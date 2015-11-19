@@ -28,7 +28,7 @@ class BatchInvitation < ActiveRecord::Base
   end
 
   def perform(options = {})
-    self.batch_invitation_users.unprocessed.each do |bi_user|
+    self.batch_invitation_users.unprocessed.order(:name).each do |bi_user|
       bi_user.invite(user, supported_permission_ids)
     end
     self.outcome = "success"

@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 
 module Signonotron2
   def self.mysql?
-    ENV.fetch("SIGNONOTRON2_DB_ADAPTER", "mysql") == "mysql"
+    ENV.fetch("SIGNONOTRON2_DB_ADAPTER", "postgresql") == "mysql"
   end
 
   class Application < Rails::Application

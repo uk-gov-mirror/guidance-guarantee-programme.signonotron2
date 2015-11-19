@@ -511,6 +511,6 @@ class UserTest < ActiveSupport::TestCase
 
   def assert_user_has_permissions(expected_permissions, application, user)
     permissions = user.permissions_for(application)
-    assert_equal expected_permissions, permissions
+    assert_equal expected_permissions.sort, permissions.sort
   end
 end

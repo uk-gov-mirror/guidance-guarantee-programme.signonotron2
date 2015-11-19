@@ -6,7 +6,7 @@ gem 'kaminari', '~> 0.16.3'
 gem 'bootstrap-kaminari-views', '0.0.5'
 
 gem 'alphabetical_paginate', '2.2.3'
-gem 'mysql2', '0.3.20'
+gem 'pg'
 gem 'govuk_admin_template', '3.3.1'
 
 gem 'nokogiri', '~> 1.6.6.4'

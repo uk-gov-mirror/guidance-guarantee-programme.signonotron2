@@ -41,9 +41,6 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
-    airbrake (3.1.15)
-      builder
-      multi_json
     alphabetical_paginate (2.2.3)
     ancestry (2.0.0)
       activerecord (>= 3.0.0)
@@ -66,6 +63,7 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
+    bugsnag (5.2.0)
     builder (3.2.3)
     byebug (9.0.6)
     capybara (2.5.0)
@@ -340,12 +338,12 @@ PLATFORMS
 DEPENDENCIES
   activejob-retry
   addressable (~> 2.3.8)
-  airbrake (= 3.1.15)
   alphabetical_paginate (= 2.2.3)
   ancestry (= 2.0.0)
   better_errors (= 2.1.1)
   binding_of_caller (= 0.7.2)
   bootstrap-kaminari-views (= 0.0.5)
+  bugsnag
   capybara (~> 2.5.0)
   capybara-email (~> 2.4.0)
   ci_reporter (= 1.7.0)

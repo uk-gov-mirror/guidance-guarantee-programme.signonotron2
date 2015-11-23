@@ -15,7 +15,7 @@ gem 'rails-html-sanitizer', '1.0.3'
 # This change was made via Snyk to fix a vulnerability
 gem 'nokogiri', '>= 1.7.0.1'
 
-gem 'airbrake', '3.1.15'
+gem 'bugsnag'
 gem 'plek', '1.7.0'
 gem 'json', '1.8.3'
 gem 'addressable', '~> 2.3.8'

@@ -32,7 +32,7 @@ class TwoStepVerificationControllerTest < ActionController::TestCase
     end
 
     should "include the environment titleised" do
-      assert_match %r{issuer=Development%20GOV.UK%20Signon}, @controller.otp_secret_key_uri
+      assert_match %r{issuer=Development%20Pension%20Wise%20Signon}, @controller.otp_secret_key_uri
     end
 
     context "in production" do
@@ -46,7 +46,7 @@ class TwoStepVerificationControllerTest < ActionController::TestCase
       end
 
       should "not include the environment name" do
-        assert_match %r{issuer=GOV.UK%20Signon}, @controller.otp_secret_key_uri
+        assert_match %r{issuer=Pension%20Wise%20Signon}, @controller.otp_secret_key_uri
       end
     end
 

@@ -63,7 +63,7 @@ class UserMailerTest < ActionMailer::TestCase
     end
 
     should "include an instance name in the subject" do
-      assert_includes @email.subject, "Your GOV.UK Signon development account"
+      assert_includes @email.subject, "Your Pension Wise Signon development account"
     end
 
     should "include an instance name in the body" do
@@ -94,7 +94,7 @@ class UserMailerTest < ActionMailer::TestCase
     end
 
     should "include the instance name in the subject" do
-      assert_includes @email.subject, "Your GOV.UK Signon test account"
+      assert_includes @email.subject, "Your Pension Wise Signon test account"
     end
 
     should "include the instance name in the body" do

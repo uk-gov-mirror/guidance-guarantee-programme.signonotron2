@@ -5,17 +5,17 @@ module MailerHelper
 
   def app_name
     if instance_name.present?
-      "GOV.UK Signon #{instance_name}"
+      "Pension Wise Signon #{instance_name}"
     else
-      "GOV.UK Signon"
+      "Pension Wise Signon"
     end
   end
 
   def email_from_address
     if instance_name.present?
-      "noreply-signon-#{instance_name.parameterize}@digital.cabinet-office.gov.uk"
+      "noreply-signon-#{instance_name.parameterize}@pensionwise.gov.uk"
     else
-      "noreply-signon@digital.cabinet-office.gov.uk"
+      "noreply-signon@pensionwise.gov.uk"
     end
   end
 

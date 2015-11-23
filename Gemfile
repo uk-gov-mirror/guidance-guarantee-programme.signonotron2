@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.7.1'
 gem 'sinatra', require: nil
+
+gem 'foreman'
+gem 'puma'
+
 gem 'kaminari', '~> 0.16.3'
 gem 'bootstrap-kaminari-views', '0.0.5'
 
@@ -38,7 +42,6 @@ gem 'ancestry', '2.0.0'
 
 gem 'gds-api-adapters', '20.1.1'
 gem 'statsd-ruby', '1.1.0'
-gem 'unicorn', '4.9.0'
 gem 'sidekiq', '~> 4.1.0'
 gem 'activejob-retry'
 

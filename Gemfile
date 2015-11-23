@@ -60,8 +60,6 @@ group :development, :test do
   gem 'govuk-lint', '~> 0.4'
 end
 
-gem 'logstasher', '0.4.8'
-
 group :test do
   gem 'rspec-rails', '~> 3.3.3'
   gem 'capybara', '~> 2.5.0'
@@ -76,4 +74,8 @@ group :test do
   gem 'timecop', '0.7.1'
   gem 'shoulda-context', '1.2.1', require: false
   gem 'pry-byebug'
+end
+
+group :production do
+  gem 'rails_12factor'
 end

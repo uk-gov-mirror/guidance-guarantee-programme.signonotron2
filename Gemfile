@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
+gem 'sinatra', require: nil
 
 gem 'kaminari', '~> 0.16.3'
 gem 'bootstrap-kaminari-views', '0.0.5'
@@ -33,11 +34,12 @@ gem 'ancestry', '2.0.0'
 gem 'gds-api-adapters', '20.1.1'
 gem 'statsd-ruby', '1.1.0'
 gem 'unicorn', '4.9.0'
-gem 'sidekiq', '~> 3.5.0'
+gem 'sidekiq', '~> 4.0'
 gem 'sidekiq-statsd', '0.1.4'
 gem 'activejob-retry'
 
-gem 'redis', '3.2.1'
+gem 'redis'
+gem 'redis-namespace'
 
 gem 'zeroclipboard-rails'
 

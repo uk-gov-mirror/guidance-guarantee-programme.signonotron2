@@ -91,6 +91,6 @@ group :test do
   gem 'test_after_commit'
 end
 
-group :production do
+group :staging, :production do
   gem 'rails_12factor'
 end

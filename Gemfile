@@ -81,6 +81,6 @@ group :test do
   gem 'pry-byebug'
 end
 
-group :production do
+group :staging, :production do
   gem 'rails_12factor'
 end

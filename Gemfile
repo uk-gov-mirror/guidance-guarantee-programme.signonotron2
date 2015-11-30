@@ -22,9 +22,12 @@ gem 'rails-html-sanitizer', '1.0.3'
 gem 'nokogiri', '>= 1.7.0.1'
 
 gem 'bugsnag'
-gem 'plek', '1.7.0'
 gem 'json', '1.8.3'
 gem 'addressable', '~> 2.3.8'
+
+gem 'newrelic_rpm'
+gem 'plek', '1.7.0'
+gem 'whenever', '~> 0.9.4', require: false
 
 gem 'uuid'
 

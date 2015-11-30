@@ -18,8 +18,9 @@ gem 'govuk_admin_template', '3.3.1'
 gem 'nokogiri', '~> 1.6.6.4'
 
 gem 'bugsnag'
-gem 'plek', '1.7.0'
 gem 'json', '1.8.3'
+gem 'newrelic_rpm'
+gem 'plek', '1.7.0'
 gem 'whenever', '~> 0.9.4', require: false
 
 gem 'uuid'

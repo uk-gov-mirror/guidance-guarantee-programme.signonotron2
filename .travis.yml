@@ -6,6 +6,8 @@ group: edge
 language: ruby
 rvm:
 - 2.2.3
+services:
+  - redis-server
 sudo: false
 before_script: "./bin/rake db:setup RAILS_ENV=test"
 script: "./bin/rake RAILS_ENV=test"

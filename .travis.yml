@@ -4,8 +4,6 @@ cache:
   - tmp/cache/assets/test
 group: edge
 language: ruby
-rvm:
-- 2.2.3
 services:
   - redis-server
 sudo: false

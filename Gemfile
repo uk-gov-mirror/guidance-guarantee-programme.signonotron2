@@ -61,7 +61,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'jasmine', '2.1.0'
+  gem 'jasmine', '2.5.1'
   gem 'govuk-lint', '~> 0.4'
 end
 
@@ -79,6 +79,7 @@ group :test do
   gem 'timecop', '0.7.1'
   gem 'shoulda-context', '1.2.1', require: false
   gem 'pry-byebug'
+  gem 'phantomjs-binaries'
 end
 
 group :staging, :production do

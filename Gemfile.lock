@@ -196,13 +196,12 @@ GEM
     pry-byebug (3.2.0)
       byebug (~> 5.0)
       pry (~> 0.10)
-    puma (2.11.3)
-      rack (>= 1.1, < 2.0)
+    puma (3.6.2)
     pundit (0.3.0)
       activesupport (>= 3.0.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
-    rack (1.6.4)
+    rack (1.6.5)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-protection (1.5.3)
@@ -406,4 +405,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.3
+   1.13.6

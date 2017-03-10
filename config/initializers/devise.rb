@@ -3,8 +3,8 @@ require_relative 'instance_name'
 
 devise_config = Rails.application.config_for(:devise).symbolize_keys
 
-if devise_config[:secret_key].blank? || devise_config[:pepper].blank?
-  raise 'Required Devise secrets are unset'
+if devise_config[:secret_key].blank?
+  raise 'Required Devise secret key is unset'
 end
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
@@ -91,7 +91,7 @@ Devise.setup do |config|
   config.stretches = (devise_config[:stretches] || 1000)
 
   # Setup a pepper to generate the encrypted password.
-  config.pepper = devise_config[:pepper]
+  # config.pepper = devise_config[:pepper]
 
   # ==> Configuration for :invitable
   # The period the generated invitation token is valid, after

@@ -1,6 +1,7 @@
 <% content_for :app_title, "#{t('department.name')} Signon" %>
 <% content_for :page_title, "#{yield(:title)} | #{t('department.name')} Signon" %>
 <% content_for :head do %>
+  <meta name="robots" content="noindex" />
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'application' %>

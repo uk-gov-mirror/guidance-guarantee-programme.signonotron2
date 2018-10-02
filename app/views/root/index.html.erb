@@ -9,6 +9,7 @@
     <% end %>
 
     <% @applications_and_permissions.each do |application, permissions| %>
+      <% next if application.name == "Support" %>
       <div class="app-application-list__item">
         <h3 class="govuk-heading-m govuk-!-margin-bottom-1">
           <%= link_to application.name, application.home_uri, class: "govuk-link" %>
@@ -23,6 +24,9 @@
 
   <div class="govuk-grid-column-one-third">
     <ul class="govuk-list app-dashboard-side">
+      <li>
+        <%= link_to "Support", "https://support.integration.publishing.service.gov.uk/" %>
+      </li>
       <li>
         <%= link_to "Change your email or password", edit_email_or_password_user_path(current_user) %>
       </li>

@@ -26,7 +26,7 @@ gem 'json'
 gem 'addressable', '~> 2.3.8'
 
 gem 'newrelic_rpm'
-gem 'plek', '1.7.0'
+gem 'plek'
 gem 'whenever', '~> 0.9.4', require: false
 
 gem 'uuid'

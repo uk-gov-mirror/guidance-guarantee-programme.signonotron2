@@ -1,7 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    PriorityQueue (0.1.2)
     actionmailer (4.2.11.1)
       actionpack (= 4.2.11.1)
       actionview (= 4.2.11.1)
@@ -118,13 +117,13 @@ GEM
     ffi (1.9.18)
     foreman (0.83.0)
       thor (~> 0.19.1)
-    gds-api-adapters (27.1.0)
+    gds-api-adapters (59.1.0)
+      addressable
       link_header
-      lrucache (~> 0.1.1)
       null_logger
-      plek
+      plek (>= 1.9.0)
       rack-cache
-      rest-client (~> 1.8.0)
+      rest-client (~> 2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     govuk-lint (0.8.1)
@@ -156,15 +155,15 @@ GEM
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lrucache (0.1.4)
-      PriorityQueue (~> 0.1.2)
     macaddr (1.7.1)
       systemu (~> 2.6.2)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     metaclass (0.0.4)
     method_source (0.8.2)
-    mime-types (2.99.3)
+    mime-types (3.2.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2019.0331)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.8.5)
@@ -183,7 +182,7 @@ GEM
     phantomjs (2.1.1.0)
     phantomjs-binaries (2.1.1.1)
       sys-uname (= 0.9.0)
-    plek (1.7.0)
+    plek (2.1.1)
     poltergeist (1.6.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -246,10 +245,10 @@ GEM
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
-    rest-client (1.8.0)
+    rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 3.0)
-      netrc (~> 0.7)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rotp (2.1.2)
     rqrcode (0.10.1)
       chunky_png (~> 1.0)
@@ -380,7 +379,7 @@ DEPENDENCIES
   nokogiri (>= 1.7.0.1)
   pg (~> 0.18)
   phantomjs-binaries
-  plek (= 1.7.0)
+  plek
   poltergeist (= 1.6.0)
   pry-byebug
   puma

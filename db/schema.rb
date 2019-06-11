@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_105421) do
+ActiveRecord::Schema.define(version: 2019_06_05_152059) do
 
   create_table "batch_invitation_application_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "batch_invitation_id", null: false
@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 2019_04_29_105421) do
     t.datetime "updated_at"
   end
 
+  create_table "devices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "certificate"
+    t.text "key_handle"
+    t.text "public_key"
+    t.integer "counter"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "event_logs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uid", null: false
     t.datetime "created_at", null: false
@@ -71,7 +80,7 @@ ActiveRecord::Schema.define(version: 2019_04_29_105421) do
     t.index ["user_agent_id"], name: "event_logs_user_agent_id_fk"
   end
 
-  create_table "lhma_2019_04_29_13_15_20_064_event_logs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "lhma_2019_06_05_14_36_44_621_event_logs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "uid", null: false
     t.datetime "created_at", null: false
     t.integer "initiator_id"

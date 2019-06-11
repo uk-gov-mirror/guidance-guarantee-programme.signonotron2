@@ -1,0 +1,26 @@
+<!-- registrations/new.html -->
+<form action="/u2f/create" method="post">
+  <input type="hidden" name="response">
+</form>
+
+<script type="text/javascript">
+  // render requests from server into Javascript format
+  var appId = <%= @app_id.to_json.html_safe %>;
+  var registerRequests = <%= @registration_requests.to_json.html_safe %>;
+  var signRequests = <%= @sign_requests.as_json.to_json.html_safe %>;
+
+  u2f.register(appId, registerRequests, signRequests, function(registerResponse) {
+    var form, reg;
+
+    if (registerResponse.errorCode) {
+      console.log("Error!", registerResponse)
+    } else {
+      console.log(registerResponse);
+    }
+
+    form = document.forms[0];
+    response = document.querySelector('[name=response]');
+    response.value = JSON.stringify(registerResponse);
+    form.submit();
+  });
+</script>

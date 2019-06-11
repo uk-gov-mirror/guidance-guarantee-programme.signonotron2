@@ -384,6 +384,7 @@ GEM
     timecop (0.9.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    u2f (1.0.0)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
@@ -465,6 +466,7 @@ DEPENDENCIES
   shoulda-context (~> 1)
   sprockets-rails (~> 3)
   timecop (~> 0.9)
+  u2f
   uglifier (~> 4)
   uuid
   webmock (~> 3)

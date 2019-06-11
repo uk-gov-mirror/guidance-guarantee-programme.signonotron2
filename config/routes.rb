@@ -9,6 +9,12 @@ Rails.application.routes.draw do
     controllers authorizations: 'signin_required_authorizations'
   end
 
+  get '/u2f' => 'u2f#new'
+  post '/u2f/create' => 'u2f#create'
+
+  get '/u2f-check' => 'u2f_login#new'
+  post '/u2f/login' => 'u2f_login#create'
+
   devise_for :users, controllers: {
     invitations: 'invitations',
     sessions: 'sessions',

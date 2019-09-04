@@ -6,6 +6,7 @@ group: edge
 language: ruby
 services:
   - redis-server
+  - postgresql
 sudo: false
 before_script: "./bin/rake db:setup RAILS_ENV=test"
 script: "./bin/rake RAILS_ENV=test"

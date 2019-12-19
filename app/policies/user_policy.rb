@@ -28,10 +28,6 @@ class UserPolicy < BasePolicy
     current_user.id == record.id
   end
 
-  def update_email?
-    current_user.id == record.id
-  end
-
   def update_passphrase?
     current_user.id == record.id
   end

@@ -11,5 +11,5 @@ sudo: false
 before_script: "./bin/rake db:setup RAILS_ENV=test"
 script: "./bin/rake RAILS_ENV=test"
 before_install:
-- gem update --system
+- gem update --system 3.0.6
 - gem install bundler

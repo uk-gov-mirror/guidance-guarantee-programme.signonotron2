@@ -38,7 +38,7 @@ class EventLogIntegrationTest < ActionDispatch::IntegrationTest
       # when people have been messing with the posted params.
       post "/users/sign_in", params: { "user" => {"email" => {"foo" => "bar"}, :password => "anything"} }
 
-      assert response.success?
+      assert response.successful?
     end
   end
 

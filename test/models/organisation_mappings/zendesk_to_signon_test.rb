@@ -2,6 +2,19 @@ require 'test_helper'
 require Rails.root + 'lib/organisation_mappings/zendesk_to_signon'
 
 class OrganisationMappings::ZendeskToSignonTest < ActiveSupport::TestCase
+# Reimplemtation of silence_stream as it was removed in Rails 5
+  def silence_stream(stream, &_block)
+    old_stream = stream.dup
+    stream.reopen(File::NULL)
+    stream.sync = true
+
+    yield
+
+  ensure
+    stream.reopen(old_stream)
+    old_stream.close
+  end
+
   def apply_mappings
     silence_stream(STDOUT) do # to stop warnings about missing orgs from printing out during test execution
       OrganisationMappings::ZendeskToSignon.apply

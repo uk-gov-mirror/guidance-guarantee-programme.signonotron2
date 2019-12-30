@@ -51,7 +51,7 @@ class InvitationsControllerTest < ActionController::TestCase
 
   context "POST create" do
     should "not allow creation of api users" do
-      post :create, user: { name: 'Testing APIs', email: 'api@example.com', api_user: true }
+      post :create, params: { user: { name: 'Testing APIs', email: 'api@example.com', api_user: true } }
 
       assert_empty User.where(api_user: true)
     end
@@ -59,7 +59,7 @@ class InvitationsControllerTest < ActionController::TestCase
     should "not error while inviting an existing user" do
       user = create(:user)
 
-      post :create, user: { name: user.name, email: user.email }
+      post :create, params: { user: { name: user.name, email: user.email } }
 
       assert_redirected_to users_path
       assert_equal "User already invited. If you want to, you can click 'Resend signup email'.", flash[:alert]
@@ -71,7 +71,7 @@ class InvitationsControllerTest < ActionController::TestCase
         outside_organisation = create(:organisation)
         sign_in admin
 
-        post :create, user: { name: "John Smith", email: "jsmith@digital.cabinet-office.gov.uk", organisation_id: outside_organisation.id }
+        post :create, params: { user: { name: "John Smith", email: "jsmith@digital.cabinet-office.gov.uk", organisation_id: outside_organisation.id } }
 
         assert_redirected_to root_path
         assert_equal "You do not have permission to perform this action.", flash[:alert]
@@ -82,7 +82,7 @@ class InvitationsControllerTest < ActionController::TestCase
         sub_organisation = create(:organisation, parent: admin.organisation)
         sign_in admin
 
-        post :create, user: { name: "John Smith", email: "jsmith@digital.cabinet-office.gov.uk", organisation_id: sub_organisation.id }
+        post :create, params: { user: { name: "John Smith", email: "jsmith@digital.cabinet-office.gov.uk", organisation_id: sub_organisation.id } }
 
         assert_redirected_to users_path
         assert_equal "An invitation email has been sent to jsmith@digital.cabinet-office.gov.uk.", flash[:notice]
@@ -98,7 +98,7 @@ class InvitationsControllerTest < ActionController::TestCase
       User.any_instance.expects(:invite!).once
       sign_in admin
 
-      post :resend, id: user.id
+      post :resend, params: { id: user.id }
 
       assert_redirected_to users_path
     end

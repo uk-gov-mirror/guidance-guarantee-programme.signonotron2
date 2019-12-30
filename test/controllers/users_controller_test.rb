@@ -9,10 +9,13 @@ class UsersControllerTest < ActionController::TestCase
     original_password_hash = user.encrypted_password
     sign_in user
 
-    post :update_passphrase, id: user.id, user: {
-      current_password: original_password,
-      password: new_password,
-      password_confirmation: new_password
+    post :update_passphrase, params: {
+      id: user.id,
+      user: {
+        current_password: original_password,
+        password: new_password,
+        password_confirmation: new_password
+      }
     }
 
     [user, original_password_hash]
@@ -56,7 +59,7 @@ class UsersControllerTest < ActionController::TestCase
         @user = create(:user_with_pending_email_change)
         sign_in @user
 
-        put :resend_email_change, id: @user.id
+        put :resend_email_change, params: { id: @user.id }
 
         assert_equal "Confirm your email change", ActionMailer::Base.deliveries.last.subject
       end
@@ -69,7 +72,7 @@ class UsersControllerTest < ActionController::TestCase
                         confirmation_sent_at: 15.days.ago)
         sign_in @user
 
-        put :resend_email_change, id: @user.id
+        put :resend_email_change, params: { id: @user.id }
 
         assert_not_equal "old token", @user.reload.confirmation_token
       end
@@ -84,7 +87,7 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     should "clear the unconfirmed_email and the confirmation_token" do
-      delete :cancel_email_change, id: @user.id
+      delete :cancel_email_change, params: { id: @user.id }
 
       @user.reload
       assert_equal nil, @user.unconfirmed_email
@@ -92,7 +95,7 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     should "redirect to the user edit email or passphrase page" do
-      delete :cancel_email_change, id: @user.id
+      delete :cancel_email_change, params: { id: @user.id }
       assert_redirected_to edit_email_or_passphrase_user_path(@user)
     end
   end
@@ -108,7 +111,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, {client_id: @application.uid, format: :json}
+      get :show, params: {client_id: @application.uid, format: :json}
 
       assert_equal "200", response.code
       presenter = UserOAuthPresenter.new(user, @application)
@@ -123,7 +126,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, {format: :json}
+      get :show, params: {format: :json}
 
       assert_equal "200", response.code
       presenter = UserOAuthPresenter.new(user, @application)
@@ -135,7 +138,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token.sub(/[0-9]/, 'x')}"
-      get :show, {client_id: @application.uid, format: :json}
+      get :show, params: {client_id: @application.uid, format: :json}
 
       assert_equal "401", response.code
     end
@@ -146,13 +149,13 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: other_application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token.sub(/[0-9]/, 'x')}"
-      get :show, {client_id: @application.uid, format: :json}
+      get :show, params: {client_id: @application.uid, format: :json}
 
       assert_equal "401", response.code
     end
 
     should "fetching json profile without any bearer header should not succeed" do
-      get :show, {client_id: @application.uid, format: :json}
+      get :show, params: {client_id: @application.uid, format: :json}
       assert_equal "401", response.code
     end
 
@@ -161,7 +164,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, {client_id: @application.uid, format: :json}
+      get :show, params: {client_id: @application.uid, format: :json}
       json = JSON.parse(response.body)
       assert_equal(["signin"], json['user']['permissions'])
     end
@@ -173,7 +176,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, {client_id: @application.uid, format: :json}
+      get :show, params: {client_id: @application.uid, format: :json}
       json = JSON.parse(response.body)
       assert_equal(["signin"], json['user']['permissions'])
     end
@@ -184,7 +187,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, {client_id: @application.uid, format: :json}
+      get :show, params: {client_id: @application.uid, format: :json}
 
       assert_not_nil user.application_permissions.first.last_synced_at
     end
@@ -194,7 +197,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, {client_id: @application.uid, format: :json}
+      get :show, params: {client_id: @application.uid, format: :json}
 
       assert_response :ok
     end
@@ -250,21 +253,21 @@ class UsersControllerTest < ActionController::TestCase
 
       context "CSV export" do
         should "respond to CSV format" do
-          get :index, format: :csv
+          get :index, params: { format: :csv }
           assert_response :success
           assert_equal @response.content_type, 'text/csv'
         end
 
         should "export filtered users" do
           user = create(:user)
-          get :index, role: 'admin', format: :csv
+          get :index, params: { role: 'admin', format: :csv }
           lines = @response.body.lines
           assert_equal(2, lines.length)
         end
 
         should "export all users when no filter selected" do
           user = create(:user)
-          get :index, format: :csv
+          get :index, params: { format: :csv }
           lines = @response.body.lines
           assert_equal(3, lines.length)
         end
@@ -274,7 +277,7 @@ class UsersControllerTest < ActionController::TestCase
         create(:user, name: "alf", email: "a@email.com")
         create(:user, name: "zed", email: "z@email.com")
 
-        get :index, letter: "Z"
+        get :index, params: { letter: "Z" }
 
         assert_select "td.email", /z@email.com/
         assert_select "tbody tr", count: 1
@@ -289,7 +292,7 @@ class UsersControllerTest < ActionController::TestCase
           create(:user, email: "special@gov.uk")
           create(:user, name: "Someone special", email: "someone@gov.uk")
 
-          get :index, filter: "special"
+          get :index, params: { filter: "special" }
 
           assert_select "tbody tr", count: 2
           assert_select "td.email", /special@gov.uk/
@@ -297,7 +300,7 @@ class UsersControllerTest < ActionController::TestCase
         end
 
         should "scope list of users by role" do
-          get :index, role: "normal"
+          get :index, params: { role: "normal" }
 
           assert_select "tbody tr", count: 1
           assert_select "td.email", /admin@gov.uk/
@@ -306,7 +309,7 @@ class UsersControllerTest < ActionController::TestCase
         should "scope filtered list of users by role" do
           create(:organisation_admin, email: "xyz@gov.uk")
 
-          get :index, filter: "admin", role: "admin"
+          get :index, params: { filter: "admin", role: "admin" }
 
           assert_select "tbody tr", count: 1
           assert_select "td.email", /admin@gov.uk/
@@ -316,7 +319,7 @@ class UsersControllerTest < ActionController::TestCase
       should "scope list of users by status" do
         create(:suspended_user, email: "suspended_user@gov.uk")
 
-        get :index, status: 'suspended'
+        get :index, params: { status: 'suspended' }
 
         assert_select "tbody tr", count: 1
         assert_select "td.email", /suspended_user@gov.uk/
@@ -326,7 +329,7 @@ class UsersControllerTest < ActionController::TestCase
         create(:suspended_user, email: "suspended_user@gov.uk", role: 'admin')
         create(:suspended_user, email: "normal_suspended_user@gov.uk")
 
-        get :index, status: 'suspended', role: 'admin'
+        get :index, params: { status: 'suspended', role: 'admin' }
 
         assert_select "tbody tr", count: 1
         assert_select "td.email", /suspended_user@gov.uk/
@@ -335,7 +338,7 @@ class UsersControllerTest < ActionController::TestCase
       should "scope list of users by organisation" do
         user = create(:user_in_organisation, email: "orgmember@gov.uk")
 
-        get :index, organisation: user.organisation.id
+        get :index, params: { organisation: user.organisation.id }
 
         assert_select "tbody tr", count: 1
         assert_select "td.email", /orgmember@gov.uk/
@@ -356,13 +359,13 @@ class UsersControllerTest < ActionController::TestCase
     context "GET edit" do
       should "show the form" do
         not_an_admin = create(:user)
-        get :edit, id: not_an_admin.id
+        get :edit, params: { id: not_an_admin.id }
         assert_select "input[name='user[email]'][value='#{not_an_admin.email}']"
       end
 
       should "show the pending email if applicable" do
         another_user = create(:user_with_pending_email_change)
-        get :edit, id: another_user.id
+        get :edit, params: { id: another_user.id }
         assert_select "input[name='user[unconfirmed_email]'][value='#{another_user.unconfirmed_email}']"
       end
 
@@ -371,7 +374,7 @@ class UsersControllerTest < ActionController::TestCase
         org_with_user = user_in_org.organisation
         other_organisation = create(:organisation, abbreviation: 'ABBR')
 
-        get :edit, id: user_in_org.id
+        get :edit, params: { id: user_in_org.id }
 
         assert_select "select[name='user[organisation_id]']" do
           assert_select "option", count: 3
@@ -384,7 +387,7 @@ class UsersControllerTest < ActionController::TestCase
       should "not be able to edit superadmins" do
         superadmin = create(:superadmin_user)
 
-        get :edit, id: superadmin.id
+        get :edit, params: { id: superadmin.id }
 
         assert_redirected_to root_path
         assert_match(/You do not have permission to perform this action./, flash[:alert])
@@ -399,7 +402,7 @@ class UsersControllerTest < ActionController::TestCase
           user = create(:user_in_organisation, organisation: admin.organisation)
           assert_not_nil user.organisation
 
-          get :edit, id: user.id
+          get :edit, params: { id: user.id }
 
           assert_select ".container" do
             assert_select "option", count: 0, text: outside_organisation.name_with_abbreviation
@@ -414,7 +417,7 @@ class UsersControllerTest < ActionController::TestCase
           user = create(:user_in_organisation, organisation: sub_organisation)
           assert_not_nil user.organisation
 
-          get :edit, id: user.id
+          get :edit, params: { id: user.id }
 
           assert_select ".container" do
             assert_select "option", count: 1, text: sub_organisation.name_with_abbreviation
@@ -427,7 +430,7 @@ class UsersControllerTest < ActionController::TestCase
     context "PUT update" do
       should "update the user" do
         another_user = create(:user, name: "Old Name")
-        put :update, id: another_user.id, user: { name: "New Name" }
+        put :update, params: { id: another_user.id, user: { name: "New Name" } }
 
         assert_equal "New Name", another_user.reload.name
         assert_redirected_to users_path
@@ -437,7 +440,7 @@ class UsersControllerTest < ActionController::TestCase
       should "not be able to update superadmins" do
         superadmin = create(:superadmin_user)
 
-        put :edit, id: superadmin.id, user: { email: 'normal_user@example.com' }
+        put :edit, params: { id: superadmin.id, user: { email: 'normal_user@example.com' } }
 
         assert_redirected_to root_path
         assert_match(/You do not have permission to perform this action./, flash[:alert])
@@ -447,7 +450,7 @@ class UsersControllerTest < ActionController::TestCase
         user = create(:user_in_organisation)
 
         assert_not_nil user.organisation
-        put :update, id: user.id, user: { organisation_id: nil }
+        put :update, params: { id: user.id, user: { organisation_id: nil } }
         assert_nil user.reload.organisation
       end
 
@@ -460,7 +463,7 @@ class UsersControllerTest < ActionController::TestCase
           user = create(:user_in_organisation, organisation: sub_organisation)
           assert_not_nil user.organisation
 
-          put :update, id: user.id, user: { organisation_id: admin.organisation.id }
+          put :update, params: { id: user.id, user: { organisation_id: admin.organisation.id } }
           assert_equal admin.organisation.id, user.reload.organisation.id
         end
 
@@ -472,20 +475,20 @@ class UsersControllerTest < ActionController::TestCase
           user = create(:user_in_organisation, organisation: admin.organisation)
           assert_not_nil user.organisation
 
-          put :update, id: user.id, user: { organisation_id: outside_organisation.id }
+          put :update, params: { id: user.id, user: { organisation_id: outside_organisation.id } }
           assert_not_equal outside_organisation.id, user.reload.organisation.id
         end
       end
 
       should "redisplay the form if save fails" do
         another_user = create(:user)
-        put :update, id: another_user.id, user: { name: "" }
+        put :update, params: { id: another_user.id, user: { name: "" } }
         assert_select "form#edit_user_#{another_user.id}"
       end
 
       should "not let you set the role" do
         not_an_admin = create(:user)
-        put :update, id: not_an_admin.id, user: { role: "admin" }
+        put :update, params: { id: not_an_admin.id, user: { role: "admin" } }
         assert_equal "normal", not_an_admin.reload.role
       end
 
@@ -496,7 +499,7 @@ class UsersControllerTest < ActionController::TestCase
 
         should "let you set the role" do
           not_an_admin = create(:user)
-          put :update, id: not_an_admin.id, user: { role: "admin" }
+          put :update, params: { id: not_an_admin.id, user: { role: "admin" } }
           assert_equal "admin", not_an_admin.reload.role
         end
       end
@@ -504,7 +507,7 @@ class UsersControllerTest < ActionController::TestCase
       context "changing an email" do
         should "not re-confirm email" do
           normal_user = create(:user, email: "old@email.com")
-          put :update, id: normal_user.id, user: { email: "new@email.com" }
+          put :update, params: { id: normal_user.id, user: { email: "new@email.com" } }
 
           assert_nil normal_user.reload.unconfirmed_email
           assert_equal "new@email.com", normal_user.email
@@ -512,7 +515,7 @@ class UsersControllerTest < ActionController::TestCase
 
         should "log an event" do
           normal_user = create(:user, email: "old@email.com")
-          put :update, id: normal_user.id, user: { email: "new@email.com" }
+          put :update, params: { id: normal_user.id, user: { email: "new@email.com" } }
 
           assert_equal 1, EventLog.where(event_id: EventLog::EMAIL_CHANGED.id, uid: normal_user.uid, initiator_id: @user.id).count
         end
@@ -520,7 +523,7 @@ class UsersControllerTest < ActionController::TestCase
         should "send email change notifications to old and new email address" do
           perform_enqueued_jobs do
             normal_user = create(:user, email: "old@email.com")
-            put :update, id: normal_user.id, user: { email: "new@email.com" }
+            put :update, params: { id: normal_user.id, user: { email: "new@email.com" } }
 
             email_change_notifications = ActionMailer::Base.deliveries[-2..-1]
             assert_equal email_change_notifications.map(&:subject).uniq.count, 1
@@ -533,7 +536,7 @@ class UsersControllerTest < ActionController::TestCase
           should "change the email, and send an invitation email" do
             perform_enqueued_jobs do
               another_user = User.invite!(name: "Ali", email: "old@email.com")
-              put :update, id: another_user.id, user: { email: "new@email.com" }
+              put :update, params: { id: another_user.id, user: { email: "new@email.com" } }
 
               another_user.reload
               assert_equal "new@email.com", another_user.reload.email
@@ -549,7 +552,7 @@ class UsersControllerTest < ActionController::TestCase
         should "log an event" do
           @user.update_column(:role, "superadmin")
           another_user = create(:user, role: "admin")
-          put :update, id: another_user.id, user: { role: "normal" }
+          put :update, params: { id: another_user.id, user: { role: "normal" } }
 
           assert_equal 1, EventLog.where(event_id: EventLog::ROLE_CHANGED.id, uid: another_user.uid, initiator_id: @user.id).count
         end
@@ -559,7 +562,7 @@ class UsersControllerTest < ActionController::TestCase
         another_user = create(:user, name: "Old Name")
         PermissionUpdater.expects(:perform_on).with(another_user).once
 
-        put :update, id: another_user.id, user: { name: "New Name" }
+        put :update, params: { id: another_user.id, user: { name: "New Name" } }
       end
 
       context "update application access" do
@@ -572,13 +575,13 @@ class UsersControllerTest < ActionController::TestCase
         should "remove all applications access for a user" do
           @another_user.grant_application_permission(@application, 'signin')
 
-          put :update, id: @another_user.id, user: {}
+          put :update, params: { id: @another_user.id, user: {} }
 
           assert_empty @another_user.reload.application_permissions
         end
 
         should "add application access for a user" do
-          put :update, id: @another_user.id, user: { supported_permission_ids: [@application.id] }
+          put :update, params: { id: @another_user.id, user: { supported_permission_ids: [@application.id] } }
 
           assert_equal 1, @another_user.reload.application_permissions.count
         end
@@ -589,7 +592,7 @@ class UsersControllerTest < ActionController::TestCase
       should "send an email change confirmation email" do
         perform_enqueued_jobs do
           another_user = create(:user_with_pending_email_change)
-          put :resend_email_change, id: another_user.id
+          put :resend_email_change, params: { id: another_user.id }
 
           assert_equal "Confirm your email change", ActionMailer::Base.deliveries.last.subject
         end
@@ -599,7 +602,7 @@ class UsersControllerTest < ActionController::TestCase
         another_user = create(:user_with_pending_email_change,
                                 confirmation_token: "old token",
                                 confirmation_sent_at: 15.days.ago)
-        put :resend_email_change, id: another_user.id
+        put :resend_email_change, params: { id: another_user.id }
 
         assert_not_equal "old token", another_user.reload.confirmation_token
       end
@@ -612,7 +615,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should "clear the unconfirmed_email and the confirmation_token" do
-        delete :cancel_email_change, id: @another_user.id
+        delete :cancel_email_change, params: { id: @another_user.id }
 
         @another_user.reload
         assert_nil @another_user.unconfirmed_email
@@ -620,7 +623,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should "redirect to the edit user admin page" do
-        delete :cancel_email_change, id: @another_user.id
+        delete :cancel_email_change, params: { id: @another_user.id }
         assert_redirected_to edit_user_path(@another_user)
       end
     end

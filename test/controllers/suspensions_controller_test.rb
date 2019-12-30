@@ -7,7 +7,7 @@ class SuspensionsControllerTest < ActionController::TestCase
       admin = create(:organisation_admin)
       sign_in admin
 
-      put :update, id: user.id, user: { suspended: "0" }
+      put :update, params: { id: user.id, user: { suspended: "0" } }
 
       assert user.reload.suspended?
     end
@@ -17,7 +17,7 @@ class SuspensionsControllerTest < ActionController::TestCase
       sign_in admin
       user = create(:suspended_user, reason_for_suspension: "Negligence", organisation: admin.organisation)
 
-      put :update, id: user.id, user: { suspended: "0" }
+      put :update, params: { id: user.id, user: { suspended: "0" } }
 
       refute user.reload.suspended?
     end
@@ -31,7 +31,7 @@ class SuspensionsControllerTest < ActionController::TestCase
 
     should "be able to suspend the user and redirect to user's edit page" do
       another_user = create(:user)
-      put :update, id: another_user.id, user: { suspended: "1", reason_for_suspension: "Negligence" }
+      put :update, params: { id: another_user.id, user: { suspended: "1", reason_for_suspension: "Negligence" } }
 
       another_user.reload
 
@@ -44,25 +44,25 @@ class SuspensionsControllerTest < ActionController::TestCase
       another_user = create(:user)
       PermissionUpdater.expects(:perform_on).with(another_user)
 
-      put :update, id: another_user.id, user: { suspended: "1", reason_for_suspension: "Negligence" }
+      put :update, params: { id: another_user.id, user: { suspended: "1", reason_for_suspension: "Negligence" } }
     end
 
     should "enforce reauth on downstream apps" do
       another_user = create(:user)
       ReauthEnforcer.expects(:perform_on).with(another_user)
 
-      put :update, id: another_user.id, user: { suspended: "1", reason_for_suspension: "Negligence" }
+      put :update, params: { id: another_user.id, user: { suspended: "1", reason_for_suspension: "Negligence" } }
     end
 
     should "redisplay the form if the reason is blank" do
       another_user = create(:user)
-      put :update, id: another_user.id, user: { suspended: "1", reason_for_suspension: "" }
+      put :update, params: { id: another_user.id, user: { suspended: "1", reason_for_suspension: "" } }
       assert_template :edit
     end
 
     should "be able to unsuspend the user" do
       another_user = create(:user, suspended_at: 2.months.ago, reason_for_suspension: "Text left in the box")
-      put :update, id: another_user.id, user: { reason_for_suspension: "Text left in the box" }
+      put :update, params: { id: another_user.id, user: { reason_for_suspension: "Text left in the box" } }
 
       another_user.reload
 
@@ -77,7 +77,7 @@ class SuspensionsControllerTest < ActionController::TestCase
       sign_in superadmin
 
       api_user = create(:api_user)
-      put :update, id: api_user.id, user: { suspended: "1", reason_for_suspension: "Negligence" }
+      put :update, params: { id: api_user.id, user: { suspended: "1", reason_for_suspension: "Negligence" } }
 
       api_user.reload
 

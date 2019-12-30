@@ -13,7 +13,7 @@ private
   attr_reader :user_params, :current_user_role, :permitted_params_by_role
 
   def sanitised_params
-    ActionController::Parameters.new(user_params).permit(*permitted_params)
+    ActionController::Parameters.new(user_params.to_h).permit(*permitted_params)
   end
 
   def permitted_params

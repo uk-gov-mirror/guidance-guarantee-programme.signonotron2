@@ -24,7 +24,7 @@ Doorkeeper.configure do
   admin_authenticator do |_routes|
     # Prevent all access to admin web interface, only allow application management
     # from command line
-    render text: "Access denied", status: 403
+    render plain: "Access denied", status: 403
   end
 
   # Access token expiration time (default 2 hours)

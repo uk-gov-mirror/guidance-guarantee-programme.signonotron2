@@ -58,21 +58,21 @@ class OrganisationsControllerTest < ActionController::TestCase
 
   context '#create' do
     test_access do
-      post :create, organisation: { name: 'test' }
+      post :create, params: { organisation: { name: 'test' } }
     end
   end
 
   context '#edit' do
     test_access do
       organisation = create(:organisation)
-      get :edit, id: organisation.id
+      get :edit, params: { id: organisation.id }
     end
   end
 
   context '#update' do
     test_access do
       organisation = create(:organisation)
-      put :update, id: organisation.id, organisation: { slug: '' }
+      put :update, params: { id: organisation.id, organisation: { slug: '' } }
     end
   end
 end

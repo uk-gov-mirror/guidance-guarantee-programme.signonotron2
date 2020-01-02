@@ -36,9 +36,9 @@ class EventLogIntegrationTest < ActionDispatch::IntegrationTest
     should "not blow up if not given a string for the email" do
       # Assert we don't blow up when looking up the attempted user
       # when people have been messing with the posted params.
-      post "/users/sign_in", "user" => {"email" => {"foo" => "bar"}, :password => "anything"}
+      post "/users/sign_in", params: { "user" => {"email" => {"foo" => "bar"}, :password => "anything"} }
 
-      assert response.success?
+      assert response.successful?
     end
   end
 

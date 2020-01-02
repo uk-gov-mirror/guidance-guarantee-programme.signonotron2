@@ -43,7 +43,7 @@ private
   end
 
   def invite_user_with_attributes(sanitised_attributes, inviting_user)
-    user = User.invite!(sanitised_attributes, inviting_user)
+    user = User.invite!(sanitised_attributes.to_h, inviting_user)
     if user.persisted?
       self.update_column(:outcome, "success")
     else

@@ -1,6 +1,6 @@
 class OrganisationsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter { authorize Organisation }
+  before_action :authenticate_user!
+  before_action { authorize Organisation }
   respond_to :html
 
   def index

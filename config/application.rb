@@ -54,12 +54,10 @@ module Signonotron2
       Doorkeeper::ApplicationController.layout "application"
     end
 
-    config.autoload_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib')
 
     config.active_job.queue_adapter = :sidekiq
 
     config.middleware.insert_before 0, SameSiteSecurity::Middleware
-
-    config.active_record.raise_in_transactional_callbacks = true
   end
 end

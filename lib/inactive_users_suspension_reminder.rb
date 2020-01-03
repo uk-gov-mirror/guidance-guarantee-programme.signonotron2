@@ -39,6 +39,6 @@ class InactiveUsersSuspensionReminder
 private
 
   def notify_bugsnag(e, user)
-    Bugsnag.notify_or_ignore(e, { user: { receiver_email: user.email } })
+    Bugsnag.notify(e, { user: { receiver_email: user.email } })
   end
 end

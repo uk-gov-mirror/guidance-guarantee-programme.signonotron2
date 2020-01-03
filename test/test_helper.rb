@@ -61,6 +61,7 @@ end
 
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
+Capybara.server = :puma, { Silent: true }
 
 require 'helpers/user_helpers'
 require 'helpers/email_helpers'

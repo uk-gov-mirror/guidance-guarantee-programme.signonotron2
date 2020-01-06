@@ -8,7 +8,7 @@ gem 'sinatra', require: nil
 gem 'foreman'
 gem 'puma'
 
-gem 'kaminari', '~> 0.16.3'
+gem 'kaminari', '~> 0.17'
 gem 'bootstrap-kaminari-views', '0.0.5'
 
 gem 'alphabetical_paginate', '2.2.3'

@@ -214,7 +214,7 @@ class UsersController < ApplicationController
   end
 
   def permitted_user_params
-    params.require(:user).permit(:user, :name, :email, :organisation_id, :require_2sv, :role, supported_permission_ids: []).to_h
+    params.require(:user).permit(:id, :user, :name, :email, :organisation_id, :require_2sv, :role, supported_permission_ids: []).to_h
   end
 
   def password_params

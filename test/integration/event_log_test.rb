@@ -237,6 +237,21 @@ class EventLogIntegrationTest < ActionDispatch::IntegrationTest
     assert page.has_content?("You do not have permission to perform this action")
   end
 
+  test 'admins can paginate a long event log' do
+    admin = create(:superadmin_user)
+
+    100.times { EventLog.record_event(@user, EventLog::SUCCESSFUL_LOGIN) }
+    EventLog.record_event(@user, EventLog::UNSUCCESSFUL_LOGIN)
+
+    visit root_path
+    signin_with(admin)
+
+    visit event_logs_user_path(@user)
+    assert_text 'Unsuccessful login'
+    first("a[rel=next]").click
+    assert_text 'Successful login'
+  end
+
   def assert_account_access_log_page_content(user)
     assert_text 'Time'
     assert_text 'Event'

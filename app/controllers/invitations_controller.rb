@@ -81,7 +81,7 @@ class InvitationsController < Devise::InvitationsController
       :name, :email, :organisation_id,
       :invitation_token, :password,
       :password_confirmation, :require_2sv,
-      :role
+      :role, supported_permission_ids: []
     ).to_h
   end
 

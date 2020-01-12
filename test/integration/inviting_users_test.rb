@@ -23,12 +23,28 @@ class InvitingUsersTest < ActionDispatch::IntegrationTest
         visit root_path
         signin_with(admin)
 
+        application_one = create(:application)
+        application_two = create(:application)
+        create(:supported_permission, application: application_one, name: 'agent')
+        create(:supported_permission, application: application_two, name: 'resource_manager')
+
         visit new_user_invitation_path
         fill_in "Name", with: "Fred Bloggs"
         fill_in "Email", with: "fred@example.com"
+
+        uncheck "Has access to #{application_one.name}?"
+        check "Has access to #{application_two.name}?"
+        select 'agent', from: "Permissions for #{application_one.name}"
+        unselect 'resource_manager', from: "Permissions for #{application_two.name}"
+
         click_button "Create user and send email"
 
-        assert_not_nil User.where(email: "fred@example.com", role: "normal").first
+        assert_not_nil u = User.where(email: "fred@example.com", role: "normal").first
+        refute u.has_access_to? application_one
+        assert_includes u.permissions_for(application_one), 'agent'
+        assert u.has_access_to? application_two
+        refute_includes u.permissions_for(application_two), 'resource_manager'
+
         assert_equal "fred@example.com", last_email.to[0]
         assert_match 'Please confirm your account', last_email.subject
       end

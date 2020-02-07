@@ -4,11 +4,8 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
-.DS_Store
-
 # Ignore bundler config
 /.bundle
-.DS_Store
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -17,8 +14,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-
-.*.swp
 
 # Simplecov
 coverage/*

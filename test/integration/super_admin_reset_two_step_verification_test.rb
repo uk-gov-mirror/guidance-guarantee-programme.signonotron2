@@ -16,8 +16,8 @@ class SuperAdminResetTwoStepVerificationTest < ActionDispatch::IntegrationTest
       signin_with(@admin)
     end
 
-    should 'not display the link' do
-      assert page.has_no_link? 'Reset 2-step verification'
+    should 'display the link' do
+      assert page.has_link? 'Reset 2-step verification'
     end
   end
 

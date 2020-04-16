@@ -49,11 +49,11 @@ class UserPolicy < BasePolicy
   end
 
   def flag_2sv?
-    current_user.superadmin?
+    current_user.superadmin? || current_user.admin?
   end
 
   def reset_2sv?
-    current_user.superadmin?
+    current_user.superadmin? || current_user.admin?
   end
   alias_method :reset_two_step_verification?, :reset_2sv?
 

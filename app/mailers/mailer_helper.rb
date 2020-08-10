@@ -18,4 +18,8 @@ module MailerHelper
   def instance_name
     Rails.application.config.instance_name
   end
+
+  def template_id
+    @template_id ||= ENV.fetch("GOVUK_NOTIFY_TEMPLATE_ID", "fake-test-template-id")
+  end
 end

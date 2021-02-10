@@ -7,6 +7,7 @@ gem 'sinatra', require: nil
 
 gem 'foreman'
 gem 'puma'
+gem 'newrelic_rpm'
 
 gem 'kaminari', '~> 0.17'
 gem 'bootstrap-kaminari-views', '0.0.5'

@@ -3,13 +3,13 @@ require "test_helper"
 class ConfigureApiUsersTest < ActiveSupport::TestCase
   test "creates required api users" do
     Configure::ApiUsers.new(
-      namespace: nil, resource_name_prefix: nil
+      namespace: nil, resource_name_prefix: nil,
     ).configure!(api_users)
 
     api_users.each do |api_user|
       assert ApiUser.exists?(
         email: "#{api_user.fetch('slug')}@digital.cabinet-office.gov.uk",
-        name: api_user.fetch('name')
+        name: api_user.fetch("name"),
       )
     end
   end
@@ -18,13 +18,13 @@ class ConfigureApiUsersTest < ActiveSupport::TestCase
     namespace = "test"
     prefix = "[Test!] "
     Configure::ApiUsers.new(
-      namespace: namespace, resource_name_prefix: prefix
+      namespace: namespace, resource_name_prefix: prefix,
     ).configure!(api_users)
 
     api_users.each do |api_user|
       assert ApiUser.exists?(
         email: "#{namespace}-#{api_user.fetch('slug')}@digital.cabinet-office.gov.uk",
-        name: prefix + api_user.fetch('name')
+        name: prefix + api_user.fetch("name"),
       )
     end
   end
@@ -36,16 +36,16 @@ class ConfigureApiUsersTest < ActiveSupport::TestCase
 
     Configure::ApiUsers.new(
       namespace: nil,
-      resource_name_prefix: nil
+      resource_name_prefix: nil,
     ).configure!(api_users)
 
     assert ApiUser.exists?(email: email, name: name)
-    assert !ApiUser.exists?(email: email, name: api_users.first.fetch('name'))
+    assert_not ApiUser.exists?(email: email, name: api_users.first.fetch("name"))
 
     api_users[1..].each do |api_user|
       assert ApiUser.exists?(
         email: "#{api_user.fetch('slug')}@digital.cabinet-office.gov.uk",
-        name: api_user.fetch('name')
+        name: api_user.fetch("name"),
       )
     end
   end
@@ -59,7 +59,7 @@ class ConfigureApiUsersTest < ActiveSupport::TestCase
       {
         "name" => "Calculators App",
         "slug" => "calculators",
-      }
+      },
     ]
   end
 end

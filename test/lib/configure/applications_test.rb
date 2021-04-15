@@ -6,7 +6,7 @@ class ConfigureApplicationsTest < ActiveSupport::TestCase
   subdomain_name = "cats"
   description = "Herds cats"
   redirect_path = "/auth/gds/callback"
-  permissions = ["signin", "cat_herder"]
+  permissions = %w[signin cat_herder]
   cats_app = {
     "name" => name,
     "description" => description,
@@ -17,7 +17,7 @@ class ConfigureApplicationsTest < ActiveSupport::TestCase
 
   test "creates required apps" do
     Configure::Applications.new(
-      public_domain: domain, resource_name_prefix: nil
+      public_domain: domain, resource_name_prefix: nil,
     ).configure!([cats_app])
 
     created = Doorkeeper::Application.find_by(name: name)
@@ -30,7 +30,7 @@ class ConfigureApplicationsTest < ActiveSupport::TestCase
 
   test "creates associated permissions" do
     Configure::Applications.new(
-      public_domain: domain, resource_name_prefix: nil
+      public_domain: domain, resource_name_prefix: nil,
     ).configure!([cats_app])
 
     created = Doorkeeper::Application.find_by(name: name)
@@ -44,7 +44,7 @@ class ConfigureApplicationsTest < ActiveSupport::TestCase
   test "namespaces api user name and emails" do
     prefix = "[Test!] "
     Configure::Applications.new(
-      public_domain: domain, resource_name_prefix: prefix
+      public_domain: domain, resource_name_prefix: prefix,
     ).configure!([cats_app])
 
     created = Doorkeeper::Application.find_by(name: prefix + name)
@@ -60,7 +60,7 @@ class ConfigureApplicationsTest < ActiveSupport::TestCase
 
     Configure::Applications.new(
       public_domain: domain,
-      resource_name_prefix: "[just testing] "
+      resource_name_prefix: "[just testing] ",
     ).configure!([cats_app])
 
     application = Doorkeeper::Application.find_by(name: name)

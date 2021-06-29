@@ -69,7 +69,7 @@ class BatchInvitingUsersTest < ActionDispatch::IntegrationTest
       invited_user = User.find_by_email('fred@example.com')
       assert_not_nil invited_user
       assert invited_user.has_access_to?(application)
-      assert_match /noreply-signon-development@.*\.gov\.uk/, last_email.from[0]
+      assert_match /noreply-pensionwise-signon-development@.*\.org\.uk/, last_email.from[0]
 
       return unless expect_email
 

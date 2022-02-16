@@ -64,7 +64,7 @@ gem 'sprockets-rails', '~> 3.1.1'
 gem 'uglifier', '>= 3.0.4'
 
 group :development do
-  gem 'better_errors', '2.1.1'
+  gem 'better_errors', '2.8.0'
   gem 'binding_of_caller', '0.7.2'
 end
 

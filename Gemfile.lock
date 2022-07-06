@@ -173,7 +173,7 @@ GEM
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
     link_header (0.0.8)
-    loofah (2.9.0)
+    loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     macaddr (1.7.2)
@@ -256,8 +256,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.4)
-      loofah (~> 2.2, >= 2.2.2)
+    rails-html-sanitizer (1.4.3)
+      loofah (~> 2.3)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -422,7 +422,7 @@ DEPENDENCIES
   pundit (= 0.3.0)
   rails (~> 5.2.0)
   rails-controller-testing
-  rails-html-sanitizer (= 1.0.4)
+  rails-html-sanitizer (= 1.4.3)
   rails_12factor
   rake (= 10.4.1)
   redis

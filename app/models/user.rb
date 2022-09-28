@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   MAX_2SV_LOGIN_ATTEMPTS = 10
   MAX_2SV_DRIFT_SECONDS = 30
-  REMEMBER_2SV_SESSION_FOR = 30.days
+  REMEMBER_2SV_SESSION_FOR = 7.days
 
   USER_STATUS_SUSPENDED = 'suspended'
   USER_STATUS_INVITED = 'invited'

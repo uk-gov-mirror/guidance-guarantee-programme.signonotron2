@@ -125,7 +125,6 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    ffi (1.15.5)
     foreman (0.86.0)
     gds-api-adapters (63.1.1)
       addressable
@@ -209,8 +208,6 @@ GEM
       ast (~> 2.4.0)
     pg (0.21.0)
     phantomjs (2.1.1.0)
-    phantomjs-binaries (2.1.1.1)
-      sys-uname (= 0.9.0)
     plek (3.0.0)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
@@ -345,8 +342,6 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     statsd-ruby (1.1.0)
-    sys-uname (0.9.0)
-      ffi (>= 1.0.0)
     systemu (2.6.5)
     thor (1.0.1)
     thread_safe (0.3.6)
@@ -414,7 +409,6 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri (>= 1.7.0.1)
   pg (~> 0.18)
-  phantomjs-binaries
   plek
   poltergeist (~> 1)
   pry-byebug

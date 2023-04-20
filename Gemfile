@@ -88,7 +88,6 @@ group :test do
   gem 'ci_reporter', '1.7.0'
   gem 'timecop', '0.7.1'
   gem 'shoulda-context', '1.2.1', require: false
-  gem 'phantomjs-binaries'
 end
 
 group :staging, :production do

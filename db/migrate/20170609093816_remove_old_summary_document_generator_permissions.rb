@@ -1,4 +1,4 @@
-require_relative '../../app/models/enhancements/application'
+require_relative '../../app/models/doorkeeper/application'
 
 class RemoveOldSummaryDocumentGeneratorPermissions < ActiveRecord::Migration
   def change

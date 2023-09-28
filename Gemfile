@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby IO.read('.ruby-version').strip
 
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 5.2'
 gem 'sinatra', require: nil
 
 gem 'foreman'

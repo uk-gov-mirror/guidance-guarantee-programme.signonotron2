@@ -8,13 +8,13 @@ class ReauthEnforcerTest < ActiveSupport::TestCase
 
       mock_client = mock('sso_push_client')
       mock_client.expects(:reauth_user).with(uid).once
-      SSOPushClient.expects(:new).with(app).returns(mock_client).once
+      SsoPushClient.expects(:new).with(app).returns(mock_client).once
 
       ReauthEnforcer.new.perform(uid, app.id)
     end
 
     should "do nothing if the application doesn't exist" do
-      SSOPushClient.any_instance.expects(:reauth_user).never
+      SsoPushClient.any_instance.expects(:reauth_user).never
 
       ReauthEnforcer.new.perform("a-uid", 123)
     end

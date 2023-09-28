@@ -7,8 +7,8 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
   end
 
   setup do
-    @sso_push_user = create(:user, name: "SSO Push User")
-    SSOPushCredential.user_email = @sso_push_user.email
+    @sso_push_user = create(:user, name: "Sso Push User")
+    SsoPushCredential.user_email = @sso_push_user.email
 
     @user = create(:user)
     @application = create(:application, redirect_uri: "https://app.com/callback", with_supported_permissions: ['user_update_permission'])
@@ -17,8 +17,8 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
   end
 
   teardown do
-    SSOPushCredential.user_email = nil
-    SSOPushCredential.user = nil
+    SsoPushCredential.user_email = nil
+    SsoPushCredential.user = nil
   end
 
   context "perform" do
@@ -45,7 +45,7 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
       should "not record the last_synced_at timestamp on the permissions" do
         stub_request(:put, users_url(@application)).to_timeout
 
-        PermissionUpdater.new.perform(@user.uid, @application.id) rescue SSOPushError
+        PermissionUpdater.new.perform(@user.uid, @application.id) rescue SsoPushError
 
         assert_nil @signin_permission.reload.last_synced_at
         assert_nil @other_permission.reload.last_synced_at
@@ -54,13 +54,13 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
 
     context "handling changes in data since job was scheduled" do
       should "not attempt to update if the User doesn't exist" do
-        SSOPushClient.expects(:new).never
+        SsoPushClient.expects(:new).never
 
         PermissionUpdater.new.perform(@user.uid + "foo", @application.id)
       end
 
       should "do nothing if the application doesn't exist" do
-        SSOPushClient.expects(:new).never
+        SsoPushClient.expects(:new).never
 
         PermissionUpdater.new.perform(@user.uid, @application.id + 42)
       end

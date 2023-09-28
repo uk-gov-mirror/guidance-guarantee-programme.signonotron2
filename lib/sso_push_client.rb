@@ -1,12 +1,12 @@
 require 'gds_api/base'
 require 'exception_handler'
 
-class SSOPushClient < GdsApi::Base
-  include Signonotron2::ExceptionHandler
+class SsoPushClient < GdsApi::Base
+  include ExceptionHandler
 
   def initialize(application)
     @application = application
-    super(application.url_without_path, bearer_token: SSOPushCredential.credentials(application))
+    super(application.url_without_path, bearer_token: SsoPushCredential.credentials(application))
   end
 
   def update_user(uid, user)

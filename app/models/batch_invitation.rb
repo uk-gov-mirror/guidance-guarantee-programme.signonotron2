@@ -1,8 +1,8 @@
 class BatchInvitation < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection
 
-  belongs_to :user
-  belongs_to :organisation
+  belongs_to :user, optional: true
+  belongs_to :organisation, optional: true
   has_many :batch_invitation_users, -> { order(:name) }
   has_many :batch_invitation_application_permissions, inverse_of: :batch_invitation
   has_many :supported_permissions, through: :batch_invitation_application_permissions

@@ -33,7 +33,7 @@ class SuperAdminApplicationEditTest < ActionDispatch::IntegrationTest
 
       # expect push update
       mock_client = mock(reauth_user: nil)
-      SSOPushClient.expects(:new).with(@application).returns(mock_client)
+      SsoPushClient.expects(:new).with(@application).returns(mock_client)
 
       # trigger a push update for reauth
       remote_logout(@user)
@@ -52,7 +52,7 @@ class SuperAdminApplicationEditTest < ActionDispatch::IntegrationTest
       assert page.has_unchecked_field?("Send push updates to this app")
 
       # don't expect push update
-      SSOPushClient.expects(:new).with(@application).never
+      SsoPushClient.expects(:new).with(@application).never
 
       # trigger a push update for reauth
       remote_logout(@user)

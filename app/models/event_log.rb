@@ -50,8 +50,8 @@ class EventLog < ActiveRecord::Base
   validates_presence_of :initiator_id,   if: Proc.new { |event_log| EVENTS_REQUIRING_INITIATOR.include? event_log.entry }
   validates_presence_of :application_id, if: Proc.new { |event_log| EVENTS_REQUIRING_APPLICATION.include? event_log.entry }
 
-  belongs_to :initiator, class_name: "User"
-  belongs_to :application, class_name: "Doorkeeper::Application"
+  belongs_to :initiator, class_name: "User", optional: true
+  belongs_to :application, class_name: "Doorkeeper::Application", optional: true
 
   def event
     entry.description

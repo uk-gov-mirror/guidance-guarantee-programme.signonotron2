@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SSOPushClientTest < ActiveSupport::TestCase
+class SsoPushClientTest < ActiveSupport::TestCase
   def reauth_url(application)
     url = URI.parse(application.redirect_uri)
     "https://#{url.host}/auth/gds/api/users/#{CGI.escape(@user.uid)}/reauth"
@@ -13,8 +13,8 @@ class SSOPushClientTest < ActiveSupport::TestCase
 
   context "update_user" do
     setup do
-      @sso_push_user = create(:user, name: "SSO Push User")
-      SSOPushCredential.stubs(:user_email).returns(@sso_push_user.email)
+      @sso_push_user = create(:user, name: "Sso Push User")
+      SsoPushCredential.stubs(:user_email).returns(@sso_push_user.email)
 
       @user = create(:user)
       @application = create(:application, redirect_uri: "https://app.com/callback", with_supported_permissions: ['user_update_permission'])
@@ -23,15 +23,15 @@ class SSOPushClientTest < ActiveSupport::TestCase
 
     should "send a PUT to the related app with the user.json as in the OAuth exchange" do
       request = stub_request(:put, users_url(@application)).with(body: @user_hash.to_json)
-      SSOPushClient.new(@application).update_user(@user.uid, @user_hash)
+      SsoPushClient.new(@application).update_user(@user.uid, @user_hash)
       assert_requested request
     end
 
     should "send the bearer token in the request" do
-      SSOPushCredential.stubs(:credentials).with(@application).returns('foo')
+      SsoPushCredential.stubs(:credentials).with(@application).returns('foo')
 
       request = stub_request(:put, users_url(@application)).with(headers: { 'Authorization' => 'Bearer foo' })
-      SSOPushClient.new(@application).update_user(@user.uid, @user_json)
+      SsoPushClient.new(@application).update_user(@user.uid, @user_json)
 
       assert_requested request
     end
@@ -39,8 +39,8 @@ class SSOPushClientTest < ActiveSupport::TestCase
 
   context "reauth" do
     setup do
-      @sso_push_user = create(:user, name: "SSO Push User")
-      SSOPushCredential.stubs(:user_email).returns(@sso_push_user.email)
+      @sso_push_user = create(:user, name: "Sso Push User")
+      SsoPushCredential.stubs(:user_email).returns(@sso_push_user.email)
 
       @user = create(:user)
       @application = create(:application, redirect_uri: "https://app.com/callback", with_supported_permissions: ['user_update_permission'])
@@ -48,15 +48,15 @@ class SSOPushClientTest < ActiveSupport::TestCase
 
     should "send an empty POST to the app" do
       request = stub_request(:post, reauth_url(@application)).with(body: "{}")
-      SSOPushClient.new(@application).reauth_user(@user.uid)
+      SsoPushClient.new(@application).reauth_user(@user.uid)
       assert_requested request
     end
 
     should "send the bearer token in the request" do
-      SSOPushCredential.stubs(:credentials).with(@application).returns('foo')
+      SsoPushCredential.stubs(:credentials).with(@application).returns('foo')
 
       request = stub_request(:post, reauth_url(@application)).with(headers: { 'Authorization' => 'Bearer foo' })
-      SSOPushClient.new(@application).reauth_user(@user.uid)
+      SsoPushClient.new(@application).reauth_user(@user.uid)
 
       assert_requested request
     end

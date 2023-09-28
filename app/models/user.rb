@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   has_many :application_permissions, class_name: 'UserApplicationPermission', inverse_of: :user
   has_many :supported_permissions, through: :application_permissions
   has_many :batch_invitations
-  belongs_to :organisation
+  belongs_to :organisation, optional: true
 
   before_validation :fix_apostrophe_in_email
   after_initialize :generate_uid

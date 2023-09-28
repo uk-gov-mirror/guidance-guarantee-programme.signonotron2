@@ -55,7 +55,7 @@ gem 'redis-namespace'
 
 gem 'zeroclipboard-rails'
 
-gem 'rake', '10.4.1'
+gem 'rake'
 
 gem 'sass-rails', '~> 5.0.6'
 gem 'sprockets-rails', '~> 3.1.1'
@@ -70,7 +70,7 @@ end
 
 group :development, :test do
   gem 'jasmine'
-  gem 'govuk-lint', '~> 0.4'
+  gem 'govuk-lint', '~> 2.0'
   gem 'pry-byebug'
 end
 

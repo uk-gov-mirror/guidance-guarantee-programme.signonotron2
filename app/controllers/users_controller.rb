@@ -44,7 +44,7 @@ class UsersController < ApplicationController
         ! current_user.organisation.subtree.map(&:id).include?(params[:user][:organisation_id].to_i)
 
     @user.skip_reconfirmation!
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       send_two_step_flag_notification(@user)
 
       @user.application_permissions.reload

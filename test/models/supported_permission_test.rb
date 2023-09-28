@@ -5,7 +5,7 @@ class SupportedPermissionTest < ActiveSupport::TestCase
     application = create(:application)
 
     assert_raises ActiveRecord::RecordInvalid do
-      application.signin_permission.update_attributes!(name: 'sign-in')
+      application.signin_permission.update!(name: 'sign-in')
     end
   end
 
@@ -13,7 +13,7 @@ class SupportedPermissionTest < ActiveSupport::TestCase
     permission = create(:supported_permission, name: 'writer')
 
     assert_nothing_raised do
-      permission.update_attributes!(name: 'write')
+      permission.update!(name: 'write')
     end
   end
 

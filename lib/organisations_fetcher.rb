@@ -40,7 +40,7 @@ private
       abbreviation: organisation_data.details.abbreviation,
       closed: organisation_data.details.govuk_status == 'closed',
     }
-    organisation.update_attributes!(update_data)
+    organisation.update!(update_data)
   end
 
   def child_organisation_slugs(organisation_data)

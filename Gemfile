@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby IO.read('.ruby-version').strip
 
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0'
 gem 'sinatra', require: nil
 
 gem 'foreman'
@@ -13,7 +13,7 @@ gem 'kaminari', '~> 1.2'
 gem 'bootstrap-kaminari-views', '0.0.5'
 
 gem 'alphabetical_paginate', '2.2.3'
-gem 'pg', '~> 0.18'
+gem 'pg'
 gem 'govuk_admin_template', '~> 6.2.0'
 gem 'deprecated_columns', '0.1.0'
 
@@ -69,13 +69,13 @@ group :development do
 end
 
 group :development, :test do
-  gem 'jasmine', '2.8.0'
+  gem 'jasmine'
   gem 'govuk-lint', '~> 0.4'
   gem 'pry-byebug'
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.9'
+  gem 'rspec-rails', '~> 4.1'
   gem 'rails-controller-testing'
   gem 'capybara', '~> 3'
   gem 'capybara-email', '~> 3'

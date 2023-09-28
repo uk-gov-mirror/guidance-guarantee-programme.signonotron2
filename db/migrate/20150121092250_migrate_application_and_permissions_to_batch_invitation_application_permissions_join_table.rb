@@ -8,7 +8,7 @@ class MigrateApplicationAndPermissionsToBatchInvitationApplicationPermissionsJoi
         application_id, permissions = permission_attributes['application_id'], permission_attributes['permissions']
         _supported_permissions << SupportedPermission.where(application_id: application_id, name: permissions) if permissions.present?
       end
-      batch_invitation.update_attributes(supported_permissions: _supported_permissions.flatten)
+      batch_invitation.update(supported_permissions: _supported_permissions.flatten)
     end
     puts 'Done.'
   end

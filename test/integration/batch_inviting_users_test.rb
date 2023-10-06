@@ -73,7 +73,7 @@ class BatchInvitingUsersTest < ActionDispatch::IntegrationTest
 
       return unless expect_email
 
-      assert_equal nil, last_email.reply_to[0]
+      assert_equal nil, last_email.reply_to
 
       assert_equal "fred@example.com", last_email.to[0]
       assert_match 'Please confirm your account', last_email.subject

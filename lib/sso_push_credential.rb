@@ -1,4 +1,4 @@
-class SSOPushCredential
+class SsoPushCredential
   PERMISSIONS = %w(signin user_update_permission)
 
   class UserNotFound < StandardError; end

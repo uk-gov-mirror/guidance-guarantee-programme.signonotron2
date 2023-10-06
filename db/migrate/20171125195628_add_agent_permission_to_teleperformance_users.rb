@@ -1,4 +1,4 @@
-require 'enhancements/application'
+require 'doorkeeper/application'
 
 class AddAgentPermissionToTeleperformanceUsers < ActiveRecord::Migration
   ORGANISATION_ID = 68 # Teleperformance

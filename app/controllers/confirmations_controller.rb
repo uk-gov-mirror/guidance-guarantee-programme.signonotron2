@@ -47,7 +47,7 @@ class ConfirmationsController < Devise::ConfirmationsController
         respond_with_navigational(resource.errors, status: :unprocessable_entity) { handle_new_token_needed }
       end
     else
-      self.resource.errors[:password] << "was incorrect"
+      self.resource.errors.add(:password, :invalid, message: "was incorrect")
       render :show
     end
   end

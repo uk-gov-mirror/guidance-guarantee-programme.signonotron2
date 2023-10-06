@@ -1,4 +1,4 @@
-class SSOPushError < StandardError
+class SsoPushError < StandardError
   def initialize(application, details = {})
     @application = application
     @details = details

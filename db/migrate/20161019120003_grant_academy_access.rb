@@ -1,4 +1,4 @@
-require 'enhancements/application'
+require 'doorkeeper/application'
 
 class GrantAcademyAccess < ActiveRecord::Migration
   ORGANISATION_IDS = [3, 4, 5] # CITA, CAS, NICAB

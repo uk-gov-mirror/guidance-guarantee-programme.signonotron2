@@ -7,7 +7,7 @@ class PermissionUpdater < PushUserUpdatesJob
     # It's possible they've been deleted between when the job was scheduled and run.
     return if user.nil? || application.nil?
 
-    api = SSOPushClient.new(application)
+    api = SsoPushClient.new(application)
     presenter = UserOAuthPresenter.new(user, application)
     api.update_user(user.uid, presenter.as_hash)
 

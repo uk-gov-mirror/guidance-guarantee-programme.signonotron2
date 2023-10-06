@@ -1,22 +1,22 @@
 require 'test_helper'
 
-class SSOPushCredentialTest < ActiveSupport::TestCase
+class SsoPushCredentialTest < ActiveSupport::TestCase
   setup do
     @application = create(:application, with_supported_permissions: ['user_update_permission'])
 
-    SSOPushCredential.user_email = nil
-    SSOPushCredential.user = nil
+    SsoPushCredential.user_email = nil
+    SsoPushCredential.user = nil
   end
 
   teardown do
-    SSOPushCredential.user_email = nil
-    SSOPushCredential.user = nil
+    SsoPushCredential.user_email = nil
+    SsoPushCredential.user = nil
   end
 
   context "given an existing user" do
     setup do
       @user = create(:user, email: "sso-push-user@gov.uk")
-      SSOPushCredential.user_email = "sso-push-user@gov.uk"
+      SsoPushCredential.user_email = "sso-push-user@gov.uk"
     end
 
     context "given an already authorised application" do
@@ -26,14 +26,14 @@ class SSOPushCredentialTest < ActiveSupport::TestCase
       end
 
       should "return the bearer token for an already-authorized application" do
-        bearer_token = SSOPushCredential.credentials(@application)
+        bearer_token = SsoPushCredential.credentials(@application)
         assert_equal "foo", bearer_token
       end
 
       should "create required application permissions if they do not already exist" do
         assert_equal 0, @user.application_permissions.count
 
-        SSOPushCredential.credentials(@application)
+        SsoPushCredential.credentials(@application)
 
         assert_equal 2, @user.application_permissions.count
         assert_same_elements %w(signin user_update_permission), @user.permissions_for(@application)
@@ -43,7 +43,7 @@ class SSOPushCredentialTest < ActiveSupport::TestCase
         @user.grant_application_permissions(@application, %w(user_update_permission signin))
 
         assert_equal 2, @user.application_permissions.count
-        SSOPushCredential.credentials(@application)
+        SsoPushCredential.credentials(@application)
 
         assert_equal 2, @user.application_permissions.count
         assert_same_elements %w(user_update_permission signin), @user.permissions_for(@application)
@@ -53,7 +53,7 @@ class SSOPushCredentialTest < ActiveSupport::TestCase
     should "create an authorisation if one does not already exist" do
       assert_equal 0, @user.authorisations.count
 
-      bearer_token = SSOPushCredential.credentials(@application)
+      bearer_token = SsoPushCredential.credentials(@application)
 
       assert_equal 1, @user.authorisations.count
       assert_equal bearer_token, @user.authorisations.first.token
@@ -61,7 +61,7 @@ class SSOPushCredentialTest < ActiveSupport::TestCase
     end
 
     should "create an authentication with an expiry of 10 years" do
-      bearer_token = SSOPushCredential.credentials(@application)
+      bearer_token = SsoPushCredential.credentials(@application)
 
       assert @user.authorisations.first.present?
       assert @user.authorisations.first.expires_in >= 315400000
@@ -70,24 +70,24 @@ class SSOPushCredentialTest < ActiveSupport::TestCase
 
   context "given an email which does not exist" do
     setup do
-      SSOPushCredential.user_email = "does-not-exist@gov.uk"
+      SsoPushCredential.user_email = "does-not-exist@gov.uk"
     end
 
     should "raise an exception on an authentication attempt" do
-      assert_raise SSOPushCredential::UserNotFound do
-        SSOPushCredential.credentials(@application)
+      assert_raise SsoPushCredential::UserNotFound do
+        SsoPushCredential.credentials(@application)
       end
     end
   end
 
   context "given no user email" do
     setup do
-      SSOPushCredential.user_email = nil
+      SsoPushCredential.user_email = nil
     end
 
     should "raise an exception on an authentication attempt" do
-      assert_raise SSOPushCredential::UserNotProvided do
-        SSOPushCredential.credentials(@application)
+      assert_raise SsoPushCredential::UserNotProvided do
+        SsoPushCredential.credentials(@application)
       end
     end
   end

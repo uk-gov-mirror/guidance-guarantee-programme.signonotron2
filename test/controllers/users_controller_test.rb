@@ -255,7 +255,7 @@ class UsersControllerTest < ActionController::TestCase
         should "respond to CSV format" do
           get :index, params: { format: :csv }
           assert_response :success
-          assert_equal @response.content_type, 'text/csv'
+          assert_equal @response.content_type, 'text/csv; charset=utf-8'
         end
 
         should "export filtered users" do

@@ -12,15 +12,15 @@ class InactiveUsersSuspenderTest < ActiveSupport::TestCase
   end
 
   test "suspension reason contains suspension threshold date" do
-    inactive_user = create(:user, current_sign_in_at: 46.days.ago)
+    inactive_user = create(:user, current_sign_in_at: 31.days.ago)
 
     InactiveUsersSuspender.new.suspend
 
-    assert_equal "User has not logged in for 45 days since #{(46.days.ago).strftime('%d %B %Y')}", inactive_user.reload.reason_for_suspension
+    assert_equal "User has not logged in for 30 days since #{(31.days.ago).strftime('%d %B %Y')}", inactive_user.reload.reason_for_suspension
   end
 
   test "doesn't suspend users who have logged-in suspension threshold days ago" do
-    active_user = create(:user, current_sign_in_at: 45.days.ago)
+    active_user = create(:user, current_sign_in_at: 29.days.ago)
 
     InactiveUsersSuspender.new.suspend
 
@@ -28,7 +28,7 @@ class InactiveUsersSuspenderTest < ActiveSupport::TestCase
   end
 
   test "doesn't suspend users who have logged-in since suspension threshold days ago" do
-    active_user = create(:user, current_sign_in_at: 44.days.ago)
+    active_user = create(:user, current_sign_in_at: 29.days.ago)
 
     InactiveUsersSuspender.new.suspend
 
@@ -37,7 +37,7 @@ class InactiveUsersSuspenderTest < ActiveSupport::TestCase
 
   test "doesn't suspend users who have recently been unsuspended" do
     admin = create(:admin_user)
-    unsuspended_user = create(:suspended_user, current_sign_in_at: 46.days.ago)
+    unsuspended_user = create(:suspended_user, current_sign_in_at: 31.days.ago)
     Timecop.travel(2.days.ago) do
       unsuspended_user.unsuspend
     end

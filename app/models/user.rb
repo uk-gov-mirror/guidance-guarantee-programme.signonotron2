@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   self.include_root_in_json = true
 
-  SUSPENSION_THRESHOLD_PERIOD = 45.days
+  SUSPENSION_THRESHOLD_PERIOD = 30.days
   UNSUSPENSION_GRACE_PERIOD = 3.days
 
   MAX_2SV_LOGIN_ATTEMPTS = 10

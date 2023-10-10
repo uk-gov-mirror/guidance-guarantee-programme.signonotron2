@@ -36,7 +36,7 @@ namespace :users do
     end
   end
 
-  desc "Suspend users who have not signed-in for 45 days"
+  desc "Suspend users who have not signed-in for 30 days"
   task suspend_inactive: :environment do
     with_lock('signon:users:suspend_inactive') do
       count = InactiveUsersSuspender.new.suspend

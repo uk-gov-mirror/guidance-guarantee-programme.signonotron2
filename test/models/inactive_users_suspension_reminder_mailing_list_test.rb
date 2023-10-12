@@ -10,7 +10,13 @@ class InactiveUsersSuspensionReminderMailingListTest < ActiveSupport::TestCase
       @in_1  = create(:user, current_sign_in_at: User::SUSPENSION_THRESHOLD_PERIOD.ago)
       @in_3  = create(:user, current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD - 2.days).ago)
       @in_7  = create(:user, current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD - 6.days).ago)
-      @in_14 = create(:user, current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD - 13.days).ago)
+
+      @application = create(:application, name: 'Pension Wise Academy')
+      @excluded    = create(
+        :user,
+        current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD - 6.days).ago,
+        with_permissions: { 'Pension Wise Academy' => %w(signin) }
+      )
     end
 
     should "select users whose accounts will get suspended in 1 day" do
@@ -23,10 +29,6 @@ class InactiveUsersSuspensionReminderMailingListTest < ActiveSupport::TestCase
 
     should "select users whose accounts will get suspended in 7 days" do
       assert_equal [@in_7], suspension_reminder_mailing_list[7]
-    end
-
-    should "select users whose accounts will get suspended in 14 days" do
-      assert_equal [@in_14], suspension_reminder_mailing_list[14]
     end
 
     should "select users who signed-in more than suspension threshold days ago" do

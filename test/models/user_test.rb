@@ -156,6 +156,17 @@ class UserTest < ActiveSupport::TestCase
     assert_equal [signed_in_7_days_ago, signed_in_8_days_ago], User.last_signed_in_before(6.days.ago)
   end
 
+  test "excludes users only having access to the Pension Wise Academy" do
+    permissions = %w(signin)
+    academy_app = create(:application, name: 'Pension Wise Academy')
+    planner_app = create(:application, name: 'Planner')
+
+    academy_only  = create(:user, current_sign_in_at: 7.days.ago, with_permissions: { academy_app.name => permissions })
+    multiple_apps = create(:user, current_sign_in_at: 7.days.ago, with_permissions: { academy_app.name => permissions, planner_app.name => permissions })
+
+    assert_equal [multiple_apps], User.last_signed_in_before(6.days.ago)
+  end
+
   test "fetches web users who signed_in after X days ago" do
     signed_in_0_days_ago = create(:user, current_sign_in_at: 0.days.ago)
     signed_in_1_day_ago  = create(:user, current_sign_in_at: 1.day.ago)

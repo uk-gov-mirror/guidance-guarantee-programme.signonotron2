@@ -1,4 +1,4 @@
-require "doorkeeper/orm/active_record/application"
+require 'doorkeeper/orm/active_record/application'
 
 class ::Doorkeeper::Application < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection

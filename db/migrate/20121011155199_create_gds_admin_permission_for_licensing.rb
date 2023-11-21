@@ -11,7 +11,7 @@ class CreateGdsAdminPermissionForLicensing < ActiveRecord::Migration
     has_many :supported_permissions, :dependent => :destroy
 
     def self.default_permission_strings
-      ["signin"]
+      ['signin']
     end
 
     def supported_permission_strings
@@ -33,7 +33,7 @@ class CreateGdsAdminPermissionForLicensing < ActiveRecord::Migration
        app = licence_application()
 
        if(!app.nil?)
-          app.supported_permissions.find_or_create_by(name: "GDSAdministrator")
+          app.supported_permissions.find_or_create_by(name: 'GDSAdministrator')
     end
   end
 end

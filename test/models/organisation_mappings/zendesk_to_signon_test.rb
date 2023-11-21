@@ -22,8 +22,8 @@ class OrganisationMappings::ZendeskToSignonTest < ActiveSupport::TestCase
   end
 
 
-  test "assigns organisation to users who have recognised domain names" do
-    co = create(:organisation, name: "Cabinet Office")
+  test 'assigns organisation to users who have recognised domain names' do
+    co = create(:organisation, name: 'Cabinet Office')
     user = create(:user, email: 'foo@digital.cabinet-office.gov.uk')
 
     assert_empty co.users
@@ -32,7 +32,7 @@ class OrganisationMappings::ZendeskToSignonTest < ActiveSupport::TestCase
   end
 
   test "doesn't assign organisation to users who don't have a recognised domain name" do
-    co = create(:organisation, name: "Cabinet Office")
+    co = create(:organisation, name: 'Cabinet Office')
     user = create(:user, email: 'foo@mailinator.com')
 
     apply_mappings
@@ -40,8 +40,8 @@ class OrganisationMappings::ZendeskToSignonTest < ActiveSupport::TestCase
   end
 
   test "doesn't affect users who belong to an organisation" do
-    hmrc = create(:organisation, name: "HM Revenue & Customs")
-    co = create(:organisation, name: "Cabinet Office")
+    hmrc = create(:organisation, name: 'HM Revenue & Customs')
+    co = create(:organisation, name: 'Cabinet Office')
     co.users << (co_user = create(:user, email: 'someone.important@hmrc.gsi.gov.uk'))
 
     apply_mappings

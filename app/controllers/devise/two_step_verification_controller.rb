@@ -21,7 +21,7 @@ class Devise::TwoStepVerificationController < DeviseController
       redirect_to_prior_flow notice: I18n.t("devise.two_step_verification.messages.success.#{mode}")
     else
       EventLog.record_event(current_user, failure_event_for(mode))
-      flash.now[:invalid_code] = "Sorry that code didn’t work. Please try again."
+      flash.now[:invalid_code] = 'Sorry that code didn’t work. Please try again.'
       render :show, status: :unprocessable_entity
     end
   end

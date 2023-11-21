@@ -5,10 +5,10 @@ class CreateEditorAdminPermsForMaslow < ActiveRecord::Migration
   end
 
   def up
-    maslow = ::Doorkeeper::Application.where(name: "Maslow").first
+    maslow = ::Doorkeeper::Application.where(name: 'Maslow').first
     if maslow
-      SupportedPermission.create!(application: maslow, name: "editor")
-      SupportedPermission.create!(application: maslow, name: "admin")
+      SupportedPermission.create!(application: maslow, name: 'editor')
+      SupportedPermission.create!(application: maslow, name: 'admin')
     end
   end
 end

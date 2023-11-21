@@ -16,7 +16,7 @@ Devise.setup do |config|
   # config.mailer_sender = Class.new.extend(MailerHelper).email_from
 
   # Configure the class responsible to send e-mails.
-  config.mailer = "UserMailer"
+  config.mailer = 'UserMailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -67,7 +67,7 @@ Devise.setup do |config|
   # config.http_authenticatable_on_xhr = true
 
   # The realm used in Http Basic Authentication. "Application" by default.
-  config.http_authentication_realm = "Sign-On-O-Tron"
+  config.http_authentication_realm = 'Sign-On-O-Tron'
 
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.

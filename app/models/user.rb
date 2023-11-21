@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   scope :with_role, lambda { |role_name| where(role: role_name) }
   scope :with_organisation, lambda { |org_id| where(organisation_id: org_id) }
   scope :fuzzy_filter, lambda { |filter_param|
-                         where("users.email like ? OR users.name like ?", "%#{filter_param.strip}%", "%#{filter_param.strip}%") # rubocop:disable Layout/LineLength
+                         where('users.email like ? OR users.name like ?', "%#{filter_param.strip}%", "%#{filter_param.strip}%") # rubocop:disable Layout/LineLength
                        }
   scope :last_signed_in_on, lambda { |date|
     web_users

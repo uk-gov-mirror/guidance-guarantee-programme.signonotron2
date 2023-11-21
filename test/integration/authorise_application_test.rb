@@ -2,11 +2,11 @@ require 'test_helper'
 
 class AuthoriseApplicationTest < ActionDispatch::IntegrationTest
   setup do
-    @app = create(:application, name: "MyApp")
+    @app = create(:application, name: 'MyApp')
     @user = create(:user)
   end
 
-  context "when the user is flagged for 2SV" do
+  context 'when the user is flagged for 2SV' do
     setup do
       @user.update_attribute(:require_2sv, true)
       ignoring_spurious_error do
@@ -15,14 +15,14 @@ class AuthoriseApplicationTest < ActionDispatch::IntegrationTest
       signin_with(@user, set_up_2sv: false)
     end
 
-    should "not confirm the authorisation" do
-      assert_response_contains("Make your account more secure")
+    should 'not confirm the authorisation' do
+      assert_response_contains('Make your account more secure')
     end
   end
 
-  should "not confirm the authorisation until the user signs in" do
+  should 'not confirm the authorisation until the user signs in' do
     visit "/oauth/authorize?response_type=code&client_id=#{@app.uid}&redirect_uri=#{@app.redirect_uri}"
-    assert_response_contains("You need to sign in")
+    assert_response_contains('You need to sign in')
     refute Doorkeeper::AccessGrant.find_by(resource_owner_id: @user.id)
 
     ignoring_spurious_error do
@@ -38,29 +38,29 @@ class AuthoriseApplicationTest < ActionDispatch::IntegrationTest
     @user.password_changed_at = 91.days.ago
     @user.save!
 
-    visit "/"
+    visit '/'
     signin_with(@user)
     ignoring_spurious_error do
       visit "/oauth/authorize?response_type=code&client_id=#{@app.uid}&redirect_uri=#{@app.redirect_uri}"
     end
-    assert_response_contains("Choose a new passphrase")
+    assert_response_contains('Choose a new passphrase')
     refute Doorkeeper::AccessGrant.find_by(resource_owner_id: @user.id)
   end
 
-  should "not confirm the authorisation if the user has not passed 2-step verification" do
+  should 'not confirm the authorisation if the user has not passed 2-step verification' do
     @user.update_attribute(:otp_secret_key, ROTP::Base32.random_base32)
 
-    visit "/"
+    visit '/'
     signin_with(@user, second_step: false)
     ignoring_spurious_error do
       visit "/oauth/authorize?response_type=code&client_id=#{@app.uid}&redirect_uri=#{@app.redirect_uri}"
     end
-    assert_response_contains("get your code")
+    assert_response_contains('get your code')
     refute Doorkeeper::AccessGrant.find_by(resource_owner_id: @user.id)
   end
 
-  should "confirm the authorisation for a signed-in user" do
-    visit "/"
+  should 'confirm the authorisation for a signed-in user' do
+    visit '/'
     signin_with(@user)
     ignoring_spurious_error do
       visit "/oauth/authorize?response_type=code&client_id=#{@app.uid}&redirect_uri=#{@app.redirect_uri}"
@@ -70,10 +70,10 @@ class AuthoriseApplicationTest < ActionDispatch::IntegrationTest
     assert_kind_of Doorkeeper::AccessGrant, Doorkeeper::AccessGrant.find_by(resource_owner_id: @user.id)
   end
 
-  should "confirm the authorisation for a fully authenticated 2SV user" do
+  should 'confirm the authorisation for a fully authenticated 2SV user' do
     @user.update_attribute(:otp_secret_key, ROTP::Base32.random_base32)
 
-    visit "/"
+    visit '/'
     signin_with(@user)
     ignoring_spurious_error do
       visit "/oauth/authorize?response_type=code&client_id=#{@app.uid}&redirect_uri=#{@app.redirect_uri}"

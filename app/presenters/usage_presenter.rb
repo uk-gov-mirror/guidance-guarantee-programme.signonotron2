@@ -11,7 +11,7 @@ class UsagePresenter
   end
 
   def write_csv(path)
-    CSV.open(File.join(path, "usage_report_#{start_date.to_date}_#{end_date.to_date}.csv"), "wb") do |csv|
+    CSV.open(File.join(path, "usage_report_#{start_date.to_date}_#{end_date.to_date}.csv"), 'wb') do |csv|
       build_csv(csv)
     end
   end
@@ -25,17 +25,17 @@ private
     while start_date_m < end_date
       end_date_m = start_date_m.end_of_month
 
-      active_users = User.where("created_at <= ? and (suspended_at is NULL or suspended_at > ?)", end_date_m,
+      active_users = User.where('created_at <= ? and (suspended_at is NULL or suspended_at > ?)', end_date_m,
                                 end_date_m).
         group(:organisation_id).count
-      suspended_users = User.where("suspended_at <= ?", end_date_m).
+      suspended_users = User.where('suspended_at <= ?', end_date_m).
         group(:organisation_id).count
       total_count = {}
       (active_users.keys | suspended_users.keys).each do |key|
         total_count[key] = {active: active_users[key], suspended: suspended_users[key]}
       end
 
-      month = start_date_m.strftime("%B, %Y")
+      month = start_date_m.strftime('%B, %Y')
       orgs = Organisation.all.select(:id, :name).index_by(&:id)
 
       total_count.each do |org_id, count|

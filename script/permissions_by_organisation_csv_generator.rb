@@ -3,7 +3,7 @@ require 'csv'
 class PermissionsByOrganisationCsvGenerator
   def self.generate
     filename = 'permissions_by_organisation.csv'
-    CSV.open(filename, "wb") do |csv|
+    CSV.open(filename, 'wb') do |csv|
       csv << ['Organisation', 'Application', 'Permission']
       permissions_by_organisation.each { |line| csv << line }
     end

@@ -11,24 +11,24 @@ class SsoPushClientTest < ActiveSupport::TestCase
     "https://#{url.host}/auth/gds/api/users/#{CGI.escape(@user.uid)}"
   end
 
-  context "update_user" do
+  context 'update_user' do
     setup do
-      @sso_push_user = create(:user, name: "Sso Push User")
+      @sso_push_user = create(:user, name: 'Sso Push User')
       SsoPushCredential.stubs(:user_email).returns(@sso_push_user.email)
 
       @user = create(:user)
-      @application = create(:application, redirect_uri: "https://app.com/callback",
+      @application = create(:application, redirect_uri: 'https://app.com/callback',
                                           with_supported_permissions: ['user_update_permission'])
       @user_hash = UserOAuthPresenter.new(@user, @application).as_hash
     end
 
-    should "send a PUT to the related app with the user.json as in the OAuth exchange" do
+    should 'send a PUT to the related app with the user.json as in the OAuth exchange' do
       request = stub_request(:put, users_url(@application)).with(body: @user_hash.to_json)
       SsoPushClient.new(@application).update_user(@user.uid, @user_hash)
       assert_requested request
     end
 
-    should "send the bearer token in the request" do
+    should 'send the bearer token in the request' do
       SsoPushCredential.stubs(:credentials).with(@application).returns('foo')
 
       request = stub_request(:put, users_url(@application)).with(headers: { 'Authorization' => 'Bearer foo' })
@@ -38,23 +38,23 @@ class SsoPushClientTest < ActiveSupport::TestCase
     end
   end
 
-  context "reauth" do
+  context 'reauth' do
     setup do
-      @sso_push_user = create(:user, name: "Sso Push User")
+      @sso_push_user = create(:user, name: 'Sso Push User')
       SsoPushCredential.stubs(:user_email).returns(@sso_push_user.email)
 
       @user = create(:user)
-      @application = create(:application, redirect_uri: "https://app.com/callback",
+      @application = create(:application, redirect_uri: 'https://app.com/callback',
                                           with_supported_permissions: ['user_update_permission'])
     end
 
-    should "send an empty POST to the app" do
-      request = stub_request(:post, reauth_url(@application)).with(body: "{}")
+    should 'send an empty POST to the app' do
+      request = stub_request(:post, reauth_url(@application)).with(body: '{}')
       SsoPushClient.new(@application).reauth_user(@user.uid)
       assert_requested request
     end
 
-    should "send the bearer token in the request" do
+    should 'send the bearer token in the request' do
       SsoPushCredential.stubs(:credentials).with(@application).returns('foo')
 
       request = stub_request(:post, reauth_url(@application)).with(headers: { 'Authorization' => 'Bearer foo' })

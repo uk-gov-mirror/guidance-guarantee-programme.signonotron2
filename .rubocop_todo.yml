@@ -1073,14 +1073,6 @@ Style/StringConcatenation:
     - 'test/models/numbers/numbers_csv_test.rb'
     - 'test/models/organisation_mappings/zendesk_to_signon_test.rb'
 
-# Offense count: 3010
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Enabled: false
-
-
 # Offense count: 16
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, MinSize, WordRegex.

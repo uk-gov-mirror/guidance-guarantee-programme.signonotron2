@@ -7,11 +7,11 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
   end
 
   setup do
-    @sso_push_user = create(:user, name: "Sso Push User")
+    @sso_push_user = create(:user, name: 'Sso Push User')
     SsoPushCredential.user_email = @sso_push_user.email
 
     @user = create(:user)
-    @application = create(:application, redirect_uri: "https://app.com/callback",
+    @application = create(:application, redirect_uri: 'https://app.com/callback',
                                         with_supported_permissions: ['user_update_permission'])
     @signin_permission = @user.grant_application_permission(@application, 'signin')
     @other_permission = @user.grant_application_permission(@application, 'user_update_permission')
@@ -22,8 +22,8 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
     SsoPushCredential.user = nil
   end
 
-  context "perform" do
-    should "update the application with users information" do
+  context 'perform' do
+    should 'update the application with users information' do
       expected_body = UserOAuthPresenter.new(@user, @application).as_hash.to_json
       http_request = stub_request(:put, users_url(@application)).with(body: expected_body)
 
@@ -31,8 +31,8 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
       assert_requested http_request
     end
 
-    context "successful update" do
-      should "record the last_synced_at timestamp on the permissions" do
+    context 'successful update' do
+      should 'record the last_synced_at timestamp on the permissions' do
         stub_request(:put, users_url(@application))
 
         PermissionUpdater.new.perform(@user.uid, @application.id)
@@ -42,8 +42,8 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
       end
     end
 
-    context "failed update" do
-      should "not record the last_synced_at timestamp on the permissions" do
+    context 'failed update' do
+      should 'not record the last_synced_at timestamp on the permissions' do
         stub_request(:put, users_url(@application)).to_timeout
 
         PermissionUpdater.new.perform(@user.uid, @application.id) rescue SsoPushError
@@ -53,11 +53,11 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
       end
     end
 
-    context "handling changes in data since job was scheduled" do
+    context 'handling changes in data since job was scheduled' do
       should "not attempt to update if the User doesn't exist" do
         SsoPushClient.expects(:new).never
 
-        PermissionUpdater.new.perform(@user.uid + "foo", @application.id)
+        PermissionUpdater.new.perform(@user.uid + 'foo', @application.id)
       end
 
       should "do nothing if the application doesn't exist" do
@@ -66,7 +66,7 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
         PermissionUpdater.new.perform(@user.uid, @application.id + 42)
       end
 
-      should "not raise if the user has no permissions for the application" do
+      should 'not raise if the user has no permissions for the application' do
         @signin_permission.destroy
         @other_permission.destroy
 

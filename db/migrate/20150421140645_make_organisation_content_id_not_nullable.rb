@@ -11,7 +11,7 @@ class MakeOrganisationContentIdNotNullable < ActiveRecord::Migration
     # This migration is written with the assumption that organisation
     # content_ids have been populated. Any without a content_id are either
     # duplicates or have been deleted from Whitehall.
-    Organisation.where("content_id is NULL").each do |organisation|
+    Organisation.where('content_id is NULL').each do |organisation|
       if Rails.env.development?
         if organisation.users.any?
           organisation.users.update_all(organisation_id: nil)

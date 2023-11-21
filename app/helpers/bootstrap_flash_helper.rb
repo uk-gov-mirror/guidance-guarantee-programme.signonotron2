@@ -6,9 +6,9 @@ module BootstrapFlashHelper
   def bootstrap_flash_class(flash_key)
     case flash_key
     when :notice
-      "success"
+      'success'
     when :error, :alert
-      "danger"
+      'danger'
     else
       flash_key
     end

@@ -13,7 +13,7 @@ class ConfirmationsController < Devise::ConfirmationsController
   def show
     if user_signed_in?
       if confirmation_user.persisted? && (current_user.email != confirmation_user.email)
-        redirect_to root_path, alert: "It appears you followed a link meant for another user."
+        redirect_to root_path, alert: 'It appears you followed a link meant for another user.'
       else
         self.resource = resource_class.confirm_by_token(params[:confirmation_token])
         if resource.errors.empty?
@@ -47,7 +47,7 @@ class ConfirmationsController < Devise::ConfirmationsController
         respond_with_navigational(resource.errors, status: :unprocessable_entity) { handle_new_token_needed }
       end
     else
-      self.resource.errors.add(:password, :invalid, message: "was incorrect")
+      self.resource.errors.add(:password, :invalid, message: 'was incorrect')
       render :show
     end
   end

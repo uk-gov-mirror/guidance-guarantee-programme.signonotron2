@@ -11,12 +11,12 @@ Signonotron2::Application.routes.draw do
   }
 
   devise_scope :user do
-    post "/users/invitation/resend/:id" => "invitations#resend", :as => "resend_user_invitation"
-    put "/users/confirmation" => "confirmations#update"
+    post '/users/invitation/resend/:id' => 'invitations#resend', :as => 'resend_user_invitation'
+    put '/users/confirmation' => 'confirmations#update'
     resource :two_step_verification, only: %i[show update],
-      path: "/users/two_step_verification",
-      controller: "devise/two_step_verification" do
-      resource :session, only: %i[new create], controller: "devise/two_step_verification_session"
+      path: '/users/two_step_verification',
+      controller: 'devise/two_step_verification' do
+      resource :session, only: %i[new create], controller: 'devise/two_step_verification_session'
 
       member { get :prompt }
     end
@@ -66,11 +66,11 @@ Signonotron2::Application.routes.draw do
   end
 
   # Gracefully handle GET on page (e.g. hit refresh) reached by a render to a POST
-  match "/users/:id" => redirect("/users/%{id}/edit"), via: :get
-  match "/suspensions/:id" => redirect("/users/%{id}/edit"), via: :get
+  match '/users/:id' => redirect('/users/%{id}/edit'), via: :get
+  match '/suspensions/:id' => redirect('/users/%{id}/edit'), via: :get
 
   # compatibility with Sign-on-o-tron 1
-  post "oauth/access_token" => "doorkeeper/tokens#create"
+  post 'oauth/access_token' => 'doorkeeper/tokens#create'
 
   # Prototyping
   get '/phone-unavailable' => 'prototype#phone_unavailable'

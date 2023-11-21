@@ -7,9 +7,9 @@ FactoryGirl.define do
     end
 
     sequence(:name) { |n| "Application #{n}" }
-    redirect_uri "https://app.com/callback"
-    home_uri "https://app.com/"
-    description "Important information about this app"
+    redirect_uri 'https://app.com/callback'
+    home_uri 'https://app.com/'
+    description 'Important information about this app'
     supports_push_updates false
 
     after(:create) do |app, evaluator|

@@ -21,7 +21,7 @@ class AddDualPurposeGuiderPermissions < ActiveRecord::Migration
   def down
     if app = Doorkeeper::Application.find_by(name: APPLICATION)
       app.supported_permissions.where(name: PERMISSION).destroy_all
-      say "Removed the permission."
+      say 'Removed the permission.'
     end
   end
 end

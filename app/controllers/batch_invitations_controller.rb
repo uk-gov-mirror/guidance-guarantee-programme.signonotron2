@@ -19,7 +19,7 @@ class BatchInvitationsController < ApplicationController
     authorize @batch_invitation
 
     unless file_uploaded?
-      flash[:alert] = "You must upload a file"
+      flash[:alert] = 'You must upload a file'
       render :new
       return
     end
@@ -32,7 +32,7 @@ class BatchInvitationsController < ApplicationController
       return
     end
     if csv.empty? # headers: true means .size is the number of data rows
-      flash[:alert] = "CSV had no rows."
+      flash[:alert] = 'CSV had no rows.'
       render :new
       return
     elsif %w(Name Email).any? { |required_header| csv.headers.exclude?(required_header) }
@@ -43,7 +43,7 @@ class BatchInvitationsController < ApplicationController
 
     @batch_invitation.save
     csv.each do |row|
-      BatchInvitationUser.create(batch_invitation: @batch_invitation, name: row["Name"], email: row["Email"])
+      BatchInvitationUser.create(batch_invitation: @batch_invitation, name: row['Name'], email: row['Email'])
     end
     @batch_invitation.enqueue
     flash[:notice] = "Scheduled invitation of #{@batch_invitation.batch_invitation_users.count} users"
@@ -58,7 +58,7 @@ class BatchInvitationsController < ApplicationController
   private
 
   def recent_batch_invitations
-    @_recent_batch_invitations ||= BatchInvitation.where("created_at > '#{3.days.ago}'").order("created_at desc")
+    @_recent_batch_invitations ||= BatchInvitation.where("created_at > '#{3.days.ago}'").order('created_at desc')
   end
 
   def file_uploaded?

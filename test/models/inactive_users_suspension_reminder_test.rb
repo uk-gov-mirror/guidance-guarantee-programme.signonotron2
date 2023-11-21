@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class InactiveUsersSuspensionReminderTest < ActiveSupport::TestCase
-  context "sending reminder emails" do
-    should "send reminder emails to users when 1 day from suspension" do
+  context 'sending reminder emails' do
+    should 'send reminder emails to users when 1 day from suspension' do
       suspends_in_1_day = create(:user, current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD).ago)
 
       mailer = mock
@@ -13,7 +13,7 @@ class InactiveUsersSuspensionReminderTest < ActiveSupport::TestCase
       InactiveUsersSuspensionReminder.new(users_to_remind, 1).send_reminders
     end
 
-    should "send reminder emails to users when 3 days from suspension" do
+    should 'send reminder emails to users when 3 days from suspension' do
       suspends_in_3_days = create(:user, current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD - 2.days).ago)
 
       mailer = mock
@@ -24,7 +24,7 @@ class InactiveUsersSuspensionReminderTest < ActiveSupport::TestCase
       InactiveUsersSuspensionReminder.new(users_to_remind, 3).send_reminders
     end
 
-    should "send reminder emails to users when 7 days from suspension" do
+    should 'send reminder emails to users when 7 days from suspension' do
       suspends_in_7_days = create(:user, current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD - 6.days).ago)
 
       mailer = mock
@@ -35,7 +35,7 @@ class InactiveUsersSuspensionReminderTest < ActiveSupport::TestCase
       InactiveUsersSuspensionReminder.new(users_to_remind, 7).send_reminders
     end
 
-    should "send reminder emails to users when 14 days from suspension" do
+    should 'send reminder emails to users when 14 days from suspension' do
       suspends_in_14_days = create(:user, current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD - 13.days).ago)
 
       mailer = mock
@@ -47,7 +47,7 @@ class InactiveUsersSuspensionReminderTest < ActiveSupport::TestCase
     end
   end
 
-  context "failing to send emails with SES down" do
+  context 'failing to send emails with SES down' do
     setup do
       create(:user, current_sign_in_at: User::SUSPENSION_THRESHOLD_PERIOD.ago)
       @users_to_remind = User.last_signed_in_on(User::SUSPENSION_THRESHOLD_PERIOD.ago)
@@ -56,12 +56,12 @@ class InactiveUsersSuspensionReminderTest < ActiveSupport::TestCase
       @mailer.expects(:deliver_now).raises(Errno::ETIMEDOUT).times(3)
     end
 
-    should "retry twice if there are errors connecting to SES" do
+    should 'retry twice if there are errors connecting to SES' do
       UserMailer.expects(:suspension_reminder).returns(@mailer).times(3)
       InactiveUsersSuspensionReminder.new(@users_to_remind, 1).send_reminders
     end
 
-    should "send an exception notification if retries fail" do
+    should 'send an exception notification if retries fail' do
       Bugsnag.expects(:notify).once
       UserMailer.expects(:suspension_reminder).returns(@mailer).times(3)
 

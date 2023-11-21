@@ -8,12 +8,12 @@ class CreateWhitehallEditorSupportedPermission < ActiveRecord::Migration
   end
 
   def up
-    whitehall = ::Doorkeeper::Application.find_by_name("Whitehall")
+    whitehall = ::Doorkeeper::Application.find_by_name('Whitehall')
     if whitehall
-      permission_name = "Editor"
+      permission_name = 'Editor'
       permission = SupportedPermission.create!(application: whitehall, name: permission_name)
       Permission.where(application_id: whitehall.id).each do |permission|
-        if permission.permissions.include?("signin")
+        if permission.permissions.include?('signin')
           permission.permissions << permission_name
           permission.save!
         end

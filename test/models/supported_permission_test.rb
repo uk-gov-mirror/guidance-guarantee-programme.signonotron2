@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SupportedPermissionTest < ActiveSupport::TestCase
-  test "name of signin permission cannot be changed" do
+  test 'name of signin permission cannot be changed' do
     application = create(:application)
 
     assert_raises ActiveRecord::RecordInvalid do
@@ -9,7 +9,7 @@ class SupportedPermissionTest < ActiveSupport::TestCase
     end
   end
 
-  test "name of permissions other than signin be changed" do
+  test 'name of permissions other than signin be changed' do
     permission = create(:supported_permission, name: 'writer')
 
     assert_nothing_raised do
@@ -17,7 +17,7 @@ class SupportedPermissionTest < ActiveSupport::TestCase
     end
   end
 
-  test "associated user application permissions are destroyed when supported permissions are destroyed" do
+  test 'associated user application permissions are destroyed when supported permissions are destroyed' do
     user = create(:user)
     application = create(:application, with_supported_permissions: ['managing_editor'])
     managing_editor_permission = application.supported_permissions.where(name: 'managing_editor').first

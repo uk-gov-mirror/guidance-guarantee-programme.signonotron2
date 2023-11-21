@@ -5,7 +5,7 @@ describe ApiUserPolicy do
 
   %i[new? create? index? edit? update? revoke?].each do |permission_name|
     permissions permission_name do
-      it "is allowed only for superadmins" do
+      it 'is allowed only for superadmins' do
         expect(subject).to permit(create(:superadmin_user), User)
 
         expect(subject).not_to permit(create(:admin_user), User)

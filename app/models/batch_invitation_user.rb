@@ -3,11 +3,11 @@ class BatchInvitationUser < ActiveRecord::Base
 
   belongs_to :batch_invitation
 
-  validates :outcome, inclusion: { in: [nil, "success", "failed", "skipped"] }
+  validates :outcome, inclusion: { in: [nil, 'success', 'failed', 'skipped'] }
 
   scope :processed, -> { where.not(outcome: nil) }
   scope :unprocessed, -> { where(outcome: nil) }
-  scope :failed, -> { where(outcome: "failed") }
+  scope :failed, -> { where(outcome: 'failed') }
 
   def invite(inviting_user, supported_permission_ids)
     sanitised_attributes = sanitise_attributes_for_inviting_user_role(
@@ -24,8 +24,8 @@ class BatchInvitationUser < ActiveRecord::Base
   end
 
   def humanized_outcome
-    if outcome == "skipped"
-      "Skipped: user already existed."
+    if outcome == 'skipped'
+      'Skipped: user already existed.'
     elsif outcome.present?
       outcome.capitalize
     else
@@ -45,12 +45,12 @@ private
   def invite_user_with_attributes(sanitised_attributes, inviting_user)
     user = User.invite!(sanitised_attributes.to_h, inviting_user)
     if user.persisted?
-      self.update_column(:outcome, "success")
+      self.update_column(:outcome, 'success')
     else
-      self.update_column(:outcome, "failed")
+      self.update_column(:outcome, 'failed')
     end
   rescue StandardError => e
-    self.update_column(:outcome, "failed")
+    self.update_column(:outcome, 'failed')
   end
 
   def sanitise_attributes_for_inviting_user_role(raw_attributes, inviting_user)

@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
-require_relative "../config/environment"
+require_relative '../config/environment'
 
 def config_for_app(application_config_file)
   lines = IO.read(application_config_file).split("\n")
   config = {}
   lines.each do |line|
-    next if line =~ Regexp.new(Regexp.escape("GDS::SSO.config do |config|"))
+    next if line =~ Regexp.new(Regexp.escape('GDS::SSO.config do |config|'))
     next if line =~ Regexp.new(/^end/)
     next if line =~ Regexp.new(/^(\s)+?$/)
     key = /config\.([^ ]+)/.match(line).to_a[1]
@@ -26,12 +26,12 @@ def config_for_app(application_config_file)
 end
 
 def deverise_uri(uri)
-  uri.gsub(/[a-z]*.alphagov.co.uk/, "dev.gov.uk").gsub(/https:/, "http:")
+  uri.gsub(/[a-z]*.alphagov.co.uk/, 'dev.gov.uk').gsub(/https:/, 'http:')
 end
 
 def application_repo_name(application)
   if application.name =~ /Content API/i
-    "govuk_content_api"
+    'govuk_content_api'
   else
     application.name.downcase.gsub(/\s/, '-')
   end
@@ -45,7 +45,7 @@ def config_path_for_app(application)
   end
 end
 
-puts "Updating SSO config so that it works in development..."
+puts 'Updating SSO config so that it works in development...'
 ::Doorkeeper::Application.all.each do |application|
   config_file = config_path_for_app(application)
   if File.exists?(config_file)
@@ -53,8 +53,8 @@ puts "Updating SSO config so that it works in development..."
 
     application.redirect_uri = deverise_uri(application.redirect_uri)
     application.home_uri     = deverise_uri(application.home_uri)
-    application.uid          = local_config["oauth_id"]
-    application.secret       = local_config["oauth_secret"]
+    application.uid          = local_config['oauth_id']
+    application.secret       = local_config['oauth_secret']
     puts "Updating application #{application.name}"
     begin
       application.save!

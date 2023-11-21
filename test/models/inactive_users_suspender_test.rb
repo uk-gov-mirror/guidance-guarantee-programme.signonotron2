@@ -3,7 +3,7 @@ require 'test_helper'
 class InactiveUsersSuspenderTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
-  test "suspends users who have not logged-in for more than suspension threshold days" do
+  test 'suspends users who have not logged-in for more than suspension threshold days' do
     inactive_user = create(:user, current_sign_in_at: 46.days.ago)
 
     InactiveUsersSuspender.new.suspend
@@ -11,7 +11,7 @@ class InactiveUsersSuspenderTest < ActiveSupport::TestCase
     assert inactive_user.reload.suspended?
   end
 
-  test "suspension reason contains suspension threshold date" do
+  test 'suspension reason contains suspension threshold date' do
     inactive_user = create(:user, current_sign_in_at: 31.days.ago)
 
     InactiveUsersSuspender.new.suspend
@@ -66,13 +66,13 @@ class InactiveUsersSuspenderTest < ActiveSupport::TestCase
     assert suspended_user.reload.suspended?
   end
 
-  test "returns the count of users who got suspended" do
+  test 'returns the count of users who got suspended' do
     create_list(:user, 2, current_sign_in_at: 46.days.ago)
 
     assert_equal 2, InactiveUsersSuspender.new.suspend
   end
 
-  test "records auto-suspension in event log" do
+  test 'records auto-suspension in event log' do
     users = create_list(:user, 2, current_sign_in_at: 46.days.ago)
     users.each { |user|
       EventLog.expects(:record_event)
@@ -83,7 +83,7 @@ class InactiveUsersSuspenderTest < ActiveSupport::TestCase
     InactiveUsersSuspender.new.suspend
   end
 
-  test "sends suspension notification to users who got suspended" do
+  test 'sends suspension notification to users who got suspended' do
     users = create_list(:user, 2, current_sign_in_at: 46.days.ago)
 
     mailer = mock
@@ -97,14 +97,14 @@ class InactiveUsersSuspenderTest < ActiveSupport::TestCase
     InactiveUsersSuspender.new.suspend
   end
 
-  test "syncs permissions with downstream apps to inform them about suspension" do
+  test 'syncs permissions with downstream apps to inform them about suspension' do
     inactive_user = create(:user, current_sign_in_at: 46.days.ago)
     PermissionUpdater.expects(:perform_on).with(inactive_user)
 
     InactiveUsersSuspender.new.suspend
   end
 
-  test "enforces downstream apps to log-off the suspended user" do
+  test 'enforces downstream apps to log-off the suspended user' do
     inactive_user = create(:user, current_sign_in_at: 46.days.ago)
     ReauthEnforcer.expects(:perform_on).with(inactive_user)
 

@@ -10,10 +10,10 @@ class UserPermissionsExporter
 
   def export_signon
     CSV.open(signon_file_path, 'wb', headers: true) do |csv|
-      csv << ["Name", "Email", "Organisation", "Role", "Suspended at"]
+      csv << ['Name', 'Email', 'Organisation', 'Role', 'Suspended at']
       User.order(:name).each do |user|
-        org_name = user.organisation ? user.organisation.name : ""
-        suspended_at = user.suspended_at || ""
+        org_name = user.organisation ? user.organisation.name : ''
+        suspended_at = user.suspended_at || ''
         csv << [user.name, user.email, org_name, user.role, suspended_at]
       end
     end
@@ -34,11 +34,11 @@ class UserPermissionsExporter
           permissions = user.permissions_for(app)
           if permissions.present?
             row = {}
-            row["Application"] = app.name if multiple_apps?
-            row["Name"] = user.name
-            row["Email"] = user.email
-            row["Organisation"] = user.organisation.name if user.organisation
-            row["Permissions"] = permissions.join(",")
+            row['Application'] = app.name if multiple_apps?
+            row['Name'] = user.name
+            row['Email'] = user.email
+            row['Organisation'] = user.organisation.name if user.organisation
+            row['Permissions'] = permissions.join(',')
             csv << row
           end
         end
@@ -65,7 +65,7 @@ private
 
   def headers
     headings = %w(Name Email Organisation Permissions)
-    headings.unshift "Application" if multiple_apps?
+    headings.unshift 'Application' if multiple_apps?
     headings
   end
 

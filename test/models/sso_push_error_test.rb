@@ -3,16 +3,16 @@ require 'gds_api/base'
 
 class SsoPushErrorTest < ActiveSupport::TestCase
   def setup
-    @sso_push_user = create(:user, name: "SSO Push User")
+    @sso_push_user = create(:user, name: 'SSO Push User')
     SsoPushCredential.stubs(:user_email).returns(@sso_push_user.email)
 
     @user = create(:user)
-    @application = create(:application, redirect_uri: "https://app.com/callback",
+    @application = create(:application, redirect_uri: 'https://app.com/callback',
                                         with_supported_permissions: ['user_update_permission'])
   end
 
-  context "rescuing GdsApi::HTTPErrorResponse" do
-    should "add application name and response error code to exception message" do
+  context 'rescuing GdsApi::HTTPErrorResponse' do
+    should 'add application name and response error code to exception message' do
       ex = GdsApi::HTTPErrorResponse.new(504)
       SsoPushClient.any_instance.stubs(:post_json).raises(ex)
 
@@ -23,8 +23,8 @@ class SsoPushErrorTest < ActiveSupport::TestCase
     end
   end
 
-  context "rescuing other GdsApi errors" do
-    should "add application name and error message to exception message" do
+  context 'rescuing other GdsApi errors' do
+    should 'add application name and error message to exception message' do
       ex = GdsApi::TimedOutException.new
       SsoPushClient.any_instance.stubs(:post_json).raises(ex)
 
@@ -35,8 +35,8 @@ class SsoPushErrorTest < ActiveSupport::TestCase
     end
   end
 
-  context "rescuing StandardError" do
-    should "add application name and message to exception message" do
+  context 'rescuing StandardError' do
+    should 'add application name and message to exception message' do
       ex = StandardError.new
       SsoPushClient.any_instance.stubs(:post_json).raises(ex)
 

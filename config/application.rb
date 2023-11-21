@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 
 module Signonotron2
   def self.mysql?
-    ENV.fetch("SIGNONOTRON2_DB_ADAPTER", "postgresql") == "mysql"
+    ENV.fetch('SIGNONOTRON2_DB_ADAPTER', 'postgresql') == 'mysql'
   end
 
   class Application < Rails::Application
@@ -28,7 +28,7 @@ module Signonotron2
     I18n.config.enforce_available_locales = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Configure sensitive parameters which will be filtered from the log file.
     # Note: filter_parameters are treated as regexes, so :password also matches
@@ -52,7 +52,7 @@ module Signonotron2
     config.assets.precompile += %w(password-strength-indicator.js)
 
     config.to_prepare do
-      Doorkeeper::ApplicationController.layout "application"
+      Doorkeeper::ApplicationController.layout 'application'
     end
 
     config.eager_load_paths << Rails.root.join('lib')

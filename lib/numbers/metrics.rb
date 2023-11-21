@@ -31,7 +31,7 @@ module Numbers
 
     def active_admin_user_names
       %w(admin superadmin).collect do |role|
-        [role, all_active.select {|u| u.role == role }.map {|u| "#{u.name} <#{u.email}>" }.sort.join(", ")]
+        [role, all_active.select {|u| u.role == role }.map {|u| "#{u.name} <#{u.email}>" }.sort.join(', ')]
       end
     end
 
@@ -44,7 +44,7 @@ module Numbers
         result << ["#{range.first} - #{range.last}", count_days_since_last_sign_in]
         result
       end
-      ranges + [["never signed in", all_active.count {|u| u.current_sign_in_at.nil? }]]
+      ranges + [['never signed in', all_active.count {|u| u.current_sign_in_at.nil? }]]
     end
 
     def accounts_count_how_often_user_has_signed_in
@@ -61,7 +61,7 @@ module Numbers
     end
 
     def active_accounts_count_by_email_domain
-      count_values(all_active.group_by {|u| u.email.split("@")[1] })
+      count_values(all_active.group_by {|u| u.email.split('@')[1] })
     end
 
     def to_a
@@ -72,7 +72,7 @@ module Numbers
 
     private
     def has_signin_permissions?(permission)
-      permission.permissions.include?("signin")
+      permission.permissions.include?('signin')
     end
 
     def count_values(map)

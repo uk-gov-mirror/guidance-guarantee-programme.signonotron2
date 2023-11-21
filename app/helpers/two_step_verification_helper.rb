@@ -13,7 +13,7 @@ module TwoStepVerificationHelper
 
   def handle_failed_second_step
     if request.format.present? && request.format.html?
-      session["user_return_to"] = request.original_fullpath if request.get?
+      session['user_return_to'] = request.original_fullpath if request.get?
       redirect_to new_two_step_verification_session_path
     else
       render nothing: true, status: :unauthorized

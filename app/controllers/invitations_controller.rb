@@ -61,7 +61,7 @@ class InvitationsController < Devise::InvitationsController
       current_user_role: current_user_role
     ).sanitise
 
-    if params[:action] == "update"
+    if params[:action] == 'update'
       sanitised_params.to_h.merge(invitation_token: invitation_token)
     else
       sanitised_params.to_h

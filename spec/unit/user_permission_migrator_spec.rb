@@ -1,35 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe UserPermissionMigrator do
-  let(:specialist_publisher) { FactoryGirl.create(:application, name: "Specialist Publisher") }
-  let(:manuals_publisher) { FactoryGirl.create(:application, name: "Manuals Publisher") }
-  let(:unrelated_application) { FactoryGirl.create(:application, name: "unrelated application") }
+  let(:specialist_publisher) { FactoryGirl.create(:application, name: 'Specialist Publisher') }
+  let(:manuals_publisher) { FactoryGirl.create(:application, name: 'Manuals Publisher') }
+  let(:unrelated_application) { FactoryGirl.create(:application, name: 'unrelated application') }
 
   before do
-    FactoryGirl.create(:supported_permission, application: specialist_publisher, name: "gds_editor")
-    FactoryGirl.create(:supported_permission, application: specialist_publisher, name: "editor")
+    FactoryGirl.create(:supported_permission, application: specialist_publisher, name: 'gds_editor')
+    FactoryGirl.create(:supported_permission, application: specialist_publisher, name: 'editor')
 
-    FactoryGirl.create(:supported_permission, application: manuals_publisher, name: "gds_editor")
-    FactoryGirl.create(:supported_permission, application: manuals_publisher, name: "editor")
+    FactoryGirl.create(:supported_permission, application: manuals_publisher, name: 'gds_editor')
+    FactoryGirl.create(:supported_permission, application: manuals_publisher, name: 'editor')
 
-    FactoryGirl.create(:supported_permission, application: unrelated_application, name: "gds_editor")
-    FactoryGirl.create(:supported_permission, application: unrelated_application, name: "editor")
+    FactoryGirl.create(:supported_permission, application: unrelated_application, name: 'gds_editor')
+    FactoryGirl.create(:supported_permission, application: unrelated_application, name: 'editor')
   end
 
   let!(:gds_editor) do
-    FactoryGirl.create(:user, with_permissions: {"Specialist Publisher" => %w(editor gds_editor signin)})
+    FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w(editor gds_editor signin)})
   end
-  let!(:editor) { FactoryGirl.create(:user, with_permissions: {"Specialist Publisher" => %w(editor signin)}) }
-  let!(:writer) { FactoryGirl.create(:user, with_permissions: {"Specialist Publisher" => %w(signin)}) }
+  let!(:editor) { FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w(editor signin)}) }
+  let!(:writer) { FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w(signin)}) }
   let!(:user_without_access) { FactoryGirl.create(:user) }
   let!(:user_with_unrelated_access) do
-    FactoryGirl.create(:user, with_permissions: {"unrelated application" => %w(editor gds_editor signin)})
+    FactoryGirl.create(:user, with_permissions: {'unrelated application' => %w(editor gds_editor signin)})
   end
 
-  it "copies permissions over for all users of an application to another application" do
+  it 'copies permissions over for all users of an application to another application' do
     UserPermissionMigrator.migrate(
-      source: "Specialist Publisher",
-      target: "Manuals Publisher"
+      source: 'Specialist Publisher',
+      target: 'Manuals Publisher'
     )
 
     expect(gds_editor.permissions_for(manuals_publisher)).to eq %w(editor gds_editor signin)

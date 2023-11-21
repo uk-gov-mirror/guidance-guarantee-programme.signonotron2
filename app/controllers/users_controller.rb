@@ -85,7 +85,7 @@ class UsersController < ApplicationController
                end
       redirect_to root_path, notice: notice
     else
-      redirect_to edit_user_path(@user), alert: "Failed to send email change email"
+      redirect_to edit_user_path(@user), alert: 'Failed to send email change email'
     end
   end
 

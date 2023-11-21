@@ -20,7 +20,7 @@ class AuthorisationsController < ApplicationController
 application: authorisation.application)
       flash[:authorisation] = { application_name: authorisation.application.name, token: authorisation.token }
     else
-      flash[:error] = "There was an error while creating the access token"
+      flash[:error] = 'There was an error while creating the access token'
     end
     redirect_to [:edit, @api_user]
   end

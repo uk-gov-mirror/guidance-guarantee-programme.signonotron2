@@ -10,12 +10,12 @@ module UserFilterHelper
   end
 
   def two_step_abbr_tag
-    content_tag(:abbr, "2SV", title: "Two step verification")
+    content_tag(:abbr, '2SV', title: 'Two step verification')
   end
 
   def title_from(filter_type)
     if filter_type == :two_step_status
-      two_step_abbr_tag + " Status"
+      two_step_abbr_tag + ' Status'
     else
       filter_type.to_s.humanize.capitalize
     end
@@ -72,10 +72,10 @@ module UserFilterHelper
         org.name
       end
     when :two_step_status
-      if value == "true"
-        "Enabled"
+      if value == 'true'
+        'Enabled'
       else
-        "Not set up"
+        'Not set up'
       end
     else
       value.humanize.capitalize

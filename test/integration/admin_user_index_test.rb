@@ -54,7 +54,7 @@ class AdminUserIndexTest < ActionDispatch::IntegrationTest
         "Aardvark aardvark@example.com",
         "Abbey abbey@example.com",
         "Abbot mr_ab@example.com",
-        "Admin User admin@example.com",
+        "Admin User admin@example.com"
       ]
       actual = page.all('table tr td.email').map(&:text).map(&:strip)
       assert_equal expected, actual
@@ -66,7 +66,7 @@ class AdminUserIndexTest < ActionDispatch::IntegrationTest
       expected = [
         "Ed ed@example.com",
         "Eddie eddie_bb@example.com",
-        "Ernie ernie@example.com",
+        "Ernie ernie@example.com"
       ]
       actual = page.all('table tr td.email').map(&:text).map(&:strip)
       assert_equal expected, actual

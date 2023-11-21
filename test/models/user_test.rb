@@ -240,7 +240,7 @@ class UserTest < ActiveSupport::TestCase
         'foo@example.com',
         'foo_bar@example.COM',
         'foo@example-domain.com',
-        'user-foo+bar@really.long.domain.co.uk',
+        'user-foo+bar@really.long.domain.co.uk'
       ].each do |email|
         user.email = email
 
@@ -253,7 +253,7 @@ class UserTest < ActiveSupport::TestCase
       [
         'foo@example.com,',
         'foo@example_domain.com',
-        'foo@no-dot-domain',
+        'foo@no-dot-domain'
       ].each do |email|
         user.email = email
 

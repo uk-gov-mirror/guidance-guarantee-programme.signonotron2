@@ -49,7 +49,7 @@ class UserParameterSanitiserTest < ActiveSupport::TestCase
       permitted_params_by_role = {
         superadmin: [
           :name,
-          { some_ids: [] },
+          { some_ids: [] }
         ]
       }
       @some_ids = [1, 2, 3]

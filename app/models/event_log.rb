@@ -50,7 +50,7 @@ class EventLog < ActiveRecord::Base
                                                              description: "Passphrase reset page loaded but the token has expired"), # rubocop:disable Layout/LineLength
     SUCCESSFUL_PASSPHRASE_RESET               = LogEntry.new(id: 32, description: "Passphrase reset successfully"),
     ROLE_CHANGED                              = LogEntry.new(id: 33, description: "Role changed",
-                                                             require_initiator: true),
+                                                             require_initiator: true)
   ]
 
   EVENTS_REQUIRING_INITIATOR   = EVENTS.select(&:require_initiator?)

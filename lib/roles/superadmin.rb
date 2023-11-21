@@ -12,7 +12,7 @@ module Roles
         :confirmation_token,
         :role,
         :require_2sv,
-        { supported_permission_ids: [] },
+        { supported_permission_ids: [] }
       ]
     end
 

@@ -1111,21 +1111,6 @@ Style/TrailingCommaInArguments:
     - 'test/models/lib/user_parameter_sanitiser_test.rb'
     - 'test/models/organisations_fetcher_test.rb'
 
-# Offense count: 11
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArrayLiteral:
-  Exclude:
-    - 'app/models/event_log.rb'
-    - 'app/presenters/user_export_presenter.rb'
-    - 'lib/roles/admin.rb'
-    - 'lib/roles/organisation_admin.rb'
-    - 'lib/roles/superadmin.rb'
-    - 'test/integration/admin_user_index_test.rb'
-    - 'test/models/lib/user_parameter_sanitiser_test.rb'
-    - 'test/models/user_test.rb'
-
 # Offense count: 16
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, MinSize, WordRegex.

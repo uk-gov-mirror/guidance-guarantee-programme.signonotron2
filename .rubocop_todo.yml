@@ -1151,8 +1151,3 @@ Style/WordArray:
     - 'test/integration/granting_permissions_test.rb'
     - 'test/models/lib/user_permissions_exporter_test.rb'
 
-# Offense count: 1
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/ZeroLengthPredicate:
-  Exclude:
-    - 'app/controllers/batch_invitations_controller.rb'

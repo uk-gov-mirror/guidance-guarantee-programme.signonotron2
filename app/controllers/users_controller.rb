@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   include UserPermissionsControllerMethods
 
   before_action :authenticate_user!, except: :show
-  before_action :load_and_authorize_user, except: [:index, :show]
+  before_action :load_and_authorize_user, except: %i[index show]
   before_action :allow_no_application_access, only: [:update]
   helper_method :applications_and_permissions, :any_filter?
   respond_to :html

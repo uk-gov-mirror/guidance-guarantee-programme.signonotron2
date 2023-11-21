@@ -25,7 +25,7 @@ namespace :applications do
     apps_to_ignore = args.any? ? args[:apps_to_ignore].split(',') : []
     raise "Requires OLD_DOMAIN + NEW_DOMAIN specified in environment" unless ENV['OLD_DOMAIN'] && ENV['NEW_DOMAIN']
     Doorkeeper::Application.where.not(name: apps_to_ignore).find_each do |application|
-      [:redirect_uri, :home_uri].each do |field|
+      %i[redirect_uri home_uri].each do |field|
         new_domain = application[field].gsub(ENV['OLD_DOMAIN'], ENV['NEW_DOMAIN'])
         unless application[field].include? ENV['NEW_DOMAIN']
           puts "Migrating #{application.name} - #{field} to new domain: #{new_domain}"

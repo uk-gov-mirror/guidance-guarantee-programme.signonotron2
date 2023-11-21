@@ -9,7 +9,7 @@ class EnableDeviseSecurityExtension < ActiveRecord::Migration
     end
 
     add_index :old_passwords,
-              [:password_archivable_type, :password_archivable_id],
+              %i[password_archivable_type password_archivable_id],
               :name => :index_password_archivable
   end
 

@@ -56,7 +56,7 @@ class EventLog < ActiveRecord::Base
   EVENTS_REQUIRING_INITIATOR   = EVENTS.select(&:require_initiator?)
   EVENTS_REQUIRING_APPLICATION = EVENTS.select(&:require_application?)
 
-  VALID_OPTIONS = [:initiator, :application, :trailing_message]
+  VALID_OPTIONS = %i[initiator application trailing_message]
 
   validates :uid, presence: true
   validates_presence_of :event_id

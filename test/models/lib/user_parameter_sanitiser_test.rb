@@ -28,7 +28,7 @@ class UserParameterSanitiserTest < ActiveSupport::TestCase
     setup do
       permitted_params_by_role = {
         normal: [:name, :email],
-        superadmin: [:name, :email, :birthday],
+        superadmin: [:name, :email, :birthday]
       }
       user_params = { name: "Mary", birthday: "today!" }
 
@@ -50,7 +50,7 @@ class UserParameterSanitiserTest < ActiveSupport::TestCase
         superadmin: [
           :name,
           { some_ids: [] },
-        ],
+        ]
       }
       @some_ids = [1, 2, 3]
       user_params = { name: "Mary", some_ids: @some_ids }

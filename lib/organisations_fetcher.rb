@@ -38,7 +38,7 @@ private
       name: organisation_data.title,
       organisation_type: organisation_data.format,
       abbreviation: organisation_data.details.abbreviation,
-      closed: organisation_data.details.govuk_status == 'closed',
+      closed: organisation_data.details.govuk_status == 'closed'
     }
     organisation.update!(update_data)
   end

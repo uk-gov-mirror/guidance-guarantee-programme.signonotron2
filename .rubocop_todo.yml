@@ -1126,19 +1126,6 @@ Style/TrailingCommaInArrayLiteral:
     - 'test/models/lib/user_parameter_sanitiser_test.rb'
     - 'test/models/user_test.rb'
 
-# Offense count: 7
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInHashLiteral:
-  Exclude:
-    - 'app/models/batch_invitation_user.rb'
-    - 'app/presenters/user_o_auth_presenter.rb'
-    - 'lib/organisations_fetcher.rb'
-    - 'lib/user_parameter_sanitiser.rb'
-    - 'test/models/lib/user_parameter_sanitiser_test.rb'
-    - 'test/models/user_o_auth_presenter_test.rb'
-
 # Offense count: 16
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, MinSize, WordRegex.

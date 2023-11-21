@@ -17,7 +17,7 @@ class UserOAuthPresenterTest < ActiveSupport::TestCase
       uid: user.uid,
       organisation_slug: "justice-league",
       organisation_content_id: justice_league.content_id,
-      disabled: false,
+      disabled: false
     }
 
     user_representation = UserOAuthPresenter.new(user, @application).as_hash[:user]

@@ -24,7 +24,7 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
       :organisation,
       name: 'Ministry Of Misery',
       slug: slug,
-      closed: true,
+      closed: true
     )
     assert_equal(1, Organisation.count)
 
@@ -48,7 +48,7 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     organisation = create(
       :organisation,
       name: 'Ministry Of Misery',
-      slug: "old-slug",
+      slug: "old-slug"
     )
     assert_equal(1, Organisation.count)
 

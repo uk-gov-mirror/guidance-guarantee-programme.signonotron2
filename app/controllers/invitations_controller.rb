@@ -58,7 +58,7 @@ class InvitationsController < Devise::InvitationsController
   def resource_params
     sanitised_params = UserParameterSanitiser.new(
       user_params: unsanitised_user_params,
-      current_user_role: current_user_role,
+      current_user_role: current_user_role
     ).sanitise
 
     if params[:action] == "update"

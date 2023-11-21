@@ -1096,21 +1096,6 @@ Style/TernaryParentheses:
   Exclude:
     - 'app/models/event_log.rb'
 
-# Offense count: 12
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyleForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInArguments:
-  Exclude:
-    - 'app/controllers/doorkeeper_applications_controller.rb'
-    - 'app/controllers/invitations_controller.rb'
-    - 'app/controllers/users_controller.rb'
-    - 'app/models/batch_invitation_user.rb'
-    - 'db/migrate/20170607150956_add_phone_booking_permission.rb'
-    - 'spec/unit/user_permission_migrator_spec.rb'
-    - 'test/models/lib/user_parameter_sanitiser_test.rb'
-    - 'test/models/organisations_fetcher_test.rb'
-
 # Offense count: 16
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, MinSize, WordRegex.
@@ -1122,4 +1107,3 @@ Style/WordArray:
     - 'script/permissions_by_organisation_csv_generator.rb'
     - 'test/integration/granting_permissions_test.rb'
     - 'test/models/lib/user_permissions_exporter_test.rb'
-

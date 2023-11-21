@@ -23,7 +23,7 @@ class AddPhoneBookingPermission < ActiveRecord::Migration
       say "creating new permission for user: #{user.name}", true
       user.application_permissions.find_or_create_by!(
         application: output,
-        supported_permission: output_phone_bookings_permission,
+        supported_permission: output_phone_bookings_permission
       )
     end
 

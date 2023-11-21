@@ -9,7 +9,7 @@ class UserParameterSanitiserTest < ActiveSupport::TestCase
       @sanitised_params = UserParameterSanitiser.new(
         user_params: @user_params,
         current_user_role: :normal,
-        permitted_params_by_role: permitted_params_by_role,
+        permitted_params_by_role: permitted_params_by_role
       ).sanitise
     end
 
@@ -35,7 +35,7 @@ class UserParameterSanitiserTest < ActiveSupport::TestCase
       @sanitised_params = UserParameterSanitiser.new(
         user_params: user_params,
         current_user_role: :normal,
-        permitted_params_by_role: permitted_params_by_role,
+        permitted_params_by_role: permitted_params_by_role
       ).sanitise
     end
 
@@ -58,7 +58,7 @@ class UserParameterSanitiserTest < ActiveSupport::TestCase
       @sanitised_params = UserParameterSanitiser.new(
         user_params: user_params,
         current_user_role: :superadmin,
-        permitted_params_by_role: permitted_params_by_role,
+        permitted_params_by_role: permitted_params_by_role
       ).sanitise
     end
 

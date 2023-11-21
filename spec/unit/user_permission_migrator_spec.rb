@@ -29,7 +29,7 @@ RSpec.describe UserPermissionMigrator do
   it "copies permissions over for all users of an application to another application" do
     UserPermissionMigrator.migrate(
       source: "Specialist Publisher",
-      target: "Manuals Publisher",
+      target: "Manuals Publisher"
     )
 
     expect(gds_editor.permissions_for(manuals_publisher)).to eq %w(editor gds_editor signin)

@@ -17,7 +17,7 @@ class BatchInvitationUser < ActiveRecord::Base
         organisation_id: batch_invitation.organisation_id,
         supported_permission_ids: new_supported_permissions_for_user(supported_permission_ids)
       },
-      inviting_user,
+      inviting_user
     )
 
     invite_user_with_attributes(sanitised_attributes, inviting_user)
@@ -56,7 +56,7 @@ private
   def sanitise_attributes_for_inviting_user_role(raw_attributes, inviting_user)
     UserParameterSanitiser.new(
       user_params: raw_attributes,
-      current_user_role: inviting_user.role.to_sym,
+      current_user_role: inviting_user.role.to_sym
     ).sanitise
   end
 end

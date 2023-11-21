@@ -222,7 +222,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(
       :current_password,
       :password,
-      :password_confirmation,
+      :password_confirmation
     )
   end
 end

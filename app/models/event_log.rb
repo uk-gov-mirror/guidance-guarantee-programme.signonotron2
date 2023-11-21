@@ -89,7 +89,7 @@ class EventLog < ActiveRecord::Base
   end
 
   def self.record_email_change(user, email_was, email_is, initiator = user)
-    event = (user == initiator) ? EMAIL_CHANGE_INITIATED : EMAIL_CHANGED
+    event = user == initiator ? EMAIL_CHANGE_INITIATED : EMAIL_CHANGED
     record_event(user, event, initiator: initiator, trailing_message: "from #{email_was} to #{email_is}")
   end
 

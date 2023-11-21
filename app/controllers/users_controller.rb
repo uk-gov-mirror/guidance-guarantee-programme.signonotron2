@@ -79,7 +79,7 @@ class UsersController < ApplicationController
     @user.resend_confirmation_instructions
     if @user.errors.empty?
       notice = if @user.normal?
-                 "An email has been sent to #{@user.unconfirmed_email}. Follow the link in the email to update your address."
+                 "An email has been sent to #{@user.unconfirmed_email}. Follow the link in the email to update your address." # rubocop:disable Layout/LineLength
                else
                  "Successfully resent email change email to #{@user.unconfirmed_email}"
                end
@@ -214,7 +214,8 @@ class UsersController < ApplicationController
   end
 
   def permitted_user_params
-    params.require(:user).permit(:id, :user, :name, :email, :organisation_id, :require_2sv, :role, supported_permission_ids: []).to_h
+    params.require(:user).permit(:id, :user, :name, :email, :organisation_id, :require_2sv, :role,
+                                 supported_permission_ids: []).to_h
   end
 
   def password_params

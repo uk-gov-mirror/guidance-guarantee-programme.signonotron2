@@ -203,7 +203,7 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
 
-  context "as Admin" do
+  context "as Admin" do # rubocop:disable Metrics/BlockLength
     setup do
       @user = create(:admin_user, email: "admin@gov.uk")
       sign_in @user
@@ -379,7 +379,8 @@ class UsersControllerTest < ActionController::TestCase
         assert_select "select[name='user[organisation_id]']" do
           assert_select "option", count: 3
           assert_select "option[selected=selected]", count: 1
-          assert_select %{option[value="#{org_with_user.id}"][selected=selected]}, text: org_with_user.name_with_abbreviation
+          assert_select %{option[value="#{org_with_user.id}"][selected=selected]},
+text: org_with_user.name_with_abbreviation
           assert_select %{option[value="#{other_organisation.id}"]}, text: other_organisation.name_with_abbreviation
         end
       end
@@ -517,7 +518,8 @@ class UsersControllerTest < ActionController::TestCase
           normal_user = create(:user, email: "old@email.com")
           put :update, params: { id: normal_user.id, user: { email: "new@email.com" } }
 
-          assert_equal 1, EventLog.where(event_id: EventLog::EMAIL_CHANGED.id, uid: normal_user.uid, initiator_id: @user.id).count
+          assert_equal 1,
+EventLog.where(event_id: EventLog::EMAIL_CHANGED.id, uid: normal_user.uid, initiator_id: @user.id).count
         end
 
         should "send email change notifications to old and new email address" do
@@ -527,7 +529,8 @@ class UsersControllerTest < ActionController::TestCase
 
             email_change_notifications = ActionMailer::Base.deliveries[-2..-1]
             assert_equal email_change_notifications.map(&:subject).uniq.count, 1
-            assert_match /Your .* Signon development email address has been updated/, email_change_notifications.map(&:subject).first
+            assert_match /Your .* Signon development email address has been updated/,
+email_change_notifications.map(&:subject).first
             assert_equal %w(old@email.com new@email.com), email_change_notifications.map {|mail| mail.to.first }
           end
         end
@@ -554,7 +557,8 @@ class UsersControllerTest < ActionController::TestCase
           another_user = create(:user, role: "admin")
           put :update, params: { id: another_user.id, user: { role: "normal" } }
 
-          assert_equal 1, EventLog.where(event_id: EventLog::ROLE_CHANGED.id, uid: another_user.uid, initiator_id: @user.id).count
+          assert_equal 1,
+EventLog.where(event_id: EventLog::ROLE_CHANGED.id, uid: another_user.uid, initiator_id: @user.id).count
         end
       end
 

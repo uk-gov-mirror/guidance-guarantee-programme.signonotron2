@@ -12,7 +12,7 @@ class UserExportPresenter
     UserApplicationPermission.find_each do |permission|
       @app_permissions[permission.user_id] ||= {}
       @app_permissions[permission.user_id][permission.application_id] ||= []
-      @app_permissions[permission.user_id][permission.application_id] << permission_names[permission.supported_permission_id]
+      @app_permissions[permission.user_id][permission.application_id] << permission_names[permission.supported_permission_id] # rubocop:disable Layout/LineLength
     end
   end
 

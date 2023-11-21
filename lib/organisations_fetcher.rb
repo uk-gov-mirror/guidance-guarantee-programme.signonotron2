@@ -44,7 +44,9 @@ private
   end
 
   def child_organisation_slugs(organisation_data)
-    organisation_data.child_organisations.map(&:id).collect { |child_organisation_id| child_organisation_id.split('/').last }
+    organisation_data.child_organisations.map(&:id).collect do |child_organisation_id|
+      child_organisation_id.split('/').last
+    end
   end
 
   def update_ancestry(organisation_relationships)

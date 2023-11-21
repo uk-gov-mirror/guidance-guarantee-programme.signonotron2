@@ -62,6 +62,6 @@ puts "Updating SSO config so that it works in development..."
       puts "ERROR Failed to update #{application.name} because: #{e.message}"
     end
   else
-    puts "WARNING Skipping #{application.name}, as it doesn't use gds-sso, is not checked out or the repo isn't \"#{application_repo_name(application)}\"."
+    puts "WARNING Skipping #{application.name}, as it doesn't use gds-sso, is not checked out or the repo isn't \"#{application_repo_name(application)}\"." # rubocop:disable Layout/LineLength
   end
 end

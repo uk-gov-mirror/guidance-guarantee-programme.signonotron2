@@ -22,7 +22,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test '#sanitised_fullpath returns the URL without the sensitive query parameters' do
-    self.request = ActionDispatch::Request.new(Rack::MockRequest.env_for("/secret-squirrel?invitation_token=w1&reset_password_token=d1&sharing=ok"))
+    self.request = ActionDispatch::Request.new(Rack::MockRequest.env_for("/secret-squirrel?invitation_token=w1&reset_password_token=d1&sharing=ok")) # rubocop:disable Layout/LineLength
     assert_equal "/secret-squirrel?sharing=ok", sanitised_fullpath
   end
 end

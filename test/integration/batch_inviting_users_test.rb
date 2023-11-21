@@ -38,7 +38,8 @@ class BatchInvitingUsersTest < ActionDispatch::IntegrationTest
 
     user = create(:user, role: 'admin')
 
-    perform_batch_invite_with_user(user, new_application, false, File.join(::Rails.root, 'test', 'fixtures', 'users-bad-cased-emails.csv'))
+    perform_batch_invite_with_user(user, new_application, false,
+                                   File.join(::Rails.root, 'test', 'fixtures', 'users-bad-cased-emails.csv'))
 
     fred.reload
     assert fred.has_access_to?(old_application)
@@ -53,7 +54,8 @@ class BatchInvitingUsersTest < ActionDispatch::IntegrationTest
     perform_batch_invite_with_user(user, application)
   end
 
-  def perform_batch_invite_with_user(user, application, expect_email = true, path = File.join(::Rails.root, 'test', 'fixtures', 'users.csv'))
+  def perform_batch_invite_with_user(user, application, expect_email = true,
+                                     path = File.join(::Rails.root, 'test', 'fixtures', 'users.csv'))
     perform_enqueued_jobs do
       visit root_path
       signin_with(user)

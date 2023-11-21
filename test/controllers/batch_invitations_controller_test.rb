@@ -28,7 +28,8 @@ class BatchInvitationsControllerTest < ActionController::TestCase
       should "show a table summarising them" do
         get :new
         assert_select "table.recent-batches tbody tr", count: 1
-        assert_select "table.recent-batches tbody td", "1 users by #{@bi.user.name} at #{@bi.created_at.to_s(:govuk_date)}"
+        assert_select "table.recent-batches tbody td",
+                      "1 users by #{@bi.user.name} at #{@bi.created_at.to_s(:govuk_date)}"
         assert_select "table.recent-batches tbody td", "In progress. 0 of 1 users processed."
       end
     end
@@ -44,7 +45,9 @@ class BatchInvitationsControllerTest < ActionController::TestCase
   context "POST create" do
     should "create a BatchInvitation and BatchInvitationUsers" do
       app = create(:application)
-      post :create, params: { batch_invitation: { user_names_and_emails: users_csv }, user: { supported_permission_ids: [app.signin_permission.id] } }
+      post :create,
+           params: { batch_invitation: { user_names_and_emails: users_csv },
+user: { supported_permission_ids: [app.signin_permission.id] } }
 
       bi = BatchInvitation.last
       assert_not_nil bi
@@ -65,13 +68,15 @@ class BatchInvitationsControllerTest < ActionController::TestCase
 
     should "queue a job to do the processing" do
       assert_enqueued_jobs 2 do
-        post :create, params: { batch_invitation: { user_names_and_emails: users_csv }, user: { supported_permission_ids: [] } }
+        post :create,
+             params: { batch_invitation: { user_names_and_emails: users_csv }, user: { supported_permission_ids: [] } }
       end
     end
 
     should "send an email to signon-alerts" do
       perform_enqueued_jobs do
-        post :create, params: { batch_invitation: { user_names_and_emails: users_csv }, user: { supported_permission_ids: [] } }
+        post :create,
+             params: { batch_invitation: { user_names_and_emails: users_csv }, user: { supported_permission_ids: [] } }
 
         email = ActionMailer::Base.deliveries.detect do |m|
           m.to.any? { |to| to =~ /signon-pensionwise-alerts@.*\.org\.uk/ }
@@ -82,7 +87,8 @@ class BatchInvitationsControllerTest < ActionController::TestCase
     end
 
     should "redirect to the batch invitation page and show a flash message" do
-      post :create, params: { batch_invitation: { user_names_and_emails: users_csv }, user: { supported_permission_ids: [] } }
+      post :create,
+           params: { batch_invitation: { user_names_and_emails: users_csv }, user: { supported_permission_ids: [] } }
 
       assert_match(/Scheduled invitation of 2 users/i, flash[:notice])
       assert_redirected_to "/batch_invitations/#{BatchInvitation.last.id}"
@@ -90,7 +96,8 @@ class BatchInvitationsControllerTest < ActionController::TestCase
 
     context "no file uploaded" do
       should "redisplay the form and show a flash message" do
-        post :create, params: { batch_invitation: { user_names_and_emails: nil }, user: { supported_permission_ids: [] } }
+        post :create,
+             params: { batch_invitation: { user_names_and_emails: nil }, user: { supported_permission_ids: [] } }
 
         assert_template :new
         assert_match(/You must upload a file/i, flash[:alert])
@@ -99,7 +106,9 @@ class BatchInvitationsControllerTest < ActionController::TestCase
 
     context "the CSV has all the fields, but not in the expected order" do
       should "process the fields by name" do
-        post :create, params: { batch_invitation: { user_names_and_emails: users_csv("reversed_users.csv") }, user: { supported_permission_ids: [] } }
+        post :create,
+             params: { batch_invitation: { user_names_and_emails: users_csv("reversed_users.csv") },
+user: { supported_permission_ids: [] } }
 
         bi = BatchInvitation.last
         assert_not_nil bi.batch_invitation_users.find_by_email("a@hhg.com")
@@ -109,7 +118,9 @@ class BatchInvitationsControllerTest < ActionController::TestCase
 
     context "the CSV has no data rows" do
       should "redisplay the form and show a flash message" do
-        post :create, params: { batch_invitation: { user_names_and_emails: users_csv("empty_users.csv") }, user: { supported_permission_ids: [] } }
+        post :create,
+             params: { batch_invitation: { user_names_and_emails: users_csv("empty_users.csv") },
+user: { supported_permission_ids: [] } }
 
         assert_template :new
         assert_match(/no rows/i, flash[:alert])
@@ -118,7 +129,9 @@ class BatchInvitationsControllerTest < ActionController::TestCase
 
     context "the CSV format is invalid" do
       should "redisplay the form and show a flash message" do
-        post :create, params: { batch_invitation: { user_names_and_emails: users_csv("invalid_users.csv") }, user: { supported_permission_ids: [] } }
+        post :create,
+             params: { batch_invitation: { user_names_and_emails: users_csv("invalid_users.csv") },
+user: { supported_permission_ids: [] } }
 
         assert_template :new
         assert_match(/Couldn't understand that file/i, flash[:alert])
@@ -127,7 +140,9 @@ class BatchInvitationsControllerTest < ActionController::TestCase
 
     context "the CSV has no headers?" do
       should "redisplay the form and show a flash message" do
-        post :create, params: { batch_invitation: { user_names_and_emails: users_csv("no_headers_users.csv") }, user: { supported_permission_ids: [] } }
+        post :create,
+             params: { batch_invitation: { user_names_and_emails: users_csv("no_headers_users.csv") },
+user: { supported_permission_ids: [] } }
 
         assert_template :new
         assert_match(/must have headers/i, flash[:alert])

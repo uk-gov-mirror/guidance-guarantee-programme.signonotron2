@@ -161,8 +161,11 @@ class UserTest < ActiveSupport::TestCase
     academy_app = create(:application, name: 'Pension Wise Academy')
     planner_app = create(:application, name: 'Planner')
 
-    academy_only  = create(:user, current_sign_in_at: 7.days.ago, with_permissions: { academy_app.name => permissions })
-    multiple_apps = create(:user, current_sign_in_at: 7.days.ago, with_permissions: { academy_app.name => permissions, planner_app.name => permissions })
+    academy_only  = create(:user, current_sign_in_at: 7.days.ago,
+                                  with_permissions: { academy_app.name => permissions })
+    multiple_apps = create(:user, current_sign_in_at: 7.days.ago,
+                                  with_permissions: { academy_app.name => permissions,
+                                                      planner_app.name => permissions })
 
     assert_equal [multiple_apps], User.last_signed_in_before(6.days.ago)
   end
@@ -318,7 +321,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "can grant permissions to users and return the created permission" do
-    app = create(:application, name: "my_app", with_supported_permissions: ['Create publications', 'Delete publications'])
+    app = create(:application, name: "my_app",
+                               with_supported_permissions: ['Create publications', 'Delete publications'])
     user = create(:user)
 
     permission = user.grant_application_permission(app, "Create publications")

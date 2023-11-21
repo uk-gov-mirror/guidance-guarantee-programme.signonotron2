@@ -19,7 +19,9 @@ module Numbers
     end
 
     def active_accounts_count_by_application
-      enabled_applications_for_each_user = all_active.map {|u| Doorkeeper::Application.can_signin(u).pluck(:name) }.flatten
+      enabled_applications_for_each_user = all_active.map do |u|
+        Doorkeeper::Application.can_signin(u).pluck(:name)
+      end.flatten
       count_values(enabled_applications_for_each_user.group_by(&:to_s))
     end
 
@@ -34,8 +36,11 @@ module Numbers
     end
 
     def accounts_count_by_days_since_last_sign_in
-      ranges = [0...7, 7...15, 15...30, 30...45, 45...60, 60...90, 90...180, 180...10000000].inject([]) do |result, range|
-        count_days_since_last_sign_in = all_active.count {|u| u.current_sign_in_at && range.last.days.ago <= u.current_sign_in_at && u.current_sign_in_at < range.first.days.ago }
+      ranges = [0...7, 7...15, 15...30, 30...45, 45...60, 60...90, 90...180,
+                180...10000000].inject([]) do |result, range|
+        count_days_since_last_sign_in = all_active.count do |u|
+          u.current_sign_in_at && range.last.days.ago <= u.current_sign_in_at && u.current_sign_in_at < range.first.days.ago # rubocop:disable Layout/LineLength
+        end
         result << ["#{range.first} - #{range.last}", count_days_since_last_sign_in]
         result
       end
@@ -43,7 +48,8 @@ module Numbers
     end
 
     def accounts_count_how_often_user_has_signed_in
-      [0, 1, 2...5, 5...10, 10...25, 25...50, 50...100, 100...200, 200...10000000].inject([]) do |result, range_or_value|
+      [0, 1, 2...5, 5...10, 10...25, 25...50, 50...100, 100...200,
+       200...10000000].inject([]) do |result, range_or_value|
         if range_or_value.is_a?(Range)
           range = range_or_value
           result << ["#{range.first} - #{range.last}", all_active.count {|u| range.include?(u.sign_in_count) }]

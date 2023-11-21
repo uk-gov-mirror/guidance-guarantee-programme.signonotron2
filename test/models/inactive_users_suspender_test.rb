@@ -16,12 +16,14 @@ class InactiveUsersSuspenderTest < ActiveSupport::TestCase
 
     InactiveUsersSuspender.new.suspend
 
-    assert_equal "User has not logged in for 30 days since #{(31.days.ago).strftime('%d %B %Y')}", inactive_user.reload.reason_for_suspension
+    assert_equal "User has not logged in for 30 days since #{(31.days.ago).strftime('%d %B %Y')}",
+                 inactive_user.reload.reason_for_suspension
   end
 
   test "doesn't suspend users who only have access to Pension Wise Academy" do
     application   = create(:application, name: 'Pension Wise Academy')
-    inactive_user = create(:user, current_sign_in_at: 31.days.ago, with_permissions: { 'Pension Wise Academy' => %w(signin) })
+    inactive_user = create(:user, current_sign_in_at: 31.days.ago,
+                                  with_permissions: { 'Pension Wise Academy' => %w(signin) })
 
     InactiveUsersSuspender.new.suspend
 

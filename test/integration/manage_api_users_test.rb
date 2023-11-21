@@ -36,7 +36,7 @@ class ManageApiUsersTest < ActionDispatch::IntegrationTest
       assert page.has_text?("Successfully created API user")
     end
 
-    should "be able to authorise application access and manage permissions for an API user which should get recorded in event log" do
+    should "be able to authorise application access and manage permissions for an API user which should get recorded in event log" do # rubocop:disable Layout/LineLength
       whitehall = create(:application, name: "Whitehall", with_supported_permissions: ["Managing Editor", "signin"])
 
       click_link @api_user.name
@@ -46,7 +46,8 @@ class ManageApiUsersTest < ActionDispatch::IntegrationTest
       click_button "Create access token"
 
       token = @api_user.authorisations.last.token
-      assert page.has_selector?("div.alert-danger", text: "Make sure to copy the access token for Whitehall now. You won't be able to see it again!")
+      assert page.has_selector?("div.alert-danger",
+                                text: "Make sure to copy the access token for Whitehall now. You won't be able to see it again!") # rubocop:disable Layout/LineLength
       assert page.has_selector?("div.alert-info", text: "Access token for Whitehall: #{token}")
 
       # shows truncated token
@@ -90,8 +91,10 @@ class ManageApiUsersTest < ActionDispatch::IntegrationTest
       assert page.has_selector?("td:first-child", text: @application.name)
       click_button "Re-generate"
 
-      assert page.has_selector?("div.alert-danger", text: "Make sure to copy the access token for #{@application.name} now. You won't be able to see it again!")
-      assert page.has_selector?("div.alert-info", text: "Access token for #{@application.name}: #{@api_user.authorisations.last.token}")
+      assert page.has_selector?("div.alert-danger",
+                                text: "Make sure to copy the access token for #{@application.name} now. You won't be able to see it again!") # rubocop:disable Layout/LineLength
+      assert page.has_selector?("div.alert-info",
+                                text: "Access token for #{@application.name}: #{@api_user.authorisations.last.token}")
 
       click_link "Account access log"
       assert page.has_text?("Access token re-generated for #{@application.name} by #{@superadmin.name}")

@@ -29,7 +29,8 @@ class SwapMagicEverythingPermissionsForRealOnes < ActiveRecord::Migration
 
   def down
     Permission.all.delete_all
-    everything_app = ::Doorkeeper::Application.create!(name: "Everything", uid: "not-a-real-app", secret: "does-not-have-a-secret", redirect_uri: "http://not-a-domain.com")
+    everything_app = ::Doorkeeper::Application.create!(name: "Everything", uid: "not-a-real-app",
+                                                       secret: "does-not-have-a-secret", redirect_uri: "http://not-a-domain.com")
     User.all.each do |user|
       Permission.create(application: everything_app, user: user, permissions: ["signin"])
     end

@@ -23,7 +23,7 @@ class PasswordsControllerTest < ActionController::TestCase
     assert_template 'devise/passwords/reset_error'
   end
 
-  test 'GET /edit by a partially signed-in user with an expired password trying to reset their password should gets signed-out' do
+  test 'GET /edit by a partially signed-in user with an expired password trying to reset their password should gets signed-out' do # rubocop:disable Layout/LineLength
     @user.update_attribute(:password_changed_at, 91.days.ago)
 
     # simulate a partially signed-in user. for example,
@@ -34,7 +34,7 @@ class PasswordsControllerTest < ActionController::TestCase
     assert_nil request.env['warden'].user
   end
 
-  test 'GET /edit by partially signed-in user with an expired password trying to reset their password should not be redirected to after_sign_in_path' do
+  test 'GET /edit by partially signed-in user with an expired password trying to reset their password should not be redirected to after_sign_in_path' do # rubocop:disable Layout/LineLength
     @user.update_attribute(:password_changed_at, 91.days.ago)
     sign_in @user
 
@@ -44,7 +44,7 @@ class PasswordsControllerTest < ActionController::TestCase
     assert_template 'devise/passwords/edit'
   end
 
-  test 'GET /new by partially signed-in user with an expired password should be able to request password reset instructions' do
+  test 'GET /new by partially signed-in user with an expired password should be able to request password reset instructions' do # rubocop:disable Layout/LineLength
     @user.update_attribute(:password_changed_at, 91.days.ago)
 
     # simulate a partially signed-in user. for example,

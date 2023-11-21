@@ -25,7 +25,8 @@ private
     while start_date_m < end_date
       end_date_m = start_date_m.end_of_month
 
-      active_users = User.where("created_at <= ? and (suspended_at is NULL or suspended_at > ?)", end_date_m, end_date_m).
+      active_users = User.where("created_at <= ? and (suspended_at is NULL or suspended_at > ?)", end_date_m,
+                                end_date_m).
         group(:organisation_id).count
       suspended_users = User.where("suspended_at <= ?", end_date_m).
         group(:organisation_id).count

@@ -62,7 +62,8 @@ describe UserPolicy do
         expect(subject).not_to permit(organisation_admin, build(:organisation_admin))
         expect(subject).not_to permit(organisation_admin, build(:user_in_organisation))
 
-        expect(subject).to permit(organisation_admin, build(:user_in_organisation, organisation: organisation_admin.organisation))
+        expect(subject).to permit(organisation_admin,
+                                  build(:user_in_organisation, organisation: organisation_admin.organisation))
       end
 
       it "is forbidden for normal users accessing other normal users" do
@@ -72,7 +73,8 @@ describe UserPolicy do
     end
   end
 
-  self_management_actions = [:edit_email_or_passphrase?, :update_passphrase?, :cancel_email_change?, :resend_email_change?]
+  self_management_actions = [:edit_email_or_passphrase?, :update_passphrase?, :cancel_email_change?,
+                             :resend_email_change?]
   self_management_actions.each do |permission_name|
     permissions permission_name do
       it "is allowed for normal users accessing their own record" do

@@ -86,7 +86,7 @@ class EmailChangeTest < ActionDispatch::IntegrationTest
         signout
 
         visit user_confirmation_path(confirmation_token: confirmation_token)
-        assert_response_contains("Couldn't confirm email change. Please contact support to request a new confirmation email.")
+        assert_response_contains("Couldn't confirm email change. Please contact support to request a new confirmation email.") # rubocop:disable Layout/LineLength
         assert_equal original_email, user.reload.email
       end
     end

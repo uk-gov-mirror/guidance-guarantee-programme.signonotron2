@@ -56,7 +56,9 @@ class SupportedPermissionsControllerTest < ActionController::TestCase
       perm = create(:supported_permission, application_id: app.id,
                                   name: "permission1", delegatable: true, created_at: 2.days.ago)
 
-      put :update, params: { doorkeeper_application_id: app.id, id: perm.id, supported_permission: { name: "", delegatable: false } }
+      put :update,
+          params: { doorkeeper_application_id: app.id, id: perm.id,
+supported_permission: { name: "", delegatable: false } }
 
       assert_select "ul[class='errors'] li", "Name can't be blank"
       assert perm.reload.delegatable
@@ -67,7 +69,8 @@ class SupportedPermissionsControllerTest < ActionController::TestCase
       perm = create(:supported_permission, application_id: app.id,
                                   name: "permission1", delegatable: true, created_at: 2.days.ago)
 
-      put :update, params: { doorkeeper_application_id: app.id, id: perm.id, supported_permission: { delegatable: false } }
+      put :update,
+          params: { doorkeeper_application_id: app.id, id: perm.id, supported_permission: { delegatable: false } }
 
       assert_redirected_to(controller: "supported_permissions", action: :index)
       assert_equal "Successfully updated permission permission1", flash[:notice]

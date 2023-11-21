@@ -16,7 +16,8 @@ class UserPermissionsExporterTest < ActionView::TestCase
   end
 
   def test_export_one_application
-    foo_app = create(:application, name: "Foo", with_supported_permissions: %w(administer add_vinegar do_some_stuff cook))
+    foo_app = create(:application, name: "Foo",
+with_supported_permissions: %w(administer add_vinegar do_some_stuff cook))
     @bill.grant_application_permissions(foo_app, %w(signin cook))
     @anne.grant_application_permissions(foo_app, %w(signin administer add_vinegar))
     @mary.grant_application_permissions(foo_app, %w(signin do_some_stuff))
@@ -32,7 +33,8 @@ class UserPermissionsExporterTest < ActionView::TestCase
   end
 
   def test_export_multiple_applications
-    foo_app = create(:application, name: "Foo", with_supported_permissions: %w(administer add_vinegar do_some_stuff cook))
+    foo_app = create(:application, name: "Foo",
+with_supported_permissions: %w(administer add_vinegar do_some_stuff cook))
     bar_app = create(:application, name: "Bar", with_supported_permissions: ['administer'])
     baz_app = create(:application, name: "Baz")
 

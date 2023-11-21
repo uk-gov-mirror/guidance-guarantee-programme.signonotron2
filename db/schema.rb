@@ -20,7 +20,8 @@ ActiveRecord::Schema.define(version: 2020_01_03_094952) do
     t.integer "supported_permission_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["batch_invitation_id", "supported_permission_id"], name: "index_batch_invite_app_perms_on_batch_invite_and_supported_perm", unique: true
+    t.index ["batch_invitation_id", "supported_permission_id"],
+            name: "index_batch_invite_app_perms_on_batch_invite_and_supported_perm", unique: true
   end
 
   create_table "batch_invitation_users", id: :serial, force: :cascade do |t|
@@ -137,7 +138,8 @@ ActiveRecord::Schema.define(version: 2020_01_03_094952) do
     t.datetime "last_synced_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "application_id", "supported_permission_id"], name: "index_app_permissions_on_user_and_app_and_supported_permission", unique: true
+    t.index ["user_id", "application_id", "supported_permission_id"],
+            name: "index_app_permissions_on_user_and_app_and_supported_permission", unique: true
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

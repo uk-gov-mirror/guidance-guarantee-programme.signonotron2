@@ -7,7 +7,9 @@ class ::Doorkeeper::ApplicationTest < ActiveSupport::TestCase
 
   context "user_update_permission" do
     should "not be grantable from ui" do
-      user_update_permission = create(:application, supports_push_updates: true).supported_permissions.detect {|perm| perm.name == 'user_update_permission' }
+      user_update_permission = create(:application, supports_push_updates: true).supported_permissions.detect do |perm|
+        perm.name == 'user_update_permission'
+      end
       refute user_update_permission.grantable_from_ui?
     end
 
@@ -20,7 +22,8 @@ class ::Doorkeeper::ApplicationTest < ActiveSupport::TestCase
     end
 
     should "not be created after save if application doesn't support push updates" do
-      assert_not_includes create(:application, supports_push_updates: false).supported_permission_strings, 'user_update_permission'
+      assert_not_includes create(:application, supports_push_updates: false).supported_permission_strings,
+                          'user_update_permission'
     end
   end
 
@@ -41,7 +44,8 @@ class ::Doorkeeper::ApplicationTest < ActiveSupport::TestCase
 
     should "only show delegatable permissions to organisation admins" do
       user = create(:organisation_admin)
-      app = create(:application, with_delegatable_supported_permissions: ['write'], with_supported_permissions: ['approve'])
+      app = create(:application, with_delegatable_supported_permissions: ['write'],
+                                 with_supported_permissions: ['approve'])
       user.grant_application_permissions(app, %w(write approve))
 
       assert_equal ["write"], app.supported_permission_strings(user)

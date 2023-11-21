@@ -17,7 +17,8 @@ class SsoPushClientTest < ActiveSupport::TestCase
       SsoPushCredential.stubs(:user_email).returns(@sso_push_user.email)
 
       @user = create(:user)
-      @application = create(:application, redirect_uri: "https://app.com/callback", with_supported_permissions: ['user_update_permission'])
+      @application = create(:application, redirect_uri: "https://app.com/callback",
+                                          with_supported_permissions: ['user_update_permission'])
       @user_hash = UserOAuthPresenter.new(@user, @application).as_hash
     end
 
@@ -43,7 +44,8 @@ class SsoPushClientTest < ActiveSupport::TestCase
       SsoPushCredential.stubs(:user_email).returns(@sso_push_user.email)
 
       @user = create(:user)
-      @application = create(:application, redirect_uri: "https://app.com/callback", with_supported_permissions: ['user_update_permission'])
+      @application = create(:application, redirect_uri: "https://app.com/callback",
+                                          with_supported_permissions: ['user_update_permission'])
     end
 
     should "send an empty POST to the app" do

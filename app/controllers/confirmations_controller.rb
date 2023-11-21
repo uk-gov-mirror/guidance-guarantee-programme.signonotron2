@@ -60,6 +60,7 @@ class ConfirmationsController < Devise::ConfirmationsController
 
   def handle_new_token_needed
     path = user_signed_in? ? root_path : new_user_session_path
-    redirect_to path, alert: "Couldn't confirm email change. Please contact support to request a new confirmation email."
+    redirect_to path,
+                alert: "Couldn't confirm email change. Please contact support to request a new confirmation email."
   end
 end

@@ -16,7 +16,9 @@ end
 
 def load_config_file(config_path)
   raise "File '#{config_path}' not found" unless File.exist?(config_path)
-  string_keys = YAML.load_file(config_path)[ENV['RAILS_ENV']].select {|k,v| %w{host username password database}.include?(k)}
+  string_keys = YAML.load_file(config_path)[ENV['RAILS_ENV']].select do |k,v|
+    %w{host username password database}.include?(k)
+  end
   Hash[string_keys.map {|k,v| [k.to_sym, v]}]
 end
 
@@ -41,7 +43,7 @@ signon_organisations = signon.query('SELECT id, slug FROM organisations').map.wi
 end
 
 puts 'Loading data from whitehall db'
-results = whitehall.query('SELECT users.uid, organisations.slug FROM users LEFT OUTER JOIN organisations ON users.organisation_id = organisations.id WHERE users.uid IS NOT NULL').map do |row|
+results = whitehall.query('SELECT users.uid, organisations.slug FROM users LEFT OUTER JOIN organisations ON users.organisation_id = organisations.id WHERE users.uid IS NOT NULL').map do |row| # rubocop:disable Layout/LineLength
   [row['uid'], signon_organisations[row['slug']]]
 end
 

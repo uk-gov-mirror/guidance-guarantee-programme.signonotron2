@@ -56,7 +56,9 @@ class User < ActiveRecord::Base
   scope :not_suspended, -> { where(suspended_at: nil) }
   scope :with_role, lambda { |role_name| where(role: role_name) }
   scope :with_organisation, lambda { |org_id| where(organisation_id: org_id) }
-  scope :fuzzy_filter, lambda { |filter_param| where("users.email like ? OR users.name like ?", "%#{filter_param.strip}%", "%#{filter_param.strip}%") }
+  scope :fuzzy_filter, lambda { |filter_param|
+                         where("users.email like ? OR users.name like ?", "%#{filter_param.strip}%", "%#{filter_param.strip}%") # rubocop:disable Layout/LineLength
+                       }
   scope :last_signed_in_on, lambda { |date|
     web_users
       .not_suspended
@@ -69,8 +71,12 @@ class User < ActiveRecord::Base
       .where('date(current_sign_in_at) < date(?)', date)
       .where.not(id: UsersWithAccessToOnlyPensionWiseAcademy.new.user_ids)
   }
-  scope :last_signed_in_after, lambda { |date| web_users.not_suspended.where('date(current_sign_in_at) >= date(?)', date) }
-  scope :not_recently_unsuspended, lambda { where(['unsuspended_at IS NULL OR unsuspended_at < ?', UNSUSPENSION_GRACE_PERIOD.ago]) }
+  scope :last_signed_in_after, lambda { |date|
+                                 web_users.not_suspended.where('date(current_sign_in_at) >= date(?)', date)
+                               }
+  scope :not_recently_unsuspended, lambda {
+                                     where(['unsuspended_at IS NULL OR unsuspended_at < ?', UNSUSPENSION_GRACE_PERIOD.ago]) # rubocop:disable Layout/LineLength
+                                   }
   scope :with_access_to_application, lambda { |application| UsersWithAccess.new(self, application).users }
   scope :with_2sv_enabled, lambda { |enabled|
     enabled = ActiveRecord::Type::Boolean.new.cast(enabled)
@@ -133,7 +139,9 @@ class User < ActiveRecord::Base
   end
 
   def has_access_to?(application)
-    application_permissions.detect {|permission| permission.supported_permission_id == application.signin_permission.id }
+    application_permissions.detect do |permission|
+      permission.supported_permission_id == application.signin_permission.id
+    end
   end
 
   def permissions_synced!(application)
@@ -151,7 +159,8 @@ class User < ActiveRecord::Base
 
   def grant_application_permissions(application, supported_permission_names)
     supported_permission_names.map do |supported_permission_name|
-      supported_permission = SupportedPermission.find_by_application_id_and_name(application.id, supported_permission_name)
+      supported_permission = SupportedPermission.find_by_application_id_and_name(application.id,
+                                                                                 supported_permission_name)
       application_permissions.where(supported_permission_id: supported_permission.id).first_or_create!
     end
   end

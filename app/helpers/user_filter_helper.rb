@@ -28,7 +28,9 @@ module UserFilterHelper
             when :status
               User::USER_STATUSES
             when :organisation
-              policy_scope(Organisation).order(:name).joins(:users).uniq.map { |org| [org.id, org.name_with_abbreviation] }
+              policy_scope(Organisation).order(:name).joins(:users).uniq.map do |org|
+                [org.id, org.name_with_abbreviation]
+              end
             when :two_step_status
               #rubocop:disable Style/WordArray
               [['true', 'Enabled'], ['false', 'Not set up']]

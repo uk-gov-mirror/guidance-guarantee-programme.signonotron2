@@ -41,7 +41,7 @@ module Devise
       private
 
       def update_password_changed
-        self.password_changed_at = Time.zone.now if (self.new_record? || self.encrypted_password_changed?) && !self.password_changed_at_changed?
+        self.password_changed_at = Time.zone.now if (self.new_record? || self.encrypted_password_changed?) && !self.password_changed_at_changed? # rubocop:disable Layout/LineLength
       end
 
       module ClassMethods

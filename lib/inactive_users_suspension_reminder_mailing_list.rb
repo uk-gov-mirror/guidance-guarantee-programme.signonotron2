@@ -12,7 +12,9 @@ class InactiveUsersSuspensionReminderMailingList
       result[days_to_suspension] = User.last_signed_in_on((suspension_threshold_exceeded - days_to_suspension.days).ago)
       result
     end
-    suspension_reminder_mailing_list[1] += User.not_recently_unsuspended.last_signed_in_before(suspension_threshold_exceeded.ago).to_a
+    suspension_reminder_mailing_list[1] += User.not_recently_unsuspended
+                                               .last_signed_in_before(suspension_threshold_exceeded.ago)
+                                               .to_a
     suspension_reminder_mailing_list
   end
 end

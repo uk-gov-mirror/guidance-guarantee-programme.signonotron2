@@ -43,7 +43,8 @@ class NumbersCsvTest < ActiveSupport::TestCase
 
     Numbers::NumbersCsv.generate
 
-    assert numbers_csv.include? ["Active admin user names", "admin", "David <dave@gov.uk>, Winston <admin_user@admin.example.com>"]
+    assert numbers_csv.include? ["Active admin user names", "admin",
+                                 "David <dave@gov.uk>, Winston <admin_user@admin.example.com>"]
     assert numbers_csv.include? ["Active admin user names", "superadmin", "Margaret <maggie@gov.uk>"]
   end
 
@@ -68,7 +69,9 @@ class NumbersCsvTest < ActiveSupport::TestCase
 
   test "csv contains counts by days since last sign-in" do
     all_users = User.all
-    [6.days.ago, 14.days.ago, 1.minute.ago].each_with_index {|time, i| all_users[i].update_attribute(:current_sign_in_at, time) }
+    [6.days.ago, 14.days.ago, 1.minute.ago].each_with_index do |time, i|
+      all_users[i].update_attribute(:current_sign_in_at, time)
+    end
 
     Numbers::NumbersCsv.generate
 

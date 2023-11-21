@@ -46,7 +46,8 @@ class AuthorisationsControllerTest < ActionController::TestCase
     context "POST create" do
       should "create a new access token and populate flash with it" do
         assert_difference 'Doorkeeper::AccessToken.count', 1 do
-          post :create, params: { api_user_id: @api_user.id, doorkeeper_access_token: { application_id: @application.id } }
+          post :create,
+               params: { api_user_id: @api_user.id, doorkeeper_access_token: { application_id: @application.id } }
         end
 
         token = Doorkeeper::AccessToken.last
@@ -54,7 +55,8 @@ class AuthorisationsControllerTest < ActionController::TestCase
       end
 
       should "add a 'signin' permission for the authorised application" do
-        post :create, params: { api_user_id: @api_user.id, doorkeeper_access_token: { application_id: @application.id } }
+        post :create,
+             params: { api_user_id: @api_user.id, doorkeeper_access_token: { application_id: @application.id } }
 
         assert @api_user.has_access_to?(@application)
       end
@@ -62,7 +64,8 @@ class AuthorisationsControllerTest < ActionController::TestCase
       should "not duplicate 'signin' permission for the authorised application if it already exists" do
         @api_user.grant_application_permission(@application, 'signin')
 
-        post :create, params: { api_user_id: @api_user.id, doorkeeper_access_token: { application_id: @application.id } }
+        post :create,
+             params: { api_user_id: @api_user.id, doorkeeper_access_token: { application_id: @application.id } }
 
         assert_equal ['signin'], @api_user.permissions_for(@application)
       end

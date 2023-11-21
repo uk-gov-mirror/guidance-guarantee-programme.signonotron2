@@ -15,7 +15,8 @@ class UserPermissionMigrator
       if user.has_access_to?(source_app)
         permissions = user.permissions_for(source_app)
         permissions.each do |permission|
-          UserApplicationPermission.create user: user, application: target_app, supported_permission: permission_mappings[permission]
+          UserApplicationPermission.create user: user, application: target_app,
+                                           supported_permission: permission_mappings[permission]
         end
       end
     end

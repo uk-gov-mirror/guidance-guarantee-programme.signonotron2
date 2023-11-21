@@ -70,8 +70,9 @@ end
 
 group :development, :test do
   gem 'jasmine'
-  gem 'govuk-lint', '~> 2.0'
+  gem 'rubocop', require: false
   gem 'pry-byebug'
+  gem 'scss_lint', '~> 0.60', require: false
 end
 
 group :test do

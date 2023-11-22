@@ -1,6 +1,6 @@
 class EnsureSigninSupportedPermissionPresent < ActiveRecord::Migration
   def up
-    require 'doorkeeper/application.rb'
+    require 'doorkeeper/application'
 
     Doorkeeper::Application.all.each do |application|
       next if application.signin_permission.present?

@@ -930,12 +930,6 @@ Style/RedundantCondition:
   Exclude:
     - 'app/helpers/user_filter_helper.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantFileExtensionInRequire:
-  Exclude:
-    - 'db/migrate/20140114145520_ensure_signin_supported_permission_present.rb'
-    - 'db/migrate/20140220150716_most_signin_permissions_should_not_be_delegable.rb'
 
 # -------------------
 
@@ -955,7 +949,7 @@ Style/RedundantSelf:
 
 # Offense count: 9
 # This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: ConvertCodeThatCanStartToReturnNil, AllowedMethods, MaxChainLength.
+# Configuration parameters: ConvertCodeThatCatartToReturnNil, AllowedMethods, MaxChainLength.
 # AllowedMethods: present?, blank?, presence, try, try!
 Style/SafeNavigation:
   Exclude:

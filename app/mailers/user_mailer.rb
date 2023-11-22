@@ -2,7 +2,7 @@ class UserMailer < Devise::Mailer
   include MailerHelper
   append_view_path Rails.root.join('app/views/devise/mailer')
 
-  default from: Proc.new { email_from }
+  default from: proc { email_from }
 
   helper_method :suspension_time, :account_name, :instance_name, :locked_time, :unlock_time, :production?
 

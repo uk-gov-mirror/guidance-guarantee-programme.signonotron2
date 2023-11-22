@@ -61,10 +61,10 @@ class EventLog < ActiveRecord::Base
   validates :uid, presence: true
   validates_presence_of :event_id
   validate :validate_event_mappable
-  validates_presence_of :initiator_id, if: Proc.new { |event_log|
+  validates_presence_of :initiator_id, if: proc { |event_log|
                                              EVENTS_REQUIRING_INITIATOR.include? event_log.entry
                                            }
-  validates_presence_of :application_id, if: Proc.new { |event_log|
+  validates_presence_of :application_id, if: proc { |event_log|
                                                EVENTS_REQUIRING_APPLICATION.include? event_log.entry
                                              }
 

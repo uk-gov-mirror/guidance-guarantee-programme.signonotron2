@@ -900,15 +900,6 @@ Style/PreferredHashMethods:
     - 'test/integration/api_authentication_test.rb'
     - 'test/models/lib/user_parameter_sanitiser_test.rb'
 
-# Offense count: 5
-# This cop supports safe autocorrection (--autocorrect).
-Style/Proc:
-  Exclude:
-    - 'app/mailers/noisy_batch_invitation.rb'
-    - 'app/mailers/user_mailer.rb'
-    - 'app/models/event_log.rb'
-    - 'spec/unit/same_site_security/middleware.rb'
-
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, AllowedCompactTypes.

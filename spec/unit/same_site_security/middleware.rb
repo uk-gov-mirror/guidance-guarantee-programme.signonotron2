@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe SameSiteSecurity::Middleware do
   headers = {'Content-Type' => 'text/plain', 'Set-Cookie' => '_signonotron2_session=abcd'}
-  let(:app) { Proc.new { [200, headers, ['OK']]} }
+  let(:app) { proc { [200, headers, ['OK']]} }
   subject { SameSiteSecurity::Middleware.new(app) }
 
   context 'when called with a GET request' do

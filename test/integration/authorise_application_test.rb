@@ -94,9 +94,8 @@ class AuthoriseApplicationTest < ActionDispatch::IntegrationTest
     # The browser gets a redirect to url of the destination app.
     # This then gets routed to Signon but Signon doesn't know how to handle the route.
     # And so it raises the RoutingError
-    begin
-      block.call
-    rescue ActionController::RoutingError
-    end
+
+    block.call
+  rescue ActionController::RoutingError
   end
 end

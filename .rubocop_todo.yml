@@ -917,16 +917,7 @@ Style/RaiseArgs:
   Exclude:
     - 'app/models/user.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantBegin:
-  Exclude:
-    - 'db/migrate/20120609094747_add_indices_for_user.rb'
-    - 'test/integration/authorise_application_test.rb'
-
-
 # -------------------
-
 
 # Offense count: 38
 # This cop supports safe autocorrection (--autocorrect).

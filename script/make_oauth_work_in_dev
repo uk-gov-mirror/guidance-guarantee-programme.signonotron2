@@ -18,7 +18,7 @@ def config_for_app(application_config_file)
       # We've got a line like this:
       #   config.oauth_id     = 'an_oauth_id'
       # so extract "an_oauth_id":
-      value = /=[\s]+?['|"]([^'"]+)['|"]/.match(line).to_a[1]
+      value = /=\s+?['|"]([^'"]+)['|"]/.match(line).to_a[1]
     end
     config[key] = value
   end

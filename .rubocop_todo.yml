@@ -952,11 +952,11 @@ Style/RedundantParentheses:
     - 'test/models/inactive_users_suspender_test.rb'
     - 'test/models/inactive_users_suspension_reminder_test.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantRegexpCharacterClass:
-  Exclude:
-    - 'script/make_oauth_work_in_dev'
+
+
+
+# -------------------
+
 
 # Offense count: 38
 # This cop supports safe autocorrection (--autocorrect).
@@ -970,9 +970,6 @@ Style/RedundantSelf:
     - 'app/models/user.rb'
     - 'lib/devise/models/password_archivable.rb'
     - 'lib/devise/models/password_expirable.rb'
-
-
-# -------------------
 
 # Offense count: 9
 # This cop supports unsafe autocorrection (--autocorrect-all).

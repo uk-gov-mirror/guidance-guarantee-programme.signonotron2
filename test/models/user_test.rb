@@ -308,7 +308,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "it doesn't migrate password unless correct one given" do
     password = ('4 l0nG sT!,ng ' * 10)[0..127]
-    old_encrypted_password = ::BCrypt::Password.create("#{password}", cost: 10).to_s
+    old_encrypted_password = ::BCrypt::Password.create(password.to_s, cost: 10).to_s
 
     u = create(:user)
     u.update_column :encrypted_password, old_encrypted_password

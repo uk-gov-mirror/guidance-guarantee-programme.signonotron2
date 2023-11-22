@@ -140,7 +140,7 @@ class EventLogIntegrationTest < ActionDispatch::IntegrationTest
     signin_with(@admin)
     first_letter_of_name = @user.name[0]
     visit users_path(letter: first_letter_of_name)
-    click_on "#{@user.name}"
+    click_on @user.name.to_s
     click_on 'Suspend user'
     check 'Suspended?'
     fill_in 'Reason for suspension', with: 'Assaulting superior officer'
@@ -166,7 +166,7 @@ class EventLogIntegrationTest < ActionDispatch::IntegrationTest
     signin_with(@admin)
     first_letter_of_name = @user.name[0]
     visit users_path(letter: first_letter_of_name)
-    click_on "#{@user.name}"
+    click_on @user.name.to_s
     click_on 'Unsuspend user'
     uncheck 'Suspended?'
     click_on 'Save'

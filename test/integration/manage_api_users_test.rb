@@ -51,9 +51,9 @@ class ManageApiUsersTest < ActionDispatch::IntegrationTest
       assert page.has_selector?('div.alert-info', text: "Access token for Whitehall: #{token}")
 
       # shows truncated token
-      assert page.has_selector?('code', text: "#{token[0..7]}")
-      assert ! page.has_selector?('code', text: "#{token[9..-9]}")
-      assert page.has_selector?('code', text: "#{token[-8..-1]}")
+      assert page.has_selector?('code', text: token[0..7].to_s)
+      assert ! page.has_selector?('code', text: token[9..-9].to_s)
+      assert page.has_selector?('code', text: token[-8..-1].to_s)
 
       select 'Managing Editor', from: 'Permissions for Whitehall'
       click_button 'Update API user'

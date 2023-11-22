@@ -937,16 +937,6 @@ Style/RedundantFileExtensionInRequire:
     - 'db/migrate/20140114145520_ensure_signin_supported_permission_present.rb'
     - 'db/migrate/20140220150716_most_signin_permissions_should_not_be_delegable.rb'
 
-# Offense count: 6
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/RedundantInterpolation:
-  Exclude:
-    - 'test/integration/event_log_test.rb'
-    - 'test/integration/manage_api_users_test.rb'
-    - 'test/models/user_test.rb'
-
-
-
 # -------------------
 
 

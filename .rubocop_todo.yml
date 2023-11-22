@@ -891,15 +891,6 @@ Style/ParallelAssignment:
 Style/PercentLiteralDelimiters:
   Enabled: false
 
-# Offense count: 3
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: short, verbose
-Style/PreferredHashMethods:
-  Exclude:
-    - 'test/integration/api_authentication_test.rb'
-    - 'test/models/lib/user_parameter_sanitiser_test.rb'
-
 
 # -------------------
 

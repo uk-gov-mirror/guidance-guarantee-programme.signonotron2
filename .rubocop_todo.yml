@@ -945,14 +945,6 @@ Style/RedundantInterpolation:
     - 'test/integration/manage_api_users_test.rb'
     - 'test/models/user_test.rb'
 
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantParentheses:
-  Exclude:
-    - 'test/models/inactive_users_suspender_test.rb'
-    - 'test/models/inactive_users_suspension_reminder_test.rb'
-
-
 
 
 # -------------------

@@ -11,7 +11,7 @@ module Numbers
 
     def accounts_count_by_state
       [[:active, all_active.size],
-       [:suspended, all.count {|u| not u.suspended_at.nil? }]]
+       [:suspended, all.count {|u| !u.suspended_at.nil? }]]
     end
 
     def active_accounts_count_by_role

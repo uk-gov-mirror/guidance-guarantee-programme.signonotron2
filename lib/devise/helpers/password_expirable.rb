@@ -11,7 +11,7 @@ module Devise
 
       # check if a password change needed
       def handle_password_change
-        if not devise_controller? && !request.format.nil? && request.format.html?
+        if !(devise_controller? && !request.format.nil? && request.format.html?)
           Devise.mappings.keys.flatten.any? do |scope|
             if signed_in?(scope) && warden.session(scope)['password_expired']
               # re-check to avoid infinite loop if date changed after login attempt

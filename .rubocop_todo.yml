@@ -845,12 +845,6 @@ Style/Next:
     - 'lib/user_permission_migrator.rb'
     - 'lib/user_permissions_exporter.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Style/Not:
-  Exclude:
-    - 'lib/devise/helpers/password_expirable.rb'
-    - 'lib/numbers/metrics.rb'
 
 # -------------------
 

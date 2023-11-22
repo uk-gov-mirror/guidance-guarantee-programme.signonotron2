@@ -14,7 +14,10 @@ class RemoveSupportAppErtpPermission < ActiveRecord::Migration
       # remove user permissions
       all_support_perms = Permission.where(application_id: support.id)
       ertp_support_perms = all_support_perms.select { |perm| perm.permissions.include?('ertp') }
-      ertp_support_perms.each { |perm| perm.permissions -= ['ertp']; perm.save! }
+      ertp_support_perms.each do |perm|
+        perm.permissions -= ['ertp']
+        perm.save!
+      end
     end
   end
 end

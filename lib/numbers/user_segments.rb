@@ -11,7 +11,10 @@ module Numbers
     end
 
     def initialize(users)
-      @users = users.map { |u| u.extend(SegmentExtensions); u }
+      @users = users.map do |u|
+        u.extend(SegmentExtensions)
+        u
+      end
     end
 
     def licensing_users

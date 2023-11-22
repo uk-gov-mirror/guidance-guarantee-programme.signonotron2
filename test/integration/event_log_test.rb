@@ -176,7 +176,8 @@ class EventLogIntegrationTest < ActionDispatch::IntegrationTest
   end
 
   test 'record password expiration' do
-    @user.password_changed_at = 100.days.ago; @user.save!
+    @user.password_changed_at = 100.days.ago
+    @user.save!
 
     visit root_path
     signin_with(@user)

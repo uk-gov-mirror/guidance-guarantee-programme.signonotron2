@@ -1020,17 +1020,6 @@ Style/Semicolon:
     - 'lib/numbers/user_segments.rb'
     - 'test/integration/event_log_test.rb'
 
-# Offense count: 5
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowIfMethodIsEmpty.
-Style/SingleLineMethods:
-  Exclude:
-    - 'app/models/doorkeeper/application.rb'
-    - 'lib/roles/admin.rb'
-    - 'lib/roles/normal.rb'
-    - 'lib/roles/organisation_admin.rb'
-    - 'lib/roles/superadmin.rb'
-
 # Offense count: 3
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/SlicingWithRange:

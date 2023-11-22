@@ -21,7 +21,9 @@ class ::Doorkeeper::Application < ActiveRecord::Base
   after_create :create_signin_supported_permission
   after_save :create_user_update_supported_permission
 
-  def self.policy_class; ApplicationPolicy; end
+  def self.policy_class
+    ApplicationPolicy
+  end
 
   def supported_permission_strings(user = nil)
     if user && user.role == 'organisation_admin'

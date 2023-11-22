@@ -19,7 +19,9 @@ module Roles
       'admin'
     end
 
-    def self.level; 1; end
+    def self.level
+      1
+    end
 
     def self.manageable_roles
       %w{normal organisation_admin admin}

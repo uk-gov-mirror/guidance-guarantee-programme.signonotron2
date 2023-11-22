@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
           or(arel_table[:invitation_accepted_at].not_eq(nil))).
         without_need_change_password
     else
-      raise NotImplementedError.new("Filtering by status '#{status}' not implemented.")
+      raise NotImplementedError, "Filtering by status '#{status}' not implemented."
     end
   }
 

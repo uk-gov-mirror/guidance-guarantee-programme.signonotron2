@@ -971,15 +971,6 @@ Style/RedundantSelf:
     - 'lib/devise/models/password_archivable.rb'
     - 'lib/devise/models/password_expirable.rb'
 
-# Offense count: 7
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, AllowInnerSlashes.
-# SupportedStyles: slashes, percent_r, mixed
-Style/RegexpLiteral:
-  Exclude:
-    - 'lib/tasks/check_for_bad_time_handling.rake'
-    - 'test/controllers/two_step_verification_controller_test.rb'
-
 
 # -------------------
 

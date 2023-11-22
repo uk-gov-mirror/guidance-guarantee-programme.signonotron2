@@ -4,7 +4,7 @@ task :check_for_bad_time_handling do
     match = false
     if filename !~ %r{/vendor/bundle/ruby/} # skip vendored gems
       File.open(filename) do |file|
-        match = file.map(&:scrub).grep(%r{Time\.(now|utc|parse)}).any?
+        match = file.map(&:scrub).grep(/Time\.(now|utc|parse)/).any?
       end
     end
     match

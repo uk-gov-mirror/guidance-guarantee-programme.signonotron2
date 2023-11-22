@@ -28,11 +28,11 @@ class TwoStepVerificationControllerTest < ActionController::TestCase
     end
 
     should 'include the secret key uppercased' do
-      assert_match %r{#{@secret.upcase}}, @controller.otp_secret_key_uri
+      assert_match(/#{@secret.upcase}/, @controller.otp_secret_key_uri)
     end
 
     should 'include the environment titleised' do
-      assert_match %r{issuer=Development%20.*%20Signon}, @controller.otp_secret_key_uri
+      assert_match(/issuer=Development%20.*%20Signon/, @controller.otp_secret_key_uri)
     end
 
     context 'in production' do
@@ -46,20 +46,20 @@ class TwoStepVerificationControllerTest < ActionController::TestCase
       end
 
       should 'not include the environment name' do
-        assert_match %r{issuer=.*%20Signon}, @controller.otp_secret_key_uri
-        refute_match %r{issuer=Development%20.*%20Signon}, @controller.otp_secret_key_uri
+        assert_match(/issuer=.*%20Signon/, @controller.otp_secret_key_uri)
+        refute_match(/issuer=Development%20.*%20Signon/, @controller.otp_secret_key_uri)
       end
     end
 
     context 'when different issuer name is provided within the localisation data' do
       should 'use the value provided by i18n' do
         I18n.stubs(t: 'issuer test')
-        assert_match %r{issuer=Development%20issuer%20test}, @controller.otp_secret_key_uri
+        assert_match(/issuer=Development%20issuer%20test/, @controller.otp_secret_key_uri)
       end
     end
 
     should "include the user's email" do
-      assert_match %r{#{@user.email}}, @controller.otp_secret_key_uri
+      assert_match(/#{@user.email}/, @controller.otp_secret_key_uri)
     end
   end
 end

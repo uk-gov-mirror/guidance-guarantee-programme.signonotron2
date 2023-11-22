@@ -836,15 +836,6 @@ Style/NegatedIf:
     - 'db/migrate/20121011166199_create_authority_permissions_for_licensing.rb'
     - 'lib/devise/helpers/password_expirable.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, MinBodyLength.
-# SupportedStyles: skip_modifier_ifs, always
-Style/Next:
-  Exclude:
-    - 'lib/user_permission_migrator.rb'
-    - 'lib/user_permissions_exporter.rb'
-
 
 # -------------------
 

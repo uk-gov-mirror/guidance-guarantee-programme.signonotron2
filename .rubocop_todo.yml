@@ -873,13 +873,6 @@ Style/NumericPredicate:
     - 'lib/inactive_users_suspension_reminder.rb'
 
 # Offense count: 1
-# Configuration parameters: AllowedMethods.
-# AllowedMethods: respond_to_missing?
-Style/OptionalBooleanParameter:
-  Exclude:
-    - 'test/integration/batch_inviting_users_test.rb'
-
-# Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Style/ParallelAssignment:
   Exclude:

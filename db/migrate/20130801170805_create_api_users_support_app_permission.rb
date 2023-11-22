@@ -5,8 +5,6 @@ class CreateApiUsersSupportAppPermission < ActiveRecord::Migration
 
   def up
     support = ::Doorkeeper::Application.find_by_name('Support')
-    if support
-      SupportedPermission.create!(application: support, name: 'api_users') if support
-    end
+    SupportedPermission.create!(application: support, name: 'api_users') if support
   end
 end

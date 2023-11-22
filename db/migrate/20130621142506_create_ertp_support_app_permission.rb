@@ -5,8 +5,6 @@ class CreateErtpSupportAppPermission < ActiveRecord::Migration
 
   def up
     support = ::Doorkeeper::Application.find_by_name('Support')
-    if support
-      SupportedPermission.create!(application: support, name: 'ertp') if support
-    end
+    SupportedPermission.create!(application: support, name: 'ertp') if support
   end
 end

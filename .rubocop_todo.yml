@@ -987,14 +987,8 @@ Style/RescueModifier:
     - 'test/integration/volatile_lock_test.rb'
     - 'test/jobs/permission_updater_test.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: implicit, explicit
-Style/RescueStandardError:
-  Exclude:
-    - 'db/migrate/20120609094747_add_indices_for_user.rb'
-    - 'lib/inactive_users_suspension_reminder.rb'
+
+# -------------------
 
 # Offense count: 9
 # This cop supports unsafe autocorrection (--autocorrect-all).

@@ -25,7 +25,7 @@ class InactiveUsersSuspensionReminder
 
         Rails.logger.warn "#{self.class}: Failed to send suspension reminder email to #{user.email}."
         notify_bugsnag(e, user)
-      rescue => e
+      rescue StandardError => e
         notify_bugsnag(e, user)
         begin
           Rails.logger.warn "#{self.class}: #{e.response.error.message} while sending email to #{user.email}."

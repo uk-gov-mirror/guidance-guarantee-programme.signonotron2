@@ -19,7 +19,7 @@ class BatchInvitation < ActiveRecord::Base
   end
 
   def all_successful?
-    batch_invitation_users.failed.count == 0
+    batch_invitation_users.failed.count.zero?
   end
 
   def enqueue

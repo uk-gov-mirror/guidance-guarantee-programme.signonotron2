@@ -21,7 +21,7 @@ class InactiveUsersSuspensionReminder
         Rails.logger.info "#{self.class}: Successfully sent email to #{user.email}."
       rescue *ERRORS_TO_RETRY_ON => e
         Rails.logger.debug "#{self.class}: #{e.class} - #{e.message} while sending email to #{user.email} during attempt (#{(tries..3).count}/3)." # rubocop:disable Layout/LineLength
-        sleep(3) && retry if (tries -= 1) > 0
+        sleep(3) && retry if (tries -= 1).positive?
 
         Rails.logger.warn "#{self.class}: Failed to send suspension reminder email to #{user.email}."
         notify_bugsnag(e, user)

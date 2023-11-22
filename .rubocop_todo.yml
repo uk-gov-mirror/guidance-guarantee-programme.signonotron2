@@ -858,19 +858,8 @@ Style/Not:
 Style/NumericLiterals:
   MinDigits: 10
 
-# Offense count: 8
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle, AllowedMethods, AllowedPatterns.
-# SupportedStyles: predicate, comparison
-Style/NumericPredicate:
-  Exclude:
-    - 'spec/**/*'
-    - 'app/controllers/devise/two_step_verification_session_controller.rb'
-    - 'app/models/batch_invitation.rb'
-    - 'db/migrate/20150113064454_migrate_permissions_to_user_application_permissions_join_table.rb'
-    - 'db/migrate/20160420145549_remove_appointed_person_for_england_and_wales_organisation.rb'
-    - 'lib/devise/models/password_archivable.rb'
-    - 'lib/inactive_users_suspension_reminder.rb'
+
+# -------------------
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -878,7 +867,6 @@ Style/ParallelAssignment:
   Exclude:
     - 'db/migrate/20150121092250_migrate_application_and_permissions_to_batch_invitation_application_permissions_join_table.rb'
 
-# -------------------
 
 # Offense count: 38
 # This cop supports safe autocorrection (--autocorrect).

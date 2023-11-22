@@ -10,7 +10,7 @@ class Devise::TwoStepVerificationSessionController < DeviseController
 
     if current_user.authenticate_otp(params[:code])
       expires_seconds = User::REMEMBER_2SV_SESSION_FOR
-      if expires_seconds && expires_seconds > 0
+      if expires_seconds.positive?
         cookies.signed['remember_2sv_session'] = {
           value: {
             user_id: current_user.id,

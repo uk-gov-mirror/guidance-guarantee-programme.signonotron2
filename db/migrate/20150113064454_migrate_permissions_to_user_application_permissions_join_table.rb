@@ -26,7 +26,7 @@ class MigratePermissionsToUserApplicationPermissionsJoinTable < ActiveRecord::Mi
                                                    updated_at: permission.updated_at)
         permission.save if permission.valid? # doesn't save duplicate permissions
       end
-      print '.' if (index += 1) % 1000 == 0
+      print '.' if ((index += 1) % 1000).zero?
     end
     puts ''
     puts 'Done.'

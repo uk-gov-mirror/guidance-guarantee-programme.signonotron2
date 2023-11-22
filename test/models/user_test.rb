@@ -157,7 +157,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'excludes users only having access to the Pension Wise Academy' do
-    permissions = %w(signin)
+    permissions = %w[signin]
     academy_app = create(:application, name: 'Pension Wise Academy')
     planner_app = create(:application, name: 'Planner')
 
@@ -348,7 +348,7 @@ class UserTest < ActiveSupport::TestCase
     user.grant_application_permission(app, 'signin')
     user.grant_application_permission(app, 'edit')
 
-    assert_user_has_permissions %w(edit signin), app, user
+    assert_user_has_permissions %w[edit signin], app, user
   end
 
   test 'inviting a user sets confirmed_at' do

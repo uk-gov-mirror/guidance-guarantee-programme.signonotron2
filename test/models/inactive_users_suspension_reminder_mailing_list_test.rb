@@ -15,7 +15,7 @@ class InactiveUsersSuspensionReminderMailingListTest < ActiveSupport::TestCase
       @excluded    = create(
         :user,
         current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD - 6.days).ago,
-        with_permissions: { 'Pension Wise Academy' => %w(signin) }
+        with_permissions: { 'Pension Wise Academy' => %w[signin] }
       )
     end
 

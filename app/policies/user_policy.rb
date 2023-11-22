@@ -60,10 +60,10 @@ class UserPolicy < BasePolicy
       if current_user.superadmin?
         scope.web_users
       elsif current_user.admin?
-        scope.web_users.where(role: %w(admin organisation_admin normal))
+        scope.web_users.where(role: %w[admin organisation_admin normal])
       elsif current_user.organisation_admin?
         scope.web_users
-             .where(role: %w(organisation_admin normal))
+             .where(role: %w[organisation_admin normal])
              .where(organisation_id: current_user.organisation.subtree_ids)
       end
     end

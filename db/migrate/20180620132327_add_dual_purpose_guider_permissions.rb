@@ -9,7 +9,7 @@ class AddDualPurposeGuiderPermissions < ActiveRecord::Migration
       app.supported_permissions.find_or_create_by!(name: PERMISSION)
 
       User.with_access_to_application(app).not_suspended.find_each do |user|
-        if user.permissions_for(app) == %w(signin)
+        if user.permissions_for(app) == %w[signin]
           user.grant_application_permission(app, PERMISSION)
 
           say "Granted to #{user.name}."

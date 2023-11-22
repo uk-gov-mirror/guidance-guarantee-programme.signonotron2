@@ -32,11 +32,11 @@ class ::Doorkeeper::ApplicationTest < ActiveSupport::TestCase
       user = create(:user)
       app = create(:application, with_supported_permissions: ['write'])
 
-      assert_equal %w(signin write), app.supported_permission_strings(user)
+      assert_equal %w[signin write], app.supported_permission_strings(user)
     end
 
     should 'only show permissions that organisation admins themselves have' do
-      app = create(:application, with_delegatable_supported_permissions: %w(write approve))
+      app = create(:application, with_delegatable_supported_permissions: %w[write approve])
       user = create(:organisation_admin, with_permissions: { app => ['write'] })
 
       assert_equal ['write'], app.supported_permission_strings(user)
@@ -46,7 +46,7 @@ class ::Doorkeeper::ApplicationTest < ActiveSupport::TestCase
       user = create(:organisation_admin)
       app = create(:application, with_delegatable_supported_permissions: ['write'],
                                  with_supported_permissions: ['approve'])
-      user.grant_application_permissions(app, %w(write approve))
+      user.grant_application_permissions(app, %w[write approve])
 
       assert_equal ['write'], app.supported_permission_strings(user)
     end

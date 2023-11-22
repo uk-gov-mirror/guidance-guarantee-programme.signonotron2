@@ -379,9 +379,9 @@ class UsersControllerTest < ActionController::TestCase
         assert_select "select[name='user[organisation_id]']" do
           assert_select 'option', count: 3
           assert_select 'option[selected=selected]', count: 1
-          assert_select %{option[value="#{org_with_user.id}"][selected=selected]},
+          assert_select %(option[value="#{org_with_user.id}"][selected=selected]),
 text: org_with_user.name_with_abbreviation
-          assert_select %{option[value="#{other_organisation.id}"]}, text: other_organisation.name_with_abbreviation
+          assert_select %(option[value="#{other_organisation.id}"]), text: other_organisation.name_with_abbreviation
         end
       end
 
@@ -531,7 +531,7 @@ EventLog.where(event_id: EventLog::EMAIL_CHANGED.id, uid: normal_user.uid, initi
             assert_equal email_change_notifications.map(&:subject).uniq.count, 1
             assert_match /Your .* Signon development email address has been updated/,
 email_change_notifications.map(&:subject).first
-            assert_equal %w(old@email.com new@email.com), email_change_notifications.map {|mail| mail.to.first }
+            assert_equal %w[old@email.com new@email.com], email_change_notifications.map {|mail| mail.to.first }
           end
         end
 

@@ -30,7 +30,7 @@ module Numbers
     end
 
     def active_admin_user_names
-      %w(admin superadmin).collect do |role|
+      %w[admin superadmin].collect do |role|
         [role, all_active.select {|u| u.role == role }.map {|u| "#{u.name} <#{u.email}>" }.sort.join(', ')]
       end
     end

@@ -17,13 +17,13 @@ RSpec.describe UserPermissionMigrator do
   end
 
   let!(:gds_editor) do
-    FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w(editor gds_editor signin)})
+    FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w[editor gds_editor signin]})
   end
-  let!(:editor) { FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w(editor signin)}) }
-  let!(:writer) { FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w(signin)}) }
+  let!(:editor) { FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w[editor signin]}) }
+  let!(:writer) { FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w[signin]}) }
   let!(:user_without_access) { FactoryGirl.create(:user) }
   let!(:user_with_unrelated_access) do
-    FactoryGirl.create(:user, with_permissions: {'unrelated application' => %w(editor gds_editor signin)})
+    FactoryGirl.create(:user, with_permissions: {'unrelated application' => %w[editor gds_editor signin]})
   end
 
   it 'copies permissions over for all users of an application to another application' do
@@ -32,15 +32,15 @@ RSpec.describe UserPermissionMigrator do
       target: 'Manuals Publisher'
     )
 
-    expect(gds_editor.permissions_for(manuals_publisher)).to eq %w(editor gds_editor signin)
-    expect(editor.permissions_for(manuals_publisher)).to eq %w(editor signin)
-    expect(writer.permissions_for(manuals_publisher)).to eq %w(signin)
+    expect(gds_editor.permissions_for(manuals_publisher)).to eq %w[editor gds_editor signin]
+    expect(editor.permissions_for(manuals_publisher)).to eq %w[editor signin]
+    expect(writer.permissions_for(manuals_publisher)).to eq %w[signin]
     expect(user_without_access.permissions_for(manuals_publisher)).to eq []
     expect(user_with_unrelated_access.permissions_for(manuals_publisher)).to eq []
 
-    expect(gds_editor.permissions_for(specialist_publisher)).to eq %w(editor gds_editor signin)
-    expect(editor.permissions_for(specialist_publisher)).to eq %w(editor signin)
-    expect(writer.permissions_for(specialist_publisher)).to eq %w(signin)
+    expect(gds_editor.permissions_for(specialist_publisher)).to eq %w[editor gds_editor signin]
+    expect(editor.permissions_for(specialist_publisher)).to eq %w[editor signin]
+    expect(writer.permissions_for(specialist_publisher)).to eq %w[signin]
     expect(user_without_access.permissions_for(specialist_publisher)).to eq []
     expect(user_with_unrelated_access.permissions_for(specialist_publisher)).to eq []
   end

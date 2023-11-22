@@ -23,7 +23,7 @@ describe UserPolicy do
     end
   end
 
-  user_management_actions = %i(
+  user_management_actions = %i[
     edit?
     create?
     update?
@@ -32,7 +32,7 @@ describe UserPolicy do
     cancel_email_change?
     resend_email_change?
     event_logs?
-  )
+  ]
 
   user_management_actions.each do |permission_name|
     permissions permission_name do

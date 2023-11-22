@@ -23,7 +23,7 @@ class InactiveUsersSuspenderTest < ActiveSupport::TestCase
   test "doesn't suspend users who only have access to Pension Wise Academy" do
     application   = create(:application, name: 'Pension Wise Academy')
     inactive_user = create(:user, current_sign_in_at: 31.days.ago,
-                                  with_permissions: { 'Pension Wise Academy' => %w(signin) })
+                                  with_permissions: { 'Pension Wise Academy' => %w[signin] })
 
     InactiveUsersSuspender.new.suspend
 

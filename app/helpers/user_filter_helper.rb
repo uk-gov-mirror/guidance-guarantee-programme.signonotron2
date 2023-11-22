@@ -6,7 +6,7 @@ module UserFilterHelper
   end
 
   def user_role_text
-    "#{params[:role] if params[:role]} users".strip.humanize.capitalize
+    "#{params[:role]} users".strip.humanize.capitalize
   end
 
   def two_step_abbr_tag

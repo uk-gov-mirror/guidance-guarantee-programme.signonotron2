@@ -54,11 +54,11 @@ class SupportedPermissionsControllerTest < ActionController::TestCase
     should 'show error if name is not provided and not edit the permission' do
       app = create(:application, name: 'My first app')
       perm = create(:supported_permission, application_id: app.id,
-                                  name: 'permission1', delegatable: true, created_at: 2.days.ago)
+                                           name: 'permission1', delegatable: true, created_at: 2.days.ago)
 
       put :update,
           params: { doorkeeper_application_id: app.id, id: perm.id,
-supported_permission: { name: '', delegatable: false } }
+                    supported_permission: { name: '', delegatable: false } }
 
       assert_select "ul[class='errors'] li", "Name can't be blank"
       assert perm.reload.delegatable
@@ -67,7 +67,7 @@ supported_permission: { name: '', delegatable: false } }
     should 'edit permission' do
       app = create(:application, name: 'My first app')
       perm = create(:supported_permission, application_id: app.id,
-                                  name: 'permission1', delegatable: true, created_at: 2.days.ago)
+                                           name: 'permission1', delegatable: true, created_at: 2.days.ago)
 
       put :update,
           params: { doorkeeper_application_id: app.id, id: perm.id, supported_permission: { delegatable: false } }

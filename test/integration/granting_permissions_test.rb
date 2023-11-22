@@ -21,7 +21,7 @@ class GrantingPermissionsTest < ActionDispatch::IntegrationTest
 
   should 'support granting app-specific permissions' do
     app = create(:application, name: 'MyApp',
-                 with_supported_permissions: ['pre-existing', 'adding', 'never'])
+                               with_supported_permissions: ['pre-existing', 'adding', 'never'])
     @user.grant_application_permission(app, 'pre-existing')
 
     visit edit_user_path(@user)

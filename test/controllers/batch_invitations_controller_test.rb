@@ -47,7 +47,7 @@ class BatchInvitationsControllerTest < ActionController::TestCase
       app = create(:application)
       post :create,
            params: { batch_invitation: { user_names_and_emails: users_csv },
-user: { supported_permission_ids: [app.signin_permission.id] } }
+                     user: { supported_permission_ids: [app.signin_permission.id] } }
 
       bi = BatchInvitation.last
       assert_not_nil bi
@@ -58,7 +58,7 @@ user: { supported_permission_ids: [app.signin_permission.id] } }
 
     should 'store the organisation to invite users to' do
       post :create, params: { user: { supported_permission_ids: [] },
-        batch_invitation: { user_names_and_emails: users_csv, organisation_id: 3 } }
+                              batch_invitation: { user_names_and_emails: users_csv, organisation_id: 3 } }
 
       bi = BatchInvitation.last
 
@@ -108,7 +108,7 @@ user: { supported_permission_ids: [app.signin_permission.id] } }
       should 'process the fields by name' do
         post :create,
              params: { batch_invitation: { user_names_and_emails: users_csv('reversed_users.csv') },
-user: { supported_permission_ids: [] } }
+                       user: { supported_permission_ids: [] } }
 
         bi = BatchInvitation.last
         assert_not_nil bi.batch_invitation_users.find_by_email('a@hhg.com')
@@ -120,7 +120,7 @@ user: { supported_permission_ids: [] } }
       should 'redisplay the form and show a flash message' do
         post :create,
              params: { batch_invitation: { user_names_and_emails: users_csv('empty_users.csv') },
-user: { supported_permission_ids: [] } }
+                       user: { supported_permission_ids: [] } }
 
         assert_template :new
         assert_match(/no rows/i, flash[:alert])
@@ -131,7 +131,7 @@ user: { supported_permission_ids: [] } }
       should 'redisplay the form and show a flash message' do
         post :create,
              params: { batch_invitation: { user_names_and_emails: users_csv('invalid_users.csv') },
-user: { supported_permission_ids: [] } }
+                       user: { supported_permission_ids: [] } }
 
         assert_template :new
         assert_match(/Couldn't understand that file/i, flash[:alert])
@@ -142,7 +142,7 @@ user: { supported_permission_ids: [] } }
       should 'redisplay the form and show a flash message' do
         post :create,
              params: { batch_invitation: { user_names_and_emails: users_csv('no_headers_users.csv') },
-user: { supported_permission_ids: [] } }
+                       user: { supported_permission_ids: [] } }
 
         assert_template :new
         assert_match(/must have headers/i, flash[:alert])

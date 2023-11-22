@@ -12,7 +12,7 @@ class UserOAuthPresenterTest < ActiveSupport::TestCase
     user.organisation = justice_league
 
     expected_user_attributes = {
-      email:  user.email,
+      email: user.email,
       name: user.name,
       uid: user.uid,
       organisation_slug: 'justice-league',

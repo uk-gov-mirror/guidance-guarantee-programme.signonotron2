@@ -6,7 +6,7 @@ class UserPermissionsExporterTest < ActionView::TestCase
     @ketchup_org = create(:organisation, name: 'Ministry of ketchup')
     @brown_sauce_org = create(:organisation, name: 'Ministry of brown sauce')
     @bill = create(:user, name: 'Bill', email: 'bill@bill.com', organisation: @chips_org,
-                               suspended_at: Date.parse('2000-01-01'), reason_for_suspension: 'Left Chips.org')
+                          suspended_at: Date.parse('2000-01-01'), reason_for_suspension: 'Left Chips.org')
     @anne = create(:user, name: 'Anne', email: 'anne@anne.com', role: 'superadmin', organisation: @ketchup_org)
     @mary = create(:user, name: 'Mary', email: 'mary@mary.com', role: 'admin', organisation: @brown_sauce_org)
 
@@ -17,7 +17,7 @@ class UserPermissionsExporterTest < ActionView::TestCase
 
   def test_export_one_application
     foo_app = create(:application, name: 'Foo',
-with_supported_permissions: %w[administer add_vinegar do_some_stuff cook])
+                                   with_supported_permissions: %w[administer add_vinegar do_some_stuff cook])
     @bill.grant_application_permissions(foo_app, %w[signin cook])
     @anne.grant_application_permissions(foo_app, %w[signin administer add_vinegar])
     @mary.grant_application_permissions(foo_app, %w[signin do_some_stuff])
@@ -34,7 +34,7 @@ with_supported_permissions: %w[administer add_vinegar do_some_stuff cook])
 
   def test_export_multiple_applications
     foo_app = create(:application, name: 'Foo',
-with_supported_permissions: %w[administer add_vinegar do_some_stuff cook])
+                                   with_supported_permissions: %w[administer add_vinegar do_some_stuff cook])
     bar_app = create(:application, name: 'Bar', with_supported_permissions: ['administer'])
     baz_app = create(:application, name: 'Baz')
 

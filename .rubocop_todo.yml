@@ -980,13 +980,6 @@ Style/RegexpLiteral:
     - 'lib/tasks/check_for_bad_time_handling.rake'
     - 'test/controllers/two_step_verification_controller_test.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Style/RescueModifier:
-  Exclude:
-    - 'test/integration/volatile_lock_test.rb'
-    - 'test/jobs/permission_updater_test.rb'
-
 
 # -------------------
 

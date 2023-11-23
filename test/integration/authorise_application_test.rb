@@ -84,8 +84,8 @@ class AuthoriseApplicationTest < ActionDispatch::IntegrationTest
   end
 
   def assert_redirected_to_application(app)
-    assert_match /^#{app.redirect_uri}/, current_url
-    assert_match /\?code=/, current_url
+    assert_match(/^#{app.redirect_uri}/, current_url)
+    assert_match(/\?code=/, current_url)
   end
 
   def ignoring_spurious_error(&block)

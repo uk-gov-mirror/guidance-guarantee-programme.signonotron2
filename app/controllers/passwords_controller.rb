@@ -16,7 +16,7 @@ class PasswordsController < Devise::PasswordsController
   # intercepting reset password flow for a partially signed-in user
   def require_no_authentication
     if (params[:reset_password_token] || params[:forgot_expired_passphrase]) &&
-        current_user && current_user.need_change_password?
+       current_user && current_user.need_change_password?
       sign_out(current_user)
     end
     super

@@ -29,8 +29,8 @@ class OrganisationsFetcher
     slug = organisation_data.details.slug
 
     organisation = Organisation.find_by(content_id: content_id) ||
-      Organisation.find_by(slug: slug) ||
-      Organisation.new(content_id: content_id)
+                   Organisation.find_by(slug: slug) ||
+                   Organisation.new(content_id: content_id)
 
     update_data = {
       content_id: content_id,

@@ -1,5 +1,6 @@
 class RemoveSupportAppErtpPermission < ActiveRecord::Migration
   class SupportedPermission < ActiveRecord::Base; end
+
   class Permission < ActiveRecord::Base
     serialize :permissions, Array
   end

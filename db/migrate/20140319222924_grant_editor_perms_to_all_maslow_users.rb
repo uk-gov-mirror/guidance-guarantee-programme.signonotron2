@@ -2,6 +2,7 @@ class GrantEditorPermsToAllMaslowUsers < ActiveRecord::Migration
   class Permission < ActiveRecord::Base
     serialize :permissions, Array
   end
+
   class ::Doorkeeper::Application < ActiveRecord::Base; end
 
   def up

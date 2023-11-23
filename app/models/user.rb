@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
   def authorised_applications
     authorisations.group_by(&:application).map(&:first)
   end
-  alias_method :applications_used, :authorised_applications
+  alias applications_used authorised_applications
 
   def grant_application_permission(application, supported_permission_name)
     grant_application_permissions(application, [supported_permission_name]).first

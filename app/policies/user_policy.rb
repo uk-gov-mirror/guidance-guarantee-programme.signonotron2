@@ -3,7 +3,7 @@ class UserPolicy < BasePolicy
     # invitations#new
     current_user.superadmin? || current_user.admin? || current_user.organisation_admin?
   end
-  alias_method :index?, :new?
+  alias index? new?
 
   def edit?
     case current_user.role
@@ -18,11 +18,11 @@ class UserPolicy < BasePolicy
       false
     end
   end
-  alias_method :create?, :edit? # invitations#create
-  alias_method :update?, :edit?
-  alias_method :unlock?, :edit?
-  alias_method :suspension?, :edit?
-  alias_method :resend?, :edit?
+  alias create? edit? # invitations#create
+  alias update? edit?
+  alias unlock? edit?
+  alias suspension? edit?
+  alias resend? edit?
 
   def edit_email_or_passphrase?
     current_user.id == record.id
@@ -52,8 +52,8 @@ class UserPolicy < BasePolicy
     current_user.superadmin? || current_user.admin? || current_user.organisation_admin?
   end
 
-  alias_method :reset_2sv?, :flag_2sv?
-  alias_method :reset_two_step_verification?, :reset_2sv?
+  alias reset_2sv? flag_2sv?
+  alias reset_two_step_verification? reset_2sv?
 
   class Scope < ::BasePolicy::Scope
     def resolve

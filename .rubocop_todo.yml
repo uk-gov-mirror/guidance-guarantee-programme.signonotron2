@@ -452,19 +452,6 @@ Naming/VariableNumber:
   Exclude:
     - 'test/models/inactive_users_suspension_reminder_mailing_list_test.rb'
 
-# Offense count: 23
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: prefer_alias, prefer_alias_method
-Style/Alias:
-  Exclude:
-    - 'app/models/user.rb'
-    - 'app/policies/api_user_policy.rb'
-    - 'app/policies/application_policy.rb'
-    - 'app/policies/batch_invitation_policy.rb'
-    - 'app/policies/organisation_policy.rb'
-    - 'app/policies/user_policy.rb'
-
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Style/BlockComments:

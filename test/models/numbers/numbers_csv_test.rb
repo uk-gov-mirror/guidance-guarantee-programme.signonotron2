@@ -88,7 +88,7 @@ class NumbersCsvTest < ActiveSupport::TestCase
 
   test 'csv contains counts by how often users have signed in' do
     all_users = User.all
-    [0, 1, 2, 123].each_with_index {|count, i| all_users[i].update_attribute(:sign_in_count, count) }
+    [0, 1, 2, 123].each_with_index { |count, i| all_users[i].update_attribute(:sign_in_count, count) }
 
     Numbers::NumbersCsv.generate
 

@@ -3,7 +3,7 @@ require 'test_helper'
 class UserExportPresenterTest < ActiveSupport::TestCase
   def setup
     Timecop.freeze(2015, 1, 15, 9, 0)
-    @apps = 5.times.map {|i| create(:application, name: "App #{i}") }
+    @apps = 5.times.map { |i| create(:application, name: "App #{i}") }
     @user = create(:two_step_enabled_user, name: 'Test User', email: 'test@dept.gov.uk')
     create(:supported_permission, application: @apps[0], name: 'editor')
     create(:supported_permission, application: @apps[2], name: 'editor')

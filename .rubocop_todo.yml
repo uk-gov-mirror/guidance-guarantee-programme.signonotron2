@@ -236,26 +236,6 @@ Layout/SpaceAroundKeyword:
     - 'db/migrate/20121011155199_create_gds_admin_permission_for_licensing.rb'
     - 'db/migrate/20121011166199_create_authority_permissions_for_licensing.rb'
 
-# Offense count: 28
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
-# SupportedStyles: space, no_space
-# SupportedStylesForEmptyBraces: space, no_space
-Layout/SpaceInsideBlockBraces:
-  Exclude:
-    - 'app/models/doorkeeper/application.rb'
-    - 'app/models/user.rb'
-    - 'db/migrate/20140220150716_most_signin_permissions_should_not_be_delegable.rb'
-    - 'lib/numbers/metrics.rb'
-    - 'lib/user_permissions_exporter.rb'
-    - 'script/import_user_organisation_membership_from_whitehall'
-    - 'spec/unit/same_site_security/middleware.rb'
-    - 'test/controllers/users_controller_test.rb'
-    - 'test/factories/users.rb'
-    - 'test/models/doorkeeper_application_test.rb'
-    - 'test/models/numbers/numbers_csv_test.rb'
-    - 'test/models/user_export_presenter_test.rb'
-
 # Offense count: 45
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces.

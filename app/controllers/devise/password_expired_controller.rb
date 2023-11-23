@@ -23,6 +23,7 @@ class Devise::PasswordExpiredController < DeviseController
 
   def skip_password_change
     return if !resource.nil? && resource.need_change_password?
+
     redirect_to :root
   end
 

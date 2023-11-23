@@ -63,6 +63,7 @@ module UserFilterHelper
   def value_from(filter_type)
     value = params[filter_type]
     return nil if value.blank?
+
     case filter_type
     when :organisation
       org = Organisation.find(value)

@@ -50,24 +50,6 @@ Layout/DotPosition:
     - 'lib/organisation_mappings/zendesk_to_signon.rb'
     - 'lib/sso_push_credential.rb'
 
-# Offense count: 19
-# This cop supports safe autocorrection (--autocorrect).
-Layout/EmptyLineAfterGuardClause:
-  Exclude:
-    - 'app/controllers/devise/password_expired_controller.rb'
-    - 'app/controllers/devise/two_step_verification_controller.rb'
-    - 'app/helpers/user_filter_helper.rb'
-    - 'app/models/user.rb'
-    - 'db/migrate/20140114145520_ensure_signin_supported_permission_present.rb'
-    - 'db/migrate/20160420145549_remove_appointed_person_for_england_and_wales_organisation.rb'
-    - 'lib/devise/models/suspendable.rb'
-    - 'lib/sso_push_credential.rb'
-    - 'lib/tasks/applications.rake'
-    - 'lib/tasks/users.rake'
-    - 'script/import_user_organisation_membership_from_whitehall'
-    - 'script/make_oauth_work_in_dev'
-    - 'test/factories/oauth_applications.rb'
-
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
 Layout/EmptyLineAfterMagicComment:

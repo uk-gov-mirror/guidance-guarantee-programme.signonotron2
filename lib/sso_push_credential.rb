@@ -17,6 +17,7 @@ class SsoPushCredential
 
     def user
       raise UserNotProvided unless user_email.present?
+
       @user ||= User.find_by_email(user_email) || raise(UserNotFound)
     end
   end

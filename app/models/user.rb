@@ -225,6 +225,7 @@ class User < ActiveRecord::Base
 
   def status
     return USER_STATUS_SUSPENDED if suspended?
+
     unless api_user?
       return USER_STATUS_INVITED if invited_but_not_yet_accepted?
       return USER_STATUS_PASSPHRASE_EXPIRED if need_change_password?
@@ -249,6 +250,7 @@ class User < ActiveRecord::Base
 
   def set_2sv_for_admin_roles
     return if Rails.application.config.instance_name.present?
+
     self.require_2sv = true if role_changed? && (admin? || superadmin?)
   end
 

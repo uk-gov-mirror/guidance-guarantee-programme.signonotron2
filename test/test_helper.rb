@@ -109,8 +109,8 @@ class ActionDispatch::IntegrationTest
     Capybara.current_driver = Capybara.javascript_driver
   end
 
- # Override the default strategy as tests with the JS driver require
- # tests not to be wrapped in a transaction
+  # Override the default strategy as tests with the JS driver require
+  # tests not to be wrapped in a transaction
   def db_cleaner_start
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.start

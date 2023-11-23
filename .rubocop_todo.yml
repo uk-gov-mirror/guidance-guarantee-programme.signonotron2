@@ -9,14 +9,6 @@
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowForAlignment.
-Layout/CommentIndentation:
-  Exclude:
-    - 'test/models/organisation_mappings/zendesk_to_signon_test.rb'
-    - 'test/test_helper.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyleAlignWith, Severity.
 # SupportedStylesAlignWith: start_of_line, def
 Layout/DefEndAlignment:

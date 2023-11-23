@@ -39,7 +39,7 @@ module Signonotron2
     config.assets.enabled = true
     config.assets.version = '1.0'
 
-    #config.middleware.insert_before Warden::Manager, Slimmer::App, config.slimmer.to_hash
+    # config.middleware.insert_before Warden::Manager, Slimmer::App, config.slimmer.to_hash
 
     # Prevent ActionDispatch::RemoteIp::IpSpoofAttackError when the client set a Client-IP
     # header and the request IP was interrogated.

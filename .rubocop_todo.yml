@@ -19,15 +19,6 @@ Layout/DefEndAlignment:
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
-Layout/EmptyLineAfterMagicComment:
-  Exclude:
-    - 'test/integration/dashboard_test.rb'
-    - 'test/integration/passphrase_change_test.rb'
-    - 'test/integration/two_step_verification_test.rb'
-    - 'test/models/user_test.rb'
-
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EmptyLineBetweenMethodDefs, EmptyLineBetweenClassDefs, EmptyLineBetweenModuleDefs, DefLikeMacros, AllowAdjacentOneLineDefs, NumberOfEmptyLines.
 Layout/EmptyLineBetweenDefs:
   Exclude:

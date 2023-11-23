@@ -559,8 +559,7 @@ create_permission('wyre-forest')
 create_permission('york')
   end
 
-  def down
-  end
+  def down; end
 
   class ::Doorkeeper::Application < ActiveRecord::Base
     has_many :permissions, :dependent => :destroy

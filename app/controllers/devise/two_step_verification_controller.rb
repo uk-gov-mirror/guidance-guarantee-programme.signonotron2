@@ -6,8 +6,7 @@ class Devise::TwoStepVerificationController < DeviseController
   attr_reader :otp_secret_key
   private :otp_secret_key
 
-  def prompt
-  end
+  def prompt; end
 
   def show
     generate_secret

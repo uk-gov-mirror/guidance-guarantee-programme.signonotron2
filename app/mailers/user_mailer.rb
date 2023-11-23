@@ -54,7 +54,7 @@ class UserMailer < Devise::Mailer
     mail(to: @user.email, subject: "Your #{app_name} email address is being changed")
   end
 
-private
+  private
 
   def suspension_time
     if @days == 1

@@ -13,7 +13,7 @@ class UsersWithAccess
       .order('current_sign_in_at DESC')
   end
 
-private
+  private
 
   def authorized_users_user_ids
     UserApplicationPermission.where(

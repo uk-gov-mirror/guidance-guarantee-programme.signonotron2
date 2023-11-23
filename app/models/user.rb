@@ -309,7 +309,7 @@ class User < ActiveRecord::Base
     require_2sv? && two_step_flag_changed?
   end
 
-private
+  private
 
   def two_step_flag_changed?
     @two_step_flag_changed

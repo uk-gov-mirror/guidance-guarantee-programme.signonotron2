@@ -45,7 +45,7 @@ class ApiUsersController < ApplicationController
     end
   end
 
-private
+  private
 
   def load_and_authorize_api_user
     @api_user = ApiUser.find(params[:id])

@@ -46,7 +46,7 @@ class ::Doorkeeper::Application < ActiveRecord::Base
     url_without_path = "#{parsed_url.scheme}://#{parsed_url.host}:#{parsed_url.port}"
   end
 
-private
+  private
 
   def create_signin_supported_permission
     supported_permissions.create!(name: 'signin', delegatable: true)

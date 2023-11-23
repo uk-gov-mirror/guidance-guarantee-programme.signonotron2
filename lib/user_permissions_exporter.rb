@@ -57,7 +57,7 @@ class UserPermissionsExporter
   end
 
 
-private
+  private
 
   def multiple_apps?
     applications.size > 1

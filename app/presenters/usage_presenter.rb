@@ -16,7 +16,7 @@ class UsagePresenter
     end
   end
 
-private
+  private
 
   def build_csv(csv)
     csv << header_row

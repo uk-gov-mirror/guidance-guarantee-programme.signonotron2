@@ -17,7 +17,7 @@ class OrganisationsFetcher
     raise "Couldn't save organisation #{invalid.record.slug} because: #{invalid.record.errors.full_messages.join(',')}"
   end
 
-private
+  private
 
   def organisations
     base_uri = Plek.current.find('whitehall-admin')

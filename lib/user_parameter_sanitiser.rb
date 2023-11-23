@@ -9,7 +9,7 @@ class UserParameterSanitiser
     sanitised_params
   end
 
-private
+  private
 
   attr_reader :user_params, :current_user_role, :permitted_params_by_role
 

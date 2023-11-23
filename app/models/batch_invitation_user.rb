@@ -33,7 +33,7 @@ class BatchInvitationUser < ActiveRecord::Base
     end
   end
 
-private
+  private
 
   def new_supported_permissions_for_user(supported_permission_ids)
     if user = User.find_by_email(self.email.to_s.downcase.strip)

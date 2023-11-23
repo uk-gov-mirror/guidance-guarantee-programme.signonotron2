@@ -31,7 +31,7 @@ class SupportedPermissionsController < ApplicationController
     end
   end
 
-private
+  private
 
   def load_and_authorize_application
     @application = Doorkeeper::Application.find(params[:doorkeeper_application_id])

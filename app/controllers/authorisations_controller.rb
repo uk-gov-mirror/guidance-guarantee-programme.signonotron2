@@ -47,7 +47,7 @@ class AuthorisationsController < ApplicationController
     redirect_to [:edit, @api_user]
   end
 
-private
+  private
 
   def load_and_authorize_api_user
     @api_user = ApiUser.find(params[:api_user_id])

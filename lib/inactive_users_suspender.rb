@@ -15,7 +15,7 @@ class InactiveUsersSuspender
     inactive_users.count
   end
 
-private
+  private
 
   def reason
     "User has not logged in for #{User::SUSPENSION_THRESHOLD_PERIOD.inspect} since" +

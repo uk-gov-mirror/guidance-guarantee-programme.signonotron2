@@ -101,7 +101,7 @@ class EventLog < ActiveRecord::Base
     EventLog.order('created_at DESC').where(uid: user.uid)
   end
 
-private
+  private
 
   def validate_event_mappable
     unless entry

@@ -11,7 +11,7 @@ class SupportedPermission < ActiveRecord::Base
   scope :delegatable, -> { where(delegatable: true) }
   scope :grantable_from_ui, -> { where(grantable_from_ui: true) }
 
-private
+  private
 
   def signin_permission_name_not_changed
     return if new_record? || !name_changed?

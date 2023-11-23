@@ -101,12 +101,13 @@ class ApiUsersControllerTest < ActionController::TestCase
 
         PermissionUpdater.expects(:perform_on).with(api_user).once
 
-        put :update, params: { 'id' => api_user.id,
-                               'api_user' => { 'name' => api_user.name,
-                                               'email' => api_user.email,
-                                               'permissions_attributes' => { '0' => {'application_id' => application.id,
-                                                                                     'id' => '',
-                                                                                     'permissions' => ['admin'] }}} }
+        put :update,
+            params: { 'id' => api_user.id,
+                      'api_user' => { 'name' => api_user.name,
+                                      'email' => api_user.email,
+                                      'permissions_attributes' => { '0' => { 'application_id' => application.id,
+                                                                             'id' => '',
+                                                                             'permissions' => ['admin'] } } } }
       end
     end
   end

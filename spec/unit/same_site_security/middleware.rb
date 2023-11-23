@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe SameSiteSecurity::Middleware do
-  headers = {'Content-Type' => 'text/plain', 'Set-Cookie' => '_signonotron2_session=abcd'}
+  headers = { 'Content-Type' => 'text/plain', 'Set-Cookie' => '_signonotron2_session=abcd' }
   let(:app) { proc { [200, headers, ['OK']] } }
   subject { SameSiteSecurity::Middleware.new(app) }
 

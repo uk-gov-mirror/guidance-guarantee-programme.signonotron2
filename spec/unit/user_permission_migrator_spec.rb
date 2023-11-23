@@ -17,13 +17,13 @@ RSpec.describe UserPermissionMigrator do
   end
 
   let!(:gds_editor) do
-    FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w[editor gds_editor signin]})
+    FactoryGirl.create(:user, with_permissions: { 'Specialist Publisher' => %w[editor gds_editor signin] })
   end
-  let!(:editor) { FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w[editor signin]}) }
-  let!(:writer) { FactoryGirl.create(:user, with_permissions: {'Specialist Publisher' => %w[signin]}) }
+  let!(:editor) { FactoryGirl.create(:user, with_permissions: { 'Specialist Publisher' => %w[editor signin] }) }
+  let!(:writer) { FactoryGirl.create(:user, with_permissions: { 'Specialist Publisher' => %w[signin] }) }
   let!(:user_without_access) { FactoryGirl.create(:user) }
   let!(:user_with_unrelated_access) do
-    FactoryGirl.create(:user, with_permissions: {'unrelated application' => %w[editor gds_editor signin]})
+    FactoryGirl.create(:user, with_permissions: { 'unrelated application' => %w[editor gds_editor signin] })
   end
 
   it 'copies permissions over for all users of an application to another application' do

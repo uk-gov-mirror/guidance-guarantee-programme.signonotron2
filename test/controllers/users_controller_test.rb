@@ -111,7 +111,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, params: {client_id: @application.uid, format: :json}
+      get :show, params: { client_id: @application.uid, format: :json }
 
       assert_equal '200', response.code
       presenter = UserOAuthPresenter.new(user, @application)
@@ -126,7 +126,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, params: {format: :json}
+      get :show, params: { format: :json }
 
       assert_equal '200', response.code
       presenter = UserOAuthPresenter.new(user, @application)
@@ -138,7 +138,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token.sub(/[0-9]/, 'x')}"
-      get :show, params: {client_id: @application.uid, format: :json}
+      get :show, params: { client_id: @application.uid, format: :json }
 
       assert_equal '401', response.code
     end
@@ -149,13 +149,13 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: other_application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token.sub(/[0-9]/, 'x')}"
-      get :show, params: {client_id: @application.uid, format: :json}
+      get :show, params: { client_id: @application.uid, format: :json }
 
       assert_equal '401', response.code
     end
 
     should 'fetching json profile without any bearer header should not succeed' do
-      get :show, params: {client_id: @application.uid, format: :json}
+      get :show, params: { client_id: @application.uid, format: :json }
       assert_equal '401', response.code
     end
 
@@ -164,7 +164,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, params: {client_id: @application.uid, format: :json}
+      get :show, params: { client_id: @application.uid, format: :json }
       json = JSON.parse(response.body)
       assert_equal(['signin'], json['user']['permissions'])
     end
@@ -176,7 +176,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, params: {client_id: @application.uid, format: :json}
+      get :show, params: { client_id: @application.uid, format: :json }
       json = JSON.parse(response.body)
       assert_equal(['signin'], json['user']['permissions'])
     end
@@ -187,7 +187,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, params: {client_id: @application.uid, format: :json}
+      get :show, params: { client_id: @application.uid, format: :json }
 
       assert_not_nil user.application_permissions.first.last_synced_at
     end
@@ -197,7 +197,7 @@ class UsersControllerTest < ActionController::TestCase
       token = create(:access_token, application: @application, resource_owner_id: user.id)
 
       @request.env['HTTP_AUTHORIZATION'] = "Bearer #{token.token}"
-      get :show, params: {client_id: @application.uid, format: :json}
+      get :show, params: { client_id: @application.uid, format: :json }
 
       assert_response :ok
     end

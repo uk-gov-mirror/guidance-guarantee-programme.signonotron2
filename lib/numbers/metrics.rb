@@ -85,11 +85,11 @@ module Numbers
     end
 
     def all
-      @all ||= User.includes({application_permissions: :application}, :organisation).to_a
+      @all ||= User.includes({ application_permissions: :application }, :organisation).to_a
     end
 
     def all_active
-      @all_active ||= User.not_suspended.includes({application_permissions: :application}, :organisation).to_a
+      @all_active ||= User.not_suspended.includes({ application_permissions: :application }, :organisation).to_a
     end
 
     def metric_methods

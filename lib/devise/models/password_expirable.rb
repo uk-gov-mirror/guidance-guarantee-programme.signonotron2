@@ -14,8 +14,8 @@ module Devise
 
         scope :with_need_change_password, -> do
           if password_expires?
-            where(arel_table[:password_changed_at].eq(nil).
-              or(arel_table[:password_changed_at].lt(self.expire_password_after.ago)))
+            where(arel_table[:password_changed_at].eq(nil)
+              .or(arel_table[:password_changed_at].lt(self.expire_password_after.ago)))
           end
         end
 

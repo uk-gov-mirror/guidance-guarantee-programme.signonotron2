@@ -16,17 +16,6 @@ Layout/DefEndAlignment:
     - 'db/migrate/20121011155199_create_gds_admin_permission_for_licensing.rb'
     - 'db/migrate/20121011166199_create_authority_permissions_for_licensing.rb'
 
-# Offense count: 11
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: leading, trailing
-Layout/DotPosition:
-  Exclude:
-    - 'app/models/user.rb'
-    - 'app/presenters/usage_presenter.rb'
-    - 'lib/devise/models/password_expirable.rb'
-    - 'lib/organisation_mappings/zendesk_to_signon.rb'
-    - 'lib/sso_push_credential.rb'
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).

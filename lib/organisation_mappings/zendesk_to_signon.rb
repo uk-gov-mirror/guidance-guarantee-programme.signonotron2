@@ -4,10 +4,10 @@ module OrganisationMappings
       OrganisationMappings.domain_names_to_organisations.each do |domain_names, organisation_name|
         organisation = Organisation.find_by_name(organisation_name)
         if organisation
-          User.
-            where(organisation_id: nil).
-            where("#{substring_function} IN (?)", domain_names).
-            update_all(organisation_id: organisation.id)
+          User
+            .where(organisation_id: nil)
+            .where("#{substring_function} IN (?)", domain_names)
+            .update_all(organisation_id: organisation.id)
         else
           puts "Could not find organisation matching name '#{organisation_name}'"
         end

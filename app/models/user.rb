@@ -94,10 +94,10 @@ class User < ActiveRecord::Base
     when USER_STATUS_LOCKED
       where.not(locked_at: nil)
     when USER_STATUS_ACTIVE
-      where(suspended_at: nil, locked_at: nil).
-        where(arel_table[:invitation_sent_at].eq(nil).
-          or(arel_table[:invitation_accepted_at].not_eq(nil))).
-        without_need_change_password
+      where(suspended_at: nil, locked_at: nil)
+        .where(arel_table[:invitation_sent_at].eq(nil)
+          .or(arel_table[:invitation_accepted_at].not_eq(nil)))
+        .without_need_change_password
     else
       raise NotImplementedError, "Filtering by status '#{status}' not implemented."
     end

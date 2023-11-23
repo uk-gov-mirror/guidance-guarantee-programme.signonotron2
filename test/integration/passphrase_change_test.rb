@@ -129,6 +129,7 @@ class PassphraseChangeTest < ActionDispatch::IntegrationTest
   end
 
   private
+
   def change_password_to(new_password)
     change_password(old: @user.password,
                     new: new_password,

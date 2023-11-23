@@ -71,6 +71,7 @@ module Numbers
     end
 
     private
+
     def has_signin_permissions?(permission)
       permission.permissions.include?('signin')
     end

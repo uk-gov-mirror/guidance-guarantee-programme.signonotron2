@@ -25,6 +25,7 @@ class CreateGdsAdminPermissionForLicensing < ActiveRecord::Migration
   end
 
    private
+
     def licence_application()
       Doorkeeper::Application.where(name: 'Licensify').first
     end

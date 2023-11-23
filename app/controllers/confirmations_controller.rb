@@ -53,6 +53,7 @@ class ConfirmationsController < Devise::ConfirmationsController
   end
 
   private
+
   def confirmation_user
     token = Devise.token_generator.digest(User, :confirmation_token, params[:confirmation_token])
     @confirmation_user ||= resource_class.find_or_initialize_by(confirmation_token: token)

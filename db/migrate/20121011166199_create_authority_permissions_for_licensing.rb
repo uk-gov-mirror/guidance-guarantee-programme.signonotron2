@@ -581,6 +581,7 @@ create_permission('york')
   end
 
    private
+
     def licence_application()
       Doorkeeper::Application.where(name: 'Licensify').first
     end

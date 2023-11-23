@@ -21,26 +21,6 @@ Bundler/OrderedGems:
 Layout/AccessModifierIndentation:
   Enabled: false
 
-# Offense count: 19
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: with_first_argument, with_fixed_indentation
-Layout/ArgumentAlignment:
-  Exclude:
-    - 'app/controllers/authorisations_controller.rb'
-    - 'app/controllers/organisations_controller.rb'
-    - 'app/controllers/supported_permissions_controller.rb'
-    - 'app/helpers/user_filter_helper.rb'
-    - 'app/helpers/users_helper.rb'
-    - 'bin/foreman'
-    - 'bin/puma'
-    - 'bin/pumactl'
-    - 'bin/sidekiq'
-    - 'bin/sidekiqctl'
-    - 'db/migrate/20150109083425_create_join_table_user_application_permissions.rb'
-    - 'db/migrate/20150121073933_create_join_table_batch_invitation_application_permissions.rb'
-    - 'test/controllers/users_controller_test.rb'
-
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowForAlignment.

@@ -68,8 +68,8 @@ class UsersControllerTest < ActionController::TestCase
     should "use a new token if it's expired" do
       perform_enqueued_jobs do
         @user = create(:user_with_pending_email_change,
-                        confirmation_token: 'old token',
-                        confirmation_sent_at: 15.days.ago)
+                       confirmation_token: 'old token',
+                       confirmation_sent_at: 15.days.ago)
         sign_in @user
 
         put :resend_email_change, params: { id: @user.id }
@@ -380,7 +380,7 @@ class UsersControllerTest < ActionController::TestCase
           assert_select 'option', count: 3
           assert_select 'option[selected=selected]', count: 1
           assert_select %(option[value="#{org_with_user.id}"][selected=selected]),
-text: org_with_user.name_with_abbreviation
+                        text: org_with_user.name_with_abbreviation
           assert_select %(option[value="#{other_organisation.id}"]), text: other_organisation.name_with_abbreviation
         end
       end
@@ -519,7 +519,8 @@ text: org_with_user.name_with_abbreviation
           put :update, params: { id: normal_user.id, user: { email: 'new@email.com' } }
 
           assert_equal 1,
-EventLog.where(event_id: EventLog::EMAIL_CHANGED.id, uid: normal_user.uid, initiator_id: @user.id).count
+                       EventLog.where(event_id: EventLog::EMAIL_CHANGED.id, uid: normal_user.uid,
+                                      initiator_id: @user.id).count
         end
 
         should 'send email change notifications to old and new email address' do
@@ -530,7 +531,7 @@ EventLog.where(event_id: EventLog::EMAIL_CHANGED.id, uid: normal_user.uid, initi
             email_change_notifications = ActionMailer::Base.deliveries[-2..-1]
             assert_equal email_change_notifications.map(&:subject).uniq.count, 1
             assert_match /Your .* Signon development email address has been updated/,
-email_change_notifications.map(&:subject).first
+                         email_change_notifications.map(&:subject).first
             assert_equal %w[old@email.com new@email.com], email_change_notifications.map {|mail| mail.to.first }
           end
         end
@@ -558,7 +559,8 @@ email_change_notifications.map(&:subject).first
           put :update, params: { id: another_user.id, user: { role: 'normal' } }
 
           assert_equal 1,
-EventLog.where(event_id: EventLog::ROLE_CHANGED.id, uid: another_user.uid, initiator_id: @user.id).count
+                       EventLog.where(event_id: EventLog::ROLE_CHANGED.id, uid: another_user.uid,
+                                      initiator_id: @user.id).count
         end
       end
 
@@ -604,8 +606,8 @@ EventLog.where(event_id: EventLog::ROLE_CHANGED.id, uid: another_user.uid, initi
 
       should "use a new token if it's expired" do
         another_user = create(:user_with_pending_email_change,
-                                confirmation_token: 'old token',
-                                confirmation_sent_at: 15.days.ago)
+                              confirmation_token: 'old token',
+                              confirmation_sent_at: 15.days.ago)
         put :resend_email_change, params: { id: another_user.id }
 
         assert_not_equal 'old token', another_user.reload.confirmation_token

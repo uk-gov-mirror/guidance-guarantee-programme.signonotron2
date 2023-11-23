@@ -15,7 +15,7 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.new(organisation_params)
     if @organisation.save
       redirect_to organisations_path,
-        notice: "Successfully added organisation #{@organisation.name}"
+                  notice: "Successfully added organisation #{@organisation.name}"
     else
       render :new
     end
@@ -29,7 +29,7 @@ class OrganisationsController < ApplicationController
     @organisation = Organisation.find(params[:id])
     if @organisation.update(organisation_params)
       redirect_to organisations_path,
-        notice: "Successfully updated organisation #{@organisation.name}"
+                  notice: "Successfully updated organisation #{@organisation.name}"
     else
       render :edit
     end

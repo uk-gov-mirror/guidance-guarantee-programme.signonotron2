@@ -14,10 +14,10 @@ class AddPhoneBookingPermission < ActiveRecord::Migration
 
     say "Adding 'phone_bookings' permission for existing output users"
     users = output
-              .supported_permissions
-              .find_by(name: 'signin')
-              .user_application_permissions
-              .collect(&:user)
+            .supported_permissions
+            .find_by(name: 'signin')
+            .user_application_permissions
+            .collect(&:user)
 
     users.each do |user|
       say "creating new permission for user: #{user.name}", true
@@ -31,10 +31,10 @@ class AddPhoneBookingPermission < ActiveRecord::Migration
     output_signin_permission = output.supported_permissions.find_by!(name: 'signin')
 
     users = summary_document_generator
-              .supported_permissions
-              .find_by(name: 'signin')
-              .user_application_permissions
-              .collect(&:user)
+            .supported_permissions
+            .find_by(name: 'signin')
+            .user_application_permissions
+            .collect(&:user)
 
     users.each do |user|
       say "creating new permission for user: #{user.name}", true

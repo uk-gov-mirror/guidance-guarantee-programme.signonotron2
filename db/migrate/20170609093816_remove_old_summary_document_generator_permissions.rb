@@ -6,9 +6,9 @@ class RemoveOldSummaryDocumentGeneratorPermissions < ActiveRecord::Migration
 
     say 'Removing signin permission to old summary document generator for all non admin users'
     user_application_permissions = summary_document_generator
-              .supported_permissions
-              .find_by(name: 'signin')
-              .user_application_permissions
+                                   .supported_permissions
+                                   .find_by(name: 'signin')
+                                   .user_application_permissions
 
     user_application_permissions.each do |permission|
       user = permission.user

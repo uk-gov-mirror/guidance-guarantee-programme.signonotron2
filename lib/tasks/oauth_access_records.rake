@@ -14,9 +14,9 @@ namespace :oauth_access_records do
 
       until ids.empty?
         ids = klass
-          .where('expires_in is not null AND DATE_ADD(created_at, INTERVAL expires_in second) < ?', Time.zone.now)
-          .limit(1000)
-          .pluck(:id)
+              .where('expires_in is not null AND DATE_ADD(created_at, INTERVAL expires_in second) < ?', Time.zone.now)
+              .limit(1000)
+              .pluck(:id)
 
         count += ids.size
 

@@ -27,9 +27,9 @@ class UsagePresenter
 
       active_users = User.where('created_at <= ? and (suspended_at is NULL or suspended_at > ?)', end_date_m,
                                 end_date_m)
-        .group(:organisation_id).count
+                         .group(:organisation_id).count
       suspended_users = User.where('suspended_at <= ?', end_date_m)
-        .group(:organisation_id).count
+                            .group(:organisation_id).count
       total_count = {}
       (active_users.keys | suspended_users.keys).each do |key|
         total_count[key] = { active: active_users[key], suspended: suspended_users[key] }

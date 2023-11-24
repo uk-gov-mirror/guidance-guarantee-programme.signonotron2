@@ -50,13 +50,7 @@ Layout/ExtraSpacing:
     - 'config.ru'
     - 'db/migrate/20120403120725_create_doorkeeper_tables.rb'
     - 'script/rails'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Layout/HeredocIndentation:
-  Exclude:
-    - 'lib/tasks/check_for_bad_time_handling.rake'
-
+    
 # Offense count: 560
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.

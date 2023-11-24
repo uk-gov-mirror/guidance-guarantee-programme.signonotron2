@@ -5,7 +5,9 @@ class SsoPushCredential
   class UserNotProvided < StandardError; end
 
   class << self
-    attr_accessor :user_email, :user
+    attr_accessor :user_email
+
+    attr_writer :user
 
     def credentials(application)
       user.grant_application_permissions(application, PERMISSIONS)

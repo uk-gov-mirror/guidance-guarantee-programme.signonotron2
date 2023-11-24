@@ -139,11 +139,6 @@ Lint/DeprecatedClassMethods:
     - 'script/make_oauth_work_in_dev'
 
 # Offense count: 1
-Lint/DuplicateMethods:
-  Exclude:
-    - 'lib/sso_push_credential.rb'
-
-# Offense count: 1
 # Configuration parameters: MaximumRangeSize.
 Lint/MissingCopEnableDirective:
   Exclude:

@@ -54,8 +54,8 @@ class User < ActiveRecord::Base
 
   scope :web_users, -> { where(api_user: false) }
   scope :not_suspended, -> { where(suspended_at: nil) }
-  scope :with_role, lambda { |role_name| where(role: role_name) }
-  scope :with_organisation, lambda { |org_id| where(organisation_id: org_id) }
+  scope :with_role, ->(role_name) { where(role: role_name) }
+  scope :with_organisation, ->(org_id) { where(organisation_id: org_id) }
   scope :fuzzy_filter, lambda { |filter_param|
                          where('users.email like ? OR users.name like ?', "%#{filter_param.strip}%", "%#{filter_param.strip}%") # rubocop:disable Layout/LineLength
                        }
@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
   scope :not_recently_unsuspended, lambda {
                                      where(['unsuspended_at IS NULL OR unsuspended_at < ?', UNSUSPENSION_GRACE_PERIOD.ago]) # rubocop:disable Layout/LineLength
                                    }
-  scope :with_access_to_application, lambda { |application| UsersWithAccess.new(self, application).users }
+  scope :with_access_to_application, ->(application) { UsersWithAccess.new(self, application).users }
   scope :with_2sv_enabled, lambda { |enabled|
     enabled = ActiveRecord::Type::Boolean.new.cast(enabled)
     where("otp_secret_key IS #{'NOT' if enabled} NULL")

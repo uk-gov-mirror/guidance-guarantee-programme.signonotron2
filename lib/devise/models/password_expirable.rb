@@ -12,18 +12,18 @@ module Devise
       included do
         before_save :update_password_changed
 
-        scope :with_need_change_password, -> do
+        scope :with_need_change_password, lambda {
           if password_expires?
             where(arel_table[:password_changed_at].eq(nil)
               .or(arel_table[:password_changed_at].lt(self.expire_password_after.ago)))
           end
-        end
+        }
 
-        scope :without_need_change_password, -> do
+        scope :without_need_change_password, lambda {
           if password_expires?
             where(arel_table[:password_changed_at].gteq(self.expire_password_after.ago))
           end
-        end
+        }
       end
 
       def need_change_password?

@@ -13,7 +13,7 @@ class ::Doorkeeper::Application < ActiveRecord::Base
       .where('supported_permissions.name' => 'signin')
       .where(retired: false)
   }
-  scope :with_signin_delegatable, -> {
+  scope :with_signin_delegatable, lambda {
     joins(:supported_permissions)
       .where(supported_permissions: { name: 'signin', delegatable: true })
   }

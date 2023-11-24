@@ -202,9 +202,9 @@ class UserTest < ActiveSupport::TestCase
       assert_not_includes User.not_recently_unsuspended, user2
     end
 
-    should "return users who have been unsuspended more than 3 days ago" do
+    should "return users who have been unsuspended more than 30 days ago" do
       user2 = create(:suspended_user)
-      Timecop.travel(4.days.ago) { user2.unsuspend }
+      Timecop.travel(31.days.ago) { user2.unsuspend }
 
       assert_includes User.not_recently_unsuspended, user2
     end

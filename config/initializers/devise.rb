@@ -3,9 +3,7 @@ require_relative 'instance_name'
 
 devise_config = Rails.application.config_for(:devise).symbolize_keys
 
-if devise_config[:secret_key].blank?
-  raise 'Required Devise secret key is unset'
-end
+raise 'Required Devise secret key is unset' if devise_config[:secret_key].blank?
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
@@ -274,9 +272,7 @@ Devise.setup do |config|
   end
 
   Warden::Manager.after_authentication do |user, _auth, _opts|
-    if user.need_change_password?
-      EventLog.record_event(user, EventLog::PASSPHRASE_EXPIRED)
-    end
+    EventLog.record_event(user, EventLog::PASSPHRASE_EXPIRED) if user.need_change_password?
   end
 
   Warden::Manager.before_failure do |_env, _opts|

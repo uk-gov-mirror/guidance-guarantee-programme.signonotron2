@@ -104,8 +104,6 @@ class EventLog < ActiveRecord::Base
   private
 
   def validate_event_mappable
-    unless entry
-      errors.add(:event_id, "must have a corresponding `LogEntry` for #{event_id}")
-    end
+    errors.add(:event_id, "must have a corresponding `LogEntry` for #{event_id}") unless entry
   end
 end

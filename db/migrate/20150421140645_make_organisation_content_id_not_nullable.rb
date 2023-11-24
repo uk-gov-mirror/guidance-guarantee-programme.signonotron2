@@ -13,9 +13,7 @@ class MakeOrganisationContentIdNotNullable < ActiveRecord::Migration
     # duplicates or have been deleted from Whitehall.
     Organisation.where('content_id is NULL').each do |organisation|
       if Rails.env.development?
-        if organisation.users.any?
-          organisation.users.update_all(organisation_id: nil)
-        end
+        organisation.users.update_all(organisation_id: nil) if organisation.users.any?
         organisation.delete
 
       else

@@ -177,9 +177,7 @@ class UsersController < ApplicationController
   def validate_token_matches_client_id
     # FIXME: Once gds-sso is updated everywhere, this should always validate
     # the client_id param.  It should 401 if no client_id is given.
-    if params[:client_id].present? && params[:client_id] != doorkeeper_token.application.uid
-      head :unauthorized
-    end
+    head :unauthorized if params[:client_id].present? && params[:client_id] != doorkeeper_token.application.uid
   end
 
   def export
@@ -194,9 +192,7 @@ class UsersController < ApplicationController
   end
 
   def send_two_step_flag_notification(user)
-    if user.send_two_step_flag_notification?
-      UserMailer.two_step_flagged(user).deliver_later
-    end
+    UserMailer.two_step_flagged(user).deliver_later if user.send_two_step_flag_notification?
   end
 
   # When no permissions are selected for a user, we set the value to [] so

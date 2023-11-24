@@ -98,9 +98,7 @@ namespace :users do
         puts "-- Adding signin permission for #{content_preview.name}"
         user.grant_application_permission(content_preview, 'signin')
 
-        if content_preview.supports_push_updates?
-          PermissionUpdater.perform_async(user.uid, content_preview.id)
-        end
+        PermissionUpdater.perform_async(user.uid, content_preview.id) if content_preview.supports_push_updates?
       end
     else
       raise "Could not find an application called 'Content Preview'"
@@ -112,9 +110,7 @@ namespace :users do
     source_application = ENV['SOURCE']
     target_application = ENV['TARGET']
 
-    unless source_application && target_application
-      raise 'Please supply SOURCE and TARGET application names'
-    end
+    raise 'Please supply SOURCE and TARGET application names' unless source_application && target_application
 
     UserPermissionMigrator.migrate(source: source_application, target: target_application)
   end

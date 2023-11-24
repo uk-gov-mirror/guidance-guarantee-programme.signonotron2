@@ -20,9 +20,7 @@ module Devise
         }
 
         scope :without_need_change_password, lambda {
-          if password_expires?
-            where(arel_table[:password_changed_at].gteq(self.expire_password_after.ago))
-          end
+          where(arel_table[:password_changed_at].gteq(self.expire_password_after.ago)) if password_expires?
         }
       end
 

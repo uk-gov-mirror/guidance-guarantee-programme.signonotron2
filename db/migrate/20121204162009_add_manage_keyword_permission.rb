@@ -1,14 +1,10 @@
 class AddManageKeywordPermission < ActiveRecord::Migration
   def up
-    unless panopticon.nil?
-      SupportedPermission.create(application: panopticon, name: 'manage_keywords')
-    end
+    SupportedPermission.create(application: panopticon, name: 'manage_keywords') unless panopticon.nil?
   end
 
   def down
-    unless panopticon.nil?
-      SupportedPermission.where(application_id: panopticon.id, name: 'manage_keywords').delete_all
-    end
+    SupportedPermission.where(application_id: panopticon.id, name: 'manage_keywords').delete_all unless panopticon.nil?
   end
 
   def panopticon

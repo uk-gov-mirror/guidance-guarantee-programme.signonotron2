@@ -9,7 +9,6 @@ class OrganisationMappings::ZendeskToSignonTest < ActiveSupport::TestCase
     stream.sync = true
 
     yield
-
   ensure
     stream.reopen(old_stream)
     old_stream.close

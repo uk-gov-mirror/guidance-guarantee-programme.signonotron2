@@ -272,14 +272,6 @@ Naming/MethodParameterName:
   Exclude:
     - 'lib/inactive_users_suspension_reminder.rb'
 
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: PreferredName.
-Naming/RescuedExceptionsVariableName:
-  Exclude:
-    - 'lib/organisations_fetcher.rb'
-
 # Offense count: 3
 # Configuration parameters: EnforcedStyle, CheckMethodNames, CheckSymbols, AllowedIdentifiers, AllowedPatterns.
 # SupportedStyles: snake_case, normalcase, non_integer

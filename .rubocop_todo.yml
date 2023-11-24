@@ -91,14 +91,6 @@ Layout/SpaceAroundKeyword:
     - 'db/migrate/20121011155199_create_gds_admin_permission_for_licensing.rb'
     - 'db/migrate/20121011166199_create_authority_permissions_for_licensing.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowedMethods, AllowedPatterns.
-Lint/AmbiguousBlockAssociation:
-  Exclude:
-    - 'test/controllers/batch_invitations_controller_test.rb'
-    - 'test/controllers/users_controller_test.rb'
-
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Lint/AmbiguousOperator:

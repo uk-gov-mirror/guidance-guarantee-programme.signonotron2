@@ -7,3 +7,7 @@ Style/NumericLiterals:
 Style/OptionalBooleanParameter:
   Exclude:
     - 'test/integration/batch_inviting_users_test.rb'
+
+Naming/VariableNumber:
+  Exclude:
+    - 'test/models/inactive_users_suspension_reminder_mailing_list_test.rb'

@@ -401,21 +401,6 @@ Style/Encoding:
     - 'test/integration/two_step_verification_test.rb'
     - 'test/models/user_test.rb'
 
-# Offense count: 11
-# This cop supports safe autocorrection (--autocorrect).
-Style/ExpandPathArguments:
-  Exclude:
-    - 'Rakefile'
-    - 'bin/bundle'
-    - 'bin/rails'
-    - 'config.ru'
-    - 'config/application.rb'
-    - 'config/boot.rb'
-    - 'config/environment.rb'
-    - 'script/rails'
-    - 'spec/rails_helper.rb'
-    - 'test/test_helper.rb'
-
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MaxUnannotatedPlaceholdersAllowed, AllowedMethods, AllowedPatterns.
@@ -537,18 +522,23 @@ Style/MutableConstant:
     - 'test/integration/passphrase_reset_test.rb'
     - 'test/integration/two_step_verification_test.rb'
 
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: both, prefix, postfix
-Style/NegatedIf:
-  Exclude:
-    - 'app/controllers/confirmations_controller.rb'
-    - 'db/migrate/20121011155199_create_gds_admin_permission_for_licensing.rb'
-    - 'db/migrate/20121011166199_create_authority_permissions_for_licensing.rb'
-    - 'lib/devise/helpers/password_expirable.rb'
 
 # -------------------
+
+# Offense count: 11
+# This cop supports safe autocorrection (--autocorrect).
+Style/ExpandPathArguments:
+  Exclude:
+    - 'Rakefile'
+    - 'bin/bundle'
+    - 'bin/rails'
+    - 'config.ru'
+    - 'config/application.rb'
+    - 'config/boot.rb'
+    - 'config/environment.rb'
+    - 'script/rails'
+    - 'spec/rails_helper.rb'
+    - 'test/test_helper.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).

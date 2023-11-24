@@ -27,7 +27,7 @@ class ConfirmationsController < Devise::ConfirmationsController
       end
     else
       self.resource = confirmation_user
-      if !self.resource.persisted?
+      unless self.resource.persisted?
         respond_with_navigational(resource.errors, status: :unprocessable_entity) { handle_new_token_needed }
       end
     end

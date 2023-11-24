@@ -132,16 +132,6 @@ Layout/SpaceAfterComma:
   Exclude:
     - 'script/import_user_organisation_membership_from_whitehall'
 
-# Offense count: 11
-# This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceAfterNot:
-  Exclude:
-    - 'app/controllers/batch_invitations_controller.rb'
-    - 'app/controllers/users_controller.rb'
-    - 'test/integration/admin_user_index_test.rb'
-    - 'test/integration/manage_api_users_test.rb'
-    - 'test/integration/user_locking_test.rb'
-
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
 Layout/SpaceAroundKeyword:

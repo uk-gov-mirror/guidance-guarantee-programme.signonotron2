@@ -42,7 +42,7 @@ class UserLockingTest < ActionDispatch::IntegrationTest
     click_button 'Unlock account'
 
     user.reload
-    assert ! user.access_locked?
+    assert !user.access_locked?
   end
 
   should 'be reversible from the user edit page' do
@@ -57,6 +57,6 @@ class UserLockingTest < ActionDispatch::IntegrationTest
     click_button 'Unlock account'
 
     user.reload
-    assert ! user.access_locked?
+    assert !user.access_locked?
   end
 end

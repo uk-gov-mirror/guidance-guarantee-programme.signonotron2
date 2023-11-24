@@ -64,7 +64,7 @@ class BatchInvitationsController < ApplicationController
   def file_uploaded?
     if params[:batch_invitation].nil? || params[:batch_invitation][:user_names_and_emails].nil?
       false
-    elsif ! params[:batch_invitation][:user_names_and_emails].respond_to?(:read)
+    elsif !params[:batch_invitation][:user_names_and_emails].respond_to?(:read)
       # IO objects should respond to `read`
       false
     else

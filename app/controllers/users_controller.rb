@@ -41,9 +41,9 @@ class UsersController < ApplicationController
 
   def update
     raise Pundit::NotAuthorizedError if current_user.organisation_admin? &&
-                                        ! current_user.organisation
-                                                      .subtree.map(&:id)
-                                                      .include?(params[:user][:organisation_id].to_i)
+                                        !current_user.organisation
+                                                     .subtree.map(&:id)
+                                                     .include?(params[:user][:organisation_id].to_i)
 
     @user.skip_reconfirmation!
     if @user.update(user_params)

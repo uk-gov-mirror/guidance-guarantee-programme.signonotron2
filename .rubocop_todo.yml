@@ -57,15 +57,6 @@ Layout/ExtraSpacing:
     - 'db/migrate/20120403120725_create_doorkeeper_tables.rb'
     - 'script/rails'
 
-# Offense count: 7
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: special_inside_parentheses, consistent, align_braces
-Layout/FirstHashElementIndentation:
-  Exclude:
-    - 'test/controllers/confirmations_controller_test.rb'
-    - 'test/models/batch_invitation_user_test.rb'
-
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Layout/HeredocIndentation:

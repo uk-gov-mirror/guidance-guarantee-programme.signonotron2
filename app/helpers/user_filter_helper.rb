@@ -32,7 +32,6 @@ module UserFilterHelper
                 [org.id, org.name_with_abbreviation]
               end
             when :two_step_status
-              # rubocop:disable Style/WordArray
               [['true', 'Enabled'], ['false', 'Not set up']]
             end
 

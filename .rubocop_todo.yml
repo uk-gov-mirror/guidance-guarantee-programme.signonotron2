@@ -151,12 +151,6 @@ Lint/MissingSuper:
     - 'lib/sso_push_error.rb'
 
 # Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Lint/RedundantCopDisableDirective:
-  Exclude:
-    - 'app/helpers/user_filter_helper.rb'
-
-# Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Lint/RedundantRequireStatement:
   Exclude:

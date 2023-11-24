@@ -86,12 +86,6 @@ Layout/MultilineMethodCallBraceLayout:
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceAfterComma:
-  Exclude:
-    - 'script/import_user_organisation_membership_from_whitehall'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
 Layout/SpaceAroundKeyword:
   Exclude:
     - 'db/migrate/20121011155199_create_gds_admin_permission_for_licensing.rb'

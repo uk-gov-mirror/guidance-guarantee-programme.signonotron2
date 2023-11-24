@@ -40,9 +40,9 @@ class InvitingUsersTest < ActionDispatch::IntegrationTest
         click_button 'Create user and send email'
 
         assert_not_nil u = User.where(email: 'fred@example.com', role: 'normal').first
-        refute u.has_access_to? application_one
+        refute u.access_to? application_one
         assert_includes u.permissions_for(application_one), 'agent'
-        assert u.has_access_to? application_two
+        assert u.access_to? application_two
         refute_includes u.permissions_for(application_two), 'resource_manager'
 
         assert_equal 'fred@example.com', last_email.to[0]

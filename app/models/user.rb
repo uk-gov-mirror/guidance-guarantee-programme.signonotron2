@@ -138,7 +138,7 @@ class User < ActiveRecord::Base
     application_permissions.where(application_id: application.id).pluck(:supported_permission_id)
   end
 
-  def has_access_to?(application)
+  def access_to?(application)
     application_permissions.detect do |permission|
       permission.supported_permission_id == application.signin_permission.id
     end

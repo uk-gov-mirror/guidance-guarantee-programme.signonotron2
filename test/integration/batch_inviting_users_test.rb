@@ -25,8 +25,8 @@ class BatchInvitingUsersTest < ActionDispatch::IntegrationTest
     perform_batch_invite_with_user(user, new_application, last_email)
 
     fred.reload
-    assert fred.has_access_to?(old_application)
-    assert fred.has_access_to?(new_application)
+    assert fred.access_to?(old_application)
+    assert fred.access_to?(new_application)
   end
 
   should 'email case and spacing are ignored' do
@@ -42,8 +42,8 @@ class BatchInvitingUsersTest < ActionDispatch::IntegrationTest
                                    File.join(::Rails.root, 'test', 'fixtures', 'users-bad-cased-emails.csv'))
 
     fred.reload
-    assert fred.has_access_to?(old_application)
-    assert fred.has_access_to?(new_application)
+    assert fred.access_to?(old_application)
+    assert fred.access_to?(new_application)
   end
 
   should 'organisation admin user can create users whose details are specified in a CSV file' do
@@ -70,7 +70,7 @@ class BatchInvitingUsersTest < ActionDispatch::IntegrationTest
 
       invited_user = User.find_by_email('fred@example.com')
       assert_not_nil invited_user
-      assert invited_user.has_access_to?(application)
+      assert invited_user.access_to?(application)
       assert_match(/noreply-pensionwise-signon-development@.*\.org\.uk/, last_email.from[0])
 
       return unless expect_email

@@ -35,7 +35,7 @@
         <% else %>
           <td>
             <%= label_tag "#{supported_permission_field_prefix}_signin", "Has access to #{application.name}?", class: "rm" %>
-            <%= check_box_tag supported_permission_field_name, application.signin_permission.id, user_object.has_access_to?(application),
+            <%= check_box_tag supported_permission_field_name, application.signin_permission.id, user_object.access_to?(application),
                               id: "#{supported_permission_field_prefix}_signin" %>
           </td>
         <% end %>

@@ -127,12 +127,6 @@ Lint/ConstantDefinitionInBlock:
     - 'test/integration/two_step_verification_test.rb'
 
 # Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Lint/DeprecatedClassMethods:
-  Exclude:
-    - 'script/make_oauth_work_in_dev'
-
-# Offense count: 1
 # Configuration parameters: MaximumRangeSize.
 Lint/MissingCopEnableDirective:
   Exclude:

@@ -153,13 +153,6 @@ Style/ConditionalAssignment:
     - 'lib/devise/models/password_archivable.rb'
     - 'script/make_oauth_work_in_dev'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Style/DefWithParentheses:
-  Exclude:
-    - 'db/migrate/20121011155199_create_gds_admin_permission_for_licensing.rb'
-    - 'db/migrate/20121011166199_create_authority_permissions_for_licensing.rb'
-
 # Offense count: 218
 # Configuration parameters: AllowedConstants.
 Style/Documentation:

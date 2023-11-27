@@ -581,7 +581,7 @@ class CreateAuthorityPermissionsForLicensing < ActiveRecord::Migration
 
   private
 
-  def licence_application()
+  def licence_application
     Doorkeeper::Application.where(name: 'Licensify').first
   end
 

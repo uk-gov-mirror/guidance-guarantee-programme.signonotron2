@@ -216,7 +216,7 @@ class User < ActiveRecord::Base
   end
 
   # Override Devise::Model::Lockable#lock_access! to add event logging
-  def lock_access! opts = {}
+  def lock_access!(opts = {})
     event = locked_reason == :two_step ? EventLog::TWO_STEP_LOCKED : EventLog::ACCOUNT_LOCKED
     EventLog.record_event(self, event)
 

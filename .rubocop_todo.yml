@@ -5,16 +5,6 @@
 # one by one as the offenses are removed from the code base.
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
-
-# Offense count: 5
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.
-Layout/ExtraSpacing:
-  Exclude:
-    - 'bin/rails'
-    - 'config.ru'
-    - 'db/migrate/20120403120725_create_doorkeeper_tables.rb'
-    - 'script/rails'
     
 # Offense count: 560
 # This cop supports safe autocorrection (--autocorrect).

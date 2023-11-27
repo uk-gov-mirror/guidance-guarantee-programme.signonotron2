@@ -30,7 +30,7 @@ class CreateDoorkeeperTables < ActiveRecord::Migration
       t.string   :refresh_token
       t.integer  :expires_in
       t.datetime :revoked_at
-      t.datetime :created_at,        :null => false
+      t.datetime :created_at, :null => false
       t.string   :scopes
     end
 

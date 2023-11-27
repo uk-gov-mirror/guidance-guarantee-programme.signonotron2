@@ -15,7 +15,7 @@ class UserPermissionsExporterTest < ActionView::TestCase
     UserPermissionsExporter.any_instance.stubs(:signon_file_path).returns(@tmpfile.path)
   end
 
-  def test_export_one_application
+  def test_export_one_application # rubocop:disable Metrics/MethodLength
     foo_app = create(:application, name: 'Foo',
                                    with_supported_permissions: %w[administer add_vinegar do_some_stuff cook])
     @bill.grant_application_permissions(foo_app, %w[signin cook])
@@ -32,7 +32,7 @@ class UserPermissionsExporterTest < ActionView::TestCase
     assert_equal %w[Mary mary@mary.com Ministry\ of\ brown\ sauce do_some_stuff,signin],      csv_data[3]
   end
 
-  def test_export_multiple_applications
+  def test_export_multiple_applications # rubocop:disable Metrics/MethodLength
     foo_app = create(:application, name: 'Foo',
                                    with_supported_permissions: %w[administer add_vinegar do_some_stuff cook])
     bar_app = create(:application, name: 'Bar', with_supported_permissions: ['administer'])

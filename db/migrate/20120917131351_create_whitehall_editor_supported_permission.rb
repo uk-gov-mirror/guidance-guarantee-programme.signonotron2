@@ -7,7 +7,7 @@ class CreateWhitehallEditorSupportedPermission < ActiveRecord::Migration
     serialize :permissions, Array
   end
 
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     whitehall = ::Doorkeeper::Application.find_by_name('Whitehall')
     if whitehall
       permission_name = 'Editor'

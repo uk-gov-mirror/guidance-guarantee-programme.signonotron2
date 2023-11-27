@@ -1,5 +1,5 @@
 class CreateOrganisations < ActiveRecord::Migration
-  def change
+  def change # rubocop:disable Metrics/MethodLength
     create_table :organisations do |t|
       t.string :slug, null: false
       t.string :name, null: false

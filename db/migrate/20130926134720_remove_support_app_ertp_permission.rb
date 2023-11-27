@@ -5,7 +5,7 @@ class RemoveSupportAppErtpPermission < ActiveRecord::Migration
     serialize :permissions, Array
   end
 
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     support = ::Doorkeeper::Application.find_by_name('Support')
 
     unless support.nil?

@@ -1,7 +1,7 @@
 require 'sso_push_error'
 
 module ExceptionHandler
-  def with_exception_handling
+  def with_exception_handling # rubocop:disable Metrics/MethodLength
     yield
   rescue URI::InvalidURIError
     raise SsoPushError.new(@application, message: 'Invalid URL for application.')

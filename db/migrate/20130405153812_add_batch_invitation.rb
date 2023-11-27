@@ -1,5 +1,5 @@
 class AddBatchInvitation < ActiveRecord::Migration
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     create_table :batch_invitations, force: true do |table|
       table.text :applications_and_permissions
       table.string :outcome # nil, "success", "fail", "skipped"

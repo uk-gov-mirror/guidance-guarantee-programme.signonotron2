@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class OrganisationsControllerTest < ActionController::TestCase
-  def self.test_access(&block)
+  def self.test_access(&block) # rubocop:disable Metrics/MethodLength
     should 'allow access for superadmin' do
       user = create(:superadmin_user)
       sign_in user

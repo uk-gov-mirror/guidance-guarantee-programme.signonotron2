@@ -1,5 +1,5 @@
 class AddUnconfirmedEmail < ActiveRecord::Migration
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     change_table(:users) do |t|
       t.string   :confirmation_token
       t.datetime :confirmed_at

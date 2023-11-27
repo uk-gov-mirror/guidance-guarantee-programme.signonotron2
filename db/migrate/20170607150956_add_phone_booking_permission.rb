@@ -1,7 +1,7 @@
 require_relative '../../app/models/doorkeeper/application'
 
 class AddPhoneBookingPermission < ActiveRecord::Migration
-  def change
+  def change # rubocop:disable Metrics/MethodLength
     output = Doorkeeper::Application.find_by!(name: 'PW Summary Document Generator - TPAS')
     summary_document_generator = Doorkeeper::Application.find_by!(name: 'PW Summary Document Generator - CABs')
 

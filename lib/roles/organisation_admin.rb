@@ -1,6 +1,6 @@
 module Roles
   class OrganisationAdmin
-    def self.permitted_user_params
+    def self.permitted_user_params # rubocop:disable Metrics/MethodLength
       [
         :uid,
         :name,

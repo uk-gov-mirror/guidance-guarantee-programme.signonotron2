@@ -12,7 +12,7 @@ class InactiveUsersSuspensionReminder
     @days_to_suspension = days_to_suspension
   end
 
-  def send_reminders
+  def send_reminders # rubocop:disable Metrics/MethodLength
     @users.each do |user|
       tries = 3
       begin

@@ -4,7 +4,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   include ActiveJob::TestHelper
 
-  def change_user_password(user_factory, new_password)
+  def change_user_password(user_factory, new_password) # rubocop:disable Metrics/MethodLength
     original_password = 'I am a very original password. Refrigerator weevil.'
     user = create(user_factory, password: original_password)
     original_password_hash = user.encrypted_password

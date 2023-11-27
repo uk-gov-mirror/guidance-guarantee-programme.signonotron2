@@ -1,5 +1,5 @@
 class MigrateApplicationAndPermissionsToBatchInvitationApplicationPermissionsJoinTable < ActiveRecord::Migration
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     puts "Updating #{BatchInvitation.count} batch invitations"
 
     BatchInvitation.all.each do |batch_invitation|

@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
 
-def config_for_app(application_config_file)
+def config_for_app(application_config_file) # rubocop:disable Metrics/MethodLength
   lines = IO.read(application_config_file).split("\n")
   config = {}
   lines.each do |line|

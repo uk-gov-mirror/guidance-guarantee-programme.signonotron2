@@ -3,7 +3,7 @@ class RemoveDelayedJobs < ActiveRecord::Migration
     drop_table :delayed_jobs
   end
 
-  def down
+  def down # rubocop:disable Metrics/MethodLength
     create_table :delayed_jobs, :force => true do |table|
       table.integer  :priority, :default => 0      # Allows some jobs to jump to the front of the queue
       table.integer  :attempts, :default => 0      # Provides for retries, but still fail eventually.

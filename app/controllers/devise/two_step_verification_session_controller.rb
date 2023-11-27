@@ -4,7 +4,7 @@ class Devise::TwoStepVerificationSessionController < DeviseController
 
   def new; end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     render(:show) && return if params[:code].nil?
 
     if current_user.authenticate_otp(params[:code])

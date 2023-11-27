@@ -21,7 +21,7 @@ module UserFilterHelper
     end
   end
 
-  def user_filter_list_items(filter_type)
+  def user_filter_list_items(filter_type) # rubocop:disable Metrics/MethodLength
     items = case filter_type
             when :role
               filtered_user_roles
@@ -59,7 +59,7 @@ module UserFilterHelper
     current_user.manageable_roles
   end
 
-  def value_from(filter_type)
+  def value_from(filter_type) # rubocop:disable Metrics/MethodLength
     value = params[filter_type]
     return nil if value.blank?
 

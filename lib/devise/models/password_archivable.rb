@@ -24,7 +24,7 @@ module Devise
 
       private
 
-      def password_archive_included?
+      def password_archive_included? # rubocop:disable Metrics/MethodLength
         unless self.class.deny_old_passwords.is_a? Integer
           self.class.deny_old_passwords = if self.class.deny_old_passwords.is_a?(TrueClass) && archive_count.positive?
                                             archive_count

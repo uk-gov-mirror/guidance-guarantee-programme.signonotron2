@@ -5,7 +5,7 @@ class GrantEditorPermsToAllMaslowUsers < ActiveRecord::Migration
 
   class ::Doorkeeper::Application < ActiveRecord::Base; end
 
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     maslow = ::Doorkeeper::Application.where(name: 'Maslow').first
 
     unless maslow.nil?

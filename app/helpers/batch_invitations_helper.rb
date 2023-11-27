@@ -1,5 +1,5 @@
 module BatchInvitationsHelper
-  def status_message(batch_invitation)
+  def status_message(batch_invitation) # rubocop:disable Metrics/MethodLength
     if batch_invitation.in_progress?
       'In progress. ' \
         "#{batch_invitation.batch_invitation_users.processed.count} of " \

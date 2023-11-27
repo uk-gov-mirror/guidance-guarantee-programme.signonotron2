@@ -1,6 +1,6 @@
 # rubocop: disable Metrics/ClassLength
 class CreateAuthorityPermissionsForLicensing < ActiveRecord::Migration
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     create_permission('deni')
     create_permission('cefas')
     create_permission('veterinary-medicines-directorate')

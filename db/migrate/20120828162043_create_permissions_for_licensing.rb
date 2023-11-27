@@ -4,7 +4,7 @@ class CreatePermissionsForLicensing < ActiveRecord::Migration
     belongs_to :application, class_name: 'Doorkeeper::Application'
   end
 
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     licensify = ::Doorkeeper::Application.find_by_name('Licensify')
     if licensify
       SupportedPermission.create!(application: licensify, name: 'GDSAdministrator')

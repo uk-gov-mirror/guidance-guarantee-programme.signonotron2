@@ -21,7 +21,7 @@ class UserPermissionsExporter
     logger.info("Signon roles exported to #{signon_file_path}")
   end
 
-  def export(apps)
+  def export(apps) # rubocop:disable Metrics/MethodLength
     @applications = Doorkeeper::Application.where('name in (?)', apps)
     users = User.order(:name).to_a
 

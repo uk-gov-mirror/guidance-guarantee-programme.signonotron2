@@ -1,6 +1,6 @@
 module OrganisationMappings
   class ZendeskToSignon
-    def self.apply
+    def self.apply # rubocop:disable Metrics/MethodLength
       OrganisationMappings.domain_names_to_organisations.each do |domain_names, organisation_name|
         organisation = Organisation.find_by_name(organisation_name)
         if organisation
@@ -24,7 +24,7 @@ module OrganisationMappings
   end
 
   # obtained from Zendesk Organisations Api
-  def self.domain_names_to_organisations
+  def self.domain_names_to_organisations # rubocop:disable Metrics/MethodLength
     { ['attorneygeneral.gsi.gov.uk'] => "Attorney General's Office",
       ['digital.cabinet-office.gov.uk'] => 'Cabinet Office',
       ['bis.gsi.gov.uk'] => 'Department for Business, Innovation & Skills',

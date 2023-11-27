@@ -8,7 +8,7 @@ class MigratePermissionsToUserApplicationPermissionsJoinTable < ActiveRecord::Mi
   class Permission < ActiveRecord::Base
   end
 
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     puts "Migrating #{Permission.count} permissions to user_application_permissions join table"
     cache_supported_permissions
 

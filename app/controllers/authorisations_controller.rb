@@ -10,7 +10,7 @@ class AuthorisationsController < ApplicationController
     @authorisation = @api_user.authorisations.build
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     authorisation = @api_user.authorisations.build(expires_in: ApiUser::DEFAULT_TOKEN_LIFE)
     authorisation.application_id = params[:doorkeeper_access_token][:application_id]
 
@@ -25,7 +25,7 @@ class AuthorisationsController < ApplicationController
     redirect_to [:edit, @api_user]
   end
 
-  def revoke
+  def revoke # rubocop:disable Metrics/MethodLength
     authorisation = @api_user.authorisations.find(params[:id])
     if authorisation.revoke
       if params[:regenerate]

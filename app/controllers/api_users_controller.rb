@@ -17,7 +17,7 @@ class ApiUsersController < ApplicationController
     @api_user = ApiUser.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     authorize ApiUser
 
     password = SecureRandom.urlsafe_base64

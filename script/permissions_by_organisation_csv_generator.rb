@@ -10,7 +10,7 @@ class PermissionsByOrganisationCsvGenerator
     puts "Permissions by organisations saved to ./#{filename}"
   end
 
-  def self.permissions_by_organisation
+  def self.permissions_by_organisation # rubocop:disable Metrics/MethodLength
     permissions_by_organisation = []
     Organisation.includes(users: { permissions: :application }).each do |organisation|
       organisation.users.each do |user|

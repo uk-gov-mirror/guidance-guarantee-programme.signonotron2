@@ -16,7 +16,7 @@ class UserExportPresenter
     end
   end
 
-  def header_row
+  def header_row # rubocop:disable Metrics/MethodLength
     [
       'Name',
       'Email',
@@ -30,7 +30,7 @@ class UserExportPresenter
     ].concat(applications.map(&:name))
   end
 
-  def row(user)
+  def row(user) # rubocop:disable Metrics/MethodLength
     [
       user.name,
       user.email,

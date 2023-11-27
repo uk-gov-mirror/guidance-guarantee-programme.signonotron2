@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
+  def index # rubocop:disable Metrics/MethodLength
     authorize User
 
     @users = policy_scope(User).includes(:organisation)
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
+  def update # rubocop:disable Metrics/MethodLength
     raise Pundit::NotAuthorizedError if current_user.organisation_admin? &&
                                         !current_user.organisation
                                                      .subtree.map(&:id)
@@ -78,7 +78,7 @@ class UsersController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
-  def resend_email_change
+  def resend_email_change # rubocop:disable Metrics/MethodLength
     @user.resend_confirmation_instructions
     if @user.errors.empty?
       notice = if @user.normal?
@@ -147,7 +147,7 @@ class UsersController < ApplicationController
     params[:format] == 'csv'
   end
 
-  def paginate_users
+  def paginate_users # rubocop:disable Metrics/MethodLength
     if any_filter?
       @users = if @users.is_a?(Array)
                  Kaminari.paginate_array(@users).page(params[:page]).per(100)

@@ -255,7 +255,7 @@ class User < ActiveRecord::Base
     self.require_2sv = true if role_changed? && (admin? || superadmin?)
   end
 
-  def authenticate_otp(code)
+  def authenticate_otp(code) # rubocop:disable Metrics/MethodLength
     totp = ROTP::TOTP.new(otp_secret_key)
     result = totp.verify_with_drift(code, MAX_2SV_DRIFT_SECONDS)
 

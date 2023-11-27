@@ -1,5 +1,5 @@
 module UserHelpers
-  def signin_with(user = nil, email: nil, password: nil, second_step: true, set_up_2sv: true)
+  def signin_with(user = nil, email: nil, password: nil, second_step: true, set_up_2sv: true) # rubocop:disable Metrics/MethodLength
     user ||= User.find_by(email: email)
     email ||= user.email
     password ||= user.password

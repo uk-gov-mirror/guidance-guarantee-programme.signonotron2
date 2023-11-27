@@ -18,7 +18,7 @@ class UsagePresenter
 
   private
 
-  def build_csv(csv)
+  def build_csv(csv) # rubocop:disable Metrics/MethodLength
     csv << header_row
     start_date_m = start_date.beginning_of_month
 

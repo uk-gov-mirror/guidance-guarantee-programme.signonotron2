@@ -24,7 +24,7 @@ class OrganisationsFetcher
     GdsApi::Organisations.new(base_uri).organisations.with_subsequent_pages
   end
 
-  def update_or_create_organisation(organisation_data)
+  def update_or_create_organisation(organisation_data) # rubocop:disable Metrics/MethodLength
     content_id = organisation_data.details.content_id
     slug = organisation_data.details.slug
 

@@ -10,7 +10,7 @@ module Devise
       private
 
       # check if a password change needed
-      def handle_password_change
+      def handle_password_change # rubocop:disable Metrics/MethodLength
         unless devise_controller? && !request.format.nil? && request.format.html?
           Devise.mappings.keys.flatten.any? do |scope|
             if signed_in?(scope) && warden.session(scope)['password_expired']

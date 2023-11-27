@@ -1,5 +1,5 @@
 class UserPermissionMigrator
-  def self.migrate(source:, target:)
+  def self.migrate(source:, target:) # rubocop:disable Metrics/MethodLength
     source_app = Doorkeeper::Application.find_by!(name: source)
     target_app = Doorkeeper::Application.find_by!(name: target)
     source_app_supported_permissions = source_app.supported_permissions

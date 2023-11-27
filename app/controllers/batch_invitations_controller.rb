@@ -12,7 +12,7 @@ class BatchInvitationsController < ApplicationController
     authorize @batch_invitation
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @batch_invitation = BatchInvitation.new(user: current_user,
                                             organisation_id: params[:batch_invitation][:organisation_id])
     @batch_invitation.supported_permission_ids = params[:user][:supported_permission_ids] if params[:user]

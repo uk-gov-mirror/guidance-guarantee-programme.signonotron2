@@ -4,7 +4,7 @@ require 'csv'
 
 module Numbers
   class NumbersCsv
-    def self.generate
+    def self.generate # rubocop:disable Metrics/MethodLength
       CSV.open('numbers.csv', 'w') do |csv|
         Metrics.new.to_a.each { |line| csv << line }
       end

@@ -1,7 +1,7 @@
 require 'addressable/uri'
 
 module ApplicationHelper
-  def nav_link(text, link)
+  def nav_link(text, link) # rubocop:disable Metrics/MethodLength
     recognized = Rails.application.routes.recognize_path(link)
     if recognized[:controller] == params[:controller] &&
        recognized[:action] == params[:action]

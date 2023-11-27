@@ -10,7 +10,7 @@ class ConfirmationsController < Devise::ConfirmationsController
   end
 
   # GET /resource/confirmation?confirmation_token=abcdef
-  def show
+  def show # rubocop:disable Metrics/MethodLength
     if user_signed_in?
       if confirmation_user.persisted? && (current_user.email != confirmation_user.email)
         redirect_to root_path, alert: 'It appears you followed a link meant for another user.'
@@ -33,7 +33,7 @@ class ConfirmationsController < Devise::ConfirmationsController
     end
   end
 
-  def update
+  def update # rubocop:disable Metrics/MethodLength
     self.resource = confirmation_user
 
     if self.resource.valid_password?(params[:user][:password])

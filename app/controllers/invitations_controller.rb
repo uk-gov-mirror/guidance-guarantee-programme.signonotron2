@@ -11,7 +11,7 @@ class InvitationsController < Devise::InvitationsController
     super
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     # Prevent an error when devise_invitable invites/updates an existing user,
     # and accepts_nested_attributes_for tries to create duplicate permissions.
     if (self.resource = User.find_by_email(params[:user][:email]))

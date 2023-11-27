@@ -7,7 +7,7 @@ class MakeOrganisationContentIdNotNullable < ActiveRecord::Migration
     has_many :users
   end
 
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     # This migration is written with the assumption that organisation
     # content_ids have been populated. Any without a content_id are either
     # duplicates or have been deleted from Whitehall.

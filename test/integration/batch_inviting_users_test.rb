@@ -54,7 +54,7 @@ class BatchInvitingUsersTest < ActionDispatch::IntegrationTest
     perform_batch_invite_with_user(user, application)
   end
 
-  def perform_batch_invite_with_user(user, application, expect_email = true,
+  def perform_batch_invite_with_user(user, application, expect_email = true, # rubocop:disable Metrics/MethodLength
                                      path = File.join(::Rails.root, 'test', 'fixtures', 'users.csv'))
     perform_enqueued_jobs do
       visit root_path

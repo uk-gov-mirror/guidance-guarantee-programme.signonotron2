@@ -5,7 +5,7 @@ class UserPolicy < BasePolicy
   end
   alias index? new?
 
-  def edit?
+  def edit? # rubocop:disable Metrics/MethodLength
     case current_user.role
     when 'superadmin'
       true

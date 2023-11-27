@@ -71,12 +71,6 @@ Lint/MissingSuper:
   Exclude:
     - 'lib/sso_push_error.rb'
 
-# Offense count: 1
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Lint/RedundantRequireStatement:
-  Exclude:
-    - 'script/import_user_organisation_membership_from_whitehall'
-
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
 Lint/ScriptPermission:

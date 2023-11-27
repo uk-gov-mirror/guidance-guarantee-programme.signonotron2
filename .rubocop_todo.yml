@@ -233,13 +233,6 @@ Style/IfInsideElse:
     - 'app/controllers/passwords_controller.rb'
     - 'db/migrate/20150421140645_make_organisation_content_id_not_nullable.rb'
 
-# Offense count: 6
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/LineEndConcatenation:
-  Exclude:
-    - 'app/helpers/batch_invitations_helper.rb'
-    - 'lib/inactive_users_suspender.rb'
-
 # Offense count: 1
 Style/MixinUsage:
   Exclude:

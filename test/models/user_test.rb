@@ -3,6 +3,7 @@
 require 'test_helper'
 require 'bcrypt'
 
+# rubocop: disable Metrics/ClassLength
 class UserTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
@@ -535,3 +536,4 @@ class UserTest < ActiveSupport::TestCase
     assert_equal expected_permissions.sort, permissions.sort
   end
 end
+# rubocop: enable Metrics/ClassLength

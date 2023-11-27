@@ -1,5 +1,6 @@
 require 'test_helper'
 
+# rubocop: disable Metrics/ClassLength
 class AdminUserIndexTest < ActionDispatch::IntegrationTest
   context 'logged in as an admin' do
     setup do
@@ -194,3 +195,4 @@ class AdminUserIndexTest < ActionDispatch::IntegrationTest
     end
   end
 end
+# rubocop: enable Metrics/ClassLength

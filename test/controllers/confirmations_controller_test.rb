@@ -1,5 +1,6 @@
 require 'test_helper'
 
+# rubocop: disable Metrics/ClassLength
 class ConfirmationsControllerTest < ActionController::TestCase
   setup do
     request.env['devise.mapping'] = Devise.mappings[:user]
@@ -127,3 +128,4 @@ class ConfirmationsControllerTest < ActionController::TestCase
     end
   end
 end
+# rubocop: enable Metrics/ClassLength

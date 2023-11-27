@@ -1,5 +1,6 @@
 require 'test_helper'
 
+# rubocop: disable Metrics/ClassLength
 class SignInTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user, email: 'email@example.com', password: 'some passphrase with various $ymb0l$')
@@ -239,3 +240,4 @@ class SignInTest < ActionDispatch::IntegrationTest
     assert_response_contains('You need to sign in before continuing.')
   end
 end
+# rubocop: enable Metrics/ClassLength

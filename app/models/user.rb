@@ -1,5 +1,6 @@
 # coding: utf-8
 
+# rubocop: disable Metrics/ClassLength
 class User < ActiveRecord::Base
   include Roles
 
@@ -334,3 +335,4 @@ class User < ActiveRecord::Base
     self.email.tr!('’', "'") if email.present? && email_changed?
   end
 end
+# rubocop: enable Metrics/ClassLength

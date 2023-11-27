@@ -1,5 +1,6 @@
 require 'test_helper'
 
+# rubocop: disable Metrics/ClassLength
 class UserMailerTest < ActionMailer::TestCase
   def assert_body_includes(search_string, email = @email)
     email.body.parts.each do |part|
@@ -133,3 +134,4 @@ class UserMailerTest < ActionMailer::TestCase
     end
   end
 end
+# rubocop: enable Metrics/ClassLength

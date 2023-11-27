@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/ClassLength
 class CreatePermissionsForLicensing < ActiveRecord::Migration
   class SupportedPermission < ActiveRecord::Base
     belongs_to :application, class_name: 'Doorkeeper::Application'
@@ -140,3 +141,4 @@ class CreatePermissionsForLicensing < ActiveRecord::Migration
     raise ActiveRecord::IrreversibleMigration
   end
 end
+# rubocop: enable Metrics/ClassLength

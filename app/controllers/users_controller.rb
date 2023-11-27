@@ -1,5 +1,6 @@
 require 'csv'
 
+# rubocop: disable Metrics/ClassLength
 class UsersController < ApplicationController
   include UserPermissionsControllerMethods
 
@@ -222,3 +223,4 @@ class UsersController < ApplicationController
     )
   end
 end
+# rubocop: enable Metrics/ClassLength

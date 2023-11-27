@@ -1,5 +1,6 @@
 require 'test_helper'
 
+# rubocop: disable Metrics/ClassLength
 class BatchInvitationsControllerTest < ActionController::TestCase
   include ActiveJob::TestHelper
 
@@ -198,3 +199,4 @@ class BatchInvitationsControllerTest < ActionController::TestCase
     end
   end
 end
+# rubocop: enable Metrics/ClassLength

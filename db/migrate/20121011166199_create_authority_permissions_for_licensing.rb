@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/ClassLength
 class CreateAuthorityPermissionsForLicensing < ActiveRecord::Migration
   def up
     create_permission('deni')
@@ -591,3 +592,4 @@ class CreateAuthorityPermissionsForLicensing < ActiveRecord::Migration
     app&.supported_permissions&.find_or_create_by(name: permission)
   end
 end
+# rubocop: enable Metrics/ClassLength

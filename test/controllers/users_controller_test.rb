@@ -1,5 +1,6 @@
 require 'test_helper'
 
+# rubocop: disable Metrics/ClassLength
 class UsersControllerTest < ActionController::TestCase
   include ActiveJob::TestHelper
 
@@ -641,3 +642,4 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
 end
+# rubocop: enable Metrics/ClassLength

@@ -3,6 +3,7 @@
 require 'test_helper'
 require 'helpers/passphrase_support'
 
+# rubocop: disable Metrics/ClassLength
 class PassphraseChangeTest < ActionDispatch::IntegrationTest
   include PassPhraseSupport
 
@@ -146,3 +147,4 @@ class PassphraseChangeTest < ActionDispatch::IntegrationTest
     assert @user.valid_password?(passphrase)
   end
 end
+# rubocop: enable Metrics/ClassLength

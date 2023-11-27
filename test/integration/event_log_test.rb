@@ -1,6 +1,7 @@
 require 'test_helper'
 require 'helpers/passphrase_support'
 
+# rubocop: disable Metrics/ClassLength
 class EventLogIntegrationTest < ActionDispatch::IntegrationTest
   include PassPhraseSupport
 
@@ -260,3 +261,4 @@ class EventLogIntegrationTest < ActionDispatch::IntegrationTest
     assert_selector 'a', text: user.name
   end
 end
+# rubocop: enable Metrics/ClassLength

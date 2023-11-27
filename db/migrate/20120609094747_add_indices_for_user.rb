@@ -1,5 +1,5 @@
 class AddIndicesForUser < ActiveRecord::Migration
-  def try_to(&block)
+  def try_to(*)
     yield
   rescue StandardError => e
     puts e

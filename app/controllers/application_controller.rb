@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  def after_sign_out_path_for(resource_or_scope)
+  def after_sign_out_path_for(*)
     new_user_session_path
   end
 
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def user_not_authorized(exception)
+  def user_not_authorized(*)
     flash[:alert] = 'You do not have permission to perform this action.'
     redirect_to root_path
   end

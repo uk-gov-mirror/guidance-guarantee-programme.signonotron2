@@ -39,7 +39,7 @@ class ActionController::TestCase
     @controller.stubs(current_user: user)
   end
 
-  def sign_out(user)
+  def sign_out(*)
     warden.unstub(:authenticate!)
     @controller.unstub(:current_user)
   end

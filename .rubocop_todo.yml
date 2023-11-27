@@ -170,12 +170,6 @@ Style/HashSyntax:
   Enabled: false
 
 # Offense count: 1
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Style/HashTransformKeys:
-  Exclude:
-    - 'script/import_user_organisation_membership_from_whitehall'
-
-# Offense count: 1
 Style/MixinUsage:
   Exclude:
     - 'Rakefile'
@@ -199,9 +193,6 @@ Style/MutableConstant:
     - 'test/integration/passphrase_expiry_test.rb'
     - 'test/integration/passphrase_reset_test.rb'
     - 'test/integration/two_step_verification_test.rb'
-
-
-# -------------------
 
 # Offense count: 11
 # This cop supports safe autocorrection (--autocorrect).

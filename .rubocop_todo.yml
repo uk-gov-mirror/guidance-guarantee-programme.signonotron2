@@ -14,13 +14,6 @@ Layout/MultilineMethodCallBraceLayout:
   Exclude:
     - 'db/migrate/20140319222924_grant_editor_perms_to_all_maslow_users.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceAroundKeyword:
-  Exclude:
-    - 'db/migrate/20121011155199_create_gds_admin_permission_for_licensing.rb'
-    - 'db/migrate/20121011166199_create_authority_permissions_for_licensing.rb'
-
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Lint/AmbiguousOperator:

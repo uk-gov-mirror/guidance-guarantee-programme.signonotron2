@@ -12,7 +12,8 @@ class GrantEditorPermsToAllMaslowUsers < ActiveRecord::Migration
       all_maslow_perms = Permission.where(
         'application_id = ? and permissions like ?',
         maslow.id,
-        '%signin%')
+        '%signin%'
+      )
       all_maslow_perms.each do |perm|
         perm.permissions += ['editor']
         perm.save!

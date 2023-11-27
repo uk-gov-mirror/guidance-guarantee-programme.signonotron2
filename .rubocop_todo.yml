@@ -208,7 +208,6 @@ Naming/MemoizedInstanceVariableName:
   Exclude:
     - 'app/controllers/batch_invitations_controller.rb'
 
-
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Style/BlockComments:
@@ -235,14 +234,6 @@ Style/ClassAndModuleChildren:
     - 'test/models/doorkeeper_application_test.rb'
     - 'test/models/organisation_mappings/zendesk_to_signon_test.rb'
     - 'test/test_helper.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: Keywords, RequireColon.
-# Keywords: TODO, FIXME, OPTIMIZE, HACK, REVIEW, NOTE
-Style/CommentAnnotation:
-  Exclude:
-    - 'lib/organisations_fetcher.rb'
 
 # Offense count: 5
 # This cop supports safe autocorrection (--autocorrect).

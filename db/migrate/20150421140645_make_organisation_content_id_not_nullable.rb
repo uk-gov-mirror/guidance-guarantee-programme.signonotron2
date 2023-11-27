@@ -15,13 +15,10 @@ class MakeOrganisationContentIdNotNullable < ActiveRecord::Migration
       if Rails.env.development?
         organisation.users.update_all(organisation_id: nil) if organisation.users.any?
         organisation.delete
-
+      elsif organisation.users.any?
+        raise "Can't delete the orphaned organisation with slug: #{organisation.slug} as it has #{organisation.users.count} users. You need to reassign them to non-orphaned organisations and retry." # rubocop:disable Layout/LineLength
       else
-        if organisation.users.any?
-          raise "Can't delete the orphaned organisation with slug: #{organisation.slug} as it has #{organisation.users.count} users. You need to reassign them to non-orphaned organisations and retry." # rubocop:disable Layout/LineLength
-        else
-          organisation.delete
-        end
+        organisation.delete
       end
     end
 

@@ -199,14 +199,6 @@ Style/HashTransformKeys:
   Exclude:
     - 'script/import_user_organisation_membership_from_whitehall'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowIfModifier.
-Style/IfInsideElse:
-  Exclude:
-    - 'app/controllers/passwords_controller.rb'
-    - 'db/migrate/20150421140645_make_organisation_content_id_not_nullable.rb'
-
 # Offense count: 1
 Style/MixinUsage:
   Exclude:

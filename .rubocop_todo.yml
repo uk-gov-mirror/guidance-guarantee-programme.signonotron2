@@ -120,12 +120,6 @@ Naming/MemoizedInstanceVariableName:
   Exclude:
     - 'app/controllers/batch_invitations_controller.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/BlockComments:
-  Exclude:
-    - 'spec/spec_helper.rb'
-
 # Offense count: 17
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle.

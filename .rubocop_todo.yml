@@ -14,12 +14,6 @@ Layout/MultilineMethodCallBraceLayout:
   Exclude:
     - 'db/migrate/20140319222924_grant_editor_perms_to_all_maslow_users.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Lint/AmbiguousOperator:
-  Exclude:
-    - 'app/presenters/user_export_presenter.rb'
-
 # Offense count: 9
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowSafeAssignment.

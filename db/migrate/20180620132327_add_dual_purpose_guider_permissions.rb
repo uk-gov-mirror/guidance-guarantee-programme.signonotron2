@@ -5,7 +5,7 @@ class AddDualPurposeGuiderPermissions < ActiveRecord::Migration
   PERMISSION  = 'face_to_face_bookings'.freeze
 
   def up
-    if app = Doorkeeper::Application.find_by(name: APPLICATION)
+    if (app = Doorkeeper::Application.find_by(name: APPLICATION))
       app.supported_permissions.find_or_create_by!(name: PERMISSION)
 
       User.with_access_to_application(app).not_suspended.find_each do |user|
@@ -19,7 +19,7 @@ class AddDualPurposeGuiderPermissions < ActiveRecord::Migration
   end
 
   def down
-    if app = Doorkeeper::Application.find_by(name: APPLICATION)
+    if (app = Doorkeeper::Application.find_by(name: APPLICATION))
       app.supported_permissions.where(name: PERMISSION).destroy_all
       say 'Removed the permission.'
     end

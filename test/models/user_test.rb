@@ -354,7 +354,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'inviting a user sets confirmed_at' do
-    if user = User.find_by_email('j@1.com')
+    if (user = User.find_by_email('j@1.com'))
       user.delete
     end
     user = User.invite!(name: 'John Smith', email: 'j@1.com')

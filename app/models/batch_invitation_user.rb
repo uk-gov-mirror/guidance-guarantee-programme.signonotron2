@@ -36,7 +36,7 @@ class BatchInvitationUser < ActiveRecord::Base
   private
 
   def new_supported_permissions_for_user(supported_permission_ids)
-    if user = User.find_by_email(self.email.to_s.downcase.strip)
+    if (user = User.find_by_email(self.email.to_s.downcase.strip))
       supported_permission_ids | user.supported_permission_ids
     else
       supported_permission_ids

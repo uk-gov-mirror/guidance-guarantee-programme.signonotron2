@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       @user.application_permissions.reload
       PermissionUpdater.perform_on(@user)
 
-      if email_change = @user.previous_changes[:email]
+      if (email_change = @user.previous_changes[:email])
         EventLog.record_email_change(@user, email_change.first, email_change.last, current_user)
         @user.invite! if @user.invited_but_not_yet_accepted?
         email_change.each do |to_address|
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
         end
       end
 
-      if role_change = @user.previous_changes[:role]
+      if (role_change = @user.previous_changes[:role])
         EventLog.record_role_change(@user, role_change.first, role_change.last, current_user)
       end
 

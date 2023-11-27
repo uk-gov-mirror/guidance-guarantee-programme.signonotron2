@@ -5,7 +5,6 @@ class CreateFactCaveEditPermission < ActiveRecord::Migration
       permission = SupportedPermission.new(application_id: fact_cave.to_param, name: 'edit_fact')
       permission.save!
     end
-
   end
 
   def down; end

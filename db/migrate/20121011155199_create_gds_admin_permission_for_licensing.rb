@@ -30,7 +30,7 @@ class CreateGdsAdminPermissionForLicensing < ActiveRecord::Migration
   end
 
   def create_permissions
-    app = licence_application()
+    app = licence_application
 
     app&.supported_permissions&.find_or_create_by(name: 'GDSAdministrator')
   end

@@ -586,7 +586,7 @@ class CreateAuthorityPermissionsForLicensing < ActiveRecord::Migration
   end
 
   def create_permission(permission)
-    app = licence_application()
+    app = licence_application
 
     app&.supported_permissions&.find_or_create_by(name: permission)
   end

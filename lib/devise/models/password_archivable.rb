@@ -26,11 +26,11 @@ module Devise
 
       def password_archive_included?
         unless self.class.deny_old_passwords.is_a? Integer
-          if self.class.deny_old_passwords.is_a?(TrueClass) && archive_count.positive?
-            self.class.deny_old_passwords = archive_count
-          else
-            self.class.deny_old_passwords = 0
-          end
+          self.class.deny_old_passwords = if self.class.deny_old_passwords.is_a?(TrueClass) && archive_count.positive?
+                                            archive_count
+                                          else
+                                            0
+                                          end
         end
 
         if self.class.deny_old_passwords.positive? && !self.password.nil?

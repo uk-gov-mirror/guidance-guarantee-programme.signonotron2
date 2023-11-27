@@ -91,5 +91,4 @@ class EmailChangeTest < ActionDispatch::IntegrationTest
       end
     end
   end
-
 end

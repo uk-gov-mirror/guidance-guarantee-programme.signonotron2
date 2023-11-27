@@ -58,7 +58,7 @@ class BatchInvitationsController < ApplicationController
   private
 
   def recent_batch_invitations
-    @_recent_batch_invitations ||= BatchInvitation.where("created_at > '#{3.days.ago}'").order('created_at desc')
+    @recent_batch_invitations ||= BatchInvitation.where("created_at > '#{3.days.ago}'").order('created_at desc')
   end
 
   def file_uploaded?

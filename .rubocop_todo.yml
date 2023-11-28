@@ -91,12 +91,6 @@ Style/ClassAndModuleChildren:
     - 'test/models/organisation_mappings/zendesk_to_signon_test.rb'
     - 'test/test_helper.rb'
 
-
-# Offense count: 218
-# Configuration parameters: AllowedConstants.
-Style/Documentation:
-  Enabled: false
-
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
 Style/EachWithObject:

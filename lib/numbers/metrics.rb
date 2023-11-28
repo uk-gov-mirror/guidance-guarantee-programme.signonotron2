@@ -37,26 +37,24 @@ module Numbers
 
     def accounts_count_by_days_since_last_sign_in
       ranges = [0...7, 7...15, 15...30, 30...45, 45...60, 60...90, 90...180,
-                180...10_000_000].inject([]) do |result, range|
+                180...10_000_000].each_with_object([]) do |range, result|
         count_days_since_last_sign_in = all_active.count do |u|
           u.current_sign_in_at && range.last.days.ago <= u.current_sign_in_at && u.current_sign_in_at < range.first.days.ago # rubocop:disable Layout/LineLength
         end
         result << ["#{range.first} - #{range.last}", count_days_since_last_sign_in]
-        result
       end
       ranges + [['never signed in', all_active.count { |u| u.current_sign_in_at.nil? }]]
     end
 
     def accounts_count_how_often_user_has_signed_in
       [0, 1, 2...5, 5...10, 10...25, 25...50, 50...100, 100...200,
-       200...10_000_000].inject([]) do |result, range_or_value|
+       200...10_000_000].each_with_object([]) do |range_or_value, result|
         if range_or_value.is_a?(Range)
           range = range_or_value
           result << ["#{range.first} - #{range.last}", all_active.count { |u| range.include?(u.sign_in_count) }]
         else
           result << ["#{range_or_value} time(s)", all_active.count { |u| u.sign_in_count == range_or_value }]
         end
-        result
       end
     end
 
@@ -77,10 +75,9 @@ module Numbers
     end
 
     def count_values(map)
-      map.inject({}) do |new_map, key_and_value|
+      map.each_with_object({}) do |key_and_value, new_map|
         key, value = key_and_value
         new_map[key] = value.size
-        new_map
       end
     end
 

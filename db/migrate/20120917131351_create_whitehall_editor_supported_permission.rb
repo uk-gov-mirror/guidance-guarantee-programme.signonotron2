@@ -12,10 +12,10 @@ class CreateWhitehallEditorSupportedPermission < ActiveRecord::Migration
     if whitehall
       permission_name = 'Editor'
       permission = SupportedPermission.create!(application: whitehall, name: permission_name)
-      Permission.where(application_id: whitehall.id).each do |permission|
-        if permission.permissions.include?('signin')
-          permission.permissions << permission_name
-          permission.save!
+      Permission.where(application_id: whitehall.id).each do |individual_permission|
+        if individual_permission.permissions.include?('signin')
+          individual_permission.permissions << permission_name
+          individual_permission.save!
         end
       end
     end

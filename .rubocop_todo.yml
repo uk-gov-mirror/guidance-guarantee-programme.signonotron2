@@ -28,11 +28,6 @@ Lint/ScriptPermission:
     - 'config/puma.rb'
 
 # Offense count: 1
-Lint/ShadowingOuterLocalVariable:
-  Exclude:
-    - 'db/migrate/20120917131351_create_whitehall_editor_supported_permission.rb'
-
-# Offense count: 1
 # Configuration parameters: AllowComments, AllowNil.
 Lint/SuppressedException:
   Exclude:

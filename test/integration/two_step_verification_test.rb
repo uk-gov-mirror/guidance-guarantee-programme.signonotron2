@@ -4,6 +4,8 @@ require 'helpers/passphrase_support'
 class TwoStepVerificationTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
+  SUCCESS = '2-step verification set up'
+
   context 'setting a 2SV code' do # rubocop: disable Metrics/BlockLength
     setup do
       @new_secret = ROTP::Base32.random_base32
@@ -79,7 +81,6 @@ class TwoStepVerificationTest < ActionDispatch::IntegrationTest
       end
 
       should 'accept a valid code, persist the secret, log an event and notify by email' do
-        SUCCESS = '2-step verification set up'
         perform_enqueued_jobs do
           enter_2sv_code(@new_secret)
 

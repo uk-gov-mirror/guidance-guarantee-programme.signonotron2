@@ -1,5 +1,5 @@
-FactoryGirl.define do
-  factory :user do
+FactoryGirl.define do # rubocop: disable Metrics/BlockLength
+  factory :user do # rubocop: disable Metrics/BlockLength
     transient do
       with_permissions {}
       with_signin_permissions_for []

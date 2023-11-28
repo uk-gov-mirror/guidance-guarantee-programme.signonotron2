@@ -1,7 +1,7 @@
 require_relative '../test_helper'
 
 class ManageApiUsersTest < ActionDispatch::IntegrationTest
-  context 'as Superadmin' do
+  context 'as Superadmin' do # rubocop: disable Metrics/BlockLength
     setup do
       @application = create(:application, with_supported_permissions: ['write'])
 

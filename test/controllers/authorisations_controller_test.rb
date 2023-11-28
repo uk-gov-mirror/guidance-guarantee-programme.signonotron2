@@ -28,7 +28,7 @@ class AuthorisationsControllerTest < ActionController::TestCase
     end
   end
 
-  context 'as superadmin' do
+  context 'as superadmin' do # rubocop: disable Metrics/BlockLength
     setup do
       @superadmin = create(:superadmin_user)
       sign_in @superadmin

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe OrganisationPolicy do
+describe OrganisationPolicy do # rubocop: disable Metrics/BlockLength
   subject { described_class }
 
   permissions :index? do

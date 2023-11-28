@@ -1,4 +1,4 @@
-namespace :users do
+namespace :users do # rubocop: disable Metrics/BlockLength
   desc 'Create a new user (specify name and email in environment)'
   task create: :environment do
     raise 'Requires name, email and applications specified in environment' unless ENV['name'] && ENV['email'] && ENV['applications'] # rubocop:disable Layout/LineLength

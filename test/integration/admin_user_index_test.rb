@@ -2,7 +2,7 @@ require 'test_helper'
 
 # rubocop: disable Metrics/ClassLength
 class AdminUserIndexTest < ActionDispatch::IntegrationTest
-  context 'logged in as an admin' do
+  context 'logged in as an admin' do # rubocop: disable Metrics/BlockLength
     setup do
       current_time = Time.zone.now
       Timecop.freeze(current_time)

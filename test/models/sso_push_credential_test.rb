@@ -13,7 +13,7 @@ class SsoPushCredentialTest < ActiveSupport::TestCase
     SsoPushCredential.user = nil
   end
 
-  context 'given an existing user' do
+  context 'given an existing user' do # rubocop: disable Metrics/BlockLength
     setup do
       @user = create(:user, email: 'sso-push-user@gov.uk')
       SsoPushCredential.user_email = 'sso-push-user@gov.uk'

@@ -20,7 +20,7 @@ class BatchInvitationTest < ActiveSupport::TestCase
     assert_equal bi.organisation, organisation
   end
 
-  context 'perform' do
+  context 'perform' do # rubocop: disable Metrics/BlockLength
     should 'create the users and assign them permissions' do
       @bi.reload.perform
 

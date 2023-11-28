@@ -11,7 +11,7 @@ class UserTest < ActiveSupport::TestCase
     @user = create(:user)
   end
 
-  context '#require_2sv' do
+  context '#require_2sv' do # rubocop: disable Metrics/BlockLength
     should 'default to false for normal users' do
       refute create(:user).require_2sv?
     end
@@ -226,7 +226,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  context 'email validation' do
+  context 'email validation' do # rubocop: disable Metrics/BlockLength
     should 'require an email' do
       user = build(:user, email: nil)
 
@@ -391,7 +391,7 @@ class UserTest < ActiveSupport::TestCase
     refute @user.valid?
   end
 
-  context 'User status' do
+  context 'User status' do # rubocop: disable Metrics/BlockLength
     setup do
       @locked = create(:user)
       @locked.lock_access!

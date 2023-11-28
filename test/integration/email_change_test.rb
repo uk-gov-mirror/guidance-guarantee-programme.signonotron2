@@ -5,12 +5,12 @@ class EmailChangeTest < ActionDispatch::IntegrationTest
   include UserAccountOperations
   include ActiveJob::TestHelper
 
-  context 'by an admin' do
+  context 'by an admin' do # rubocop: disable Metrics/BlockLength
     setup do
       @admin = create(:admin_user)
     end
 
-    context 'for an active user' do
+    context 'for an active user' do # rubocop: disable Metrics/BlockLength
       should 'send a notification email and not confirmation email' do
         perform_enqueued_jobs do
           user = create(:user)

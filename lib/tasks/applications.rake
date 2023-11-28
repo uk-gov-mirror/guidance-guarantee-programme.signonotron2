@@ -1,4 +1,4 @@
-namespace :applications do
+namespace :applications do # rubocop: disable Metrics/BlockLength
   desc 'Creates an application(OAuth client)'
   task create: :environment do
     # Create client app

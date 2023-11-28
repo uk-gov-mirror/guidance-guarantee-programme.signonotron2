@@ -65,7 +65,7 @@ class SignInTest < ActionDispatch::IntegrationTest
     assert_response_contains('Signed in successfully.')
   end
 
-  context 'with a 2SV secret key' do
+  context 'with a 2SV secret key' do # rubocop: disable Metrics/BlockLength
     setup do
       @user.update_attribute(:otp_secret_key, ROTP::Base32.random_base32)
     end

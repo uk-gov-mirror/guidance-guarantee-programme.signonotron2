@@ -50,12 +50,6 @@ Lint/UselessAssignment:
 Metrics/AbcSize:
   Max: 557
 
-# Offense count: 54
-# Configuration parameters: CountComments, CountAsOne, AllowedMethods, AllowedPatterns.
-# AllowedMethods: refine
-Metrics/BlockLength:
-  Max: 331
-
 # Offense count: 2
 # Configuration parameters: CountBlocks.
 Metrics/BlockNesting:

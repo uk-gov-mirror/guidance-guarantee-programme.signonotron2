@@ -5,7 +5,7 @@ class InactiveUsersSuspensionReminderMailingListTest < ActiveSupport::TestCase
     InactiveUsersSuspensionReminderMailingList.new(User::SUSPENSION_THRESHOLD_PERIOD).generate
   end
 
-  context 'generating suspension mailing list' do
+  context 'generating suspension mailing list' do # rubocop: disable Metrics/BlockLength
     setup do
       @in_1  = create(:user, current_sign_in_at: User::SUSPENSION_THRESHOLD_PERIOD.ago)
       @in_3  = create(:user, current_sign_in_at: (User::SUSPENSION_THRESHOLD_PERIOD - 2.days).ago)

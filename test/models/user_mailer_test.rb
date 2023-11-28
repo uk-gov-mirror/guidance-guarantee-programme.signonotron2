@@ -14,7 +14,7 @@ class UserMailerTest < ActionMailer::TestCase
     end
   end
 
-  context '2-step verification set up' do
+  context '2-step verification set up' do # rubocop: disable Metrics/BlockLength
     setup do
       user = stub(name: 'Ben', email: 'test@example.com')
       @email = UserMailer.two_step_enabled(user)

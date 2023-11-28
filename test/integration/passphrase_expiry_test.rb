@@ -19,7 +19,7 @@ class PassphraseExpiryTest < ActionDispatch::IntegrationTest
     end
   end
 
-  context 'logging in with a user with an expired password' do
+  context 'logging in with a user with an expired password' do # rubocop: disable Metrics/BlockLength
     setup do
       @user = create(:user, password_changed_at: 91.days.ago)
       @new_password = 'some 3v3n more s3cure passphrase'

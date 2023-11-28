@@ -19,7 +19,7 @@ class TwoStepVerificationControllerTest < ActionController::TestCase
     end
   end
 
-  context 'otp_secret_key_uri' do
+  context 'otp_secret_key_uri' do # rubocop: disable Metrics/BlockLength
     setup do
       @secret = ROTP::Base32.random_base32
       ROTP::Base32.stubs(random_base32: @secret)

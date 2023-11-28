@@ -23,7 +23,7 @@ class SuspensionsControllerTest < ActionController::TestCase
     end
   end
 
-  context 'PUT update' do
+  context 'PUT update' do # rubocop: disable Metrics/BlockLength
     setup do
       user = create(:admin_user)
       sign_in user

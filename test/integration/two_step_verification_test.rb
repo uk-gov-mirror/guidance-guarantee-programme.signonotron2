@@ -4,14 +4,14 @@ require 'helpers/passphrase_support'
 class TwoStepVerificationTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
-  context 'setting a 2SV code' do
+  context 'setting a 2SV code' do # rubocop: disable Metrics/BlockLength
     setup do
       @new_secret = ROTP::Base32.random_base32
       @original_secret = ROTP::Base32.random_base32
       ROTP::Base32.stubs(random_base32: @new_secret)
     end
 
-    context 'with an existing 2SV setup' do
+    context 'with an existing 2SV setup' do # rubocop: disable Metrics/BlockLength
       setup do
         @user = create(:user, email: 'jane.user@example.com', otp_secret_key: @original_secret)
         visit new_user_session_path
@@ -57,7 +57,7 @@ class TwoStepVerificationTest < ActionDispatch::IntegrationTest
       end
     end
 
-    context 'for a user without an existing 2SV setup' do
+    context 'for a user without an existing 2SV setup' do # rubocop: disable Metrics/BlockLength
       setup do
         @user = create(:user, email: 'jane.user@example.com')
         visit root_path

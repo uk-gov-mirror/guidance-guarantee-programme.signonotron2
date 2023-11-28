@@ -5,7 +5,7 @@ require 'helpers/passphrase_support'
 class PassphraseChangeTest < ActionDispatch::IntegrationTest
   include PassPhraseSupport
 
-  context 'normal user' do
+  context 'normal user' do # rubocop: disable Metrics/BlockLength
     setup do
       @original_password = 'some v3ry s3cure passphrase'
       @user = create(:user, email: 'jane.user@example.com', password: @original_password)

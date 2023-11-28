@@ -24,7 +24,7 @@ class ConfirmationsControllerTest < ActionController::TestCase
     end
   end
 
-  context 'GET show' do
+  context 'GET show' do # rubocop: disable Metrics/BlockLength
     context 'not signed in' do
       should 'reject an invalid token' do
         get :show, params: { confirmation_token: 'fake' }
@@ -82,7 +82,7 @@ class ConfirmationsControllerTest < ActionController::TestCase
     end
   end
 
-  context 'PUT update' do
+  context 'PUT update' do # rubocop: disable Metrics/BlockLength
     should 'authenticate with the correct token and password, and confirm the email change' do
       put :update, params: {
         confirmation_token: @confirmation_token,

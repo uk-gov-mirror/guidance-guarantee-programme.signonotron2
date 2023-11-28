@@ -43,7 +43,7 @@ class BatchInvitationsControllerTest < ActionController::TestCase
     end
   end
 
-  context 'POST create' do
+  context 'POST create' do # rubocop: disable Metrics/BlockLength
     should 'create a BatchInvitation and BatchInvitationUsers' do
       app = create(:application)
       post :create,
@@ -151,7 +151,7 @@ class BatchInvitationsControllerTest < ActionController::TestCase
     end
   end
 
-  context 'GET show' do
+  context 'GET show' do # rubocop: disable Metrics/BlockLength
     setup do
       @bi = create(:batch_invitation)
       @user1 = create(:batch_invitation_user, name: 'A', email: 'a@m.com', batch_invitation: @bi)

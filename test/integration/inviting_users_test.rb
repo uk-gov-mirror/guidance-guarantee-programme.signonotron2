@@ -16,7 +16,7 @@ class InvitingUsersTest < ActionDispatch::IntegrationTest
     end
   end
 
-  context 'for an end-user by an admin' do
+  context 'for an end-user by an admin' do # rubocop: disable Metrics/BlockLength
     should 'create and notify the user' do
       perform_enqueued_jobs do
         admin = create(:user, role: 'admin')

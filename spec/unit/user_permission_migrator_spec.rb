@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UserPermissionMigrator do
+RSpec.describe UserPermissionMigrator do # rubocop: disable Metrics/BlockLength
   let(:specialist_publisher) { FactoryGirl.create(:application, name: 'Specialist Publisher') }
   let(:manuals_publisher) { FactoryGirl.create(:application, name: 'Manuals Publisher') }
   let(:unrelated_application) { FactoryGirl.create(:application, name: 'unrelated application') }

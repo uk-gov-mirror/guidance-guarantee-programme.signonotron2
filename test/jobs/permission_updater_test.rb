@@ -22,7 +22,7 @@ class PermissionUpdaterTest < ActiveSupport::TestCase
     SsoPushCredential.user = nil
   end
 
-  context 'perform' do
+  context 'perform' do # rubocop: disable Metrics/BlockLength
     should 'update the application with users information' do
       expected_body = UserOAuthPresenter.new(@user, @application).as_hash.to_json
       http_request = stub_request(:put, users_url(@application)).with(body: expected_body)

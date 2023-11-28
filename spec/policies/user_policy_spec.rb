@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UserPolicy do
+describe UserPolicy do # rubocop: disable Metrics/BlockLength
   subject { described_class }
 
   %i[new? index?].each do |permission_name|
@@ -34,8 +34,8 @@ describe UserPolicy do
     event_logs?
   ]
 
-  user_management_actions.each do |permission_name|
-    permissions permission_name do
+  user_management_actions.each do |permission_name| # rubocop: disable Metrics/BlockLength
+    permissions permission_name do # rubocop: disable Metrics/BlockLength
       it 'is allowed for superadmins accessing any type of user' do
         superadmin = create(:superadmin_user)
 

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class InactiveUsersSuspensionReminderTest < ActiveSupport::TestCase
-  context 'sending reminder emails' do
+  context 'sending reminder emails' do # rubocop: disable Metrics/BlockLength
     should 'send reminder emails to users when 1 day from suspension' do
       suspends_in_1_day = create(:user, current_sign_in_at: User::SUSPENSION_THRESHOLD_PERIOD.ago)
 

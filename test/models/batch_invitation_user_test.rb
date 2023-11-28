@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class BatchInvitationUserTest < ActiveSupport::TestCase
-  context 'invite' do
+  context 'invite' do # rubocop: disable Metrics/BlockLength
     setup do
       @inviting_user = create(:admin_user)
       @batch_invitation = create(:batch_invitation, :with_organisation, user: @inviting_user)

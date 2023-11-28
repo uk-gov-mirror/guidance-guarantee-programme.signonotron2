@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_03_094952) do
+ActiveRecord::Schema.define(version: 2020_01_03_094952) do # rubocop: disable Metrics/BlockLength
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_094952) do
             name: 'index_app_permissions_on_user_and_app_and_supported_permission', unique: true
   end
 
-  create_table 'users', id: :serial, force: :cascade do |t|
+  create_table 'users', id: :serial, force: :cascade do |t| # rubocop: disable Metrics/BlockLength
     t.string 'name', limit: 255, null: false
     t.string 'email', limit: 255, default: '', null: false
     t.string 'encrypted_password', limit: 255, default: ''

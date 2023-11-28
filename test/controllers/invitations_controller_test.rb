@@ -13,7 +13,7 @@ class InvitationsControllerTest < ActionController::TestCase
     assert_redirected_to root_path
   end
 
-  context 'GET new' do
+  context 'GET new' do # rubocop: disable Metrics/BlockLength
     context 'organisation admin' do
       should 'can select only organisations under them' do
         admin = create(:organisation_admin)
@@ -49,7 +49,7 @@ class InvitationsControllerTest < ActionController::TestCase
     end
   end
 
-  context 'POST create' do
+  context 'POST create' do # rubocop: disable Metrics/BlockLength
     should 'not allow creation of api users' do
       post :create, params: { user: { name: 'Testing APIs', email: 'api@example.com', api_user: true } }
 

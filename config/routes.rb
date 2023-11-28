@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 
-Signonotron2::Application.routes.draw do
+Signonotron2::Application.routes.draw do # rubocop: disable Metrics/BlockLength
   use_doorkeeper
 
   devise_for :users, controllers: {

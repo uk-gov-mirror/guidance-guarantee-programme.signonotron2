@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryGirl.define do # rubocop: disable Metrics/BlockLength
   factory :application, class: Doorkeeper::Application do
     transient do
       with_supported_permissions []

@@ -101,7 +101,7 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
 
-  context 'GET show (as OAuth client application)' do
+  context 'GET show (as OAuth client application)' do # rubocop: disable Metrics/BlockLength
     setup do
       @application = create(:application)
     end
@@ -210,7 +210,7 @@ class UsersControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    context 'GET index' do
+    context 'GET index' do # rubocop: disable Metrics/BlockLength
       should 'list users' do
         create(:user, email: 'another_user@email.com')
         get :index
@@ -357,7 +357,7 @@ class UsersControllerTest < ActionController::TestCase
       end
     end
 
-    context 'GET edit' do
+    context 'GET edit' do # rubocop: disable Metrics/BlockLength
       should 'show the form' do
         not_an_admin = create(:user)
         get :edit, params: { id: not_an_admin.id }
@@ -429,7 +429,7 @@ class UsersControllerTest < ActionController::TestCase
       end
     end
 
-    context 'PUT update' do
+    context 'PUT update' do # rubocop: disable Metrics/BlockLength
       should 'update the user' do
         another_user = create(:user, name: 'Old Name')
         put :update, params: { id: another_user.id, user: { name: 'New Name' } }
@@ -506,7 +506,7 @@ class UsersControllerTest < ActionController::TestCase
         end
       end
 
-      context 'changing an email' do
+      context 'changing an email' do # rubocop: disable Metrics/BlockLength
         should 'not re-confirm email' do
           normal_user = create(:user, email: 'old@email.com')
           put :update, params: { id: normal_user.id, user: { email: 'new@email.com' } }

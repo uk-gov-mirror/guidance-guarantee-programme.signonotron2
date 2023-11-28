@@ -3,7 +3,7 @@ require 'test_helper'
 class SuperAdminApplicationEditTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
-  context 'logged in as an superadmin' do
+  context 'logged in as an superadmin' do # rubocop: disable Metrics/BlockLength
     setup do
       @application = create(:application)
 

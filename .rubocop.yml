@@ -11,3 +11,6 @@ Style/OptionalBooleanParameter:
 Naming/VariableNumber:
   Exclude:
     - 'test/models/inactive_users_suspension_reminder_mailing_list_test.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

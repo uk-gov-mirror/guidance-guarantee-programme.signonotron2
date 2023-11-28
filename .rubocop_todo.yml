@@ -179,13 +179,6 @@ Style/ExpandPathArguments:
     - 'spec/rails_helper.rb'
     - 'test/test_helper.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-Style/ParallelAssignment:
-  Exclude:
-    - 'db/migrate/20150121092250_migrate_application_and_permissions_to_batch_invitation_application_permissions_join_table.rb'
-
-
 # Offense count: 38
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantSelf:

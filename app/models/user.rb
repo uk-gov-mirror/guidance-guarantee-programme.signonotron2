@@ -1,5 +1,3 @@
-# coding: utf-8
-
 # rubocop: disable Metrics/ClassLength
 class User < ActiveRecord::Base
   include Roles

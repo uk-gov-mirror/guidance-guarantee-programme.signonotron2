@@ -115,17 +115,6 @@ Style/EachWithObject:
     - 'lib/inactive_users_suspension_reminder_mailing_list.rb'
     - 'lib/numbers/metrics.rb'
 
-# Offense count: 6
-# This cop supports safe autocorrection (--autocorrect).
-Style/Encoding:
-  Exclude:
-    - 'app/models/user.rb'
-    - 'db/migrate/20140123152440_replace_apostrophe_in_user_emails.rb'
-    - 'test/integration/dashboard_test.rb'
-    - 'test/integration/passphrase_change_test.rb'
-    - 'test/integration/two_step_verification_test.rb'
-    - 'test/models/user_test.rb'
-
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MaxUnannotatedPlaceholdersAllowed, AllowedMethods, AllowedPatterns.

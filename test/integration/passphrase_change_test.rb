@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'test_helper'
 require 'helpers/passphrase_support'
 

@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_094952) do # rubocop: disable Me
     t.integer 'supported_permission_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['batch_invitation_id', 'supported_permission_id'],
+    t.index %w[batch_invitation_id supported_permission_id],
             name: 'index_batch_invite_app_perms_on_batch_invite_and_supported_perm', unique: true
   end
 
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_094952) do # rubocop: disable Me
     t.integer 'application_id'
     t.string 'trailing_message', limit: 255
     t.integer 'event_id'
-    t.index ['uid', 'created_at'], name: 'index_event_logs_on_uid_and_created_at'
+    t.index %w[uid created_at], name: 'index_event_logs_on_uid_and_created_at'
   end
 
   create_table 'oauth_access_grants', id: :serial, force: :cascade do |t|
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_094952) do # rubocop: disable Me
     t.integer 'password_archivable_id', null: false
     t.string 'password_archivable_type', limit: 255, null: false
     t.datetime 'created_at'
-    t.index ['password_archivable_type', 'password_archivable_id'], name: 'index_password_archivable'
+    t.index %w[password_archivable_type password_archivable_id], name: 'index_password_archivable'
   end
 
   create_table 'organisations', id: :serial, force: :cascade do |t|
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_094952) do # rubocop: disable Me
     t.datetime 'updated_at'
     t.boolean 'delegatable', default: false
     t.boolean 'grantable_from_ui', default: true, null: false
-    t.index ['application_id', 'name'], name: 'index_supported_permissions_on_application_id_and_name', unique: true
+    t.index %w[application_id name], name: 'index_supported_permissions_on_application_id_and_name', unique: true
     t.index ['application_id'], name: 'index_supported_permissions_on_application_id'
   end
 
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 2020_01_03_094952) do # rubocop: disable Me
     t.datetime 'last_synced_at'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['user_id', 'application_id', 'supported_permission_id'],
+    t.index %w[user_id application_id supported_permission_id],
             name: 'index_app_permissions_on_user_and_app_and_supported_permission', unique: true
   end
 

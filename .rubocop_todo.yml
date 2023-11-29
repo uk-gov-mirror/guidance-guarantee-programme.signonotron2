@@ -25,11 +25,6 @@ Style/GlobalStdStream:
     - 'lib/tasks/users.rake'
     - 'test/models/organisation_mappings/zendesk_to_signon_test.rb'
 
-# Offense count: 1
-Style/MixinUsage:
-  Exclude:
-    - 'Rakefile'
-
 # Offense count: 20
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle.

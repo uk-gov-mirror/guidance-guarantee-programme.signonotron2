@@ -28,3 +28,6 @@ Lint/SuppressedException:
 
 Metrics/AbcSize:
   Max: 557
+
+Metrics/BlockNesting:
+  Max: 4

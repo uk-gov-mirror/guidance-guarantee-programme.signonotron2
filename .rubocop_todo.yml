@@ -11,11 +11,6 @@
 Lint/UselessAssignment:
   Enabled: false
 
-# Offense count: 2
-# Configuration parameters: CountBlocks.
-Metrics/BlockNesting:
-  Max: 4
-
 # Offense count: 6
 # Configuration parameters: AllowedMethods, AllowedPatterns.
 Metrics/CyclomaticComplexity:

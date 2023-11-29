@@ -11,27 +11,6 @@
 Lint/UselessAssignment:
   Enabled: false
 
-# Offense count: 17
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: nested, compact
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'app/controllers/devise/password_expired_controller.rb'
-    - 'app/controllers/devise/two_step_verification_controller.rb'
-    - 'app/controllers/devise/two_step_verification_session_controller.rb'
-    - 'app/models/doorkeeper/application.rb'
-    - 'db/migrate/20120626094255_swap_magic_everything_permissions_for_real_ones.rb'
-    - 'db/migrate/20121011155199_create_gds_admin_permission_for_licensing.rb'
-    - 'db/migrate/20121011166199_create_authority_permissions_for_licensing.rb'
-    - 'db/migrate/20140319200000_create_editor_admin_perms_for_maslow.rb'
-    - 'db/migrate/20140319222924_grant_editor_perms_to_all_maslow_users.rb'
-    - 'lib/devise/hooks/password_expirable.rb'
-    - 'lib/devise/routes.rb'
-    - 'test/models/doorkeeper_application_test.rb'
-    - 'test/models/organisation_mappings/zendesk_to_signon_test.rb'
-    - 'test/test_helper.rb'
-
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MaxUnannotatedPlaceholdersAllowed, AllowedMethods, AllowedPatterns.

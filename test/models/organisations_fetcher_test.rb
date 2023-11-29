@@ -23,7 +23,7 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     organisation = create(
       :organisation,
       name: 'Ministry Of Misery',
-      slug: slug,
+      slug:,
       closed: true
     )
     assert_equal(1, Organisation.count)
@@ -71,7 +71,7 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     organisation = create(
       :organisation,
       name: 'Ministry Of Misery',
-      slug: slug
+      slug:
     )
     assert_equal(1, Organisation.count)
 
@@ -92,7 +92,7 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     skip 'Failing temporarily'
 
     slug = 'ministry-of-fun'
-    fun = create(:organisation, name: 'Ministry of Fun', slug: slug)
+    fun = create(:organisation, name: 'Ministry of Fun', slug:)
     child_slug = 'ministry-of-fun-child-1' # hard-coded in gds_api_adapters
     movies = create(:organisation, name: 'Ministry of Movies', slug: child_slug)
 

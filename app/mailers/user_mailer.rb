@@ -90,7 +90,7 @@ class UserMailer < Devise::Mailer
 
   def subject_for(key)
     I18n.t(:"#{devise_mapping.name}_subject", scope: [:devise, :mailer, key],
-                                              default: [:subject, key.to_s.humanize], app_name: app_name)
+                                              default: [:subject, key.to_s.humanize], app_name:)
   end
 
   def production?

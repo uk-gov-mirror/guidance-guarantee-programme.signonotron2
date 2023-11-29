@@ -563,8 +563,8 @@ class CreateAuthorityPermissionsForLicensing < ActiveRecord::Migration
   def down; end
 
   class ::Doorkeeper::Application < ActiveRecord::Base
-    has_many :permissions, :dependent => :destroy
-    has_many :supported_permissions, :dependent => :destroy
+    has_many :permissions, dependent: :destroy
+    has_many :supported_permissions, dependent: :destroy
 
     def self.default_permission_strings
       ['signin']

@@ -17,7 +17,7 @@ class EmailChangeTest < ActionDispatch::IntegrationTest
 
           visit new_user_session_path
           signin_with(@admin)
-          admin_changes_email_address(user: user, new_email: 'new@email.com')
+          admin_changes_email_address(user:, new_email: 'new@email.com')
 
           assert_equal 'new@email.com', last_email.to[0]
           assert_match(/Your .* Signon development email address has been updated/, last_email.subject)
@@ -30,7 +30,7 @@ class EmailChangeTest < ActionDispatch::IntegrationTest
 
           visit new_user_session_path
           signin_with(@admin)
-          admin_changes_email_address(user: user, new_email: 'new@email.com')
+          admin_changes_email_address(user:, new_email: 'new@email.com')
 
           visit event_logs_user_path(user)
           assert_response_contains "Email changed by #{@admin.name} from old@email.com to new@email.com"
@@ -42,7 +42,7 @@ class EmailChangeTest < ActionDispatch::IntegrationTest
 
         visit new_user_session_path
         signin_with(@admin)
-        admin_changes_email_address(user: user, new_email: '')
+        admin_changes_email_address(user:, new_email: '')
 
         assert_response_contains("Email can't be blank")
         assert_nil last_email
@@ -60,7 +60,7 @@ class EmailChangeTest < ActionDispatch::IntegrationTest
 
           visit new_user_session_path
           signin_with(@admin)
-          admin_changes_email_address(user: user, new_email: 'new@email.com')
+          admin_changes_email_address(user:, new_email: 'new@email.com')
 
           email = emails_sent_to('new@email.com').detect { |mail| mail.subject == 'Please confirm your account' }
           assert email
@@ -85,7 +85,7 @@ class EmailChangeTest < ActionDispatch::IntegrationTest
         click_link 'Cancel email change'
         signout
 
-        visit user_confirmation_path(confirmation_token: confirmation_token)
+        visit user_confirmation_path(confirmation_token:)
         assert_response_contains("Couldn't confirm email change. Please contact support to request a new confirmation email.") # rubocop:disable Layout/LineLength
         assert_equal original_email, user.reload.email
       end

@@ -28,13 +28,13 @@ class OrganisationsFetcher
     content_id = organisation_data.details.content_id
     slug = organisation_data.details.slug
 
-    organisation = Organisation.find_by(content_id: content_id) ||
-                   Organisation.find_by(slug: slug) ||
-                   Organisation.new(content_id: content_id)
+    organisation = Organisation.find_by(content_id:) ||
+                   Organisation.find_by(slug:) ||
+                   Organisation.new(content_id:)
 
     update_data = {
-      content_id: content_id,
-      slug: slug,
+      content_id:,
+      slug:,
       name: organisation_data.title,
       organisation_type: organisation_data.format,
       abbreviation: organisation_data.details.abbreviation,
@@ -57,7 +57,7 @@ class OrganisationsFetcher
         # end up with the parent that appears last in the API response(s).
         #
         # Transition app implements this correctly.
-        child_organisation.update_attributes!(parent: parent)
+        child_organisation.update_attributes!(parent:)
       end
     end
   end

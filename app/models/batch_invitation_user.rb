@@ -12,8 +12,8 @@ class BatchInvitationUser < ActiveRecord::Base
   def invite(inviting_user, supported_permission_ids)
     sanitised_attributes = sanitise_attributes_for_inviting_user_role(
       {
-        name: name,
-        email: email,
+        name:,
+        email:,
         organisation_id: batch_invitation.organisation_id,
         supported_permission_ids: new_supported_permissions_for_user(supported_permission_ids)
       },

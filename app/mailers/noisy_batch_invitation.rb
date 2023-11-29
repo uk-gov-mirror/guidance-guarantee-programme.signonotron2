@@ -11,6 +11,6 @@ class NoisyBatchInvitation < ActionMailer::Base
     user_count = batch_invitation.batch_invitation_users.count
     subject = "[SIGNON] #{@user.name} created a batch of #{user_count} users"
     subject << " in #{instance_name}" if instance_name
-    mail(subject: subject)
+    mail(subject:)
   end
 end

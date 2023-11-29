@@ -8,7 +8,7 @@ class MigrateApplicationAndPermissionsToBatchInvitationApplicationPermissionsJoi
         application_id = permission_attributes['application_id']
         permissions = permission_attributes['permissions']
         if permissions.present?
-          _supported_permissions << SupportedPermission.where(application_id: application_id,
+          _supported_permissions << SupportedPermission.where(application_id:,
                                                               name: permissions)
         end
       end

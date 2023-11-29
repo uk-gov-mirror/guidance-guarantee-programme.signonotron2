@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
   end
 
   def event_logs
-    EventLog.where(uid: uid).order(created_at: :desc)
+    EventLog.where(uid:).order(created_at: :desc)
   end
 
   def generate_uid

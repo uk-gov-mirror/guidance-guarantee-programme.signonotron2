@@ -529,7 +529,7 @@ class UsersControllerTest < ActionController::TestCase
             normal_user = create(:user, email: 'old@email.com')
             put :update, params: { id: normal_user.id, user: { email: 'new@email.com' } }
 
-            email_change_notifications = ActionMailer::Base.deliveries[-2..-1]
+            email_change_notifications = ActionMailer::Base.deliveries[-2..]
             assert_equal email_change_notifications.map(&:subject).uniq.count, 1
             assert_match(/Your .* Signon development email address has been updated/,
                          email_change_notifications.map(&:subject).first)

@@ -15,7 +15,7 @@ class OrganisationMappings::ZendeskToSignonTest < ActiveSupport::TestCase
   end
 
   def apply_mappings
-    silence_stream(STDOUT) do # to stop warnings about missing orgs from printing out during test execution
+    silence_stream($stdout) do # to stop warnings about missing orgs from printing out during test execution
       OrganisationMappings::ZendeskToSignon.apply
     end
   end

@@ -58,3 +58,23 @@ Style/ClassAndModuleChildren:
 Style/MixinUsage:
   Exclude:
     - 'Rakefile'
+
+# Offense count: 20
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: literals, strict
+Style/MutableConstant:
+  Exclude:
+    - 'app/helpers/application_helper.rb'
+    - 'app/models/event_log.rb'
+    - 'app/models/user.rb'
+    - 'config/initializers/alphabetical_paginate_config.rb'
+    - 'config/initializers/statsd.rb'
+    - 'db/migrate/20161019120003_grant_academy_access.rb'
+    - 'lib/inactive_users_suspension_reminder.rb'
+    - 'lib/inactive_users_suspension_reminder_mailing_list.rb'
+    - 'lib/sso_push_credential.rb'
+    - 'lib/tasks/export_usage_stats.rake'
+    - 'test/integration/passphrase_expiry_test.rb'
+    - 'test/integration/passphrase_reset_test.rb'
+    - 'test/integration/two_step_verification_test.rb'

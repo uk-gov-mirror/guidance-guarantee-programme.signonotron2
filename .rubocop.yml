@@ -34,3 +34,6 @@ Metrics/BlockNesting:
 
 Metrics/CyclomaticComplexity:
   Max: 12
+
+Metrics/PerceivedComplexity:
+  Max: 12

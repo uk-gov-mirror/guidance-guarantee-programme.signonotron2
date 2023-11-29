@@ -53,9 +53,9 @@ class ::Doorkeeper::Application < ActiveRecord::Base
   end
 
   def create_user_update_supported_permission
-    if supports_push_updates?
-      supported_permissions.where(name: 'user_update_permission',
-                                  grantable_from_ui: false).first_or_create!
-    end
+    return unless supports_push_updates?
+
+    supported_permissions.where(name: 'user_update_permission',
+                                grantable_from_ui: false).first_or_create!
   end
 end

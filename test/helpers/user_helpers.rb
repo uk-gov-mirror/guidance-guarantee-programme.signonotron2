@@ -12,12 +12,12 @@ module UserHelpers
     fill_in 'Passphrase', with: password
     click_button 'Sign in'
 
-    if second_step && user && user.otp_secret_key
-      code = second_step == true ? ROTP::TOTP.new(user.otp_secret_key).now : second_step
-      Timecop.freeze do
-        fill_in :code, with: code
-        click_button 'Sign in'
-      end
+    return unless second_step && user && user.otp_secret_key
+
+    code = second_step == true ? ROTP::TOTP.new(user.otp_secret_key).now : second_step
+    Timecop.freeze do
+      fill_in :code, with: code
+      click_button 'Sign in'
     end
   end
 

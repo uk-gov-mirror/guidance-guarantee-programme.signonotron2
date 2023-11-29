@@ -53,10 +53,10 @@ class Devise::TwoStepVerificationController < DeviseController
     redirect_to(:root) && return if current_user.nil?
 
     @limit = User::MAX_2SV_LOGIN_ATTEMPTS
-    if current_user.max_2sv_login_attempts?
-      sign_out(current_user)
-      render(:max_2sv_login_attempts_reached) && return
-    end
+    return unless current_user.max_2sv_login_attempts?
+
+    sign_out(current_user)
+    render(:max_2sv_login_attempts_reached) && return
   end
 
   def generate_secret

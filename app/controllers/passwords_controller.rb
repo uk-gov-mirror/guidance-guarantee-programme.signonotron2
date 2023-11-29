@@ -6,10 +6,10 @@ class PasswordsController < Devise::PasswordsController
     super
 
     user = user_from_params
-    unless user && user.reset_password_period_valid?
-      record_reset_page_loaded_token_expired
-      render 'devise/passwords/reset_error'
-    end
+    return if user && user.reset_password_period_valid?
+
+    record_reset_page_loaded_token_expired
+    render 'devise/passwords/reset_error'
   end
 
   # overrides http://git.io/sOhoaA to prevent expirable from

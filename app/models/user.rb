@@ -320,9 +320,9 @@ class User < ActiveRecord::Base
   end
 
   def organisation_admin_belongs_to_organisation
-    if role == 'organisation_admin' && organisation_id.blank?
-      errors.add(:organisation_id, "can't be 'None' for an Organisation admin")
-    end
+    return unless role == 'organisation_admin' && organisation_id.blank?
+
+    errors.add(:organisation_id, "can't be 'None' for an Organisation admin")
   end
 
   def email_is_ascii_only

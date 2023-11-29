@@ -61,13 +61,13 @@ module Devise
 
       # archive the last password before save and delete all to old passwords from archive
       def archive_password
-        if encrypted_password_changed?
-          if archive_count.to_i.positive?
-            old_passwords.create! old_password_params
-            old_passwords.order(:id).reverse_order.offset(archive_count).destroy_all
-          else
-            old_passwords.destroy_all
-          end
+        return unless encrypted_password_changed?
+
+        if archive_count.to_i.positive?
+          old_passwords.create! old_password_params
+          old_passwords.order(:id).reverse_order.offset(archive_count).destroy_all
+        else
+          old_passwords.destroy_all
         end
       end
 

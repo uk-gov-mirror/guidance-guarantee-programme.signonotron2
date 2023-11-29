@@ -8,16 +8,16 @@ class GrantEditorPermsToAllMaslowUsers < ActiveRecord::Migration
   def up # rubocop:disable Metrics/MethodLength
     maslow = ::Doorkeeper::Application.where(name: 'Maslow').first
 
-    unless maslow.nil?
-      all_maslow_perms = Permission.where(
-        'application_id = ? and permissions like ?',
-        maslow.id,
-        '%signin%'
-      )
-      all_maslow_perms.each do |perm|
-        perm.permissions += ['editor']
-        perm.save!
-      end
+    return if maslow.nil?
+
+    all_maslow_perms = Permission.where(
+      'application_id = ? and permissions like ?',
+      maslow.id,
+      '%signin%'
+    )
+    all_maslow_perms.each do |perm|
+      perm.permissions += ['editor']
+      perm.save!
     end
   end
 end

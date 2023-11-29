@@ -11,11 +11,6 @@
 Lint/UselessAssignment:
   Enabled: false
 
-# Offense count: 3
-Naming/AccessorMethodName:
-  Exclude:
-    - 'test/helpers/token_auth_support.rb'
-
 # Offense count: 17
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle.

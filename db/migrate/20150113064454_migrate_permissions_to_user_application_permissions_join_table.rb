@@ -15,7 +15,7 @@ class MigratePermissionsToUserApplicationPermissionsJoinTable < ActiveRecord::Mi
     index = 0
     Permission.find_each do |permission|
       permission.permissions.each do |supported_permission_name|
-        _supported_permission = @cache[permission.application_id][supported_permission_name]
+        supported_permission = @cache[permission.application_id][supported_permission_name]
         next unless _supported_permission
 
         permission = UserApplicationPermission.new(user_id: permission.user_id,

@@ -27,7 +27,7 @@ class ConfirmationsController < Devise::ConfirmationsController
       end
     else
       self.resource = confirmation_user
-      unless self.resource.persisted?
+      unless resource.persisted?
         respond_with_navigational(resource.errors, status: :unprocessable_entity) { handle_new_token_needed }
       end
     end
@@ -36,7 +36,7 @@ class ConfirmationsController < Devise::ConfirmationsController
   def update # rubocop:disable Metrics/MethodLength
     self.resource = confirmation_user
 
-    if self.resource.valid_password?(params[:user][:password])
+    if resource.valid_password?(params[:user][:password])
       self.resource = resource_class.confirm_by_token(params[:confirmation_token])
       if resource.errors.empty?
         EventLog.record_event(resource, EventLog::EMAIL_CHANGE_CONFIRMED)
@@ -47,7 +47,7 @@ class ConfirmationsController < Devise::ConfirmationsController
         respond_with_navigational(resource.errors, status: :unprocessable_entity) { handle_new_token_needed }
       end
     else
-      self.resource.errors.add(:password, :invalid, message: 'was incorrect')
+      resource.errors.add(:password, :invalid, message: 'was incorrect')
       render :show
     end
   end

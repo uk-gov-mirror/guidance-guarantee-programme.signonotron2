@@ -320,7 +320,7 @@ class User < ActiveRecord::Base
   end
 
   def organisation_admin_belongs_to_organisation
-    if self.role == 'organisation_admin' && self.organisation_id.blank?
+    if role == 'organisation_admin' && organisation_id.blank?
       errors.add(:organisation_id, "can't be 'None' for an Organisation admin")
     end
   end
@@ -330,7 +330,7 @@ class User < ActiveRecord::Base
   end
 
   def fix_apostrophe_in_email
-    self.email.tr!('’', "'") if email.present? && email_changed?
+    email.tr!('’', "'") if email.present? && email_changed?
   end
 end
 # rubocop: enable Metrics/ClassLength

@@ -15,18 +15,18 @@ module Devise
         scope :with_need_change_password, lambda {
           if password_expires?
             where(arel_table[:password_changed_at].eq(nil)
-              .or(arel_table[:password_changed_at].lt(self.expire_password_after.ago)))
+              .or(arel_table[:password_changed_at].lt(expire_password_after.ago)))
           end
         }
 
         scope :without_need_change_password, lambda {
-          where(arel_table[:password_changed_at].gteq(self.expire_password_after.ago)) if password_expires?
+          where(arel_table[:password_changed_at].gteq(expire_password_after.ago)) if password_expires?
         }
       end
 
       def need_change_password?
         if self.class.password_expires?
-          self.password_changed_at.nil? || self.password_changed_at < self.expire_password_after.ago
+          password_changed_at.nil? || password_changed_at < expire_password_after.ago
         else
           false
         end
@@ -39,14 +39,14 @@ module Devise
       private
 
       def update_password_changed
-        self.password_changed_at = Time.zone.now if (self.new_record? || self.encrypted_password_changed?) && !self.password_changed_at_changed? # rubocop:disable Layout/LineLength
+        self.password_changed_at = Time.zone.now if (new_record? || encrypted_password_changed?) && !password_changed_at_changed? # rubocop:disable Layout/LineLength
       end
 
       module ClassMethods
         ::Devise::Models.config(self, :expire_password_after)
 
         def password_expires?
-          self.expire_password_after.is_a?(Integer) || self.expire_password_after.is_a?(Float)
+          expire_password_after.is_a?(Integer) || expire_password_after.is_a?(Float)
         end
       end
     end

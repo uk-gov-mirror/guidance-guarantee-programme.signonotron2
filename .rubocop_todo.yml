@@ -64,19 +64,6 @@ Style/MutableConstant:
     - 'test/integration/passphrase_reset_test.rb'
     - 'test/integration/two_step_verification_test.rb'
 
-# Offense count: 38
-# This cop supports safe autocorrection (--autocorrect).
-Style/RedundantSelf:
-  Exclude:
-    - 'app/controllers/confirmations_controller.rb'
-    - 'app/controllers/invitations_controller.rb'
-    - 'app/jobs/push_user_updates_job.rb'
-    - 'app/models/batch_invitation.rb'
-    - 'app/models/batch_invitation_user.rb'
-    - 'app/models/user.rb'
-    - 'lib/devise/models/password_archivable.rb'
-    - 'lib/devise/models/password_expirable.rb'
-
 # Offense count: 9
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: ConvertCodeThatCatartToReturnNil, AllowedMethods, MaxChainLength.

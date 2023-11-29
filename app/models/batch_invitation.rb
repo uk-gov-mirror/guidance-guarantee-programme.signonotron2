@@ -24,17 +24,17 @@ class BatchInvitation < ActiveRecord::Base
 
   def enqueue
     NoisyBatchInvitation.make_noise(self).deliver_later
-    BatchInvitationJob.perform_later(self.id)
+    BatchInvitationJob.perform_later(id)
   end
 
   def perform(*)
-    self.batch_invitation_users.unprocessed.order(:name).each do |bi_user|
+    batch_invitation_users.unprocessed.order(:name).each do |bi_user|
       bi_user.invite(user, supported_permission_ids)
     end
     self.outcome = 'success'
-    self.save!
+    save!
   rescue StandardError => e
-    self.update_column(:outcome, 'fail')
+    update_column(:outcome, 'fail')
     raise
   end
 end

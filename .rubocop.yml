@@ -17,3 +17,8 @@ Style/FrozenStringLiteralComment:
 
 Style/Documentation:
   Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'lib/sso_push_error.rb'
+    

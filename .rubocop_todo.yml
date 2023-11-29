@@ -136,21 +136,6 @@ Style/MutableConstant:
     - 'test/integration/passphrase_reset_test.rb'
     - 'test/integration/two_step_verification_test.rb'
 
-# Offense count: 11
-# This cop supports safe autocorrection (--autocorrect).
-Style/ExpandPathArguments:
-  Exclude:
-    - 'Rakefile'
-    - 'bin/bundle'
-    - 'bin/rails'
-    - 'config.ru'
-    - 'config/application.rb'
-    - 'config/boot.rb'
-    - 'config/environment.rb'
-    - 'script/rails'
-    - 'spec/rails_helper.rb'
-    - 'test/test_helper.rb'
-
 # Offense count: 38
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantSelf:

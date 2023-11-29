@@ -11,11 +11,6 @@
 Lint/UselessAssignment:
   Enabled: false
 
-# Offense count: 38
-# Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes.
-Metrics/AbcSize:
-  Max: 557
-
 # Offense count: 2
 # Configuration parameters: CountBlocks.
 Metrics/BlockNesting:

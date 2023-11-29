@@ -25,3 +25,6 @@ Lint/MissingSuper:
 Lint/SuppressedException:
   Exclude:
     - 'test/integration/authorise_application_test.rb'
+
+Metrics/AbcSize:
+  Max: 557

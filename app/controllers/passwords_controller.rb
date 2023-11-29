@@ -6,7 +6,7 @@ class PasswordsController < Devise::PasswordsController
     super
 
     user = user_from_params
-    return if user && user.reset_password_period_valid?
+    return if user&.reset_password_period_valid?
 
     record_reset_page_loaded_token_expired
     render 'devise/passwords/reset_error'

@@ -22,11 +22,11 @@ UserOAuthPresenter = Struct.new(:user, :application) do
 
   def organisation_slug
     organisation = user.organisation
-    organisation.nil? ? nil : organisation.slug
+    organisation&.slug
   end
 
   def organisation_content_id
     organisation = user.organisation
-    organisation.nil? ? nil : organisation.content_id
+    organisation&.content_id
   end
 end

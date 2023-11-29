@@ -4,7 +4,7 @@ module UserHelpers
     email ||= user.email
     password ||= user.password
 
-    if user && user.require_2sv? && user.otp_secret_key.blank? && set_up_2sv
+    if user&.require_2sv? && user.otp_secret_key.blank? && set_up_2sv
       user.update_attribute(:otp_secret_key, ROTP::Base32.random_base32)
     end
 

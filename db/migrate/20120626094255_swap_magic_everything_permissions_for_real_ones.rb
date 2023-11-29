@@ -18,7 +18,7 @@ class SwapMagicEverythingPermissionsForRealOnes < ActiveRecord::Migration
 
   def up
     everything_app = ::Doorkeeper::Application.find_by_name('Everything')
-    everything_app && everything_app.destroy
+    everything_app&.destroy
 
     User.all.each do |user|
       ::Doorkeeper::Application.all.each do |application|

@@ -11,7 +11,7 @@ class RemoveSupportAppErtpPermission < ActiveRecord::Migration
     return if support.nil?
 
     permission = SupportedPermission.find_by_application_id_and_name(support.id, 'ertp')
-    permission.delete unless permission.nil?
+    permission&.delete
 
     # remove user permissions
     all_support_perms = Permission.where(application_id: support.id)

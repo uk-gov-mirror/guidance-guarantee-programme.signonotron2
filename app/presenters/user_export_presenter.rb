@@ -47,7 +47,7 @@ class UserExportPresenter
   def app_permissions_for(user)
     applications.map do |application|
       perms = app_permissions[user.id][application.id] if app_permissions[user.id]
-      perms.sort.join(', ') if perms
+      perms&.sort&.join(', ')
     end
   end
 end

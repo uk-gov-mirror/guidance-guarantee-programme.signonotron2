@@ -45,20 +45,6 @@ Style/MutableConstant:
     - 'test/integration/passphrase_reset_test.rb'
     - 'test/integration/two_step_verification_test.rb'
 
-# Offense count: 9
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: ConvertCodeThatCatartToReturnNil, AllowedMethods, MaxChainLength.
-# AllowedMethods: present?, blank?, presence, try, try!
-Style/SafeNavigation:
-  Exclude:
-    - 'app/controllers/passwords_controller.rb'
-    - 'app/presenters/user_export_presenter.rb'
-    - 'app/presenters/user_o_auth_presenter.rb'
-    - 'db/migrate/20120626094255_swap_magic_everything_permissions_for_real_ones.rb'
-    - 'db/migrate/20130926134720_remove_support_app_ertp_permission.rb'
-    - 'test/factories/users.rb'
-    - 'test/helpers/user_helpers.rb'
-
 # Offense count: 15
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: Mode.

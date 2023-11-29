@@ -21,4 +21,7 @@ Style/Documentation:
 Lint/MissingSuper:
   Exclude:
     - 'lib/sso_push_error.rb'
-    
+
+Lint/SuppressedException:
+  Exclude:
+    - 'test/integration/authorise_application_test.rb'

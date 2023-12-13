@@ -13,12 +13,12 @@ class VolatileLockTest < ActiveSupport::TestCase
     VolatileLock.new(key, expiration_time)
   end
 
-  test "starts by deleting possibly stale locks created by the same host" do
+  test 'starts by deleting possibly stale locks created by the same host' do
     redis.set('foo', Socket.gethostname)
     assert volatile_lock('foo').obtained?
   end
 
-  test "ensures only one lock is obtained per key across hosts" do
+  test 'ensures only one lock is obtained per key across hosts' do
     Socket.stubs(:gethostname).returns('pluto')
     assert volatile_lock('foo').obtained?
 
@@ -26,12 +26,12 @@ class VolatileLockTest < ActiveSupport::TestCase
     refute volatile_lock('foo').obtained?
   end
 
-  test "allows multiple locks to be obtained if keys differ" do
+  test 'allows multiple locks to be obtained if keys differ' do
     assert volatile_lock('foo').obtained?
     assert volatile_lock('bar').obtained?
   end
 
-  test "allows expiration_time to be changed" do
+  test 'allows expiration_time to be changed' do
     redis = mock(get: nil, setnx: true)
     redis.expects(:expire).with('foo', 30.seconds).returns(true)
     VolatileLock.any_instance.stubs(:redis).returns(redis)
@@ -39,20 +39,24 @@ class VolatileLockTest < ActiveSupport::TestCase
     volatile_lock('foo', 30.seconds).obtained?
   end
 
-  context "failing to set expiration time" do
-    should "raise FailedToSetExpiration" do
+  context 'failing to set expiration time' do
+    should 'raise FailedToSetExpiration' do
       redis = mock(get: nil, setnx: true, del: true, expire: false)
       VolatileLock.any_instance.stubs(:redis).returns(redis)
 
       assert_raises(VolatileLock::FailedToSetExpiration) { volatile_lock('foo').obtained? }
     end
 
-    should "delete the persisted key" do
+    should 'delete the persisted key' do
       redis = mock(get: nil, setnx: true, expire: false)
       redis.expects(:del).with('foo')
       VolatileLock.any_instance.stubs(:redis).returns(redis)
 
-      volatile_lock('foo').obtained? rescue VolatileLock::FailedToSetExpiration
+      begin
+        volatile_lock('foo').obtained?
+      rescue StandardError
+        VolatileLock::FailedToSetExpiration
+      end
     end
   end
 end

@@ -6,17 +6,17 @@ class PasswordsController < Devise::PasswordsController
     super
 
     user = user_from_params
-    unless user && user.reset_password_period_valid?
-      record_reset_page_loaded_token_expired
-      render 'devise/passwords/reset_error'
-    end
+    return if user&.reset_password_period_valid?
+
+    record_reset_page_loaded_token_expired
+    render 'devise/passwords/reset_error'
   end
 
   # overrides http://git.io/sOhoaA to prevent expirable from
   # intercepting reset password flow for a partially signed-in user
   def require_no_authentication
     if (params[:reset_password_token] || params[:forgot_expired_passphrase]) &&
-        current_user && current_user.need_change_password?
+       current_user && current_user.need_change_password?
       sign_out(current_user)
     end
     super
@@ -26,13 +26,14 @@ class PasswordsController < Devise::PasswordsController
     super do |resource|
       if resource.errors.empty?
         record_password_reset_success(resource)
-      else
-        record_password_reset_failure(resource) if resource.persisted?
+      elsif resource.persisted?
+        record_password_reset_failure(resource)
       end
     end
   end
 
-private
+  private
+
   def record_password_reset_request
     user = User.find_by_email(params[:user][:email]) if params[:user].present?
     EventLog.record_event(user, EventLog::PASSPHRASE_RESET_REQUEST) if user

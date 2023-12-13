@@ -1,5 +1,4 @@
-# coding: utf-8
-
+# rubocop: disable Metrics/ClassLength
 class User < ActiveRecord::Base
   include Roles
 
@@ -54,9 +53,11 @@ class User < ActiveRecord::Base
 
   scope :web_users, -> { where(api_user: false) }
   scope :not_suspended, -> { where(suspended_at: nil) }
-  scope :with_role, lambda { |role_name| where(role: role_name) }
-  scope :with_organisation, lambda { |org_id| where(organisation_id: org_id) }
-  scope :fuzzy_filter, lambda { |filter_param| where("users.email like ? OR users.name like ?", "%#{filter_param.strip}%", "%#{filter_param.strip}%") }
+  scope :with_role, ->(role_name) { where(role: role_name) }
+  scope :with_organisation, ->(org_id) { where(organisation_id: org_id) }
+  scope :fuzzy_filter, lambda { |filter_param|
+                         where('users.email like ? OR users.name like ?', "%#{filter_param.strip}%", "%#{filter_param.strip}%") # rubocop:disable Layout/LineLength
+                       }
   scope :last_signed_in_on, lambda { |date|
     web_users
       .not_suspended
@@ -69,9 +70,13 @@ class User < ActiveRecord::Base
       .where('date(current_sign_in_at) < date(?)', date)
       .where.not(id: UsersWithAccessToOnlyPensionWiseAcademy.new.user_ids)
   }
-  scope :last_signed_in_after, lambda { |date| web_users.not_suspended.where('date(current_sign_in_at) >= date(?)', date) }
-  scope :not_recently_unsuspended, lambda { where(['unsuspended_at IS NULL OR unsuspended_at < ?', UNSUSPENSION_GRACE_PERIOD.ago]) }
-  scope :with_access_to_application, lambda { |application| UsersWithAccess.new(self, application).users }
+  scope :last_signed_in_after, lambda { |date|
+                                 web_users.not_suspended.where('date(current_sign_in_at) >= date(?)', date)
+                               }
+  scope :not_recently_unsuspended, lambda {
+                                     where(['unsuspended_at IS NULL OR unsuspended_at < ?', UNSUSPENSION_GRACE_PERIOD.ago]) # rubocop:disable Layout/LineLength
+                                   }
+  scope :with_access_to_application, ->(application) { UsersWithAccess.new(self, application).users }
   scope :with_2sv_enabled, lambda { |enabled|
     enabled = ActiveRecord::Type::Boolean.new.cast(enabled)
     where("otp_secret_key IS #{'NOT' if enabled} NULL")
@@ -88,12 +93,12 @@ class User < ActiveRecord::Base
     when USER_STATUS_LOCKED
       where.not(locked_at: nil)
     when USER_STATUS_ACTIVE
-      where(suspended_at: nil, locked_at: nil).
-        where(arel_table[:invitation_sent_at].eq(nil).
-          or(arel_table[:invitation_accepted_at].not_eq(nil))).
-        without_need_change_password
+      where(suspended_at: nil, locked_at: nil)
+        .where(arel_table[:invitation_sent_at].eq(nil)
+          .or(arel_table[:invitation_accepted_at].not_eq(nil)))
+        .without_need_change_password
     else
-      raise NotImplementedError.new("Filtering by status '#{status}' not implemented.")
+      raise NotImplementedError, "Filtering by status '#{status}' not implemented."
     end
   }
 
@@ -104,7 +109,7 @@ class User < ActiveRecord::Base
   end
 
   def event_logs
-    EventLog.where(uid: uid).order(created_at: :desc)
+    EventLog.where(uid:).order(created_at: :desc)
   end
 
   def generate_uid
@@ -132,8 +137,10 @@ class User < ActiveRecord::Base
     application_permissions.where(application_id: application.id).pluck(:supported_permission_id)
   end
 
-  def has_access_to?(application)
-    application_permissions.detect {|permission| permission.supported_permission_id == application.signin_permission.id }
+  def access_to?(application)
+    application_permissions.detect do |permission|
+      permission.supported_permission_id == application.signin_permission.id
+    end
   end
 
   def permissions_synced!(application)
@@ -143,7 +150,7 @@ class User < ActiveRecord::Base
   def authorised_applications
     authorisations.group_by(&:application).map(&:first)
   end
-  alias_method :applications_used, :authorised_applications
+  alias applications_used authorised_applications
 
   def grant_application_permission(application, supported_permission_name)
     grant_application_permissions(application, [supported_permission_name]).first
@@ -151,7 +158,8 @@ class User < ActiveRecord::Base
 
   def grant_application_permissions(application, supported_permission_names)
     supported_permission_names.map do |supported_permission_name|
-      supported_permission = SupportedPermission.find_by_application_id_and_name(application.id, supported_permission_name)
+      supported_permission = SupportedPermission.find_by_application_id_and_name(application.id,
+                                                                                 supported_permission_name)
       application_permissions.where(supported_permission_id: supported_permission.id).first_or_create!
     end
   end
@@ -207,7 +215,7 @@ class User < ActiveRecord::Base
   end
 
   # Override Devise::Model::Lockable#lock_access! to add event logging
-  def lock_access! opts = {}
+  def lock_access!(opts = {})
     event = locked_reason == :two_step ? EventLog::TWO_STEP_LOCKED : EventLog::ACCOUNT_LOCKED
     EventLog.record_event(self, event)
 
@@ -216,6 +224,7 @@ class User < ActiveRecord::Base
 
   def status
     return USER_STATUS_SUSPENDED if suspended?
+
     unless api_user?
       return USER_STATUS_INVITED if invited_but_not_yet_accepted?
       return USER_STATUS_PASSPHRASE_EXPIRED if need_change_password?
@@ -240,10 +249,11 @@ class User < ActiveRecord::Base
 
   def set_2sv_for_admin_roles
     return if Rails.application.config.instance_name.present?
+
     self.require_2sv = true if role_changed? && (admin? || superadmin?)
   end
 
-  def authenticate_otp(code)
+  def authenticate_otp(code) # rubocop:disable Metrics/MethodLength
     totp = ROTP::TOTP.new(otp_secret_key)
     result = totp.verify_with_drift(code, MAX_2SV_DRIFT_SECONDS)
 
@@ -298,7 +308,7 @@ class User < ActiveRecord::Base
     require_2sv? && two_step_flag_changed?
   end
 
-private
+  private
 
   def two_step_flag_changed?
     @two_step_flag_changed
@@ -310,9 +320,9 @@ private
   end
 
   def organisation_admin_belongs_to_organisation
-    if self.role == 'organisation_admin' && self.organisation_id.blank?
-      errors.add(:organisation_id, "can't be 'None' for an Organisation admin")
-    end
+    return unless role == 'organisation_admin' && organisation_id.blank?
+
+    errors.add(:organisation_id, "can't be 'None' for an Organisation admin")
   end
 
   def email_is_ascii_only
@@ -320,6 +330,7 @@ private
   end
 
   def fix_apostrophe_in_email
-    self.email.tr!('’', "'") if email.present? && email_changed?
+    email.tr!('’', "'") if email.present? && email_changed?
   end
 end
+# rubocop: enable Metrics/ClassLength

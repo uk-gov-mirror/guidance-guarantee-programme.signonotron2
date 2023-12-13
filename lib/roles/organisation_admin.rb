@@ -1,6 +1,6 @@
 module Roles
   class OrganisationAdmin
-    def self.permitted_user_params
+    def self.permitted_user_params # rubocop:disable Metrics/MethodLength
       [
         :uid,
         :name,
@@ -11,7 +11,7 @@ module Roles
         :unconfirmed_email,
         :confirmation_token,
         :require_2sv,
-        { supported_permission_ids: [] },
+        { supported_permission_ids: [] }
       ]
     end
 
@@ -19,7 +19,9 @@ module Roles
       'organisation_admin'
     end
 
-    def self.level; 2; end
+    def self.level
+      2
+    end
 
     def self.manageable_roles
       ['normal']

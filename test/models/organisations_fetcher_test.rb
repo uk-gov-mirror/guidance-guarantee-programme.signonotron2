@@ -4,10 +4,10 @@ require 'gds_api/test_helpers/organisations'
 class OrganisationsFetcherTest < ActiveSupport::TestCase
   include GdsApi::TestHelpers::Organisations
 
-  test "it creates new organisations when none exist" do
+  test 'it creates new organisations when none exist' do
     skip 'Failing temporarily'
 
-    organisation_slugs = %w(ministry-of-fun tea-agency)
+    organisation_slugs = %w[ministry-of-fun tea-agency]
     organisations_api_has_organisations(organisation_slugs)
     assert_equal(0, Organisation.count)
 
@@ -16,15 +16,15 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     assert_equal(2, Organisation.count)
   end
 
-  test "it updates an existing organisation when its data changes" do
+  test 'it updates an existing organisation when its data changes' do
     skip 'Failing temporarily'
 
     slug = 'ministry-of-fun'
     organisation = create(
       :organisation,
       name: 'Ministry Of Misery',
-      slug: slug,
-      closed: true,
+      slug:,
+      closed: true
     )
     assert_equal(1, Organisation.count)
 
@@ -41,29 +41,29 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     assert_equal(false, organisation.closed)
   end
 
-  test "it updates an existing organisation when its slug changes" do
+  test 'it updates an existing organisation when its slug changes' do
     skip 'Failing temporarily'
 
     slug = 'ministry-of-fun'
     organisation = create(
       :organisation,
       name: 'Ministry Of Misery',
-      slug: "old-slug",
+      slug: 'old-slug'
     )
     assert_equal(1, Organisation.count)
 
     bodies = [
-      organisation_details_for_slug("new-slug", organisation.content_id)
+      organisation_details_for_slug('new-slug', organisation.content_id)
     ]
     organisations_api_has_organisations_with_bodies(bodies)
 
     OrganisationsFetcher.new.call
 
     assert_equal(1, Organisation.count)
-    assert_equal("new-slug", Organisation.first.slug)
+    assert_equal('new-slug', Organisation.first.slug)
   end
 
-  test "it updates an existing organisation when its content id changes" do
+  test 'it updates an existing organisation when its content id changes' do
     skip 'Failing temporarily'
 
     content_id = 'abc-123'
@@ -71,7 +71,7 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     organisation = create(
       :organisation,
       name: 'Ministry Of Misery',
-      slug: slug
+      slug:
     )
     assert_equal(1, Organisation.count)
 
@@ -92,7 +92,7 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     skip 'Failing temporarily'
 
     slug = 'ministry-of-fun'
-    fun = create(:organisation, name: 'Ministry of Fun', slug: slug)
+    fun = create(:organisation, name: 'Ministry of Fun', slug:)
     child_slug = 'ministry-of-fun-child-1' # hard-coded in gds_api_adapters
     movies = create(:organisation, name: 'Ministry of Movies', slug: child_slug)
 
@@ -106,7 +106,7 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     assert_equal [movies], fun.children
   end
 
-  test "it saves values which are not validated for presence, when they are present in the data" do
+  test 'it saves values which are not validated for presence, when they are present in the data' do
     skip 'Failing temporarily'
 
     slug = 'ministry-of-fun'
@@ -118,10 +118,10 @@ class OrganisationsFetcherTest < ActiveSupport::TestCase
     assert organisation.abbreviation.present?
   end
 
-  test "it raises an error when it receives invalid data" do
+  test 'it raises an error when it receives invalid data' do
     skip 'Failing temporarily'
 
-    organisation_slugs = [""]
+    organisation_slugs = ['']
     organisations_api_has_organisations(organisation_slugs)
 
     assert_raises RuntimeError do

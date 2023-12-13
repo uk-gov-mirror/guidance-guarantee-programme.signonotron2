@@ -1,5 +1,5 @@
-ENV["RAILS_ENV"] = "test"
-require File.expand_path('../../config/environment', __FILE__)
+ENV['RAILS_ENV'] = 'test'
+require File.expand_path('../config/environment', __dir__)
 
 require 'rails/test_help'
 require 'shoulda/context'
@@ -39,7 +39,7 @@ class ActionController::TestCase
     @controller.stubs(current_user: user)
   end
 
-  def sign_out(user)
+  def sign_out(*)
     warden.unstub(:authenticate!)
     @controller.unstub(:current_user)
   end
@@ -100,17 +100,17 @@ class ActionDispatch::IntegrationTest
     expected = URI.parse(path_with_query)
     current = URI.parse(current_url)
     assert_equal expected.path, current.path
-    unless options[:ignore_query]
-      assert_equal Rack::Utils.parse_query(expected.query), Rack::Utils.parse_query(current.query)
-    end
+    return if options[:ignore_query]
+
+    assert_equal Rack::Utils.parse_query(expected.query), Rack::Utils.parse_query(current.query)
   end
 
   def use_javascript_driver
     Capybara.current_driver = Capybara.javascript_driver
   end
 
- # Override the default strategy as tests with the JS driver require
- # tests not to be wrapped in a transaction
+  # Override the default strategy as tests with the JS driver require
+  # tests not to be wrapped in a transaction
   def db_cleaner_start
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.start

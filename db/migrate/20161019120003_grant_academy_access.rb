@@ -6,10 +6,10 @@ class GrantAcademyAccess < ActiveRecord::Migration
   def up
     academy = Doorkeeper::Application.find_by_name('Pension Wise Academy')
 
-    if academy
-      User.where(organisation_id: ORGANISATION_IDS).find_each do |user|
-        user.grant_application_permission(academy, 'signin')
-      end
+    return unless academy
+
+    User.where(organisation_id: ORGANISATION_IDS).find_each do |user|
+      user.grant_application_permission(academy, 'signin')
     end
   end
 

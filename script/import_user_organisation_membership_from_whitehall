@@ -2,12 +2,11 @@
 
 require 'mysql2'
 require 'yaml'
-require 'pp'
 
 def usage(message = nil)
   puts "Usage: #{File.basename(__FILE__)} <path/to/signon/database.yml> <path/to/whitehall/database.yml>"
   puts
-  puts "Imports all user organisations from whitehall database into signonotron"
+  puts 'Imports all user organisations from whitehall database into signonotron'
   puts
   puts "RAILS_ENV: '#{ENV['RAILS_ENV']}'"
   puts "\n#{message}" if message
@@ -16,8 +15,11 @@ end
 
 def load_config_file(config_path)
   raise "File '#{config_path}' not found" unless File.exist?(config_path)
-  string_keys = YAML.load_file(config_path)[ENV['RAILS_ENV']].select {|k,v| %w{host username password database}.include?(k)}
-  Hash[string_keys.map {|k,v| [k.to_sym, v]}]
+
+  string_keys = YAML.load_file(config_path)[ENV['RAILS_ENV']].select do |k, _v|
+    %w[host username password database].include?(k)
+  end
+  string_keys.transform_keys(&:to_sym)
 end
 
 def connect_to_mysql(params)
@@ -26,7 +28,7 @@ def connect_to_mysql(params)
 end
 
 if ENV['RAILS_ENV'].to_s == ''
-  usage("ERROR: RAILS_ENV required")
+  usage('ERROR: RAILS_ENV required')
 elsif ARGV.size != 2
   usage
 else
@@ -41,7 +43,7 @@ signon_organisations = signon.query('SELECT id, slug FROM organisations').map.wi
 end
 
 puts 'Loading data from whitehall db'
-results = whitehall.query('SELECT users.uid, organisations.slug FROM users LEFT OUTER JOIN organisations ON users.organisation_id = organisations.id WHERE users.uid IS NOT NULL').map do |row|
+results = whitehall.query('SELECT users.uid, organisations.slug FROM users LEFT OUTER JOIN organisations ON users.organisation_id = organisations.id WHERE users.uid IS NOT NULL').map do |row| # rubocop:disable Layout/LineLength
   [row['uid'], signon_organisations[row['slug']]]
 end
 

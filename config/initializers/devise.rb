@@ -3,20 +3,18 @@ require_relative 'instance_name'
 
 devise_config = Rails.application.config_for(:devise).symbolize_keys
 
-if devise_config[:secret_key].blank?
-  raise 'Required Devise secret key is unset'
-end
+raise 'Required Devise secret key is unset' if devise_config[:secret_key].blank?
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
-Devise.setup do |config|
+Devise.setup do |config| # rubocop: disable Metrics/BlockLength
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   # config.mailer_sender = Class.new.extend(MailerHelper).email_from
 
   # Configure the class responsible to send e-mails.
-  config.mailer = "UserMailer"
+  config.mailer = 'UserMailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -67,7 +65,7 @@ Devise.setup do |config|
   # config.http_authenticatable_on_xhr = true
 
   # The realm used in Http Basic Authentication. "Application" by default.
-  config.http_authentication_realm = "Sign-On-O-Tron"
+  config.http_authentication_realm = 'Sign-On-O-Tron'
 
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.
@@ -274,9 +272,7 @@ Devise.setup do |config|
   end
 
   Warden::Manager.after_authentication do |user, _auth, _opts|
-    if user.need_change_password?
-      EventLog.record_event(user, EventLog::PASSPHRASE_EXPIRED)
-    end
+    EventLog.record_event(user, EventLog::PASSPHRASE_EXPIRED) if user.need_change_password?
   end
 
   Warden::Manager.before_failure do |_env, _opts|

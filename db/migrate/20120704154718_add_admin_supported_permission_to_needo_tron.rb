@@ -4,9 +4,7 @@ class AddAdminSupportedPermissionToNeedoTron < ActiveRecord::Migration
   end
 
   def change
-    needotron = ::Doorkeeper::Application.find_by_name("Need-o-Tron")
-    if needotron
-      SupportedPermission.create!(application: needotron, name: "admin")
-    end
+    needotron = ::Doorkeeper::Application.find_by_name('Need-o-Tron')
+    SupportedPermission.create!(application: needotron, name: 'admin') if needotron
   end
 end

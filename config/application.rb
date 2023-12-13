@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path('boot', __dir__)
 
 require 'rails/all'
 require_relative '../lib/same_site_security/middleware'
@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 
 module Signonotron2
   def self.mysql?
-    ENV.fetch("SIGNONOTRON2_DB_ADAPTER", "postgresql") == "mysql"
+    ENV.fetch('SIGNONOTRON2_DB_ADAPTER', 'postgresql') == 'mysql'
   end
 
   class Application < Rails::Application
@@ -28,7 +28,7 @@ module Signonotron2
     I18n.config.enforce_available_locales = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Configure sensitive parameters which will be filtered from the log file.
     # Note: filter_parameters are treated as regexes, so :password also matches
@@ -39,7 +39,7 @@ module Signonotron2
     config.assets.enabled = true
     config.assets.version = '1.0'
 
-    #config.middleware.insert_before Warden::Manager, Slimmer::App, config.slimmer.to_hash
+    # config.middleware.insert_before Warden::Manager, Slimmer::App, config.slimmer.to_hash
 
     # Prevent ActionDispatch::RemoteIp::IpSpoofAttackError when the client set a Client-IP
     # header and the request IP was interrogated.
@@ -49,10 +49,10 @@ module Signonotron2
     config.action_dispatch.ip_spoofing_check = false
 
     # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-    config.assets.precompile += %w(password-strength-indicator.js)
+    config.assets.precompile += %w[password-strength-indicator.js]
 
     config.to_prepare do
-      Doorkeeper::ApplicationController.layout "application"
+      Doorkeeper::ApplicationController.layout 'application'
     end
 
     config.eager_load_paths << Rails.root.join('lib')

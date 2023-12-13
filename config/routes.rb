@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 
-Signonotron2::Application.routes.draw do
+Signonotron2::Application.routes.draw do # rubocop: disable Metrics/BlockLength
   use_doorkeeper
 
   devise_for :users, controllers: {
@@ -11,12 +11,12 @@ Signonotron2::Application.routes.draw do
   }
 
   devise_scope :user do
-    post "/users/invitation/resend/:id" => "invitations#resend", :as => "resend_user_invitation"
-    put "/users/confirmation" => "confirmations#update"
-    resource :two_step_verification, only: [:show, :update],
-      path: "/users/two_step_verification",
-      controller: "devise/two_step_verification" do
-      resource :session, only: [:new, :create], controller: "devise/two_step_verification_session"
+    post '/users/invitation/resend/:id' => 'invitations#resend', :as => 'resend_user_invitation'
+    put '/users/confirmation' => 'confirmations#update'
+    resource :two_step_verification, only: %i[show update],
+                                     path: '/users/two_step_verification',
+                                     controller: 'devise/two_step_verification' do
+      resource :session, only: %i[new create], controller: 'devise/two_step_verification_session'
 
       member { get :prompt }
     end
@@ -24,8 +24,10 @@ Signonotron2::Application.routes.draw do
 
   if ENV['SIDEKIQ_USERNAME'] && ENV['SIDEKIQ_PASSWORD']
     Sidekiq::Web.use(Rack::Auth::Basic) do |username, password|
-      ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV['SIDEKIQ_USERNAME'])) &
-      ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV['SIDEKIQ_PASSWORD']))
+      ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username),
+                                                  ::Digest::SHA256.hexdigest(ENV['SIDEKIQ_USERNAME'])) &
+        ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password),
+                                                    ::Digest::SHA256.hexdigest(ENV['SIDEKIQ_PASSWORD']))
     end
 
     mount(Sidekiq::Web => '/sidekiq')
@@ -44,19 +46,19 @@ Signonotron2::Application.routes.draw do
   end
   resource :user, only: [:show]
 
-  resources :batch_invitations, only: [:new, :create, :show]
-  resources :organisations, only: [:index, :new, :create, :edit, :update]
-  resources :suspensions, only: [:edit, :update]
+  resources :batch_invitations, only: %i[new create show]
+  resources :organisations, only: %i[index new create edit update]
+  resources :suspensions, only: %i[edit update]
 
-  resources :doorkeeper_applications, only: [:index, :edit, :update] do
+  resources :doorkeeper_applications, only: %i[index edit update] do
     member do
       get :users_with_access
     end
-    resources :supported_permissions, only: [:index, :new, :create, :edit, :update]
+    resources :supported_permissions, only: %i[index new create edit update]
   end
 
-  resources :api_users, only: [:new, :create, :index, :edit, :update] do
-    resources :authorisations, only: [:new, :create] do
+  resources :api_users, only: %i[new create index edit update] do
+    resources :authorisations, only: %i[new create] do
       member do
         post :revoke
       end
@@ -64,11 +66,11 @@ Signonotron2::Application.routes.draw do
   end
 
   # Gracefully handle GET on page (e.g. hit refresh) reached by a render to a POST
-  match "/users/:id" => redirect("/users/%{id}/edit"), via: :get
-  match "/suspensions/:id" => redirect("/users/%{id}/edit"), via: :get
+  match '/users/:id' => redirect('/users/%{id}/edit'), via: :get
+  match '/suspensions/:id' => redirect('/users/%{id}/edit'), via: :get
 
   # compatibility with Sign-on-o-tron 1
-  post "oauth/access_token" => "doorkeeper/tokens#create"
+  post 'oauth/access_token' => 'doorkeeper/tokens#create'
 
   # Prototyping
   get '/phone-unavailable' => 'prototype#phone_unavailable'

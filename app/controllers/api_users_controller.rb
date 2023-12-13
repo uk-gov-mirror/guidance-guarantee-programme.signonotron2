@@ -2,7 +2,7 @@ class ApiUsersController < ApplicationController
   include UserPermissionsControllerMethods
 
   before_action :authenticate_user!
-  before_action :load_and_authorize_api_user, only: [:edit, :update]
+  before_action :load_and_authorize_api_user, only: %i[edit update]
   helper_method :applications_and_permissions, :visible_applications
 
   respond_to :html
@@ -17,17 +17,17 @@ class ApiUsersController < ApplicationController
     @api_user = ApiUser.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     authorize ApiUser
 
     password = SecureRandom.urlsafe_base64
-    @api_user = ApiUser.new(api_user_params.merge(password: password, password_confirmation: password))
+    @api_user = ApiUser.new(api_user_params.merge(password:, password_confirmation: password))
     @api_user.skip_confirmation!
     @api_user.api_user = true
 
     if @api_user.save
       EventLog.record_event(@api_user, EventLog::API_USER_CREATED, initiator: current_user)
-      redirect_to [:edit, @api_user], notice: "Successfully created API user"
+      redirect_to [:edit, @api_user], notice: 'Successfully created API user'
     else
       render :new
     end
@@ -45,7 +45,7 @@ class ApiUsersController < ApplicationController
     end
   end
 
-private
+  private
 
   def load_and_authorize_api_user
     @api_user = ApiUser.find(params[:id])

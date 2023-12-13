@@ -1,4 +1,4 @@
-Signonotron2::Application.configure do
+Signonotron2::Application.configure do # rubocop: disable Metrics/BlockLength
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

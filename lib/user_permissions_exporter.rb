@@ -10,10 +10,10 @@ class UserPermissionsExporter
 
   def export_signon
     CSV.open(signon_file_path, 'wb', headers: true) do |csv|
-      csv << ["Name", "Email", "Organisation", "Role", "Suspended at"]
+      csv << ['Name', 'Email', 'Organisation', 'Role', 'Suspended at']
       User.order(:name).each do |user|
-        org_name = user.organisation ? user.organisation.name : ""
-        suspended_at = user.suspended_at || ""
+        org_name = user.organisation ? user.organisation.name : ''
+        suspended_at = user.suspended_at || ''
         csv << [user.name, user.email, org_name, user.role, suspended_at]
       end
     end
@@ -21,7 +21,7 @@ class UserPermissionsExporter
     logger.info("Signon roles exported to #{signon_file_path}")
   end
 
-  def export(apps)
+  def export(apps) # rubocop:disable Metrics/MethodLength
     @applications = Doorkeeper::Application.where('name in (?)', apps)
     users = User.order(:name).to_a
 
@@ -32,15 +32,15 @@ class UserPermissionsExporter
       applications.each do |app|
         users.each do |user|
           permissions = user.permissions_for(app)
-          if permissions.present?
-            row = {}
-            row["Application"] = app.name if multiple_apps?
-            row["Name"] = user.name
-            row["Email"] = user.email
-            row["Organisation"] = user.organisation.name if user.organisation
-            row["Permissions"] = permissions.join(",")
-            csv << row
-          end
+          next unless permissions.present?
+
+          row = {}
+          row['Application'] = app.name if multiple_apps?
+          row['Name'] = user.name
+          row['Email'] = user.email
+          row['Organisation'] = user.organisation.name if user.organisation
+          row['Permissions'] = permissions.join(',')
+          csv << row
         end
       end
     end
@@ -56,20 +56,19 @@ class UserPermissionsExporter
     File.join(export_dir, file_name)
   end
 
-
-private
+  private
 
   def multiple_apps?
     applications.size > 1
   end
 
   def headers
-    headings = %w(Name Email Organisation Permissions)
-    headings.unshift "Application" if multiple_apps?
+    headings = %w[Name Email Organisation Permissions]
+    headings.unshift 'Application' if multiple_apps?
     headings
   end
 
   def file_name
-    "#{Time.zone.now.to_s(:number)}-#{@applications.map {|a| a.name.parameterize}.join('-')}.csv"
+    "#{Time.zone.now.to_s(:number)}-#{@applications.map { |a| a.name.parameterize }.join('-')}.csv"
   end
 end

@@ -12,13 +12,14 @@ class BatchInvitationsController < ApplicationController
     authorize @batch_invitation
   end
 
-  def create
-    @batch_invitation = BatchInvitation.new(user: current_user, organisation_id: params[:batch_invitation][:organisation_id])
+  def create # rubocop:disable Metrics/MethodLength
+    @batch_invitation = BatchInvitation.new(user: current_user,
+                                            organisation_id: params[:batch_invitation][:organisation_id])
     @batch_invitation.supported_permission_ids = params[:user][:supported_permission_ids] if params[:user]
     authorize @batch_invitation
 
     unless file_uploaded?
-      flash[:alert] = "You must upload a file"
+      flash[:alert] = 'You must upload a file'
       render :new
       return
     end
@@ -30,11 +31,11 @@ class BatchInvitationsController < ApplicationController
       render :new
       return
     end
-    if csv.size < 1 # headers: true means .size is the number of data rows
-      flash[:alert] = "CSV had no rows."
+    if csv.empty? # headers: true means .size is the number of data rows
+      flash[:alert] = 'CSV had no rows.'
       render :new
       return
-    elsif %w(Name Email).any? { |required_header| csv.headers.exclude?(required_header) }
+    elsif %w[Name Email].any? { |required_header| csv.headers.exclude?(required_header) }
       flash[:alert] = "CSV must have headers including 'Name' and 'Email'"
       render :new
       return
@@ -42,7 +43,7 @@ class BatchInvitationsController < ApplicationController
 
     @batch_invitation.save
     csv.each do |row|
-      BatchInvitationUser.create(batch_invitation: @batch_invitation, name: row["Name"], email: row["Email"])
+      BatchInvitationUser.create(batch_invitation: @batch_invitation, name: row['Name'], email: row['Email'])
     end
     @batch_invitation.enqueue
     flash[:notice] = "Scheduled invitation of #{@batch_invitation.batch_invitation_users.count} users"
@@ -57,13 +58,13 @@ class BatchInvitationsController < ApplicationController
   private
 
   def recent_batch_invitations
-    @_recent_batch_invitations ||= BatchInvitation.where("created_at > '#{3.days.ago}'").order("created_at desc")
+    @recent_batch_invitations ||= BatchInvitation.where("created_at > '#{3.days.ago}'").order('created_at desc')
   end
 
   def file_uploaded?
     if params[:batch_invitation].nil? || params[:batch_invitation][:user_names_and_emails].nil?
       false
-    elsif ! params[:batch_invitation][:user_names_and_emails].respond_to?(:read)
+    elsif !params[:batch_invitation][:user_names_and_emails].respond_to?(:read)
       # IO objects should respond to `read`
       false
     else

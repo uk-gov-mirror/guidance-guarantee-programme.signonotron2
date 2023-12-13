@@ -1,19 +1,19 @@
 class UserMailer < Devise::Mailer
   include MailerHelper
-  append_view_path Rails.root.join("app/views/devise/mailer")
+  append_view_path Rails.root.join('app/views/devise/mailer')
 
-  default from: Proc.new { email_from }
+  default from: proc { email_from }
 
   helper_method :suspension_time, :account_name, :instance_name, :locked_time, :unlock_time, :production?
 
   def two_step_reset(user)
     @user = user
-    mail(to: @user.email, subject: "2-step verification has been reset")
+    mail(to: @user.email, subject: '2-step verification has been reset')
   end
 
   def two_step_changed(user)
     @user = user
-    mail(to: @user.email, subject: "Your 2-step verification phone has been changed")
+    mail(to: @user.email, subject: 'Your 2-step verification phone has been changed')
   end
 
   def two_step_enabled(user)
@@ -24,7 +24,7 @@ class UserMailer < Devise::Mailer
 
   def two_step_flagged(user)
     @user = user
-    mail(to: @user.email, subject: "Make your Signon account more secure")
+    mail(to: @user.email, subject: 'Make your Signon account more secure')
   end
 
   def suspension_reminder(user, days)
@@ -54,10 +54,11 @@ class UserMailer < Devise::Mailer
     mail(to: @user.email, subject: "Your #{app_name} email address is being changed")
   end
 
-private
+  private
+
   def suspension_time
     if @days == 1
-      "tomorrow"
+      'tomorrow'
     else
       "in #{@days} days"
     end
@@ -83,13 +84,13 @@ private
     if instance_name.present?
       "#{instance_name} account"
     else
-      "account"
+      'account'
     end
   end
 
   def subject_for(key)
     I18n.t(:"#{devise_mapping.name}_subject", scope: [:devise, :mailer, key],
-      default: [:subject, key.to_s.humanize], app_name: app_name)
+                                              default: [:subject, key.to_s.humanize], app_name:)
   end
 
   def production?

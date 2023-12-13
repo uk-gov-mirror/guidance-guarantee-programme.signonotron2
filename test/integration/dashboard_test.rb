@@ -1,4 +1,3 @@
-#encoding: utf-8
 require 'test_helper'
 
 class DashboardTest < ActionDispatch::IntegrationTest
@@ -7,12 +6,12 @@ class DashboardTest < ActionDispatch::IntegrationTest
     visit root_path
     signin_with(user)
 
-    assert_response_contains("Your Applications")
-    assert_response_contains("You haven’t been assigned to any applications yet")
+    assert_response_contains('Your Applications')
+    assert_response_contains('You haven’t been assigned to any applications yet')
   end
 
   should "show the user's assigned applications" do
-    app = create(:application, name: "MyApp")
+    app = create(:application, name: 'MyApp')
     user = create(:user, with_signin_permissions_for: [app])
 
     visit root_path
@@ -22,23 +21,23 @@ class DashboardTest < ActionDispatch::IntegrationTest
     assert page.has_css?("a[href='#{app.home_uri}']")
   end
 
-  context "when the user has enrolled in 2SV" do
+  context 'when the user has enrolled in 2SV' do
     should "display the 'change' link" do
       user = create(:two_step_enabled_user)
       visit root_path
       signin_with(user)
 
-      assert has_link?("Change your 2-step verification phone")
+      assert has_link?('Change your 2-step verification phone')
     end
   end
 
-  context "when the user is not enrolled in 2SV" do
+  context 'when the user is not enrolled in 2SV' do
     should "display the 'set up' link" do
       user = create(:user)
       visit root_path
       signin_with(user)
 
-      assert has_link?("Make your account more secure")
+      assert has_link?('Make your account more secure')
     end
   end
 end

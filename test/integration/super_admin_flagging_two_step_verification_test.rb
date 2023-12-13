@@ -4,7 +4,7 @@ class SuperAdminFlaggingTwoStepVerificationTest < ActionDispatch::IntegrationTes
   include EmailHelpers
   include ActiveJob::TestHelper
 
-  context 'updating a user' do
+  context 'updating a user' do # rubocop: disable Metrics/BlockLength
     setup do
       super_admin = create(:superadmin_user)
       user = create(:user)

@@ -2,16 +2,16 @@
 # signon for SSO over OAuth. Also used when pushing user updates, which isn't
 # part of OAuth.
 UserOAuthPresenter = Struct.new(:user, :application) do
-  def as_hash
+  def as_hash # rubocop:disable Metrics/MethodLength
     {
       user: {
         uid: user.uid,
         name: user.name,
         email: user.email,
-        permissions: permissions,
-        organisation_slug: organisation_slug,
-        organisation_content_id: organisation_content_id,
-        disabled: user.suspended?,
+        permissions:,
+        organisation_slug:,
+        organisation_content_id:,
+        disabled: user.suspended?
       }
     }
   end
@@ -22,11 +22,11 @@ UserOAuthPresenter = Struct.new(:user, :application) do
 
   def organisation_slug
     organisation = user.organisation
-    organisation.nil? ? nil : organisation.slug
+    organisation&.slug
   end
 
   def organisation_content_id
     organisation = user.organisation
-    organisation.nil? ? nil : organisation.content_id
+    organisation&.content_id
   end
 end

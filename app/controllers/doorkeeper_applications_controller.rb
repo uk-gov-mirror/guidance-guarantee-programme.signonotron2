@@ -40,7 +40,7 @@ class DoorkeeperApplicationsController < ApplicationController
       :redirect_uri,
       :retired,
       :home_uri,
-      :supports_push_updates,
+      :supports_push_updates
     )
   end
 end

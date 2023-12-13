@@ -1,6 +1,6 @@
 module Roles
   class Superadmin
-    def self.permitted_user_params
+    def self.permitted_user_params  # rubocop:disable Metrics/MethodLength
       [
         :uid,
         :name,
@@ -12,7 +12,7 @@ module Roles
         :confirmation_token,
         :role,
         :require_2sv,
-        { supported_permission_ids: [] },
+        { supported_permission_ids: [] }
       ]
     end
 
@@ -20,7 +20,9 @@ module Roles
       'superadmin'
     end
 
-    def self.level; 0; end
+    def self.level
+      0
+    end
 
     def self.manageable_roles
       User.roles

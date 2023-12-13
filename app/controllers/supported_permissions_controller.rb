@@ -15,7 +15,7 @@ class SupportedPermissionsController < ApplicationController
     @supported_permission = @application.supported_permissions.build(supported_permission_parameters)
     if @supported_permission.save
       redirect_to doorkeeper_application_supported_permissions_path,
-        notice: "Successfully added permission #{@supported_permission.name} to #{@application.name}"
+                  notice: "Successfully added permission #{@supported_permission.name} to #{@application.name}"
     else
       render :new
     end
@@ -25,13 +25,13 @@ class SupportedPermissionsController < ApplicationController
     @supported_permission = supported_permission
     if @supported_permission.update(supported_permission_parameters)
       redirect_to doorkeeper_application_supported_permissions_path,
-        notice: "Successfully updated permission #{@supported_permission.name}"
+                  notice: "Successfully updated permission #{@supported_permission.name}"
     else
       render :edit
     end
   end
 
-private
+  private
 
   def load_and_authorize_application
     @application = Doorkeeper::Application.find(params[:doorkeeper_application_id])

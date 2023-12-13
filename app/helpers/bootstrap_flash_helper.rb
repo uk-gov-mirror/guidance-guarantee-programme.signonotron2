@@ -1,14 +1,14 @@
 module BootstrapFlashHelper
   def bootstrap_flash_message_keys
-    [:success, :info, :warning, :danger, :error, :notice, :alert].select { |k| flash[k].present? }
+    %i[success info warning danger error notice alert].select { |k| flash[k].present? }
   end
 
   def bootstrap_flash_class(flash_key)
     case flash_key
     when :notice
-      "success"
+      'success'
     when :error, :alert
-      "danger"
+      'danger'
     else
       flash_key
     end

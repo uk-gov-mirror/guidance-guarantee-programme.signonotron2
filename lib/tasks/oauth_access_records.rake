@@ -1,10 +1,10 @@
 namespace :oauth_access_grants do
-  desc "Delete expired OAuth access grants"
+  desc 'Delete expired OAuth access grants'
   task delete_expired: 'oauth_access_records:delete_expired'
 end
 
 namespace :oauth_access_records do
-  desc "Delete expired OAuth access grants and tokens"
+  desc 'Delete expired OAuth access grants and tokens'
   task delete_expired: :environment do
     klasses = [Doorkeeper::AccessGrant, Doorkeeper::AccessToken]
     klasses.each do |klass|
@@ -14,9 +14,9 @@ namespace :oauth_access_records do
 
       until ids.empty?
         ids = klass
-          .where('expires_in is not null AND DATE_ADD(created_at, INTERVAL expires_in second) < ?', Time.zone.now)
-          .limit(1000)
-          .pluck(:id)
+              .where('expires_in is not null AND DATE_ADD(created_at, INTERVAL expires_in second) < ?', Time.zone.now)
+              .limit(1000)
+              .pluck(:id)
 
         count += ids.size
 

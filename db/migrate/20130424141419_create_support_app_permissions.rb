@@ -4,11 +4,11 @@ class CreateSupportAppPermissions < ActiveRecord::Migration
   end
 
   def up
-    support = ::Doorkeeper::Application.find_by_name("Support")
-    if support
-      ["content_requesters", "campaign_requesters", "single_points_of_contact"].each do |permission_name|
-        SupportedPermission.create!(application: support, name: permission_name)
-      end
+    support = ::Doorkeeper::Application.find_by_name('Support')
+    return unless support
+
+    %w[content_requesters campaign_requesters single_points_of_contact].each do |permission_name|
+      SupportedPermission.create!(application: support, name: permission_name)
     end
   end
 end

@@ -12,11 +12,11 @@ class UserExportPresenter
     UserApplicationPermission.find_each do |permission|
       @app_permissions[permission.user_id] ||= {}
       @app_permissions[permission.user_id][permission.application_id] ||= []
-      @app_permissions[permission.user_id][permission.application_id] << permission_names[permission.supported_permission_id]
+      @app_permissions[permission.user_id][permission.application_id] << permission_names[permission.supported_permission_id] # rubocop:disable Layout/LineLength
     end
   end
 
-  def header_row
+  def header_row # rubocop:disable Metrics/MethodLength
     [
       'Name',
       'Email',
@@ -26,11 +26,11 @@ class UserExportPresenter
       'Last sign-in',
       'Created',
       'Status',
-      '2SV Status',
-    ].concat applications.map &:name
+      '2SV Status'
+    ].concat(applications.map(&:name))
   end
 
-  def row(user)
+  def row(user) # rubocop:disable Metrics/MethodLength
     [
       user.name,
       user.email,
@@ -40,14 +40,14 @@ class UserExportPresenter
       user.current_sign_in_at.try(:to_formatted_s, :db),
       user.created_at.try(:to_formatted_s, :db),
       user.status.humanize,
-      two_step_status(user),
+      two_step_status(user)
     ].concat(app_permissions_for(user))
   end
 
   def app_permissions_for(user)
     applications.map do |application|
       perms = app_permissions[user.id][application.id] if app_permissions[user.id]
-      perms.sort.join(', ') if perms
+      perms&.sort&.join(', ')
     end
   end
 end

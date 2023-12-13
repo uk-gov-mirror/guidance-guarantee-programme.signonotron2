@@ -1,10 +1,11 @@
 require 'csv'
 
+# rubocop: disable Metrics/ClassLength
 class UsersController < ApplicationController
   include UserPermissionsControllerMethods
 
   before_action :authenticate_user!, except: :show
-  before_action :load_and_authorize_user, except: [:index, :show]
+  before_action :load_and_authorize_user, except: %i[index show]
   before_action :allow_no_application_access, only: [:update]
   helper_method :applications_and_permissions, :any_filter?
   respond_to :html
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
+  def index # rubocop:disable Metrics/MethodLength
     authorize User
 
     @users = policy_scope(User).includes(:organisation)
@@ -39,9 +40,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
+  def update # rubocop:disable Metrics/MethodLength
     raise Pundit::NotAuthorizedError if current_user.organisation_admin? &&
-        ! current_user.organisation.subtree.map(&:id).include?(params[:user][:organisation_id].to_i)
+                                        !current_user.organisation
+                                                     .subtree.map(&:id)
+                                                     .include?(params[:user][:organisation_id].to_i)
 
     @user.skip_reconfirmation!
     if @user.update(user_params)
@@ -50,7 +53,7 @@ class UsersController < ApplicationController
       @user.application_permissions.reload
       PermissionUpdater.perform_on(@user)
 
-      if email_change = @user.previous_changes[:email]
+      if (email_change = @user.previous_changes[:email])
         EventLog.record_email_change(@user, email_change.first, email_change.last, current_user)
         @user.invite! if @user.invited_but_not_yet_accepted?
         email_change.each do |to_address|
@@ -58,7 +61,7 @@ class UsersController < ApplicationController
         end
       end
 
-      if role_change = @user.previous_changes[:role]
+      if (role_change = @user.previous_changes[:role])
         EventLog.record_role_change(@user, role_change.first, role_change.last, current_user)
       end
 
@@ -75,17 +78,17 @@ class UsersController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
-  def resend_email_change
+  def resend_email_change # rubocop:disable Metrics/MethodLength
     @user.resend_confirmation_instructions
     if @user.errors.empty?
       notice = if @user.normal?
-                 "An email has been sent to #{@user.unconfirmed_email}. Follow the link in the email to update your address."
+                 "An email has been sent to #{@user.unconfirmed_email}. Follow the link in the email to update your address." # rubocop:disable Layout/LineLength
                else
                  "Successfully resent email change email to #{@user.unconfirmed_email}"
                end
-      redirect_to root_path, notice: notice
+      redirect_to root_path, notice:
     else
-      redirect_to edit_user_path(@user), alert: "Failed to send email change email"
+      redirect_to edit_user_path(@user), alert: 'Failed to send email change email'
     end
   end
 
@@ -144,13 +147,13 @@ class UsersController < ApplicationController
     params[:format] == 'csv'
   end
 
-  def paginate_users
+  def paginate_users # rubocop:disable Metrics/MethodLength
     if any_filter?
-      if @users.is_a?(Array)
-        @users = Kaminari.paginate_array(@users).page(params[:page]).per(100)
-      else
-        @users = @users.page(params[:page]).per(100)
-      end
+      @users = if @users.is_a?(Array)
+                 Kaminari.paginate_array(@users).page(params[:page]).per(100)
+               else
+                 @users.page(params[:page]).per(100)
+               end
     else
       @users, @sorting_params = @users.alpha_paginate(
         params[:letter],
@@ -175,11 +178,7 @@ class UsersController < ApplicationController
   def validate_token_matches_client_id
     # FIXME: Once gds-sso is updated everywhere, this should always validate
     # the client_id param.  It should 401 if no client_id is given.
-    if params[:client_id].present?
-      if params[:client_id] != doorkeeper_token.application.uid
-        head :unauthorized
-      end
-    end
+    head :unauthorized if params[:client_id].present? && params[:client_id] != doorkeeper_token.application.uid
   end
 
   def export
@@ -194,9 +193,7 @@ class UsersController < ApplicationController
   end
 
   def send_two_step_flag_notification(user)
-    if user.send_two_step_flag_notification?
-      UserMailer.two_step_flagged(user).deliver_later
-    end
+    UserMailer.two_step_flagged(user).deliver_later if user.send_two_step_flag_notification?
   end
 
   # When no permissions are selected for a user, we set the value to [] so
@@ -214,14 +211,16 @@ class UsersController < ApplicationController
   end
 
   def permitted_user_params
-    params.require(:user).permit(:id, :user, :name, :email, :organisation_id, :require_2sv, :role, supported_permission_ids: []).to_h
+    params.require(:user).permit(:id, :user, :name, :email, :organisation_id, :require_2sv, :role,
+                                 supported_permission_ids: []).to_h
   end
 
   def password_params
     params.require(:user).permit(
       :current_password,
       :password,
-      :password_confirmation,
+      :password_confirmation
     )
   end
 end
+# rubocop: enable Metrics/ClassLength

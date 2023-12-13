@@ -1,11 +1,11 @@
 require 'addressable/uri'
 
 module ApplicationHelper
-  def nav_link(text, link)
+  def nav_link(text, link) # rubocop:disable Metrics/MethodLength
     recognized = Rails.application.routes.recognize_path(link)
     if recognized[:controller] == params[:controller] &&
-        recognized[:action] == params[:action]
-      content_tag(:li, class: "active") do
+       recognized[:action] == params[:action]
+      content_tag(:li, class: 'active') do
         link_to(text, link)
       end
     else
@@ -24,7 +24,7 @@ module ApplicationHelper
     end
   end
 
-  SENSITIVE_QUERY_PARAMETERS = %w{reset_password_token invitation_token}
+  SENSITIVE_QUERY_PARAMETERS = %w[reset_password_token invitation_token]
 
   def sensitive_query_parameters?
     (request.query_parameters.keys & SENSITIVE_QUERY_PARAMETERS).any?

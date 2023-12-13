@@ -7,4 +7,4 @@
 # to make requests to.
 #
 
-SsoPushCredential.user_email = ENV['SSO_PUSH_USER_EMAIL'] || "replace.with.user.for.sso.push@alphagov.co.uk"
+SsoPushCredential.user_email = ENV['SSO_PUSH_USER_EMAIL'] || 'replace.with.user.for.sso.push@alphagov.co.uk'

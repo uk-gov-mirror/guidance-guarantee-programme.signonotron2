@@ -4,9 +4,7 @@ class CreateFeedexSupportAppPermission < ActiveRecord::Migration
   end
 
   def up
-    support = ::Doorkeeper::Application.find_by_name("Support")
-    if support
-      SupportedPermission.create!(application: support, name: "feedex")
-    end
+    support = ::Doorkeeper::Application.find_by_name('Support')
+    SupportedPermission.create!(application: support, name: 'feedex') if support
   end
 end

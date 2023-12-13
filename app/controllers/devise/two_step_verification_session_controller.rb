@@ -2,15 +2,14 @@ class Devise::TwoStepVerificationSessionController < DeviseController
   before_action { |c| c.authenticate_user! force: true }
   skip_before_action :handle_two_step_verification
 
-  def new
-  end
+  def new; end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     render(:show) && return if params[:code].nil?
 
     if current_user.authenticate_otp(params[:code])
       expires_seconds = User::REMEMBER_2SV_SESSION_FOR
-      if expires_seconds && expires_seconds > 0
+      if expires_seconds.positive?
         cookies.signed['remember_2sv_session'] = {
           value: {
             user_id: current_user.id,

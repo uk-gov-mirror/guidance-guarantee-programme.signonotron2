@@ -1,5 +1,3 @@
-#!/usr/bin/env puma
-
 rackup DefaultRackup
 
 environment ENV['RACK_ENV'] || 'development'

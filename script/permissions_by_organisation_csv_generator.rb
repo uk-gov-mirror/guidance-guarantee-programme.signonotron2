@@ -3,14 +3,14 @@ require 'csv'
 class PermissionsByOrganisationCsvGenerator
   def self.generate
     filename = 'permissions_by_organisation.csv'
-    CSV.open(filename, "wb") do |csv|
-      csv << ['Organisation', 'Application', 'Permission']
+    CSV.open(filename, 'wb') do |csv|
+      csv << %w[Organisation Application Permission]
       permissions_by_organisation.each { |line| csv << line }
     end
     puts "Permissions by organisations saved to ./#{filename}"
   end
 
-  def self.permissions_by_organisation
+  def self.permissions_by_organisation # rubocop:disable Metrics/MethodLength
     permissions_by_organisation = []
     Organisation.includes(users: { permissions: :application }).each do |organisation|
       organisation.users.each do |user|

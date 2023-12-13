@@ -10,10 +10,10 @@ class ConfirmationsController < Devise::ConfirmationsController
   end
 
   # GET /resource/confirmation?confirmation_token=abcdef
-  def show
+  def show # rubocop:disable Metrics/MethodLength
     if user_signed_in?
       if confirmation_user.persisted? && (current_user.email != confirmation_user.email)
-        redirect_to root_path, alert: "It appears you followed a link meant for another user."
+        redirect_to root_path, alert: 'It appears you followed a link meant for another user.'
       else
         self.resource = resource_class.confirm_by_token(params[:confirmation_token])
         if resource.errors.empty?
@@ -27,16 +27,16 @@ class ConfirmationsController < Devise::ConfirmationsController
       end
     else
       self.resource = confirmation_user
-      if !self.resource.persisted?
+      unless resource.persisted?
         respond_with_navigational(resource.errors, status: :unprocessable_entity) { handle_new_token_needed }
       end
     end
   end
 
-  def update
+  def update # rubocop:disable Metrics/MethodLength
     self.resource = confirmation_user
 
-    if self.resource.valid_password?(params[:user][:password])
+    if resource.valid_password?(params[:user][:password])
       self.resource = resource_class.confirm_by_token(params[:confirmation_token])
       if resource.errors.empty?
         EventLog.record_event(resource, EventLog::EMAIL_CHANGE_CONFIRMED)
@@ -47,12 +47,13 @@ class ConfirmationsController < Devise::ConfirmationsController
         respond_with_navigational(resource.errors, status: :unprocessable_entity) { handle_new_token_needed }
       end
     else
-      self.resource.errors.add(:password, :invalid, message: "was incorrect")
+      resource.errors.add(:password, :invalid, message: 'was incorrect')
       render :show
     end
   end
 
   private
+
   def confirmation_user
     token = Devise.token_generator.digest(User, :confirmation_token, params[:confirmation_token])
     @confirmation_user ||= resource_class.find_or_initialize_by(confirmation_token: token)
@@ -60,6 +61,7 @@ class ConfirmationsController < Devise::ConfirmationsController
 
   def handle_new_token_needed
     path = user_signed_in? ? root_path : new_user_session_path
-    redirect_to path, alert: "Couldn't confirm email change. Please contact support to request a new confirmation email."
+    redirect_to path,
+                alert: "Couldn't confirm email change. Please contact support to request a new confirmation email."
   end
 end

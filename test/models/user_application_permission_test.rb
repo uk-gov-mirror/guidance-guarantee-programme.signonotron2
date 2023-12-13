@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserApplicationPermissionTest < ActiveSupport::TestCase
-  context "validations" do
+  context 'validations' do
     setup do
       @user = create(:user)
       @application = create(:application)
@@ -16,7 +16,7 @@ class UserApplicationPermissionTest < ActiveSupport::TestCase
       assert UserApplicationPermission.new(supported_permission: nil, user: @user).invalid?
     end
 
-    should "ensure unique user application permissions" do
+    should 'ensure unique user application permissions' do
       application_permission_attributes = { supported_permission: @supported_permission }
       @user.application_permissions.create!(application_permission_attributes)
 

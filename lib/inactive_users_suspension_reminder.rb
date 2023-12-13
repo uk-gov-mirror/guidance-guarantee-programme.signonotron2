@@ -12,7 +12,7 @@ class InactiveUsersSuspensionReminder
     @days_to_suspension = days_to_suspension
   end
 
-  def send_reminders
+  def send_reminders # rubocop:disable Metrics/MethodLength
     @users.each do |user|
       tries = 3
       begin
@@ -20,12 +20,12 @@ class InactiveUsersSuspensionReminder
         UserMailer.suspension_reminder(user, @days_to_suspension).deliver_now
         Rails.logger.info "#{self.class}: Successfully sent email to #{user.email}."
       rescue *ERRORS_TO_RETRY_ON => e
-        Rails.logger.debug "#{self.class}: #{e.class} - #{e.message} while sending email to #{user.email} during attempt (#{(tries..3).count}/3)."
-        sleep(3) && retry if (tries -= 1) > 0
+        Rails.logger.debug "#{self.class}: #{e.class} - #{e.message} while sending email to #{user.email} during attempt (#{(tries..3).count}/3)." # rubocop:disable Layout/LineLength
+        sleep(3) && retry if (tries -= 1).positive?
 
         Rails.logger.warn "#{self.class}: Failed to send suspension reminder email to #{user.email}."
         notify_bugsnag(e, user)
-      rescue => e
+      rescue StandardError => e
         notify_bugsnag(e, user)
         begin
           Rails.logger.warn "#{self.class}: #{e.response.error.message} while sending email to #{user.email}."
@@ -36,9 +36,9 @@ class InactiveUsersSuspensionReminder
     end
   end
 
-private
+  private
 
-  def notify_bugsnag(e, user)
-    Bugsnag.notify(e, { user: { receiver_email: user.email } })
+  def notify_bugsnag(err, user)
+    Bugsnag.notify(err, { user: { receiver_email: user.email } })
   end
 end

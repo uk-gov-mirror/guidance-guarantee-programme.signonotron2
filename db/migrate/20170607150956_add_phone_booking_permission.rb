@@ -1,7 +1,7 @@
 require_relative '../../app/models/doorkeeper/application'
 
 class AddPhoneBookingPermission < ActiveRecord::Migration
-  def change
+  def change # rubocop:disable Metrics/MethodLength
     output = Doorkeeper::Application.find_by!(name: 'PW Summary Document Generator - TPAS')
     summary_document_generator = Doorkeeper::Application.find_by!(name: 'PW Summary Document Generator - CABs')
 
@@ -14,16 +14,16 @@ class AddPhoneBookingPermission < ActiveRecord::Migration
 
     say "Adding 'phone_bookings' permission for existing output users"
     users = output
-              .supported_permissions
-              .find_by(name: 'signin')
-              .user_application_permissions
-              .collect(&:user)
+            .supported_permissions
+            .find_by(name: 'signin')
+            .user_application_permissions
+            .collect(&:user)
 
     users.each do |user|
       say "creating new permission for user: #{user.name}", true
       user.application_permissions.find_or_create_by!(
         application: output,
-        supported_permission: output_phone_bookings_permission,
+        supported_permission: output_phone_bookings_permission
       )
     end
 
@@ -31,10 +31,10 @@ class AddPhoneBookingPermission < ActiveRecord::Migration
     output_signin_permission = output.supported_permissions.find_by!(name: 'signin')
 
     users = summary_document_generator
-              .supported_permissions
-              .find_by(name: 'signin')
-              .user_application_permissions
-              .collect(&:user)
+            .supported_permissions
+            .find_by(name: 'signin')
+            .user_application_permissions
+            .collect(&:user)
 
     users.each do |user|
       say "creating new permission for user: #{user.name}", true

@@ -4,11 +4,9 @@ if Rails.env.test?
   module I18n
     class AlwaysRaiseExceptionHandler < ExceptionHandler
       def call(exception, locale, key, options)
-        if exception.is_a?(MissingTranslation)
-          raise exception.to_exception
-        else
-          super
-        end
+        raise exception.to_exception if exception.is_a?(MissingTranslation)
+
+        super
       end
     end
   end

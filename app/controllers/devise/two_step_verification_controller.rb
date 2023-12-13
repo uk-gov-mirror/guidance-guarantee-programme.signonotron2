@@ -6,8 +6,7 @@ class Devise::TwoStepVerificationController < DeviseController
   attr_reader :otp_secret_key
   private :otp_secret_key
 
-  def prompt
-  end
+  def prompt; end
 
   def show
     generate_secret
@@ -21,16 +20,14 @@ class Devise::TwoStepVerificationController < DeviseController
       redirect_to_prior_flow notice: I18n.t("devise.two_step_verification.messages.success.#{mode}")
     else
       EventLog.record_event(current_user, failure_event_for(mode))
-      flash.now[:invalid_code] = "Sorry that code didn’t work. Please try again."
+      flash.now[:invalid_code] = 'Sorry that code didn’t work. Please try again.'
       render :show, status: :unprocessable_entity
     end
   end
 
   def otp_secret_key_uri
     issuer = I18n.t('devise.issuer')
-    if Rails.application.config.instance_name
-      issuer = "#{Rails.application.config.instance_name.titleize} #{issuer}"
-    end
+    issuer = "#{Rails.application.config.instance_name.titleize} #{issuer}" if Rails.application.config.instance_name
 
     issuer = URI::Parser.new.escape(issuer)
     "otpauth://totp/#{issuer}:#{current_user.email}?secret=#{@otp_secret_key.upcase}&issuer=#{issuer}"
@@ -38,7 +35,7 @@ class Devise::TwoStepVerificationController < DeviseController
 
   private
 
-  def send_notification(user, mode)
+  def send_notification(_, mode)
     if mode == :setup
       UserMailer.two_step_enabled(current_user).deliver_later
     else
@@ -54,11 +51,12 @@ class Devise::TwoStepVerificationController < DeviseController
 
   def prepare_and_validate
     redirect_to(:root) && return if current_user.nil?
+
     @limit = User::MAX_2SV_LOGIN_ATTEMPTS
-    if current_user.max_2sv_login_attempts?
-      sign_out(current_user)
-      render(:max_2sv_login_attempts_reached) && return
-    end
+    return unless current_user.max_2sv_login_attempts?
+
+    sign_out(current_user)
+    render(:max_2sv_login_attempts_reached) && return
   end
 
   def generate_secret

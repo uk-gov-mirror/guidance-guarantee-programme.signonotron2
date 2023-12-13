@@ -1,5 +1,5 @@
 class UserPermissionMigrator
-  def self.migrate(source:, target:)
+  def self.migrate(source:, target:) # rubocop:disable Metrics/MethodLength
     source_app = Doorkeeper::Application.find_by!(name: source)
     target_app = Doorkeeper::Application.find_by!(name: target)
     source_app_supported_permissions = source_app.supported_permissions
@@ -12,11 +12,12 @@ class UserPermissionMigrator
     permission_mappings = permissions.to_h
 
     User.all.each do |user|
-      if user.has_access_to?(source_app)
-        permissions = user.permissions_for(source_app)
-        permissions.each do |permission|
-          UserApplicationPermission.create user: user, application: target_app, supported_permission: permission_mappings[permission]
-        end
+      next unless user.access_to?(source_app)
+
+      permissions = user.permissions_for(source_app)
+      permissions.each do |permission|
+        UserApplicationPermission.create user:, application: target_app,
+                                         supported_permission: permission_mappings[permission]
       end
     end
   end

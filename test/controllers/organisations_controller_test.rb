@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class OrganisationsControllerTest < ActionController::TestCase
-  def self.test_access(&block)
+  def self.test_access(&block) # rubocop:disable Metrics/MethodLength
     should 'allow access for superadmin' do
       user = create(:superadmin_user)
       sign_in user
@@ -37,15 +37,15 @@ class OrganisationsControllerTest < ActionController::TestCase
       sign_in @user
     end
 
-    context "GET index" do
+    context 'GET index' do
       setup do
-        create(:organisation, name: "Ministry of Funk")
+        create(:organisation, name: 'Ministry of Funk')
       end
 
-      should "list organisations" do
+      should 'list organisations' do
         get :index
         assert_response 200
-        assert_select "td", "Ministry of Funk"
+        assert_select 'td', 'Ministry of Funk'
       end
     end
   end

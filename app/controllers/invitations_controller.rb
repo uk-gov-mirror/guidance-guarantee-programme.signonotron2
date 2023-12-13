@@ -1,7 +1,7 @@
 # https://raw.github.com/scambra/devise_invitable/master/app/controllers/devise/invitations_controller.rb
 class InvitationsController < Devise::InvitationsController
   before_action :authenticate_user!
-  after_action :verify_authorized, except: [:edit, :update]
+  after_action :verify_authorized, except: %i[edit update]
 
   include UserPermissionsControllerMethods
   helper_method :applications_and_permissions
@@ -11,10 +11,10 @@ class InvitationsController < Devise::InvitationsController
     super
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     # Prevent an error when devise_invitable invites/updates an existing user,
     # and accepts_nested_attributes_for tries to create duplicate permissions.
-    if self.resource = User.find_by_email(params[:user][:email])
+    if (self.resource = User.find_by_email(params[:user][:email]))
       authorize resource
       flash[:alert] = "User already invited. If you want to, you can click 'Resend signup email'."
       respond_with resource, location: after_invite_path_for(resource)
@@ -26,7 +26,7 @@ class InvitationsController < Devise::InvitationsController
 
       self.resource = resource_class.invite!(resource_params, current_inviter)
       if resource.errors.empty?
-        set_flash_message :notice, :send_instructions, email: self.resource.email
+        set_flash_message :notice, :send_instructions, email: resource.email
         respond_with resource, location: after_invite_path_for(resource)
       else
         respond_with_navigational(resource) { render :new }
@@ -45,7 +45,7 @@ class InvitationsController < Devise::InvitationsController
 
   private
 
-  def after_invite_path_for(resource)
+  def after_invite_path_for(*)
     users_path
   end
 
@@ -58,11 +58,11 @@ class InvitationsController < Devise::InvitationsController
   def resource_params
     sanitised_params = UserParameterSanitiser.new(
       user_params: unsanitised_user_params,
-      current_user_role: current_user_role,
+      current_user_role:
     ).sanitise
 
-    if params[:action] == "update"
-      sanitised_params.to_h.merge(invitation_token: invitation_token)
+    if params[:action] == 'update'
+      sanitised_params.to_h.merge(invitation_token:)
     else
       sanitised_params.to_h
     end

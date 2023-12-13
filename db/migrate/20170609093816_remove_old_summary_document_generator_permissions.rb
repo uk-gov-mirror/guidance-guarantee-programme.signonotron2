@@ -1,14 +1,14 @@
 require_relative '../../app/models/doorkeeper/application'
 
 class RemoveOldSummaryDocumentGeneratorPermissions < ActiveRecord::Migration
-  def change
+  def change # rubocop:disable Metrics/MethodLength
     summary_document_generator = Doorkeeper::Application.find_by!(name: 'PW Summary Document Generator - CABs')
 
     say 'Removing signin permission to old summary document generator for all non admin users'
     user_application_permissions = summary_document_generator
-              .supported_permissions
-              .find_by(name: 'signin')
-              .user_application_permissions
+                                   .supported_permissions
+                                   .find_by(name: 'signin')
+                                   .user_application_permissions
 
     user_application_permissions.each do |permission|
       user = permission.user

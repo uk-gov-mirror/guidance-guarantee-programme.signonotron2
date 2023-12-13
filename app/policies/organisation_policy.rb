@@ -6,9 +6,9 @@ class OrganisationPolicy < BasePolicy
   def new?
     current_user.superadmin? || current_user.admin?
   end
-  alias_method :create?, :new?
-  alias_method :edit?, :new?
-  alias_method :update?, :new?
+  alias create? new?
+  alias edit? new?
+  alias update? new?
 
   def can_assign?
     return true if current_user.superadmin? || current_user.admin?

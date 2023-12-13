@@ -2,7 +2,7 @@ module Numbers
   class UserSegments
     module SegmentExtensions
       def licensing_user?
-        application_permissions.count == 1 && has_access_to?(Doorkeeper::Application.find_by_name('Licensing'))
+        application_permissions.count == 1 && access_to?(Doorkeeper::Application.find_by_name('Licensing'))
       end
 
       def active?
@@ -11,7 +11,10 @@ module Numbers
     end
 
     def initialize(users)
-      @users = users.map { |u| u.extend(SegmentExtensions); u }
+      @users = users.map do |u|
+        u.extend(SegmentExtensions)
+        u
+      end
     end
 
     def licensing_users

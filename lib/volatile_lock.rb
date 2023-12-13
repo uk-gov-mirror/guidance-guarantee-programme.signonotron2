@@ -30,7 +30,7 @@ class VolatileLock
     result
   end
 
-private
+  private
 
   def expire
     result = redis.expire(@key, @expiration_time)

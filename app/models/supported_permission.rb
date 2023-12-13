@@ -11,13 +11,11 @@ class SupportedPermission < ActiveRecord::Base
   scope :delegatable, -> { where(delegatable: true) }
   scope :grantable_from_ui, -> { where(grantable_from_ui: true) }
 
-private
+  private
 
   def signin_permission_name_not_changed
     return if new_record? || !name_changed?
 
-    if name_change.first.downcase == 'signin'
-      errors.add(:name, "of permission #{name_change.first} can't be changed")
-    end
+    errors.add(:name, "of permission #{name_change.first} can't be changed") if name_change.first.downcase == 'signin'
   end
 end

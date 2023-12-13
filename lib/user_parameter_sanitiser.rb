@@ -9,7 +9,8 @@ class UserParameterSanitiser
     sanitised_params
   end
 
-private
+  private
+
   attr_reader :user_params, :current_user_role, :permitted_params_by_role
 
   def sanitised_params
@@ -29,7 +30,7 @@ private
       normal: Roles::Normal.permitted_user_params,
       organisation_admin: Roles::OrganisationAdmin.permitted_user_params,
       admin: Roles::Admin.permitted_user_params,
-      superadmin: Roles::Superadmin.permitted_user_params,
+      superadmin: Roles::Superadmin.permitted_user_params
     }
   end
 end

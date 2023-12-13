@@ -5,6 +5,6 @@ class BatchInvitationPolicy < BasePolicy
 
     false
   end
-  alias_method :create?, :new?
-  alias_method :show?, :new?
+  alias create? new?
+  alias show? new?
 end

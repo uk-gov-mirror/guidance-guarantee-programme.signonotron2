@@ -1,0 +1,81 @@
+inherit_from: .rubocop_todo.yml
+
+Style/NumericLiterals:
+  Exclude:
+      - 'db/schema.rb'
+      
+Style/OptionalBooleanParameter:
+  Exclude:
+    - 'test/integration/batch_inviting_users_test.rb'
+
+Naming/VariableNumber:
+  Exclude:
+    - 'test/models/inactive_users_suspension_reminder_mailing_list_test.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'lib/sso_push_error.rb'
+
+Lint/SuppressedException:
+  Exclude:
+    - 'test/integration/authorise_application_test.rb'
+    - 'Rakefile'
+
+Metrics/AbcSize:
+  Max: 557
+
+Metrics/BlockNesting:
+  Max: 4
+
+Metrics/CyclomaticComplexity:
+  Max: 12
+
+Metrics/PerceivedComplexity:
+  Max: 12
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/controllers/devise/password_expired_controller.rb'
+    - 'app/controllers/devise/two_step_verification_controller.rb'
+    - 'app/controllers/devise/two_step_verification_session_controller.rb'
+    - 'app/models/doorkeeper/application.rb'
+    - 'db/migrate/20120626094255_swap_magic_everything_permissions_for_real_ones.rb'
+    - 'db/migrate/20121011155199_create_gds_admin_permission_for_licensing.rb'
+    - 'db/migrate/20121011166199_create_authority_permissions_for_licensing.rb'
+    - 'db/migrate/20140319200000_create_editor_admin_perms_for_maslow.rb'
+    - 'db/migrate/20140319222924_grant_editor_perms_to_all_maslow_users.rb'
+    - 'lib/devise/hooks/password_expirable.rb'
+    - 'lib/devise/routes.rb'
+    - 'test/models/doorkeeper_application_test.rb'
+    - 'test/models/organisation_mappings/zendesk_to_signon_test.rb'
+    - 'test/test_helper.rb'
+
+Style/MixinUsage:
+  Exclude:
+    - 'Rakefile'
+
+# Offense count: 20
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: literals, strict
+Style/MutableConstant:
+  Exclude:
+    - 'app/helpers/application_helper.rb'
+    - 'app/models/event_log.rb'
+    - 'app/models/user.rb'
+    - 'config/initializers/alphabetical_paginate_config.rb'
+    - 'config/initializers/statsd.rb'
+    - 'db/migrate/20161019120003_grant_academy_access.rb'
+    - 'lib/inactive_users_suspension_reminder.rb'
+    - 'lib/inactive_users_suspension_reminder_mailing_list.rb'
+    - 'lib/sso_push_credential.rb'
+    - 'lib/tasks/export_usage_stats.rake'
+    - 'test/integration/passphrase_expiry_test.rb'
+    - 'test/integration/passphrase_reset_test.rb'
+    - 'test/integration/two_step_verification_test.rb'

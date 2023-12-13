@@ -1,4 +1,4 @@
-Dir[File.dirname(__FILE__) + "/roles/*.rb"].each { |file| require file }
+Dir["#{File.dirname(__FILE__)}/roles/*.rb"].each { |file| require file }
 
 module Roles
   def self.included(base)
@@ -17,7 +17,7 @@ module Roles
 
   module ClassMethods
     def role_classes
-      (Roles.constants.select { |c| Class === Roles.const_get(c) }).map do |role_class|
+      (Roles.constants.select { |c| Roles.const_get(c).is_a?(Class) }).map do |role_class|
         "Roles::#{role_class}".constantize
       end
     end

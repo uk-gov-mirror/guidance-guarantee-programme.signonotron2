@@ -8,14 +8,14 @@ class MigratePermissionsToUserApplicationPermissionsJoinTable < ActiveRecord::Mi
   class Permission < ActiveRecord::Base
   end
 
-  def up
+  def up # rubocop:disable Metrics/MethodLength
     puts "Migrating #{Permission.count} permissions to user_application_permissions join table"
     cache_supported_permissions
 
     index = 0
     Permission.find_each do |permission|
       permission.permissions.each do |supported_permission_name|
-        _supported_permission = @cache[permission.application_id][supported_permission_name]
+        supported_permission = @cache[permission.application_id][supported_permission_name]
         next unless _supported_permission
 
         permission = UserApplicationPermission.new(user_id: permission.user_id,
@@ -26,7 +26,7 @@ class MigratePermissionsToUserApplicationPermissionsJoinTable < ActiveRecord::Mi
                                                    updated_at: permission.updated_at)
         permission.save if permission.valid? # doesn't save duplicate permissions
       end
-      print '.' if (index += 1) % 1000 == 0
+      print '.' if ((index += 1) % 1000).zero?
     end
     puts ''
     puts 'Done.'

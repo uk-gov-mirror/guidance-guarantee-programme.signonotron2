@@ -2,35 +2,36 @@ module UserFilterHelper
   def current_path_with_filter(filter_type, filter_value)
     query_parameters = (request.query_parameters.clone || {})
     filter_value.nil? ? query_parameters.delete(filter_type) : query_parameters.merge!(filter_type => filter_value)
-    request.path_info + '?' + query_parameters.map { |k, v| "#{k}=#{v}" }.join('&')
+    "#{request.path_info}?#{query_parameters.map { |k, v| "#{k}=#{v}" }.join('&')}"
   end
 
   def user_role_text
-    "#{params[:role] if params[:role]} users".strip.humanize.capitalize
+    "#{params[:role]} users".strip.humanize.capitalize
   end
 
   def two_step_abbr_tag
-    content_tag(:abbr, "2SV", title: "Two step verification")
+    content_tag(:abbr, '2SV', title: 'Two step verification')
   end
 
   def title_from(filter_type)
     if filter_type == :two_step_status
-      two_step_abbr_tag + " Status"
+      "#{two_step_abbr_tag} Status".html_safe
     else
       filter_type.to_s.humanize.capitalize
     end
   end
 
-  def user_filter_list_items(filter_type)
+  def user_filter_list_items(filter_type) # rubocop:disable Metrics/MethodLength
     items = case filter_type
             when :role
               filtered_user_roles
             when :status
               User::USER_STATUSES
             when :organisation
-              policy_scope(Organisation).order(:name).joins(:users).uniq.map { |org| [org.id, org.name_with_abbreviation] }
+              policy_scope(Organisation).order(:name).joins(:users).uniq.map do |org|
+                [org.id, org.name_with_abbreviation]
+              end
             when :two_step_status
-              #rubocop:disable Style/WordArray
               [['true', 'Enabled'], ['false', 'Not set up']]
             end
 
@@ -43,13 +44,13 @@ module UserFilterHelper
         item_name = item[1]
       end
       content_tag(:li,
-      link_to(item_name, current_path_with_filter(filter_type, item_id)),
-      class: params[filter_type] == item_id ? 'active' : '')
+                  link_to(item_name, current_path_with_filter(filter_type, item_id)),
+                  class: params[filter_type] == item_id ? 'active' : '')
     end
 
     list_items << content_tag(:li,
-      link_to("All #{title_from(filter_type).pluralize}".html_safe,
-      current_path_with_filter(filter_type, nil)))
+                              link_to("All #{title_from(filter_type).pluralize}".html_safe,
+                                      current_path_with_filter(filter_type, nil)))
 
     list_items.join("\n").html_safe
   end
@@ -58,9 +59,10 @@ module UserFilterHelper
     current_user.manageable_roles
   end
 
-  def value_from(filter_type)
+  def value_from(filter_type) # rubocop:disable Metrics/MethodLength
     value = params[filter_type]
     return nil if value.blank?
+
     case filter_type
     when :organisation
       org = Organisation.find(value)
@@ -70,10 +72,10 @@ module UserFilterHelper
         org.name
       end
     when :two_step_status
-      if value == "true"
-        "Enabled"
+      if value == 'true'
+        'Enabled'
       else
-        "Not set up"
+        'Not set up'
       end
     else
       value.humanize.capitalize

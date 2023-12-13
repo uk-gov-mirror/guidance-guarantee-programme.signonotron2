@@ -11,7 +11,7 @@ class BatchInvitation < ActiveRecord::Base
 
   attr_accessor :user_names_and_emails
 
-  validates :outcome, inclusion: { in: [nil, "success", "fail"] }
+  validates :outcome, inclusion: { in: [nil, 'success', 'fail'] }
   validates :user_id, presence: true
 
   def in_progress?
@@ -19,22 +19,22 @@ class BatchInvitation < ActiveRecord::Base
   end
 
   def all_successful?
-    batch_invitation_users.failed.count == 0
+    batch_invitation_users.failed.count.zero?
   end
 
   def enqueue
     NoisyBatchInvitation.make_noise(self).deliver_later
-    BatchInvitationJob.perform_later(self.id)
+    BatchInvitationJob.perform_later(id)
   end
 
-  def perform(options = {})
-    self.batch_invitation_users.unprocessed.order(:name).each do |bi_user|
+  def perform(*)
+    batch_invitation_users.unprocessed.order(:name).each do |bi_user|
       bi_user.invite(user, supported_permission_ids)
     end
-    self.outcome = "success"
-    self.save!
+    self.outcome = 'success'
+    save!
   rescue StandardError => e
-    self.update_column(:outcome, "fail")
+    update_column(:outcome, 'fail')
     raise
   end
 end

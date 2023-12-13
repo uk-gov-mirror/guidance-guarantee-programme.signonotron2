@@ -25,6 +25,7 @@ Lint/MissingSuper:
 Lint/SuppressedException:
   Exclude:
     - 'test/integration/authorise_application_test.rb'
+    - 'Rakefile'
 
 Metrics/AbcSize:
   Max: 557

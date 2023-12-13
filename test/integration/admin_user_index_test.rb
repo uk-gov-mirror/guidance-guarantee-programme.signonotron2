@@ -69,6 +69,11 @@ class AdminUserIndexTest < ActionDispatch::IntegrationTest
         'Eddie eddie_bb@example.com',
         'Ernie ernie@example.com'
       ]
+
+      within first('.pagination') do
+        assert page.find('li[class=active]').has_text?('E')
+      end
+
       actual = page.all('table tr td.email').map(&:text).map(&:strip)
       assert_equal expected, actual
     end

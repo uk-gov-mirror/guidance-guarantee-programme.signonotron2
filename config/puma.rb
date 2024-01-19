@@ -1,4 +1,4 @@
-rackup DefaultRackup
+rackup DefaultRackup if defined?(DefaultRackup)
 
 environment ENV['RACK_ENV'] || 'development'
 

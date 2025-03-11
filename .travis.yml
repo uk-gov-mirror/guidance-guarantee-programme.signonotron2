@@ -1,3 +1,4 @@
+dist: focal
 cache:
   bundler: true
   directories:
@@ -5,7 +6,7 @@ cache:
 group: edge
 language: ruby
 services:
-  - redis-server
+  - redis
   - postgresql
 sudo: false
 before_script: "./bin/rake db:setup RAILS_ENV=test"

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby IO.read('.ruby-version').strip
 
+gem 'concurrent-ruby', '1.3.4'
 gem 'rails', '~> 6.1'
 gem 'sinatra', require: nil
 
@@ -83,9 +84,9 @@ group :test do
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'minitest', '~> 5.8.0'
   gem 'mocha', '1.1.0', require: false
-  gem 'poltergeist', '~> 1'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 4.1'
+  gem 'selenium-webdriver'
   gem 'shoulda-context', require: false
   gem 'timecop', '0.7.1'
   gem 'webmock'

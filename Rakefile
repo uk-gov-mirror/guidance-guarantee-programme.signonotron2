@@ -8,7 +8,7 @@ include VolatileLock::DSL
 
 Signonotron2::Application.load_tasks
 
-default_tasks = [:test, :spec, :check_for_bad_time_handling, 'jasmine:ci']
+default_tasks = %i[test spec check_for_bad_time_handling]
 
 begin
   # Rubocop is not available in envs other than development and test.

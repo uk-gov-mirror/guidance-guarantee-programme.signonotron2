@@ -1,3 +1,4 @@
+dist: jammy
 cache:
   bundler: true
   directories:

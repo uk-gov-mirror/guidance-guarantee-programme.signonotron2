@@ -9,13 +9,14 @@ class BatchInvitationUser < ActiveRecord::Base
   scope :unprocessed, -> { where(outcome: nil) }
   scope :failed, -> { where(outcome: 'failed') }
 
-  def invite(inviting_user, supported_permission_ids)
+  def invite(inviting_user, supported_permission_ids) # rubocop:disable Metrics/MethodLength
     sanitised_attributes = sanitise_attributes_for_inviting_user_role(
       {
         name:,
         email:,
         organisation_id: batch_invitation.organisation_id,
-        supported_permission_ids: new_supported_permissions_for_user(supported_permission_ids)
+        supported_permission_ids: new_supported_permissions_for_user(supported_permission_ids),
+        require_2sv: true
       },
       inviting_user
     )

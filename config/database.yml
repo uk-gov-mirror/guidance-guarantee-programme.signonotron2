@@ -9,4 +9,5 @@ development:
 
 test: &test
   <<: *default
+  <% if ENV['DATABASE_URL'] %>url: <%= ENV['DATABASE_URL'] %><% end %>
   database: signonotron2_test

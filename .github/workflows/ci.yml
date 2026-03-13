@@ -40,7 +40,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Set up database schema
-        run: 'bundle exec rake db:create db:migrate'
+        run: 'bundle exec rake db:setup'
       - name: Precompile assets
         run:  'bundle exec rails assets:precompile RAILS_ENV=test'
       - name: Run tests and lint

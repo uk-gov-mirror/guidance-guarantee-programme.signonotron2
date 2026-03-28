@@ -135,3 +135,6 @@ class ActionDispatch::IntegrationTest
     ActionController::Base.allow_forgery_protection = @original_forgery_protection_value
   end
 end
+
+require 'minitest/retry'
+Minitest::Retry.use!

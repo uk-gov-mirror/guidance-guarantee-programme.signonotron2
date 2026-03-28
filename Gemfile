@@ -83,6 +83,7 @@ group :test do
   gem 'database_cleaner', '1.6.2'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'minitest', '~> 5.8.0'
+  gem 'minitest-retry'
   gem 'mocha', '1.1.0', require: false
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 4.1'

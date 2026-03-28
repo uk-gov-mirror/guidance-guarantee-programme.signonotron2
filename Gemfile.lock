@@ -214,6 +214,8 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (5.8.5)
+    minitest-retry (0.3.1)
+      minitest (>= 5.0)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     mustermann (3.0.0)
@@ -455,6 +457,7 @@ DEPENDENCIES
   json
   kaminari
   minitest (~> 5.8.0)
+  minitest-retry
   mocha (= 1.1.0)
   nokogiri (>= 1.7.0.1)
   pg

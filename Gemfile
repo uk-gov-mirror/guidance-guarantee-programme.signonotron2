@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby IO.read('.ruby-version').strip
 
 gem 'concurrent-ruby', '1.3.4'
-gem 'rails', '~> 6.1'
+gem 'rails', '7.0.2.3'
 gem 'sinatra', require: nil
 
 gem 'foreman'

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby IO.read('.ruby-version').strip
 
 gem 'concurrent-ruby', '1.3.4'
-gem 'rails', '~> 6.1'
+gem 'rails', '7.1.6'
 gem 'sinatra', require: nil
 
 gem 'foreman'
@@ -17,7 +17,7 @@ gem 'deprecated_columns', '0.1.0'
 gem 'govuk_admin_template', '~> 6.2.0'
 gem 'pg'
 
-gem 'rails-html-sanitizer', '1.4.4'
+gem 'rails-html-sanitizer'
 
 # This change was made via Snyk to fix a vulnerability
 gem 'nokogiri', '>= 1.7.0.1'
@@ -37,7 +37,7 @@ gem 'devise', '>= 4.2.0'
 gem 'devise-encryptable', '0.2.0'
 gem 'devise_invitable'
 gem 'devise_zxcvbn'
-gem 'pundit', '0.3.0'
+gem 'pundit'
 gem 'rotp', '~> 2.1.1'
 gem 'rqrcode'
 
@@ -59,7 +59,7 @@ gem 'zeroclipboard-rails'
 gem 'rake'
 
 gem 'sass-rails', '~> 5.0.6'
-gem 'sprockets-rails', '~> 3.1.1'
+gem 'sprockets-rails'
 
 # This change was made via Snyk to fix a vulnerability
 gem 'uglifier', '>= 3.0.4'
@@ -80,7 +80,7 @@ group :test do
   gem 'capybara', '~> 3'
   gem 'capybara-email', '~> 3'
   gem 'ci_reporter', '1.7.0'
-  gem 'database_cleaner', '1.6.2'
+  gem 'database_cleaner'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'minitest', '~> 5.8.0'
   gem 'minitest-retry'

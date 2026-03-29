@@ -37,7 +37,7 @@ gem 'devise', '>= 4.2.0'
 gem 'devise-encryptable', '0.2.0'
 gem 'devise_invitable'
 gem 'devise_zxcvbn'
-gem 'pundit', '0.3.0'
+gem 'pundit'
 gem 'rotp', '~> 2.1.1'
 gem 'rqrcode'
 

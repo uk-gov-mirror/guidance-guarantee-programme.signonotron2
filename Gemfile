@@ -59,7 +59,7 @@ gem 'zeroclipboard-rails'
 gem 'rake'
 
 gem 'sass-rails', '~> 5.0.6'
-gem 'sprockets-rails', '~> 3.1.1'
+gem 'sprockets-rails'
 
 # This change was made via Snyk to fix a vulnerability
 gem 'uglifier', '>= 3.0.4'
